@@ -1,7 +1,7 @@
 ---
-title: "[Old] Blog Collection"
-description: "How to add posts to the blog."
-date: "2024-03-21"
+title: '[Old] Blog Collection'
+description: 'How to add posts to the blog.'
+date: '2024-03-21'
 tags: ['aa']
 ---
 
@@ -32,10 +32,10 @@ Metadata is required for each post.
 
 ```astro
 ---
-title: "Blog Collection";
-description: "How to add posts to the blog.";
-date: "2024-03-21";
-draft: false;
+title: 'Blog Collection'
+description: 'How to add posts to the blog.'
+date: '2024-03-21'
+draft: false
 ---
 ```
 
@@ -52,10 +52,10 @@ All that's left to do is write the content under the metadata.
 
 ```astro
 ---
-title: "Blog Collection";
-description: "How to add posts to the blog.";
-date: "2024-03-21";
-draft: false;
+title: 'Blog Collection'
+description: 'How to add posts to the blog.'
+date: '2024-03-21'
+draft: false
 ---
 
 ## Working with the blog collection

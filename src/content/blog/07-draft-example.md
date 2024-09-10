@@ -1,7 +1,7 @@
 ---
-title: "[Old] Draft example"
-description: "Setting draft flag to true to hide this post."
-date: "2022-12-31"
+title: '[Old] Draft example'
+description: 'Setting draft flag to true to hide this post.'
+date: '2022-12-31'
 draft: false
 ---
 

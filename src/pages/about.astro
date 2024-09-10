@@ -1,9 +1,9 @@
 ---
-import { getCollection } from "astro:content";
-import Layout from "@layouts/Layout.astro";
-import Container from "@components/Container.astro";
-import { ABOUT } from "@consts";
-import Image from "astro/components/Image.astro";
+import { getCollection } from 'astro:content'
+import Layout from '@layouts/Layout.astro'
+import Container from '@components/Container.astro'
+import { ABOUT } from '@consts'
+import { Image } from 'astro:assets'
 ---
 
 <Layout title={ABOUT.TITLE} description={ABOUT.DESCRIPTION}>
@@ -14,37 +14,51 @@ import Image from "astro/components/Image.astro";
           About
         </div>
         <section class="animate not-prose flex flex-col gap-4 text-justify">
-          <p class="text-justify">Lorem ipsum dolor sit amet consectetur adipisicing elit. Dolores porro hic minima incidunt explicabo obcaecati consectetur consequuntur at quisquam commodi.
-          </p>      
-          
-          <p class="text-justify">Lorem ipsum dolor sit amet consectetur adipisicing elit. Dolores porro hic minima incidunt explicabo obcaecati consectetur consequuntur at quisquam commodi.
+          <p class="text-justify">
+            Lorem ipsum dolor sit amet consectetur adipisicing elit. Dolores
+            porro hic minima incidunt explicabo obcaecati consectetur
+            consequuntur at quisquam commodi.
+          </p>
+
+          <p class="text-justify">
+            Lorem ipsum dolor sit amet consectetur adipisicing elit. Dolores
+            porro hic minima incidunt explicabo obcaecati consectetur
+            consequuntur at quisquam commodi.
           </p>
         </section>
 
-        <div class="flex flex-col md:flex-row justify-center">
+        <div class="flex flex-col justify-center md:flex-row">
           <div class="my-10 text-center">
-            <div class="bg-neutral-300 w-[350px] h-[250px] object-cover rounded-xl -rotate-6 overflow-hidden">
+            <div
+              class="h-[250px] w-[350px] -rotate-6 overflow-hidden rounded-xl bg-neutral-300 object-cover"
+            >
               <Image
                 src={'/astro-nano.png'}
                 alt={'life2'}
                 width={350}
                 height={250}
-                class="w-[350px] h-[250px] object-cover rounded-xl overflow-hidden"
+                class="h-[250px] w-[350px] overflow-hidden rounded-xl object-cover"
               />
             </div>
-            <p class="mt-4 text-sm">Lorem ipsum dolor sit amet, consectetur adipisicing elit. </p>
+            <p class="mt-4 text-sm">
+              Lorem ipsum dolor sit amet, consectetur adipisicing elit.
+            </p>
           </div>
           <div class="mx-10 my-10 text-center">
-            <div class="bg-neutral-300 w-[150px] h-[250px] object-cover rounded-xl rotate-6 mx-auto sm:ml-auto">
+            <div
+              class="mx-auto h-[250px] w-[150px] rotate-6 rounded-xl bg-neutral-300 object-cover sm:ml-auto"
+            >
               <Image
                 src={'/astro-micro.jpg'}
                 alt={'life2'}
                 width={150}
                 height={250}
-                class="w-[150px] h-[250px] object-cover rounded-xl "
+                class="h-[250px] w-[150px] rounded-xl object-cover"
               />
             </div>
-            <p class="mt-4 text-sm">Lorem ipsum dolor sit amet, consectetur adipisicing elit.</p>
+            <p class="mt-4 text-sm">
+              Lorem ipsum dolor sit amet, consectetur adipisicing elit.
+            </p>
           </div>
         </div>
       </div>

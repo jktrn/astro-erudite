@@ -1,19 +1,20 @@
 ---
-import Container from "@components/Container.astro";
-import { SITE } from "@consts";
-import BackToTop from "@components/BackToTop.astro";
-import SocialIcons from "./SocialIcons.astro";
+import Container from '@components/Container.astro'
+import { SITE } from '@consts'
+import BackToTop from '@components/BackToTop.astro'
+import SocialIcons from './SocialIcons.astro'
 ---
 
 <footer class="animate">
   <Container>
-    <div class="flex justify-between my-2">
+    <div class="my-2 flex justify-between">
       <SocialIcons icon_size={'text-xl'} />
       <BackToTop />
     </div>
     <div class="flex items-center justify-between">
-      <div>&copy; {new Date().getFullYear()} • {SITE.TITLE} 👀<br>
-      Built with Astro
+      <div>
+        &copy; {new Date().getFullYear()} • {SITE.TITLE} 👀<br />
+        Built with Astro
       </div>
       <div class="flex flex-wrap items-center gap-1.5">
         <button

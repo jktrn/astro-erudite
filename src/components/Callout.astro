@@ -1,18 +1,18 @@
 ---
 interface Component {
-  type: "default" | "info" | "warning" | "error";
+  type: 'default' | 'info' | 'warning' | 'error'
 }
 
-const { type = "default" } = Astro.props;
+const { type = 'default' } = Astro.props
 
-let emoji = "💡";
+let emoji = '💡'
 
-if (type === "info") {
-  emoji = "ℹ️";
-} else if (type === "warning") {
-  emoji = "⚠️";
-} else if (type === "error") {
-  emoji = "🚨";
+if (type === 'info') {
+  emoji = 'ℹ️'
+} else if (type === 'warning') {
+  emoji = '⚠️'
+} else if (type === 'error') {
+  emoji = '🚨'
 }
 ---
 

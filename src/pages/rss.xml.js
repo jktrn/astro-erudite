@@ -1,6 +1,6 @@
-import rss from "@astrojs/rss";
-import { SITE } from "@consts";
-import { getCollection } from "astro:content";
+import rss from '@astrojs/rss'
+import { SITE } from '@consts'
+import { getCollection } from 'astro:content'
 
 export async function GET(context) {
   // const publications = (await getCollection("publications")).filter(
@@ -11,15 +11,20 @@ export async function GET(context) {
   //   (a, b) => new Date(b.data.date).valueOf() - new Date(a.data.date).valueOf(),
   // );
   try {
-    const blog = (await getCollection("blog")).filter((post) => !post.data.draft);
+    const blog = (await getCollection('blog')).filter(
+      (post) => !post.data.draft,
+    )
 
     // Filter posts by tag 'rss-feed'
-    const filteredBlogs = blog.filter(post => post.data.tags && post.data.tags.includes('rss-feed'));
+    const filteredBlogs = blog.filter(
+      (post) => post.data.tags && post.data.tags.includes('rss-feed'),
+    )
 
     // Sort posts by date
     const items = [...filteredBlogs].sort(
-      (a, b) => new Date(b.data.date).valueOf() - new Date(a.data.date).valueOf()
-    );
+      (a, b) =>
+        new Date(b.data.date).valueOf() - new Date(a.data.date).valueOf(),
+    )
 
     // Return RSS feed
     return rss({
@@ -32,9 +37,9 @@ export async function GET(context) {
         pubDate: item.data.date,
         link: `/${item.collection}/${item.slug}/`,
       })),
-    });
+    })
   } catch (error) {
-    console.error('Error generating RSS feed:', error);
-    return new Response('Error generating RSS feed', { status: 500 });
+    console.error('Error generating RSS feed:', error)
+    return new Response('Error generating RSS feed', { status: 500 })
   }
 }
