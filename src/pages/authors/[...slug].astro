@@ -1,0 +1,40 @@
+---
+import { type CollectionEntry, getCollection, getEntry } from "astro:content";
+import Layout from "@layouts/Layout.astro";
+import MemberCard from "@components/MemberCard.astro";
+
+export async function getStaticPaths() {
+  const authors = await getCollection("authors");
+  return authors.map((member) => ({
+    params: { slug: member.slug },
+    props: { member },
+  }));
+}
+
+type Props = {
+  member: CollectionEntry<"authors">;
+};
+
+const { member } = Astro.props;
+
+const allPosts = await getCollection("blog");
+const memberPosts = allPosts
+  .filter((post) => {
+    if (typeof post.data.author === 'string') {
+      return post.data.author === member.data.name && !post.data.draft;
+    } else if (post.data.author && 'slug' in post.data.author) {
+      return post.data.author.slug === member.slug && !post.data.draft;
+    }
+    return false;
+  })
+  .sort((a, b) => b.data.date.valueOf() - a.data.date.valueOf());
+---
+
+<Layout
+  title={`${member.data.name} - Team Member`}
+  description={member.data.bio || `Profile of ${member.data.name}`}
+>
+  <section class="mx-auto flex max-w-screen-xl flex-col gap-4">
+    <MemberCard member={member} />
+  </section>
+</Layout>
