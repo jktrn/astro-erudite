@@ -1,6 +1,5 @@
 ---
 import '../styles/global.css'
-import { ViewTransitions } from 'astro:transitions'
 
 import '@fontsource/geist-sans'
 import '@fontsource/geist-mono'
@@ -16,46 +15,31 @@ const canonicalURL = new URL(Astro.url.pathname, Astro.site)
 const { title, description, image = '/blog-placeholder-1.jpg' } = Astro.props
 ---
 
-<!-- Global Metadata -->
 <meta charset="utf-8" />
 <meta name="viewport" content="width=device-width,initial-scale=1" />
-<link rel="icon" type="image/svg+xml" href="/favicon.svg" />
-<link
-  rel="icon"
-  href="data:image/svg+xml,<svg xmlns=%22http://www.w3.org/2000/svg%22 viewBox=%220 0 100 100%22><text y=%22.9em%22 font-size=%2290%22>🍄</text></svg>"
-/>
 <meta name="generator" content={Astro.generator} />
 
-<!-- Canonical URL -->
 <link rel="canonical" href={canonicalURL} />
 
-<!-- Primary Meta Tags -->
 <title>{title}</title>
 <meta name="title" content={title} />
 <meta name="description" content={description} />
 
-<!-- Open Graph / Facebook -->
 <meta property="og:type" content="website" />
 <meta property="og:url" content={Astro.url} />
 <meta property="og:title" content={title} />
 <meta property="og:description" content={description} />
 <meta property="og:image" content={new URL(image, Astro.url)} />
 
-<!-- Twitter -->
 <meta property="twitter:card" content="summary_large_image" />
 <meta property="twitter:url" content={Astro.url} />
 <meta property="twitter:title" content={title} />
 <meta property="twitter:description" content={description} />
 <meta property="twitter:image" content={new URL(image, Astro.url)} />
 
-<ViewTransitions />
-
 <script is:inline>
   function init() {
-    preloadTheme()
     onScroll()
-    animate()
-    updateThemeButtons()
     addCopyCodeButtons()
 
     const backToTop = document.getElementById('back-to-top')
@@ -64,75 +48,7 @@ const { title, description, image = '/blog-placeholder-1.jpg' } = Astro.props
     const backToPrev = document.getElementById('back-to-prev')
     backToPrev?.addEventListener('click', () => window.history.back())
 
-    const lightThemeButton = document.getElementById('light-theme-button')
-    lightThemeButton?.addEventListener('click', () => {
-      localStorage.setItem('theme', 'light')
-      toggleTheme(false)
-      updateThemeButtons()
-    })
-
-    const darkThemeButton = document.getElementById('dark-theme-button')
-    darkThemeButton?.addEventListener('click', () => {
-      localStorage.setItem('theme', 'dark')
-      toggleTheme(true)
-      updateThemeButtons()
-    })
-
-    const systemThemeButton = document.getElementById('system-theme-button')
-    systemThemeButton?.addEventListener('click', () => {
-      localStorage.setItem('theme', 'system')
-      toggleTheme(window.matchMedia('(prefers-color-scheme: dark)').matches)
-      updateThemeButtons()
-    })
-
-    window
-      .matchMedia('(prefers-color-scheme: dark)')
-      .addEventListener('change', (event) => {
-        if (localStorage.theme === 'system') {
-          toggleTheme(event.matches)
-        }
-      })
-
     document.addEventListener('scroll', onScroll)
-  }
-
-  function updateThemeButtons() {
-    const theme = localStorage.getItem('theme')
-    const lightThemeButton = document.getElementById('light-theme-button')
-    const darkThemeButton = document.getElementById('dark-theme-button')
-    const systemThemeButton = document.getElementById('system-theme-button')
-
-    function removeActiveButtonTheme(button) {
-      button?.classList.remove('bg-black/5')
-      button?.classList.remove('dark:bg-white/5')
-    }
-
-    function addActiveButtonTheme(button) {
-      button?.classList.add('bg-black/5')
-      button?.classList.add('dark:bg-white/5')
-    }
-
-    removeActiveButtonTheme(lightThemeButton)
-    removeActiveButtonTheme(darkThemeButton)
-    removeActiveButtonTheme(systemThemeButton)
-
-    if (theme === 'light') {
-      addActiveButtonTheme(lightThemeButton)
-    } else if (theme === 'dark') {
-      addActiveButtonTheme(darkThemeButton)
-    } else {
-      addActiveButtonTheme(systemThemeButton)
-    }
-  }
-
-  function animate() {
-    const animateElements = document.querySelectorAll('.animate')
-
-    animateElements.forEach((element, index) => {
-      setTimeout(() => {
-        element.classList.add('show')
-      }, index * 100)
-    })
   }
 
   function onScroll() {
@@ -149,44 +65,6 @@ const { title, description, image = '/blog-placeholder-1.jpg' } = Astro.props
       top: 0,
       behavior: 'smooth',
     })
-  }
-
-  function toggleTheme(dark) {
-    const css = document.createElement('style')
-
-    css.appendChild(
-      document.createTextNode(
-        `* {
-             -webkit-transition: none !important;
-             -moz-transition: none !important;
-             -o-transition: none !important;
-             -ms-transition: none !important;
-             transition: none !important;
-          }
-        `,
-      ),
-    )
-
-    document.head.appendChild(css)
-
-    if (dark) {
-      document.documentElement.classList.add('dark')
-    } else {
-      document.documentElement.classList.remove('dark')
-    }
-
-    window.getComputedStyle(css).opacity
-    document.head.removeChild(css)
-  }
-
-  function preloadTheme() {
-    const userTheme = localStorage.theme
-
-    if (userTheme === 'light' || userTheme === 'dark') {
-      toggleTheme(true) // set default to dark theme
-    } else {
-      toggleTheme(window.matchMedia('(prefers-color-scheme: dark)').matches)
-    }
   }
 
   function addCopyCodeButtons() {
@@ -228,5 +106,4 @@ const { title, description, image = '/blog-placeholder-1.jpg' } = Astro.props
 
   document.addEventListener('DOMContentLoaded', () => init())
   document.addEventListener('astro:after-swap', () => init())
-  preloadTheme()
 </script>

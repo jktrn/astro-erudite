@@ -1,7 +1,7 @@
-import { defineCollection, reference, z } from "astro:content";
+import { defineCollection, reference, z } from 'astro:content'
 
 const blog = defineCollection({
-  type: "content",
+  type: 'content',
   schema: z.object({
     title: z.string(),
     description: z.string(),
@@ -9,12 +9,12 @@ const blog = defineCollection({
     draft: z.boolean().optional(),
 
     tags: z.array(z.string()).optional(),
-    author: z.union([reference("authors"), z.string()]).optional(),
+    author: z.union([reference('authors'), z.string()]).optional(),
   }),
-});
+})
 
 const authors = defineCollection({
-  type: "content",
+  type: 'content',
   schema: z.object({
     name: z.string(),
     avatar: z.string().url(),
@@ -26,6 +26,6 @@ const authors = defineCollection({
     mail: z.string().email().optional(),
     discord: z.string().optional(),
   }),
-});
+})
 
-export const collections = { blog, authors };
+export const collections = { blog, authors }

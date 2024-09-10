@@ -8,10 +8,19 @@ import remarkEmoji from 'remark-emoji'
 import remarkMath from 'remark-math'
 import remarkToc from 'remark-toc'
 
+import react from '@astrojs/react'
+
 // https://astro.build/config
 export default defineConfig({
   site: 'https://astro-micro-academic.vercel.app',
-  integrations: [tailwind(), sitemap(), mdx()],
+  integrations: [
+    tailwind({
+      applyBaseStyles: false,
+    }),
+    sitemap(),
+    mdx(),
+    react(),
+  ],
   markdown: {
     shikiConfig: {
       theme: 'css-variables',
@@ -19,5 +28,11 @@ export default defineConfig({
     rehypePlugins: [rehypeHeadingIds, rehypeKatex],
     remarkPlugins: [remarkToc, remarkMath, remarkEmoji],
   },
-  server: { port: 1234, host: true },
+  server: {
+    port: 1234,
+    host: true,
+  },
+  devToolbar: {
+    enabled: false,
+  },
 })

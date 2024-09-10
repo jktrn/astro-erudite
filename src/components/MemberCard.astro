@@ -1,17 +1,17 @@
 ---
-import type { CollectionEntry } from "astro:content";
-import { Image } from "astro:assets";
+import type { CollectionEntry } from 'astro:content'
+import { Image } from 'astro:assets'
 
 type Props = {
-  member: CollectionEntry<"authors">;
-};
+  member: CollectionEntry<'authors'>
+}
 
-const { member } = Astro.props;
-const { name, avatar, bio } = member.data;
+const { member } = Astro.props
+const { name, avatar, bio } = member.data
 ---
 
 <div
-  class="animate not-prose flex flex-col sm:flex-row size-full sm:items-center gap-4 overflow-hidden rounded-xl border border-foreground bg-background p-6 hover:bg-secondary"
+  class="not-prose flex size-full flex-col gap-4 overflow-hidden rounded-xl border border-foreground bg-background p-6 hover:bg-secondary sm:flex-row sm:items-center"
 >
   <Image
     src={avatar}

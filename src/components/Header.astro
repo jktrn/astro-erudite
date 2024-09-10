@@ -2,33 +2,30 @@
 import Container from '@components/Container.astro'
 import Link from '@components/Link.astro'
 import { SITE } from '@consts'
+
+const items = [
+  { href: '/blog', label: 'blog' },
+  { href: '/authors', label: 'authors' },
+  { href: '/about', label: 'about' },
+  { href: '/tags', label: 'tags' },
+]
 ---
 
-<header transition:persist>
+<header class="sticky top-0 z-10" transition:persist>
   <Container>
-    <div class="flex flex-wrap justify-between gap-y-2">
+    <div class="flex items-center justify-between py-4">
       <Link href="/" underline={false}>
-        <div class="font-semibold">
-          {SITE.TITLE}&nbsp;🍄
-        </div>
+        {SITE.TITLE}<span class="ml-1">🍄</span>
       </Link>
-      <nav class="flex items-center gap-1 text-sm">
-        <Link href="/blog">blog</Link>
-        <span>
-          {`/`}
-        </span>
-        <Link href="/authors">authors</Link>
-        <span>
-          {`/`}
-        </span>
-        <Link href="/about">about</Link>
-        <span>
-          {`/`}
-        </span>
-        <Link href="/tags">tags</Link>
-        <span>
-          {`/`}
-        </span>
+      <nav class="flex items-center space-x-1 text-sm">
+        {
+          items.map((item, index) => (
+            <>
+              <Link href={item.href}>{item.label}</Link>
+              {index < items.length - 1 && <span class="text-gray-400">/</span>}
+            </>
+          ))
+        }
       </nav>
     </div>
   </Container>

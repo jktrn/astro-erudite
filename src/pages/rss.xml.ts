@@ -1,23 +1,23 @@
 import rss from '@astrojs/rss'
 import { SITE } from '@consts'
-import { getCollection } from 'astro:content'
 import type { APIContext } from 'astro'
+import { getCollection } from 'astro:content'
 
 export async function GET(context: APIContext) {
   try {
     const blog = (await getCollection('blog')).filter(
-      (post) => !post.data.draft
+      (post) => !post.data.draft,
     )
 
     // Filter posts by tag 'rss-feed'
     const filteredBlogs = blog.filter(
-      (post) => post.data.tags && post.data.tags.includes('rss-feed')
+      (post) => post.data.tags && post.data.tags.includes('rss-feed'),
     )
 
     // Sort posts by date
     const items = [...filteredBlogs].sort(
       (a, b) =>
-        new Date(b.data.date).valueOf() - new Date(a.data.date).valueOf()
+        new Date(b.data.date).valueOf() - new Date(a.data.date).valueOf(),
     )
 
     // Return RSS feed

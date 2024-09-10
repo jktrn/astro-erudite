@@ -4,6 +4,7 @@ import Header from '@components/Header.astro'
 import Footer from '@components/Footer.astro'
 import { SITE } from '@consts'
 import '../styles/katex.css'
+import { ViewTransitions } from 'astro:transitions'
 
 type Props = {
   title: string
@@ -17,10 +18,13 @@ const { title, description } = Astro.props
 <html lang="en">
   <head>
     <Head title={`${title} | ${SITE.TITLE}`} description={description} />
+    <ViewTransitions />
   </head>
-  <body>
+  <body
+    class="box-border flex h-fit min-h-screen flex-col px-4 font-sans antialiased"
+  >
     <Header />
-    <main>
+    <main class="flex-grow">
       <slot />
     </main>
     <Footer />
