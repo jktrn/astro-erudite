@@ -1,0 +1,33 @@
+---
+import { getCollection } from "astro:content";
+import Layout from "@layouts/Layout.astro";
+import Container from "@components/Container.astro";
+import { TAGS } from "@consts";
+import Image from "astro/components/Image.astro";
+
+const blog = (await getCollection("blog"))
+  .filter((post) => !post.data.draft);
+
+const tags =  blog.flatMap(post => post.data.tags).filter((tag, index, self) => self.indexOf(tag) === index);
+---
+
+<Layout title={TAGS.TITLE} description={TAGS.DESCRIPTION}>
+  <Container>
+    <aside data-pagefind-ignore>
+      <div class="space-y-10">
+        <div class="animate font-semibold text-black dark:text-white">
+          Tags
+        </div>
+        <ul class="flex flex-wrap ">
+            {tags.map(tag => (
+              <li class="my-3">
+                <a href={`/tags/${tag}`} class="px-3 py-2  rounded-full mx-2 bg-orange-300 hover:bg-cyan-200 dark:bg-orange-500 dark:hover:bg-cyan-500 transition-colors duration-300 ease-in-out">
+                    #{tag}
+                </a>
+              </li>
+            ))}
+        </ul>
+      </div>
+    </aside>
+  </Container>
+</Layout>

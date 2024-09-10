@@ -1,0 +1,71 @@
+---
+title: "[Old] MDX syntax guide"
+description: "Use interactive components in Markdown."
+date: "2024-03-16"
+---
+
+import Callout from "@/components/Callout.astro";
+
+---
+
+MDX is an extension of Markdown with the ability to import `.astro`,
+`.jsx`, `.tsx` and other framework components you have integrated.
+
+This guide covers the basics of MDX syntax and how to use it, as well as a few examples.
+
+## Example 1
+
+Importing a component from the `/components` directory.
+
+This component accepts a Javascript date object and format it as a string.
+
+```astro
+import DateComp from "../../../components/FormattedDate.astro";
+
+<DateComp date={new Date()} />
+```
+
+import FormattedDate from "../../../components/FormattedDate.astro";
+
+<FormattedDate date={new Date()} />
+
+---
+
+## Example 2
+
+Importing a component from a relative path to your content.
+
+This component displays an alert when the button is clicked.
+
+```astro
+import RelativeComponent from "./component.astro";
+
+<RelativeComponent />
+```
+
+import RelativeComponent from "./component.astro";
+
+<RelativeComponent />
+
+---
+
+By default Micro has zero frameworks installed. If you install a framework, components of that framework can be used in MDX files.
+
+<Callout>
+  Don't forget to use [client
+  directives](https://docs.astro.build/en/reference/directives-reference/#client-directives)
+  to make framework components interactive.
+</Callout>
+
+```astro
+<ReactComponent client:load />
+```
+
+---
+
+## More Links
+
+- [MDX Syntax Documentation](https://mdxjs.com/docs/what-is-mdx)
+- [Astro Framework Integrations](https://docs.astro.build/en/guides/integrations-guide)
+- [Astro Usage Documentation](https://docs.astro.build/en/guides/markdown-content/#markdown-and-mdx-pages)
+- [Client Directives](https://docs.astro.build/en/reference/directives-reference/#client-directives)

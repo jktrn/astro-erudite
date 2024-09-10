@@ -1,0 +1,125 @@
+@tailwind base;
+@tailwind components;
+@tailwind utilities;
+
+html {
+  overflow-y: auto;
+  color-scheme: light;
+  scroll-padding-top: 100px;
+}
+
+html.dark {
+  color-scheme: dark;
+}
+
+html,
+body {
+  @apply size-full;
+}
+
+body {
+  @apply font-sans antialiased;
+  @apply flex flex-col;
+  @apply bg-neutral-300 dark:bg-slate-900;
+  @apply text-black/75 dark:text-white/75;
+}
+
+header {
+  @apply fixed left-0 right-0 top-0 z-50 py-6;
+  @apply bg-neutral-100/75 dark:bg-neutral-900/75;
+  @apply saturate-200 backdrop-blur-sm;
+}
+
+main {
+  @apply flex-1 py-32;
+}
+
+footer {
+  @apply py-6 text-sm;
+}
+
+article {
+  @apply prose prose-neutral max-w-full dark:prose-invert prose-img:mx-auto prose-img:my-auto;
+  @apply prose-headings:font-semibold;
+  @apply prose-headings:text-black prose-headings:dark:text-white;
+}
+
+@layer utilities {
+  article a {
+    @apply font-sans text-current underline underline-offset-[3px];
+    @apply decoration-black/30 dark:decoration-white/30;
+    @apply transition-colors duration-300 ease-in-out;
+  }
+  article a:hover {
+    @apply text-black dark:text-white;
+    @apply decoration-black/50 dark:decoration-white/50;
+  }
+}
+
+.scroll_bar {
+  scrollbar-width: thin; 
+  scrollbar-color:  #1e293b #0f172a ; 
+}
+
+.animate {
+  @apply -translate-y-3 opacity-0;
+  @apply transition-all duration-300 ease-out;
+}
+
+.animate.show {
+  @apply translate-y-0 opacity-100;
+}
+
+html #back-to-top {
+  @apply pointer-events-none opacity-0;
+}
+
+html.scrolled #back-to-top {
+  @apply pointer-events-auto opacity-100;
+}
+
+/* shiki config */
+pre {
+  @apply border border-black/15 py-5 dark:border-white/20;
+}
+
+:root {
+  --astro-code-color-text: #09090b;
+  --astro-code-color-background: #fafafa;
+  --astro-code-token-comment: #a19595;
+  --astro-code-token-keyword: #f47067;
+  --astro-code-token-string: #00a99a;
+  --astro-code-token-function: #429996;
+  --astro-code-token-constant: #2b70c5;
+  --astro-code-token-parameter: #4e8fdf;
+  --astro-code-token-string-expression: #ae42a0;
+  --astro-code-token-punctuation: #8996a3;
+  --astro-code-token-link: #8d85ff;
+}
+
+.dark {
+  --astro-code-color-text: #fafafa;
+  --astro-code-color-background: #09090b;
+  --astro-code-token-comment: #a19595;
+  --astro-code-token-keyword: #f47067;
+  --astro-code-token-string: #00a99a;
+  --astro-code-token-function: #6eafad;
+  --astro-code-token-constant: #b3cceb;
+  --astro-code-token-parameter: #4e8fdf;
+  --astro-code-token-string-expression: #bf7db6;
+  --astro-code-token-punctuation: #8996a3;
+  --astro-code-token-link: #8d85ff;
+}
+
+/* copy code button on codeblocks */
+.copy-code {
+  @apply absolute right-3 top-3 grid size-9 place-content-center rounded border border-black/15 bg-neutral-100 text-center duration-300 ease-in-out dark:border-white/20 dark:bg-neutral-900;
+}
+
+.copy-code:hover {
+  @apply bg-[#E9E9E9] transition-colors dark:bg-[#232323];
+}
+
+.copy-code:active {
+  @apply scale-90 transition-transform;
+}

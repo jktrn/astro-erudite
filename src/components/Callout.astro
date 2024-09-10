@@ -1,0 +1,44 @@
+---
+interface Component {
+  type: "default" | "info" | "warning" | "error";
+}
+
+const { type = "default" } = Astro.props;
+
+let emoji = "💡";
+
+if (type === "info") {
+  emoji = "ℹ️";
+} else if (type === "warning") {
+  emoji = "⚠️";
+} else if (type === "error") {
+  emoji = "🚨";
+}
+---
+
+<div class={`not-prose callout callout-${type}`}>
+  <span class="emoji pointer-events-none select-none">{emoji}</span>
+  <slot />
+</div>
+
+<style>
+  .callout {
+    @apply relative my-4 flex rounded border border-orange-800 bg-orange-100 p-3 text-orange-950 dark:border-orange-200/20 dark:bg-orange-950/20 dark:text-orange-200;
+  }
+
+  .emoji {
+    @apply pr-3 text-xl;
+  }
+
+  .callout-info {
+    @apply border-blue-800 bg-blue-100 text-blue-950 dark:border-blue-200/20 dark:bg-blue-950/20 dark:text-blue-200;
+  }
+
+  .callout-warning {
+    @apply border-yellow-800 bg-yellow-100 text-yellow-950 dark:border-yellow-200/20 dark:bg-yellow-950/20 dark:text-yellow-200;
+  }
+
+  .callout-error {
+    @apply border-red-800 bg-red-100 text-red-950 dark:border-red-200/20 dark:bg-red-950/20 dark:text-red-200;
+  }
+</style>

@@ -1,0 +1,23 @@
+---
+export interface Props {
+    institution: string;
+    time: string;
+    job_title: string;
+    location: string;
+    description: string
+  }
+  
+const { institution, time, job_title, location, description } = Astro.props;
+---
+
+<div class="py-5 px-8">
+    <div class="flex justify-between text-sm font-bold md:text-lg">
+        <div>{institution}</div>
+        <div>{location}</div>
+    </div>
+    <div class="flex justify-between text-xs md:text-base">
+        <div class="italic">{job_title}</div>
+        <div>{time}</div>
+    </div>
+    <p class="text-xs mt-2">{description}</p>
+</div>

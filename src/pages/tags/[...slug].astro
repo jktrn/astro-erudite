@@ -1,0 +1,54 @@
+---
+import { type CollectionEntry, getCollection } from "astro:content";
+import Layout from "@layouts/Layout.astro";
+import Container from "@components/Container.astro";
+import ArrowCard from "@components/ArrowCard.astro";
+import { TAGS } from "@consts";
+
+type BlogPost = CollectionEntry<'blog'>;
+
+type Props = {
+  tag: string;
+  posts: BlogPost[];
+};
+
+const { tag, posts } = Astro.props;
+
+export async function getStaticPaths() {
+  const posts = await getCollection('blog');
+  const tags = posts.flatMap((post) => post.data.tags || []);
+  const uniqueTags = Array.from(new Set(tags.filter((tag): tag is string => typeof tag === 'string')));
+
+  return uniqueTags.map((tag) => ({
+    params: { slug: tag },
+    props: { tag, posts: posts.filter((post) => post.data.tags?.includes(tag)) },
+  }));
+}
+---
+
+<Layout title={`Posts tagged with "${tag}"`} description={`A collection of posts tagged with ${tag}.`}>
+  <Container>
+    <aside data-pagefind-ignore>
+      <div class="space-y-10">
+        <div class="animate font-semibold text-black dark:text-white">
+         Tag: <span class="px-3 py-2 rounded-full mx-2 bg-orange-300 hover:bg-cyan-200 dark:bg-orange-500 dark:hover:bg-cyan-500 transition-colors duration-300 ease-in-out">#{tag}</span>
+        </div>
+        <div class="space-y-4">
+          {
+            posts.map((post) => (
+              <section class="animate space-y-4">
+                <div>
+                  <ul class="not-prose flex flex-col gap-4">
+                      <li>
+                        <ArrowCard entry={post} />
+                      </li>
+                  </ul>
+                </div>
+              </section>
+            ))
+          }
+        </div>
+      </div>
+    </aside>
+  </Container>
+</Layout>

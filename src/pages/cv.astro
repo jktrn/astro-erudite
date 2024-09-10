@@ -1,0 +1,41 @@
+---
+import { getCollection } from "astro:content";
+import Layout from "@layouts/Layout.astro";
+import Container from "@components/Container.astro";
+import { CV } from "@consts";
+import CVCard from "@components/CVCard.astro";
+
+// TO Modify
+const works = [
+  {company:"Company A", time: "2022-Present", job_title: "Research Scientist", location: "London, UK", description: "Your Notes about the job"},
+  {company:"Company A", time: "2022-Present", job_title: "Research Scientist", location: "London, UK", description: "Your Notes about the job"},
+]
+const educations = [
+  {school:"University 1", time: "2022-Present", job_title: "BEng in Electronic Information Engineering", location: "London, UK", description: "Your Notes about the study"},
+]
+---
+
+<Layout title={CV.TITLE} description={CV.DESCRIPTION}>
+  <Container>
+    <aside data-pagefind-ignore>
+      <div class="space-y-2 md:space-y-10">
+        <div class="animate font-semibold text-black dark:text-white">
+          Work Experience
+        </div>
+        <ul class="animate not-prose flex flex-col gap-4">
+          {works.map((work) => (
+              <CVCard institution={work.company} time={work.time} job_title={work.job_title} location={work.location} description={work.description} />)
+          )}
+        </ul>
+        <div class="animate font-semibold text-black dark:text-white">
+          Education
+        </div>
+        <ul class="animate not-prose flex flex-col gap-4">
+          {educations.map((education) => (
+            <CVCard institution={education.school} time={education.time} job_title={education.job_title} location={education.location} description={education.description} />)
+        )}
+        </ul>
+      </div>
+    </aside>
+  </Container>
+</Layout>

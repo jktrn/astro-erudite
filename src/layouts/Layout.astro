@@ -1,0 +1,33 @@
+---
+import Head from "@components/Head.astro";
+import Header from "@components/Header.astro";
+import Footer from "@components/Footer.astro";
+import PageFind from "@components/PageFind.astro";
+import { SITE } from "@consts";
+import '../styles/katex.css';
+import ProgressBar from "@components/ProgressBar.astro";
+
+type Props = {
+  title: string;
+  description: string;
+};
+
+const { title, description } = Astro.props;
+---
+
+<!doctype html>
+<html lang="en">
+  <head>
+    <Head title={`${title} | ${SITE.TITLE}`} description={description} />
+    <link rel="stylesheet" href="/path/to/your/global.css">
+  </head>
+  <body>
+    <Header />
+    <!-- <ProgressBar /> -->
+    <main>
+      <slot />
+    </main>
+    <Footer />
+    <PageFind />
+  </body>
+</html>

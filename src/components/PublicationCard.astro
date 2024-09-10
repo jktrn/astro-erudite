@@ -1,0 +1,74 @@
+---
+import type { CollectionEntry } from "astro:content";
+import { Image } from "astro:assets";
+import { HIGHLIGHTAUTHOR } from "@consts";
+
+type Props = {
+  entry: CollectionEntry<"publications">;
+};
+
+const { entry } = Astro.props as {
+  entry: CollectionEntry<"publications">;
+};
+
+const splitStr = (authors: string | undefined, targetAuthor: string) => {
+  if (!authors) return [];
+  const parts = authors.split(new RegExp(`(${targetAuthor})`, 'g'));
+  return parts;
+};
+const decomposeURL = (URL: string | undefined) => {
+  if (!URL) return { text: '', url: '' };
+  const parts = URL.split(": ");
+  return { text: parts[0], url: parts[1] };
+};
+
+const dataLink = decomposeURL(entry.data.dataURL);
+const paperLink = decomposeURL(entry.data.paperURL);
+const codeLink = decomposeURL(entry.data.codeURL);
+const webLink = decomposeURL(entry.data.webURL);
+const authorsParts = splitStr(entry.data.authors, HIGHLIGHTAUTHOR);
+
+---
+
+<div
+  class="w-full not-prose group relative grid grid-cols-auto md:grid-cols-[204px_auto] gap-4 rounded-lg items-center border border-black/15 px-4 py-3  transition-colors duration-300 ease-in-out hover:bg-black/5 hover:text-black focus-visible:bg-black/5 focus-visible:text-black dark:border-white/20 dark:hover:bg-white/5 dark:hover:text-white dark:focus-visible:bg-white/5 dark:focus-visible:text-white"
+>
+  <Image
+  src={entry.data.img ?? ''}
+  alt={entry.data.imgAlt ?? ''}
+  width={640}
+  height={480}
+  class="sm:w-[240px] sm:h-[135px] shadow-sm rounded-md sm:mr-6 hover:opacity-80 transition hidden md:flex"
+  loading="eager"
+  />
+
+
+  <div class="flex items-center h-full">
+    <div class="flex flex-col">
+      <div class="w-full">
+        <div class="text-md font-semibold w-full">
+          {entry.data.title}
+        </div>
+        <div class="text-sm w-full">
+          {authorsParts.map((part:any) =>
+            part === HIGHLIGHTAUTHOR ? <u><strong>{part}</strong></u> : part
+          )}
+        </div>
+        <div class="text-sm w-full">
+          {paperLink.url!="" && <a class="underline hover:text-cyan-500 text-orange-500 dark:hover:text-cyan-500 transition-colors duration-300 ease-in-out visited:text-indigo-400" target="_blank" href={paperLink.url}>{paperLink.text}</a>}
+          {codeLink.url!="" && <a class="underline hover:text-cyan-500 text-orange-500 dark:hover:text-cyan-500 transition-colors duration-300 ease-in-out visited:text-indigo-400" target="_blank" href={codeLink.url}>{codeLink.text}</a>}
+          {webLink.url!="" && <a class="underline hover:text-cyan-500 text-orange-500 dark:hover:text-cyan-500 transition-colors duration-300 ease-in-out visited:text-indigo-400" target="_blank" href={webLink.url}>{webLink.text}</a>}
+          {dataLink.url!="" && <a class="underline hover:text-cyan-500 text-orange-500 dark:hover:text-cyan-500 transition-colors duration-300 ease-in-out visited:text-indigo-400" target="_blank" href={dataLink.url}>{dataLink.text}</a>}
+        </div>
+        <div class="text-sm">
+          In <div class="inline italic">{entry.data.pub}</div>
+        </div>
+      </div>
+      <p class="text-sm mt-2 break-words">
+        {entry.data.description}
+      </p>
+    </div>
+  </div>
+</div>
+
+

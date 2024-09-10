@@ -1,0 +1,95 @@
+---
+import { type CollectionEntry, getCollection } from "astro:content";
+import Layout from "@layouts/Layout.astro";
+import Container from "@components/Container.astro";
+import FormattedDate from "@components/FormattedDate.astro";
+import { readingTime } from "@lib/utils";
+import BackToPrevious from "@components/BackToPrevious.astro";
+import PostNavigation from "@components/PostNavigation.astro";
+import TableOfContents from "@components/TableOfContents.astro";
+import Giscus from "@components/Giscus.astro";
+
+export async function getStaticPaths() {
+  const posts = (await getCollection("blog"))
+    .filter((post) => !post.data.draft)
+    .sort((a, b) => b.data.date.valueOf() - a.data.date.valueOf());
+  return posts.map((post) => ({
+    params: { slug: post.slug },
+    props: post,
+  }));
+}
+type Props = CollectionEntry<"blog">;
+
+const posts = (await getCollection("blog"))
+  .filter((post) => !post.data.draft)
+  .sort((a, b) => b.data.date.valueOf() - a.data.date.valueOf());
+
+function getPostIndex(slug: string): number {
+  return posts.findIndex((post) => post.slug === slug);
+}
+
+function getNextPost(slug: string): Props | null {
+  const postIndex = getPostIndex(slug);
+  return postIndex !== -1 && postIndex < posts.length - 1 ? posts[postIndex + 1] : null;
+}
+
+function getPrevPost(slug: string): Props | null {
+  const postIndex = getPostIndex(slug);
+  return postIndex > 0 ? posts[postIndex - 1] : null;
+}
+
+const currentPostSlug = Astro.params.slug;
+const nextPost = getNextPost(currentPostSlug);
+const prevPost = getPrevPost(currentPostSlug);
+
+const post = Astro.props;
+const { Content, headings } = await post.render();
+---
+
+<Layout title={post.data.title} description={post.data.description}>
+  <Container>
+    <div class="animate">
+      <BackToPrevious href="/blog">Back to blog</BackToPrevious>
+    </div>
+    <div class="my-10 space-y-4">
+      <div class="animate flex items-center gap-1.5">
+        <div class="font-base text-sm">
+          <FormattedDate date={post.data.date} />
+        </div>
+        &bull;
+        <div class="font-base text-sm">
+          {readingTime(post.body)}
+        </div>
+      </div>
+      <h1 class="animate text-4xl font-semibold text-black dark:text-white">
+        {post.data.title}
+      </h1>
+      <div class="font-base text-sm ">
+        {post.data.tags && post.data.tags.length > 0 ? (
+          post.data.tags.map((tag) => (
+            <div class="inline-block my-1">
+              <a
+                href={`/tags/${tag}`}
+                class="mx-1 rounded-full px-2 py-1 bg-orange-300 hover:bg-cyan-200 dark:bg-orange-500 dark:hover:bg-cyan-500 transition-colors duration-300 ease-in-out"
+              >
+                #{tag}
+              </a>
+            </div>
+          ))
+        ) : (
+          <span>No tags available</span>
+        )}
+      </div>
+    </div>
+    {headings.length > 0 && <TableOfContents headings={headings} />}
+    <article class="animate">
+      <Content />
+      <div class="mt-24">
+        <PostNavigation prevPost={prevPost} nextPost={nextPost} />
+      </div>
+      <div class="mt-24">
+        <Giscus />
+      </div>
+    </article>
+  </Container>
+</Layout>
