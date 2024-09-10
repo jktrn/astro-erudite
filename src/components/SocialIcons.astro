@@ -1,23 +1,14 @@
 ---
-import SocialIcon from '@components/SocialIcon.astro'
+import { Twitter, Github, Linkedin, Mail, GraduationCap, Rss } from 'lucide-react'
 import { SITE } from '@consts'
 
-export interface Props {
-  icon_size: string
-}
-
-const { icon_size } = Astro.props
 ---
 
 <ul class="not-prose flex flex-wrap gap-2">
-  <SocialIcon icon_size={icon_size} URL="#" icon="twitter-x" />
-  <SocialIcon icon_size={icon_size} URL="#" icon="github" />
-  <SocialIcon icon_size={icon_size} URL="#" icon="linkedin" />
-  <SocialIcon icon_size={icon_size} URL="#" icon="envelope-fill" />
-  <SocialIcon icon_size={icon_size} URL="#" icon="mortarboard-fill" />
-  <SocialIcon
-    icon_size={icon_size}
-    URL={`${SITE.SITEURL}/rss.xml`}
-    icon="rss-fill"
-  />
+  <a href="#" class="inline-block"><Twitter /></a>
+  <a href="#" class="inline-block"><Github /></a>
+  <a href="#" class="inline-block"><Linkedin /></a>
+  <a href="#" class="inline-block"><Mail /></a>
+  <a href="#" class="inline-block"><GraduationCap /></a>
+  <a href={`${SITE.SITEURL}/rss.xml`} class="inline-block"><Rss /></a>
 </ul>

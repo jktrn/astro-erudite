@@ -8,7 +8,7 @@ import { Image } from 'astro:assets'
 <Layout title="About" description="About">
   <Container>
     <div class="space-y-10">
-      <div class="font-semibold text-black dark:text-white">About</div>
+      <div class="font-semibold">About</div>
       <section class="not-prose flex flex-col gap-4 text-justify">
         <p class="text-justify">
           Lorem ipsum dolor sit amet consectetur adipisicing elit. Dolores porro
@@ -26,7 +26,7 @@ import { Image } from 'astro:assets'
       <div class="flex flex-col justify-center md:flex-row">
         <div class="my-10 text-center">
           <div
-            class="h-[250px] w-[350px] -rotate-6 overflow-hidden rounded-xl bg-neutral-300 object-cover"
+            class="h-[250px] w-[350px] -rotate-6 overflow-hidden rounded-xl object-cover"
           >
             <Image
               src={'/astro-nano.png'}
@@ -42,7 +42,7 @@ import { Image } from 'astro:assets'
         </div>
         <div class="mx-10 my-10 text-center">
           <div
-            class="mx-auto h-[250px] w-[150px] rotate-6 rounded-xl bg-neutral-300 object-cover sm:ml-auto"
+            class="mx-auto h-[250px] w-[150px] rotate-6 rounded-xl object-cover sm:ml-auto"
           >
             <Image
               src={'/astro-micro.jpg'}

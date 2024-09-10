@@ -62,7 +62,7 @@ const { Content, headings } = await post.render()
           {readingTime(post.body)}
         </div>
       </div>
-      <h1 class="text-4xl font-semibold text-black dark:text-white">
+      <h1 class="text-4xl font-semibold">
         {post.data.title}
       </h1>
       <div class="font-base text-sm">
@@ -72,7 +72,7 @@ const { Content, headings } = await post.render()
               <div class="my-1 inline-block">
                 <a
                   href={`/tags/${tag}`}
-                  class="mx-1 rounded-full bg-orange-300 px-2 py-1 transition-colors duration-300 ease-in-out hover:bg-cyan-200 dark:bg-orange-500 dark:hover:bg-cyan-500"
+                  class="mx-1 rounded-full px-2 py-1 transition-colors duration-300 ease-in-out"
                 >
                   #{tag}
                 </a>
@@ -85,7 +85,7 @@ const { Content, headings } = await post.render()
       </div>
     </div>
     {headings.length > 0 && <TableOfContents headings={headings} />}
-    <article class="animate">
+    <article class="prose prose-neutral max-w-full dark:prose-invert prose-img:mx-auto prose-img:my-auto">
       <Content />
       <div class="mt-24">
         <PostNavigation prevPost={prevPost} nextPost={nextPost} />

@@ -12,7 +12,7 @@ const { entry } = Astro.props as {
 
 <a
   href={`/${entry.collection}/${entry.slug}`}
-  class="not-prose group relative flex flex-nowrap rounded-lg border border-black/15 px-4 py-3 pr-10 transition-colors duration-300 ease-in-out hover:bg-black/5 hover:text-black focus-visible:bg-black/5 focus-visible:text-black dark:border-white/20 dark:hover:bg-white/5 dark:hover:text-white dark:focus-visible:bg-white/5 dark:focus-visible:text-white"
+  class="not-prose group relative flex flex-nowrap rounded-lg border px-4 py-3 pr-10 transition-colors duration-300 ease-in-out"
 >
   <div class="flex flex-1 flex-col truncate">
     <div class="font-semibold">
@@ -32,11 +32,11 @@ const { entry } = Astro.props as {
       y1="12"
       x2="19"
       y2="12"
-      class="translate-x-3 scale-x-0 transition-transform duration-300 ease-in-out group-hover:translate-x-0 group-hover:scale-x-100 group-focus-visible:translate-x-0 group-focus-visible:scale-x-100"
+      class="translate-x-3 scale-x-0 transition-transform duration-300 ease-in-out group-focus-visible:translate-x-0 group-focus-visible:scale-x-100"
     ></line>
     <polyline
       points="12 5 19 12 12 19"
-      class="-translate-x-1 transition-transform duration-300 ease-in-out group-hover:translate-x-0 group-focus-visible:translate-x-0"
+      class="-translate-x-1 transition-transform duration-300 ease-in-out group-focus-visible:translate-x-0"
     ></polyline>
   </svg>
 </a>

@@ -4,6 +4,8 @@ import '../styles/global.css'
 import '@fontsource/geist-sans'
 import '@fontsource/geist-mono'
 
+import { ViewTransitions } from 'astro:transitions'
+
 interface Props {
   title: string
   description: string
@@ -37,73 +39,40 @@ const { title, description, image = '/blog-placeholder-1.jpg' } = Astro.props
 <meta property="twitter:description" content={description} />
 <meta property="twitter:image" content={new URL(image, Astro.url)} />
 
+<ViewTransitions />
+
 <script is:inline>
-  function init() {
-    onScroll()
-    addCopyCodeButtons()
-
-    const backToTop = document.getElementById('back-to-top')
-    backToTop?.addEventListener('click', (event) => scrollToTop(event))
-
-    const backToPrev = document.getElementById('back-to-prev')
-    backToPrev?.addEventListener('click', () => window.history.back())
-
-    document.addEventListener('scroll', onScroll)
-  }
-
-  function onScroll() {
-    if (window.scrollY > 0) {
-      document.documentElement.classList.add('scrolled')
-    } else {
-      document.documentElement.classList.remove('scrolled')
+  function setDarkMode(document) {
+    const getThemePreference = () => {
+      if (
+        typeof localStorage !== 'undefined' &&
+        localStorage.getItem('theme')
+      ) {
+        return localStorage.getItem('theme')
+      }
+      return window.matchMedia('(prefers-color-scheme: dark)').matches
+        ? 'dark'
+        : 'theme-light'
     }
-  }
+    const isDark = getThemePreference() === 'dark'
+    document.documentElement.classList[isDark ? 'add' : 'remove']('dark')
 
-  function scrollToTop(event) {
-    event.preventDefault()
-    window.scrollTo({
-      top: 0,
-      behavior: 'smooth',
-    })
-  }
-
-  function addCopyCodeButtons() {
-    let copyButtonLabel = '📋'
-    let codeBlocks = Array.from(document.querySelectorAll('pre'))
-
-    async function copyCode(codeBlock, copyButton) {
-      const codeText = codeBlock.innerText
-      const buttonText = copyButton.innerText
-      const textToCopy = codeText.replace(buttonText, '')
-
-      await navigator.clipboard.writeText(textToCopy)
-      copyButton.innerText = '✅'
-
-      setTimeout(() => {
-        copyButton.innerText = copyButtonLabel
-      }, 2000)
-    }
-
-    for (let codeBlock of codeBlocks) {
-      const wrapper = document.createElement('div')
-      wrapper.style.position = 'relative'
-
-      const copyButton = document.createElement('button')
-      copyButton.innerText = copyButtonLabel
-      copyButton.classList = 'copy-code'
-
-      codeBlock.setAttribute('tabindex', '0')
-      codeBlock.appendChild(copyButton)
-
-      codeBlock.parentNode.insertBefore(wrapper, codeBlock)
-      wrapper.appendChild(codeBlock)
-
-      copyButton?.addEventListener('click', async () => {
-        await copyCode(codeBlock, copyButton)
+    if (typeof localStorage !== 'undefined') {
+      const observer = new MutationObserver(() => {
+        const isDark = document.documentElement.classList.contains('dark')
+        localStorage.setItem('theme', isDark ? 'dark' : 'theme-light')
+      })
+      observer.observe(document.documentElement, {
+        attributes: true,
+        attributeFilter: ['class'],
       })
     }
   }
 
-  document.addEventListener('DOMContentLoaded', () => init())
-  document.addEventListener('astro:after-swap', () => init())
+  setDarkMode(document)
+
+  document.addEventListener('astro:before-swap', (ev) => {
+    // Pass the incoming document to set the theme on it
+    setDarkMode(ev.newDocument)
+  })
 </script>

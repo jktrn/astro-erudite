@@ -1,21 +1,17 @@
 ---
 import Container from '@components/Container.astro'
-import { SITE } from '@consts'
-import BackToTop from '@components/BackToTop.astro'
 import SocialIcons from './SocialIcons.astro'
+import { ModeToggle } from '@components/ui/mode-toggle'
 ---
 
-<footer>
+<footer class="py-8">
   <Container>
-    <div class="my-2 flex justify-between">
-      <SocialIcons icon_size={'text-xl'} />
-      <BackToTop />
-    </div>
-    <div class="flex items-center justify-between">
-      <div>
-        &copy; {new Date().getFullYear()} • {SITE.TITLE} 👀<br />
-        Built with Astro
+    <div class="flex justify-between items-center">
+      <div class="flex items-center space-x-4">
+        <ModeToggle client:load />
+        <p class="text-sm text-muted-foreground">&copy; {new Date().getFullYear()} All rights reserved.</p>
       </div>
+      <SocialIcons />
     </div>
   </Container>
 </footer>
