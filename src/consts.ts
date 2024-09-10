@@ -1,9 +1,15 @@
-import type { Site } from '@types'
+export type Site = {
+  TITLE: string
+  DESCRIPTION: string
+  EMAIL: string
+  NUM_POSTS_ON_HOMEPAGE: number
+  SITEURL: string
+}
 
 export const SITE: Site = {
-  TITLE: 'Astro Micro Academics',
-  DESCRIPTION: 'Astro Micro Academics is for academic user.',
-  EMAIL: 'youremial@gmail.com',
+  TITLE: 'astro-erudite',
+  DESCRIPTION: 'astro-erudite is a opinionated, no-frills blogging template. Built with Astro.',
+  EMAIL: 'youremail@gmail.com',
   NUM_POSTS_ON_HOMEPAGE: 2,
-  SITEURL: 'https://astro-micro-academic.vercel.app', // Update here to link the RSS icon to your website rss
+  SITEURL: 'https://astro-erudite.vercel.app',
 }

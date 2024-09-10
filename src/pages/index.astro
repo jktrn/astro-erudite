@@ -5,9 +5,6 @@ import { SITE } from '@consts'
 import ArrowCard from '@components/ArrowCard.astro'
 import Link from '@components/Link.astro'
 import { getCollection } from 'astro:content'
-import type { CollectionEntry } from 'astro:content'
-import SocialIcons from '@components/SocialIcons.astro'
-import { ModeToggle } from '@components/ui/mode-toggle'
 
 const blog = (await getCollection('blog'))
   .filter((post) => !post.data.draft)
@@ -18,7 +15,6 @@ const blog = (await getCollection('blog'))
 <Layout title="Home" description="Home">
   <Container>
     <section class="space-y-6">
-      <ModeToggle client:load />
       <div class="flex flex-wrap items-center justify-between gap-y-2">
         <h2 class="font-semibold">Latest posts</h2>
         <Link href="/blog"> See all posts </Link>

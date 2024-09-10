@@ -84,24 +84,19 @@
     --chart-4: 280 65% 60%;
     --chart-5: 340 75% 55%;
   }
-}
 
-@layer base {
-  * {
-    @apply border-border;
+  *,
+  *::before,
+  *::after {
+    @apply !border-border;
   }
 
   html {
     color-scheme: light;
+    scrollbar-gutter: stable;
   }
 
   html.dark {
     color-scheme: dark;
-  }
-}
-
-@layer utilities {
-  .disable-transitions * {
-    @apply !transition-none;
   }
 }

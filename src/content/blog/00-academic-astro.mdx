@@ -5,48 +5,108 @@ date: '2024-07-25'
 tags: ['log', 'rss-feed']
 ---
 
-:exclamation: Also refer to [Old] posts to see examples and changes. Some changes are removed in this version, which are marked.
+## h2 Heading
+### h3 Heading
+#### h4 Heading
+##### h5 Heading
+###### h6 Heading
 
-## What is New
+## Emphasis
 
-- Add Math support to the blog
-- Add News, Research, Publication, CV sections
-- add icon to connect section
-- Add tag function to the blog
-- add RSS Feed icon
-- add tags to post slug and enable tag based search
-- add function to RSS feed only posts with rss-feed tags
-- Change SOCIALS
-- add highlight author
-- redo the news section height
-- support markdown emoji :blush: :exclamation:
-- Clear and rearrange all the posts
-  - [x] rewrite astro-micro-academics
-  - [x] astro micro
-  - [x] get started with astro micro
-  - [x] blog collection example
+**This is bold text**
 
----
+__This is bold text__
 
-## TODO
+*This is italic text*
 
-- Add Group Page
-- Add Opening Section
-- Add Award Page
-- Write a complete personal website setup guide
-- screenshot and submit theme to astro
-- add progress bar on the top
-- show tags on allowcard
-- fix news section scroll bar
+_This is italic text_
 
-## Math test
+~~Strikethrough~~
 
-This is an inline formula: $a = b+1$, $a = \frac{1}{x_1}$
 
-$$
-a = \sum_{n=1}^{22} \sqrt{a+b_n}
-$$
+## Blockquotes
 
-## 中文测试
 
-这里是中文测试
+> Blockquotes can also be nested...
+>> ...by using additional greater-than signs right next to each other...
+> > > ...or with spaces between arrows.
+
+
+## Lists
+
+Unordered
+
++ Create a list by starting a line with `+`, `-`, or `*`
++ Sub-lists are made by indenting 2 spaces:
+  - Marker character change forces new list start:
+    * Ac tristique libero volutpat at
+    + Facilisis in pretium nisl aliquet
+    - Nulla volutpat aliquam velit
++ Very easy!
+
+Ordered
+
+1. Lorem ipsum dolor sit amet
+2. Consectetur adipiscing elit
+3. Integer molestie lorem at massa
+
+
+1. You can use sequential numbers...
+1. ...or keep all the numbers as `1.`
+
+Start numbering with offset:
+
+57. foo
+1. bar
+
+
+## Code
+
+Inline `code`
+
+Indented code
+
+    // Some comments
+    line 1 of code
+    line 2 of code
+    line 3 of code
+
+
+Block code "fences"
+
+```
+Sample text here...
+```
+
+Syntax highlighting
+
+``` js
+var foo = function (bar) {
+  return bar++;
+};
+
+console.log(foo(5));
+```
+
+## Tables
+
+| Option | Description |
+| ------ | ----------- |
+| data   | path to data files to supply the data that will be passed into templates. |
+| engine | engine to be used for processing templates. Handlebars is the default. |
+| ext    | extension to be used for dest files. |
+
+Right aligned columns
+
+| Option | Description |
+| ------:| -----------:|
+| data   | path to data files to supply the data that will be passed into templates. |
+| engine | engine to be used for processing templates. Handlebars is the default. |
+| ext    | extension to be used for dest files. |
+
+
+## Links
+
+[link text](http://dev.nodeca.com)
+
+[link with title](http://nodeca.github.io/pica/demo/ "title text!")

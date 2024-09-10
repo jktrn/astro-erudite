@@ -2,18 +2,16 @@
 import type { Heading } from './TableOfContents.astro'
 import Link from './Link.astro'
 
-// https://kld.dev/building-table-of-contents/
-
 const { heading } = Astro.props
 ---
 
-<li class="list-inside list-disc px-6 py-1.5 text-sm">
-  <Link href={'#' + heading.slug} underline>
+<li class="list-inside list-disc px-6 py-1.5 xl:list-none xl:p-0 text-sm">
+  <Link href={'#' + heading.slug} class="toc-link" data-heading={heading.slug}>
     {heading.text}
   </Link>
   {
     heading.subheadings.length > 0 && (
-      <ul class="translate-x-3">
+      <ul class="translate-x-3 xl:translate-x-0 xl:ml-4 xl:mt-2 xl:space-y-2">
         {heading.subheadings.map((subheading: Heading) => (
           <Astro.self heading={subheading} />
         ))}
@@ -21,3 +19,31 @@ const { heading } = Astro.props
     )
   }
 </li>
+
+<script>
+  function updateActiveHeading() {
+    const headings = document.querySelectorAll('h2, h3, h4, h5, h6');
+    const tocLinks = document.querySelectorAll('.toc-link');
+    
+    let currentHeading = '';
+    
+    headings.forEach(heading => {
+      const top = heading.getBoundingClientRect().top;
+      if (top < 100) {
+        currentHeading = heading.id;
+      }
+    });
+    
+    tocLinks.forEach(link => {
+      const headingSlug = link.getAttribute('data-heading');
+      if (headingSlug === currentHeading) {
+        link.classList.add('underline');
+      } else {
+        link.classList.remove('underline');
+      }
+    });
+  }
+
+  window.addEventListener('scroll', updateActiveHeading);
+  window.addEventListener('load', updateActiveHeading);
+</script>
