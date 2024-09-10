@@ -3,7 +3,6 @@ import { type CollectionEntry, getCollection } from 'astro:content'
 import Layout from '@layouts/Layout.astro'
 import Container from '@components/Container.astro'
 import ArrowCard from '@components/ArrowCard.astro'
-import { BLOG } from '@consts'
 
 const data = (await getCollection('blog'))
   .filter((post) => !post.data.draft)
@@ -25,7 +24,7 @@ const posts = data.reduce((acc: Acc, post) => {
 const years = Object.keys(posts).sort((a, b) => parseInt(b) - parseInt(a))
 ---
 
-<Layout title={BLOG.TITLE} description={BLOG.DESCRIPTION}>
+<Layout title="Blog" description="Blog">
   <Container>
     <aside data-pagefind-ignore>
       <div class="space-y-10">

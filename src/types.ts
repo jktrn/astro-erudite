@@ -6,8 +6,3 @@ export type Site = {
   NUM_PUBLICATIONS_ON_HOMEPAGE: number
   SITEURL: string
 }
-
-export type Metadata = {
-  TITLE: string
-  DESCRIPTION: string
-}

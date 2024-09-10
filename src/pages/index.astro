@@ -1,7 +1,7 @@
 ---
 import Layout from '@layouts/Layout.astro'
 import Container from '@components/Container.astro'
-import { SITE, HOME } from '@consts'
+import { SITE } from '@consts'
 import ArrowCard from '@components/ArrowCard.astro'
 import Link from '@components/Link.astro'
 import { getCollection } from 'astro:content'
@@ -21,7 +21,7 @@ const publications: CollectionEntry<'publications'>[] = (
   .slice(0, SITE.NUM_PUBLICATIONS_ON_HOMEPAGE)
 ---
 
-<Layout title={HOME.TITLE} description={HOME.DESCRIPTION}>
+<Layout title="Home" description="Home">
   <Container>
     <aside data-pagefind-ignore>
       <h1 class="animate font-semibold text-black dark:text-white">

@@ -2,7 +2,6 @@
 import { getCollection } from 'astro:content'
 import Layout from '@layouts/Layout.astro'
 import Container from '@components/Container.astro'
-import { RESEARCH } from '@consts'
 import PublicationCard from '@components/PublicationCard.astro'
 // import PublicationCard from "@components/PublicationCard";
 
@@ -11,7 +10,7 @@ const publications = (await getCollection('publications')).sort(
 )
 ---
 
-<Layout title={RESEARCH.TITLE} description={RESEARCH.DESCRIPTION}>
+<Layout title="Research" description="Research">
   <Container>
     <aside data-pagefind-ignore>
       <div class="space-y-10">

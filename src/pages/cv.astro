@@ -2,7 +2,6 @@
 import { getCollection } from 'astro:content'
 import Layout from '@layouts/Layout.astro'
 import Container from '@components/Container.astro'
-import { CV } from '@consts'
 import CVCard from '@components/CVCard.astro'
 
 // TO Modify
@@ -33,7 +32,7 @@ const educations = [
 ]
 ---
 
-<Layout title={CV.TITLE} description={CV.DESCRIPTION}>
+<Layout title="CV" description="CV">
   <Container>
     <aside data-pagefind-ignore>
       <div class="space-y-2 md:space-y-10">

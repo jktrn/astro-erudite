@@ -2,11 +2,10 @@
 import { getCollection } from 'astro:content'
 import Layout from '@layouts/Layout.astro'
 import Container from '@components/Container.astro'
-import { ABOUT } from '@consts'
 import { Image } from 'astro:assets'
 ---
 
-<Layout title={ABOUT.TITLE} description={ABOUT.DESCRIPTION}>
+<Layout title="About" description="About">
   <Container>
     <aside data-pagefind-ignore>
       <div class="space-y-10">

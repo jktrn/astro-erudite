@@ -1,7 +1,6 @@
 ---
 import type { CollectionEntry } from 'astro:content'
 import { Image } from 'astro:assets'
-import { HIGHLIGHTAUTHOR } from '@consts'
 
 type Props = {
   entry: CollectionEntry<'publications'>
@@ -26,7 +25,6 @@ const dataLink = decomposeURL(entry.data.dataURL)
 const paperLink = decomposeURL(entry.data.paperURL)
 const codeLink = decomposeURL(entry.data.codeURL)
 const webLink = decomposeURL(entry.data.webURL)
-const authorsParts = splitStr(entry.data.authors, HIGHLIGHTAUTHOR)
 ---
 
 <div
@@ -48,17 +46,7 @@ const authorsParts = splitStr(entry.data.authors, HIGHLIGHTAUTHOR)
           {entry.data.title}
         </div>
         <div class="w-full text-sm">
-          {
-            authorsParts.map((part: any) =>
-              part === HIGHLIGHTAUTHOR ? (
-                <u>
-                  <strong>{part}</strong>
-                </u>
-              ) : (
-                part
-              ),
-            )
-          }
+          {entry.data.authors}
         </div>
         <div class="w-full text-sm">
           {

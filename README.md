@@ -11,8 +11,6 @@ Micro Academics adds features like tags, and blog math support and also inherits
 
 Micro Academics still comes with everything great about Micro and Nano — full type safety, a sitemap, an RSS feed, and Markdown + MDX support. Styled with TailwindCSS and preconfigured with system, light, and dark themes.
 
-![teaser](./assets/teaser-1.png)
-
 ## News
 
 ✨ I've got a detailed blog about building and deploying your website using this template! Check it out [here](https://jingwu2121.github.io/blog/01-build-deploy-website/)
