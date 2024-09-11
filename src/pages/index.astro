@@ -6,7 +6,13 @@ import BlogCard from '@components/BlogCard.astro'
 import { buttonVariants } from '@/components/ui/button'
 import { getCollection } from 'astro:content'
 import Link from '@components/Link.astro'
-import { Card, CardContent, CardDescription, CardHeader, CardTitle } from "@/components/ui/card"
+import {
+  Card,
+  CardContent,
+  CardDescription,
+  CardHeader,
+  CardTitle,
+} from '@/components/ui/card'
 
 const blog = (await getCollection('blog'))
   .filter((post) => !post.data.draft)

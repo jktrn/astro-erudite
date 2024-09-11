@@ -40,8 +40,12 @@ function buildToc(headings: Heading[]) {
 <nav
   class="overflow-wrap-break-word sticky top-16 hidden h-0 w-[calc(50vw-50%-4rem)] translate-x-[calc(-100%-2em)] text-xs leading-4 xl:block"
 >
-  <h2 class="mb-4 text-xl font-semibold">Table of Contents</h2>
-  <ul class="space-y-2">
-    {toc.map((heading) => <TableOfContentsHeading heading={heading} />)}
-  </ul>
+  <div class="mr-6 flex justify-end">
+    <ul class="space-y-2">
+      <li>
+        <h2 class="mb-2 text-lg font-semibold">Table of Contents</h2>
+      </li>
+      {toc.map((heading) => <TableOfContentsHeading heading={heading} />)}
+    </ul>
+  </div>
 </nav>

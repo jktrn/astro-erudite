@@ -12,28 +12,42 @@ const { prevPost, nextPost } = Astro.props
     href={prevPost ? `/blog/${prevPost.slug}` : '#'}
     class={cn(
       buttonVariants({ variant: 'outline' }),
-      'group flex items-center justify-start gap-2 w-1/2',
+      'rounded-xl group flex items-center justify-start w-1/2 h-fit',
       !prevPost && 'pointer-events-none opacity-50 cursor-not-allowed',
     )}
     aria-disabled={!prevPost}
   >
-    <ArrowLeft
-      className="h-4 w-4 transition-transform group-hover:-translate-x-1"
-    />
-    <span class="truncate">{prevPost?.data.title || 'Latest post!'}</span>
+    <div class="mr-2 flex-shrink-0">
+      <ArrowLeft
+        className="h-4 w-4 transition-transform group-hover:-translate-x-1"
+      />
+    </div>
+    <div class="flex flex-col items-start overflow-hidden">
+      <span class="text-left text-xs text-muted-foreground">Previous Post</span>
+      <span class="w-full truncate text-left"
+        >{prevPost?.data.title || 'Latest post!'}</span
+      >
+    </div>
   </Link>
   <Link
     href={nextPost ? `/blog/${nextPost.slug}` : '#'}
     class={cn(
       buttonVariants({ variant: 'outline' }),
-      'group flex items-center justify-end gap-2 w-1/2',
+      'rounded-xl group flex items-center justify-end w-1/2 h-fit',
       !nextPost && 'pointer-events-none opacity-50 cursor-not-allowed',
     )}
     aria-disabled={!nextPost}
   >
-    <span class="truncate">{nextPost?.data.title || 'Last post!'}</span>
-    <ArrowRight
-      className="h-4 w-4 transition-transform group-hover:translate-x-1"
-    />
+    <div class="flex flex-col items-end overflow-hidden">
+      <span class="text-right text-xs text-muted-foreground">Next Post</span>
+      <span class="w-full truncate text-right"
+        >{nextPost?.data.title || 'Last post!'}</span
+      >
+    </div>
+    <div class="ml-2 flex-shrink-0">
+      <ArrowRight
+        className="h-4 w-4 transition-transform group-hover:translate-x-1"
+      />
+    </div>
   </Link>
 </div>

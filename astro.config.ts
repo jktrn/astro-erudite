@@ -1,14 +1,18 @@
 import { rehypeHeadingIds } from '@astrojs/markdown-remark'
 import mdx from '@astrojs/mdx'
+import react from '@astrojs/react'
 import sitemap from '@astrojs/sitemap'
 import tailwind from '@astrojs/tailwind'
+import {
+  transformerMetaHighlight,
+  transformerNotationDiff,
+} from '@shikijs/transformers'
 import { defineConfig } from 'astro/config'
 import rehypeKatex from 'rehype-katex'
+import rehypePrettyCode from 'rehype-pretty-code'
 import remarkEmoji from 'remark-emoji'
 import remarkMath from 'remark-math'
 import remarkToc from 'remark-toc'
-
-import react from '@astrojs/react'
 
 // https://astro.build/config
 export default defineConfig({
@@ -22,10 +26,28 @@ export default defineConfig({
     react(),
   ],
   markdown: {
-    shikiConfig: {
-      theme: 'css-variables',
-    },
-    rehypePlugins: [rehypeHeadingIds, rehypeKatex],
+    // shikiConfig: {
+    //   transformers: [
+    //     transformerNotationDiff(),
+    //     transformerNotationFocus(),
+    //     transformerMetaHighlight(),
+    //   ],
+    // },
+    syntaxHighlight: false,
+    rehypePlugins: [
+      rehypeHeadingIds,
+      rehypeKatex,
+      [
+        rehypePrettyCode,
+        {
+          theme: {
+            light: 'vitesse-light',
+            dark: 'vitesse-dark',
+          },
+          transformers: [transformerNotationDiff(), transformerMetaHighlight()],
+        },
+      ],
+    ],
     remarkPlugins: [remarkToc, remarkMath, remarkEmoji],
   },
   server: {
