@@ -2,8 +2,7 @@
 import { type CollectionEntry, getCollection, getEntry } from 'astro:content'
 import Layout from '@layouts/Layout.astro'
 import Container from '@components/Container.astro'
-import FormattedDate from '@components/FormattedDate.astro'
-import { readingTime } from '@lib/utils'
+import { formatDate, readingTime } from '@lib/utils'
 import PostNavigation from '@components/PostNavigation.astro'
 import TableOfContents from '@components/TableOfContents.astro'
 import { Image } from 'astro:assets'
@@ -104,7 +103,7 @@ if (
           alt={post.data.title}
           width={1200}
           height={630}
-          class="mb-8 rounded-lg object-cover shadow-lg"
+          class="mb-8 rounded-xl object-cover shadow-lg"
         />
       )
     }
@@ -144,7 +143,7 @@ if (
             </>
           )
         }
-        <FormattedDate date={post.data.date} />
+        <span>{formatDate(post.data.date)}</span>
         <Separator orientation="vertical" className="h-4" />
         <span>{readingTime(post.body)}</span>
       </div>

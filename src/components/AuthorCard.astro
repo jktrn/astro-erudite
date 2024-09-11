@@ -12,7 +12,7 @@ const { name, avatar, bio } = author.data
 ---
 
 <div
-  class="rounded-lg border p-4 transition-colors duration-300 ease-in-out hover:bg-secondary/50"
+  class="rounded-xl border p-4 transition-colors duration-300 ease-in-out hover:bg-secondary/50"
 >
   <Link href={`/authors/${author.slug}`} class="flex flex-wrap gap-4">
     <Image
@@ -20,7 +20,7 @@ const { name, avatar, bio } = author.data
       alt={`Avatar of ${name}`}
       width={128}
       height={128}
-      class="rounded-lg object-cover"
+      class="rounded-xl object-cover"
     />
     <div class="flex-grow">
       <h3 class="mb-1 text-lg font-semibold">{name}</h3>

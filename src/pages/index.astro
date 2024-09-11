@@ -6,6 +6,7 @@ import BlogCard from '@components/BlogCard.astro'
 import { buttonVariants } from '@/components/ui/button'
 import { getCollection } from 'astro:content'
 import Link from '@components/Link.astro'
+import { Card, CardContent, CardDescription, CardHeader, CardTitle } from "@/components/ui/card"
 
 const blog = (await getCollection('blog'))
   .filter((post) => !post.data.draft)
@@ -16,8 +17,17 @@ const blog = (await getCollection('blog'))
 <Layout title="Home" description="Home">
   <Container>
     <section class="space-y-6">
-      <div class="min-w-full">
-        <h1 class="mb-4 text-3xl font-bold">Occasionally, less is more</h1>
+      <Card>
+        <CardHeader>
+          <CardTitle className="text-3xl">er·u·dite</CardTitle>
+          <CardDescription>/ˈer(y)əˌdīt/</CardDescription>
+        </CardHeader>
+        <CardContent>
+          <p class="font-medium">adjective</p>
+          <p>having or showing great knowledge or learning.</p>
+        </CardContent>
+      </Card>
+      <div class="mt-8">
         <p class="prose min-w-full dark:prose-invert">
           {SITE.TITLE} is an opinionated, no-frills static blogging template built
           with Astro.
