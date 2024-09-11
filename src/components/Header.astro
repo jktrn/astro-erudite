@@ -2,6 +2,7 @@
 import Container from '@components/Container.astro'
 import Link from '@components/Link.astro'
 import { SITE } from '@consts'
+import { ModeToggle } from '@/components/ui/mode-toggle'
 
 const items = [
   { href: '/blog', label: 'blog' },
@@ -22,20 +23,21 @@ const items = [
       >
         {SITE.TITLE}
       </Link>
-      <nav class="flex items-center gap-4 text-sm sm:gap-6">
-        {
-          items.map((item, index) => (
-            <Fragment key={item.href}>
+      <div class="flex items-center gap-4">
+        <nav class="flex items-center gap-4 text-sm sm:gap-6">
+          {
+            items.map((item) => (
               <Link
                 href={item.href}
                 class="capitalize text-foreground/60 transition-colors hover:text-foreground/80"
               >
                 {item.label}
               </Link>
-            </Fragment>
-          ))
-        }
-      </nav>
+            ))
+          }
+        </nav>
+        <ModeToggle client:load />
+      </div>
     </div>
   </Container>
 </header>

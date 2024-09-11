@@ -1,6 +1,7 @@
 ---
 import type { CollectionEntry } from 'astro:content'
 import { Image } from 'astro:assets'
+import Link from '@components/Link.astro'
 
 type Props = {
   author: CollectionEntry<'authors'>
@@ -13,7 +14,7 @@ const { name, avatar, bio } = author.data
 <div
   class="rounded-lg border p-4 transition-colors duration-300 ease-in-out hover:bg-secondary/50"
 >
-  <a href={`/authors/${author.slug}`} class="flex flex-wrap gap-4">
+  <Link href={`/authors/${author.slug}`} class="flex flex-wrap gap-4">
     <Image
       src={avatar}
       alt={`Avatar of ${name}`}
@@ -25,5 +26,5 @@ const { name, avatar, bio } = author.data
       <h3 class="mb-1 text-lg font-semibold">{name}</h3>
       <p class="text-sm text-muted-foreground">{bio}</p>
     </div>
-  </a>
+  </Link>
 </div>

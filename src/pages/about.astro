@@ -3,33 +3,41 @@ import Layout from '@layouts/Layout.astro'
 import Container from '@components/Container.astro'
 import Link from '@components/Link.astro'
 import { SITE } from '@consts'
+import {
+  Breadcrumb,
+  BreadcrumbItem,
+  BreadcrumbLink,
+  BreadcrumbList,
+  BreadcrumbPage,
+  BreadcrumbSeparator,
+} from '@/components/ui/breadcrumb'
+import { HomeIcon } from 'lucide-react'
 ---
 
 <Layout title="About" description={SITE.DESCRIPTION}>
   <Container>
-    <article class="prose max-w-none dark:prose-invert">
-      <h1 class="mb-8 text-3xl font-bold">About Us</h1>
-      <p class="mb-4">
-        Welcome to {SITE.TITLE}, a platform dedicated to sharing insights,
-        knowledge, and experiences in the world of technology and beyond. Our
-        mission is to provide valuable content that informs, inspires, and
-        engages our readers.
-      </p>
-      <p class="mb-8">
-        Founded in 2023, we've grown into a community of passionate writers and
-        tech enthusiasts. Our team brings diverse expertise to the table,
-        covering topics ranging from software development and artificial
-        intelligence to digital culture and tech ethics.
-      </p>
+    <Breadcrumb className="mb-4">
+      <BreadcrumbList>
+        <BreadcrumbItem>
+          <BreadcrumbLink href="/"
+            ><HomeIcon className="h-4 w-4" /></BreadcrumbLink
+          >
+        </BreadcrumbItem>
+        <BreadcrumbSeparator />
+        <BreadcrumbItem>
+          <BreadcrumbPage>About</BreadcrumbPage>
+        </BreadcrumbItem>
+      </BreadcrumbList>
+    </Breadcrumb>
 
-      <h2 class="mb-4 text-2xl font-semibold">Get in Touch</h2>
-      <p class="mb-4">
-        We love hearing from our readers! Whether you have a question,
-        suggestion, or just want to say hello, don't hesitate to reach out.
-      </p>
-      <p>
-        <Link href="/contact" class="font-semibold">Contact Us</Link>
-      </p>
-    </article>
+    <section class="space-y-6">
+      <div class="min-w-full">
+        <h1 class="mb-4 text-3xl font-bold">Some more about us</h1>
+        <p class="prose dark:prose-invert">
+          {SITE.TITLE} is an opinionated, no-frills static blogging template built
+          with Astro.
+        </p>
+      </div>
+    </section>
   </Container>
 </Layout>

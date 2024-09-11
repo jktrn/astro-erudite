@@ -7,8 +7,20 @@ import { readingTime } from '@lib/utils'
 import PostNavigation from '@components/PostNavigation.astro'
 import TableOfContents from '@components/TableOfContents.astro'
 import { Image } from 'astro:assets'
-import { Badge } from '@/components/ui/badge'
+import { Badge, badgeVariants } from '@/components/ui/badge'
 import { Button } from '@/components/ui/button'
+import {
+  Breadcrumb,
+  BreadcrumbItem,
+  BreadcrumbLink,
+  BreadcrumbList,
+  BreadcrumbPage,
+  BreadcrumbSeparator,
+} from '@/components/ui/breadcrumb'
+import { HomeIcon } from 'lucide-react'
+import { cn } from '@/lib/utils'
+import { Separator } from '@/components/ui/separator'
+import Link from '@components/Link.astro'
 
 export async function getStaticPaths() {
   const posts = (await getCollection('blog'))
@@ -67,96 +79,102 @@ if (
 
 <Layout title={post.data.title} description={post.data.description}>
   <Container>
-    <a href="/blog">
-      <Button variant="ghost" className="mb-8">&larr; Back to blog</Button>
-    </a>
+    <Breadcrumb className="mb-4">
+      <BreadcrumbList>
+        <BreadcrumbItem>
+          <BreadcrumbLink href="/"
+            ><HomeIcon className="h-4 w-4" /></BreadcrumbLink
+          >
+        </BreadcrumbItem>
+        <BreadcrumbSeparator />
+        <BreadcrumbItem>
+          <BreadcrumbLink href="/blog">Blog</BreadcrumbLink>
+        </BreadcrumbItem>
+        <BreadcrumbSeparator />
+        <BreadcrumbItem>
+          <BreadcrumbPage>{post.data.title}</BreadcrumbPage>
+        </BreadcrumbItem>
+      </BreadcrumbList>
+    </Breadcrumb>
+
     {
       post.data.image && (
-        <div class="mb-8 flex justify-center">
-          <Image
-            src={post.data.image}
-            alt={post.data.title}
-            width={1200}
-            height={630}
-            class="rounded-lg object-cover shadow-lg"
-          />
-        </div>
+        <Image
+          src={post.data.image}
+          alt={post.data.title}
+          width={1200}
+          height={630}
+          class="mb-8 rounded-lg object-cover shadow-lg"
+        />
       )
     }
-    <div class="mb-8 flex flex-col items-center gap-y-4">
-      <div class="flex items-center gap-3 text-sm text-muted-foreground">
-        <FormattedDate date={post.data.date} />
-        <span>&bull;</span>
-        <span>{readingTime(post.body)}</span>
-      </div>
-      <h1 class="text-4xl font-bold leading-tight sm:text-5xl">
+
+    <section class="mb-8 text-center">
+      <h1 class="mb-4 text-4xl font-bold leading-tight sm:text-5xl">
         {post.data.title}
       </h1>
-      <div class="flex flex-wrap gap-2">
+
+      <div
+        class="flex items-center justify-center gap-3 text-sm text-muted-foreground"
+      >
+        {
+          author && (
+            <>
+              <div class="flex items-center gap-2">
+                <Image
+                  src={author.data.avatar}
+                  alt={author.data.name}
+                  width={24}
+                  height={24}
+                  class="rounded-full"
+                />
+                {typeof post.data.author === 'object' &&
+                'collection' in post.data.author ? (
+                  <a
+                    href={`/authors/${post.data.author.slug}`}
+                    class="hover:text-primary"
+                  >
+                    {author.data.name}
+                  </a>
+                ) : (
+                  <span>{author.data.name}</span>
+                )}
+              </div>
+              <Separator orientation="vertical" className="h-4" />
+            </>
+          )
+        }
+        <FormattedDate date={post.data.date} />
+        <Separator orientation="vertical" className="h-4" />
+        <span>{readingTime(post.body)}</span>
+      </div>
+
+      <div class="mt-4 flex flex-wrap justify-center gap-2">
         {
           post.data.tags && post.data.tags.length > 0 ? (
             post.data.tags.map((tag) => (
-              <Button variant="outline" asChild>
-                <a href={`/tags/${tag}`}>
-                  <Badge variant="outline">{tag}</Badge>
-                </a>
-              </Button>
+              <a
+                href={`/tags/${tag}`}
+                class={badgeVariants({ variant: 'outline' })}
+              >
+                {tag}
+              </a>
             ))
           ) : (
             <span class="text-sm text-muted-foreground">No tags available</span>
           )
         }
       </div>
-      {
-        author && (
-          <div>
-            {typeof post.data.author === 'object' &&
-            'collection' in post.data.author ? (
-              <Button variant="ghost" asChild>
-                <a
-                  class="group flex items-center gap-3 rounded-xl p-2 transition-colors duration-300 ease-in-out hover:bg-secondary"
-                  href={`/authors/${post.data.author.slug}`}
-                >
-                  <Image
-                    src={author.data.avatar}
-                    alt={`Avatar of ${author.data.name}`}
-                    width={48}
-                    height={48}
-                    class="rounded-full"
-                  />
-                  <div>
-                    <span class="font-medium group-hover:text-primary">
-                      {author.data.name}
-                    </span>
-                    <p class="text-sm text-muted-foreground">Author</p>
-                  </div>
-                </a>
-              </Button>
-            ) : (
-              <div class="flex items-center gap-3 rounded-xl p-2">
-                <Image
-                  src={author.data.avatar || '/default-avatar.png'}
-                  alt={`Avatar of ${author.data.name}`}
-                  width={48}
-                  height={48}
-                  class="rounded-full"
-                />
-                <div>
-                  <span class="font-medium">{author.data.name}</span>
-                  <p class="text-sm text-muted-foreground">Author</p>
-                </div>
-              </div>
-            )}
-          </div>
-        )
-      }
-    </div>
+
+      <PostNavigation prevPost={prevPost} nextPost={nextPost} />
+    </section>
+
     {headings.length > 0 && <TableOfContents headings={headings} />}
-    <article class="max-w-full">
+
+    <article class="prose max-w-none dark:prose-invert">
       <Content />
-      <div class="mt-24">
-        <PostNavigation prevPost={prevPost} nextPost={nextPost} />
-      </div>
     </article>
+
+    <PostNavigation prevPost={prevPost} nextPost={nextPost} />
   </Container>
 </Layout>

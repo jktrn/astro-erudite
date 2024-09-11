@@ -1,65 +1,39 @@
 ---
+import Link from '@components/Link.astro'
+import { ArrowLeft, ArrowRight } from 'lucide-react'
+import { buttonVariants } from '@/components/ui/button'
+import { cn } from '@/lib/utils'
+
 const { prevPost, nextPost } = Astro.props
 ---
 
-<div class="grid grid-cols-2 gap-1.5 sm:gap-3">
-  {
-    prevPost?.slug ? (
-      <a
-        href={`/blog/${prevPost?.slug}`}
-        class="group relative flex flex-nowrap rounded-lg border px-4 py-3 pl-10 no-underline transition-colors duration-300 ease-in-out"
-      >
-        <svg
-          xmlns="http://www.w3.org/2000/svg"
-          viewBox="0 0 24 24"
-          class="absolute left-2 top-1/2 size-5 -translate-y-1/2 fill-none stroke-current stroke-2"
-        >
-          <line
-            x1="5"
-            y1="12"
-            x2="19"
-            y2="12"
-            class="translate-x-3 scale-x-0 transition-transform duration-300 ease-in-out"
-          />
-          <polyline
-            points="12 5 5 12 12 19"
-            class="translate-x-1 transition-transform duration-300 ease-in-out"
-          />
-        </svg>
-        <div class="flex items-center text-sm">{prevPost?.data.title}</div>
-      </a>
-    ) : (
-      <div class="invisible" />
-    )
-  }
-
-  {
-    nextPost?.slug ? (
-      <a
-        href={`/blog/${nextPost?.slug}`}
-        class="group relative flex flex-grow flex-row-reverse flex-nowrap rounded-lg border px-4 py-4 pr-10 no-underline transition-colors duration-300 ease-in-out"
-      >
-        <svg
-          xmlns="http://www.w3.org/2000/svg"
-          viewBox="0 0 24 24"
-          class="absolute right-2 top-1/2 size-5 -translate-y-1/2 fill-none stroke-current stroke-2"
-        >
-          <line
-            x1="5"
-            y1="12"
-            x2="19"
-            y2="12"
-            class="translate-x-3 scale-x-0 transition-transform duration-300 ease-in-out"
-          />
-          <polyline
-            points="12 5 19 12 12 19"
-            class="-translate-x-1 transition-transform duration-300 ease-in-out"
-          />
-        </svg>
-        <div class="flex items-center text-sm">{nextPost?.data.title}</div>
-      </a>
-    ) : (
-      <div class="invisible" />
-    )
-  }
+<div class="mt-8 flex justify-between gap-4">
+  <Link
+    href={prevPost ? `/blog/${prevPost.slug}` : '#'}
+    class={cn(
+      buttonVariants({ variant: 'outline' }),
+      'group flex items-center justify-start gap-2 w-1/2',
+      !prevPost && 'pointer-events-none opacity-50 cursor-not-allowed',
+    )}
+    aria-disabled={!prevPost}
+  >
+    <ArrowLeft
+      className="h-4 w-4 transition-transform group-hover:-translate-x-1"
+    />
+    <span class="truncate">{prevPost?.data.title || 'Latest post!'}</span>
+  </Link>
+  <Link
+    href={nextPost ? `/blog/${nextPost.slug}` : '#'}
+    class={cn(
+      buttonVariants({ variant: 'outline' }),
+      'group flex items-center justify-end gap-2 w-1/2',
+      !nextPost && 'pointer-events-none opacity-50 cursor-not-allowed',
+    )}
+    aria-disabled={!nextPost}
+  >
+    <span class="truncate">{nextPost?.data.title || 'Last post!'}</span>
+    <ArrowRight
+      className="h-4 w-4 transition-transform group-hover:translate-x-1"
+    />
+  </Link>
 </div>

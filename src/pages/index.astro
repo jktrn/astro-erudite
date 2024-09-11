@@ -3,8 +3,9 @@ import Layout from '@layouts/Layout.astro'
 import Container from '@components/Container.astro'
 import { SITE } from '@consts'
 import BlogCard from '@components/BlogCard.astro'
-import Link from '@components/Link.astro'
+import { buttonVariants } from '@/components/ui/button'
 import { getCollection } from 'astro:content'
+import Link from '@components/Link.astro'
 
 const blog = (await getCollection('blog'))
   .filter((post) => !post.data.draft)
@@ -14,10 +15,16 @@ const blog = (await getCollection('blog'))
 
 <Layout title="Home" description="Home">
   <Container>
-    <section class="space-y-4">
+    <section class="space-y-6">
+      <div class="min-w-full">
+        <h1 class="mb-4 text-3xl font-bold">Occasionally, less is more</h1>
+        <p class="prose min-w-full dark:prose-invert">
+          {SITE.TITLE} is an opinionated, no-frills static blogging template built
+          with Astro.
+        </p>
+      </div>
       <div class="flex flex-wrap items-center justify-between gap-y-2">
-        <h2 class="font-semibold">Latest posts</h2>
-        <Link href="/blog"> See all posts </Link>
+        <h2 class="text-2xl font-bold">Latest posts</h2>
       </div>
       <ul class="not-prose flex flex-col gap-4">
         {
@@ -28,6 +35,17 @@ const blog = (await getCollection('blog'))
           ))
         }
       </ul>
+      <div class="flex justify-center">
+        <Link
+          href="/blog"
+          class={buttonVariants({ variant: 'ghost' }) + ' group'}
+        >
+          See all posts <span
+            class="ml-1.5 transition-transform group-hover:translate-x-1"
+            >&rarr;</span
+          >
+        </Link>
+      </div>
     </section>
   </Container>
 </Layout>

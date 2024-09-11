@@ -1,20 +1,37 @@
 ---
-import {
-  Twitter,
-  Github,
-  Linkedin,
-  Mail,
-  GraduationCap,
-  Rss,
-} from 'lucide-react'
+import { Twitter, Github, Linkedin, Mail, Rss } from 'lucide-react'
 import { SITE } from '@consts'
 ---
 
-<ul class="not-prose flex flex-wrap gap-2">
-  <a href="#" class="inline-block"><Twitter /></a>
-  <a href="#" class="inline-block"><Github /></a>
-  <a href="#" class="inline-block"><Linkedin /></a>
-  <a href="#" class="inline-block"><Mail /></a>
-  <a href="#" class="inline-block"><GraduationCap /></a>
-  <a href={`${SITE.SITEURL}/rss.xml`} class="inline-block"><Rss /></a>
+<ul class="not-prose flex flex-wrap gap-2" role="list">
+  <li>
+    <a href="#" class="inline-block" aria-label="Twitter" title="Twitter">
+      <Twitter />
+    </a>
+  </li>
+  <li>
+    <a href="#" class="inline-block" aria-label="GitHub" title="GitHub">
+      <Github />
+    </a>
+  </li>
+  <li>
+    <a href="#" class="inline-block" aria-label="LinkedIn" title="LinkedIn">
+      <Linkedin />
+    </a>
+  </li>
+  <li>
+    <a href="#" class="inline-block" aria-label="Email" title="Email">
+      <Mail />
+    </a>
+  </li>
+  <li>
+    <a
+      href={`${SITE.SITEURL}/rss.xml`}
+      class="inline-block"
+      aria-label="RSS feed"
+      title="RSS feed"
+    >
+      <Rss />
+    </a>
+  </li>
 </ul>

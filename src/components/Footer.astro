@@ -1,7 +1,6 @@
 ---
 import Container from '@components/Container.astro'
 import SocialIcons from './SocialIcons.astro'
-import { ModeToggle } from '@components/ui/mode-toggle'
 ---
 
 <footer class="py-4">
@@ -10,9 +9,6 @@ import { ModeToggle } from '@components/ui/mode-toggle'
       class="flex flex-col items-center justify-center gap-y-2 sm:flex-row sm:justify-between"
     >
       <div class="flex items-center">
-        <div class="mr-2 hidden sm:block">
-          <ModeToggle client:load />
-        </div>
         <p class="text-sm text-muted-foreground">
           &copy; {new Date().getFullYear()} All rights reserved.
         </p>

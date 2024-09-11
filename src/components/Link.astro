@@ -5,6 +5,7 @@ type Props = {
   href: string
   external?: boolean
   class?: string
+  underline?: boolean
   'data-heading'?: string
 }
 
@@ -12,6 +13,7 @@ const {
   href,
   external,
   class: className,
+  underline,
   'data-heading': dataHeading,
   ...rest
 } = Astro.props
@@ -21,7 +23,8 @@ const {
   href={href}
   target={external ? '_blank' : '_self'}
   class={cn(
-    'inline-block transition-colors duration-300 ease-in-out hover:underline underline-offset-[3px]',
+    'inline-block transition-colors duration-300 ease-in-out',
+    underline && 'hover:underline hover:underline-offset-[3px]',
     className,
   )}
   data-heading={dataHeading}

@@ -3,6 +3,8 @@ import type { CollectionEntry } from 'astro:content'
 import { formatDate, readingTime } from '@lib/utils'
 import { Image } from 'astro:assets'
 import { Badge } from '@/components/ui/badge'
+import { Separator } from '@/components/ui/separator'
+import Link from './Link.astro'
 
 type Props = {
   entry: CollectionEntry<'blog'>
@@ -19,7 +21,10 @@ const readTime = readingTime(entry.body)
 <div
   class="not-prose rounded-lg border p-4 transition-colors duration-300 ease-in-out hover:bg-secondary/50"
 >
-  <a href={`/${entry.collection}/${entry.slug}`} class="flex flex-wrap gap-4">
+  <Link
+    href={`/${entry.collection}/${entry.slug}`}
+    class="flex flex-wrap gap-4"
+  >
     {
       entry.data.image && (
         <div class="flex-shrink-0">
@@ -44,7 +49,7 @@ const readTime = readingTime(entry.body)
         class="mb-2 flex items-center space-x-2 text-xs text-muted-foreground"
       >
         <span>{formattedDate}</span>
-        <span>&bull;</span>
+        <Separator orientation="vertical" className="h-4" />
         <span>{readTime}</span>
       </div>
       {
@@ -57,5 +62,5 @@ const readTime = readingTime(entry.body)
         )
       }
     </div>
-  </a>
+  </Link>
 </div>
