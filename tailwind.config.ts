@@ -1,16 +1,6 @@
 import type { Config } from 'tailwindcss'
 import defaultTheme from 'tailwindcss/defaultTheme'
 
-const disabledCss = {
-  'code::before': false,
-  'code::after': false,
-  'blockquote p:first-of-type::before': false,
-  'blockquote p:last-of-type::after': false,
-  pre: false,
-  code: false,
-  'pre code': false,
-}
-
 const config: Config = {
   darkMode: ['selector'],
   content: ['./src/**/*.{astro,md,mdx,ts,tsx}'],
@@ -52,6 +42,10 @@ const config: Config = {
           DEFAULT: 'hsl(var(--accent))',
           foreground: 'hsl(var(--accent-foreground))',
         },
+        additive: {
+          DEFAULT: 'hsl(var(--additive))',
+          foreground: 'hsl(var(--additive-foreground))',
+        },
         destructive: {
           DEFAULT: 'hsl(var(--destructive))',
           foreground: 'hsl(var(--destructive-foreground))',
@@ -68,11 +62,17 @@ const config: Config = {
         },
       },
       typography: {
-        DEFAULT: { css: disabledCss },
-        sm: { css: disabledCss },
-        lg: { css: disabledCss },
-        xl: { css: disabledCss },
-        '2xl': { css: disabledCss },
+        DEFAULT: {
+          css: {
+            'code::before': 'false',
+            'code::after': 'false',
+            'blockquote p:first-of-type::before': 'false',
+            'blockquote p:last-of-type::after': 'false',
+            pre: 'false',
+            code: 'false',
+            'pre code': 'false',
+          },
+        },
       },
     },
   },

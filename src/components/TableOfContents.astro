@@ -27,10 +27,23 @@ function buildToc(headings: Heading[]) {
 }
 ---
 
-<details open class="mb-8 block rounded-xl border p-3 xl:hidden">
-  <summary class="cursor-pointer text-xl font-semibold"
-    >Table of Contents</summary
+<details open class="group mb-8 block rounded-xl border p-3 xl:hidden">
+  <summary
+    class="flex cursor-pointer items-center justify-between text-xl font-semibold"
   >
+    Table of Contents
+    <svg
+      xmlns="http://www.w3.org/2000/svg"
+      class="h-5 w-5 transition-transform group-open:rotate-180"
+      viewBox="0 0 20 20"
+      fill="currentColor"
+    >
+      <path
+        fill-rule="evenodd"
+        d="M5.293 7.293a1 1 0 011.414 0L10 10.586l3.293-3.293a1 1 0 111.414 1.414l-4 4a1 1 0 01-1.414 0l-4-4a1 1 0 010-1.414z"
+        clip-rule="evenodd"></path>
+    </svg>
+  </summary>
   <nav>
     <ul class="py-3">
       {toc.map((heading) => <TableOfContentsHeading heading={heading} />)}
@@ -41,7 +54,7 @@ function buildToc(headings: Heading[]) {
   class="overflow-wrap-break-word sticky top-16 hidden h-0 w-[calc(50vw-50%-4rem)] translate-x-[calc(-100%-2em)] text-xs leading-4 xl:block"
 >
   <div class="mr-6 flex justify-end">
-    <ul class="space-y-2">
+    <ul class="max-h-[calc(100vh-8rem)] space-y-2 overflow-y-auto">
       <li>
         <h2 class="mb-2 text-lg font-semibold">Table of Contents</h2>
       </li>
