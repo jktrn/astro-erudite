@@ -10,10 +10,6 @@ export interface Props {
 const { URL, icon, icon_size } = Astro.props
 ---
 
-<a
-  href={URL}
-  target={'_blank'}
-  class={`inline-block ${icon_size}`}
->
+<a href={URL} target={'_blank'} class={`inline-block ${icon_size}`}>
   <i class={`bi bi-${icon}`}></i>
 </a>

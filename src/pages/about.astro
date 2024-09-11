@@ -1,62 +1,35 @@
 ---
-import { getCollection } from 'astro:content'
 import Layout from '@layouts/Layout.astro'
 import Container from '@components/Container.astro'
-import { Image } from 'astro:assets'
+import Link from '@components/Link.astro'
+import { SITE } from '@consts'
 ---
 
-<Layout title="About" description="About">
+<Layout title="About" description={SITE.DESCRIPTION}>
   <Container>
-    <div class="space-y-10">
-      <div class="font-semibold">About</div>
-      <section class="not-prose flex flex-col gap-4 text-justify">
-        <p class="text-justify">
-          Lorem ipsum dolor sit amet consectetur adipisicing elit. Dolores porro
-          hic minima incidunt explicabo obcaecati consectetur consequuntur at
-          quisquam commodi.
-        </p>
+    <article class="prose max-w-none dark:prose-invert">
+      <h1 class="mb-8 text-3xl font-bold">About Us</h1>
+      <p class="mb-4">
+        Welcome to {SITE.TITLE}, a platform dedicated to sharing insights,
+        knowledge, and experiences in the world of technology and beyond. Our
+        mission is to provide valuable content that informs, inspires, and
+        engages our readers.
+      </p>
+      <p class="mb-8">
+        Founded in 2023, we've grown into a community of passionate writers and
+        tech enthusiasts. Our team brings diverse expertise to the table,
+        covering topics ranging from software development and artificial
+        intelligence to digital culture and tech ethics.
+      </p>
 
-        <p class="text-justify">
-          Lorem ipsum dolor sit amet consectetur adipisicing elit. Dolores porro
-          hic minima incidunt explicabo obcaecati consectetur consequuntur at
-          quisquam commodi.
-        </p>
-      </section>
-
-      <div class="flex flex-col justify-center md:flex-row">
-        <div class="my-10 text-center">
-          <div
-            class="h-[250px] w-[350px] -rotate-6 overflow-hidden rounded-xl object-cover"
-          >
-            <Image
-              src={'/astro-nano.png'}
-              alt={'life2'}
-              width={350}
-              height={250}
-              class="h-[250px] w-[350px] overflow-hidden rounded-xl object-cover"
-            />
-          </div>
-          <p class="mt-4 text-sm">
-            Lorem ipsum dolor sit amet, consectetur adipisicing elit.
-          </p>
-        </div>
-        <div class="mx-10 my-10 text-center">
-          <div
-            class="mx-auto h-[250px] w-[150px] rotate-6 rounded-xl object-cover sm:ml-auto"
-          >
-            <Image
-              src={'/astro-micro.jpg'}
-              alt={'life2'}
-              width={150}
-              height={250}
-              class="h-[250px] w-[150px] rounded-xl object-cover"
-            />
-          </div>
-          <p class="mt-4 text-sm">
-            Lorem ipsum dolor sit amet, consectetur adipisicing elit.
-          </p>
-        </div>
-      </div>
-    </div>
+      <h2 class="mb-4 text-2xl font-semibold">Get in Touch</h2>
+      <p class="mb-4">
+        We love hearing from our readers! Whether you have a question,
+        suggestion, or just want to say hello, don't hesitate to reach out.
+      </p>
+      <p>
+        <Link href="/contact" class="font-semibold">Contact Us</Link>
+      </p>
+    </article>
   </Container>
 </Layout>

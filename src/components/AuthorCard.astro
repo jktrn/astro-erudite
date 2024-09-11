@@ -1,0 +1,29 @@
+---
+import type { CollectionEntry } from 'astro:content'
+import { Image } from 'astro:assets'
+
+type Props = {
+  author: CollectionEntry<'authors'>
+}
+
+const { author } = Astro.props
+const { name, avatar, bio } = author.data
+---
+
+<div
+  class="rounded-lg border p-4 transition-colors duration-300 ease-in-out hover:bg-secondary/50"
+>
+  <a href={`/authors/${author.slug}`} class="flex flex-wrap gap-4">
+    <Image
+      src={avatar}
+      alt={`Avatar of ${name}`}
+      width={128}
+      height={128}
+      class="rounded-lg object-cover"
+    />
+    <div class="flex-grow">
+      <h3 class="mb-1 text-lg font-semibold">{name}</h3>
+      <p class="text-sm text-muted-foreground">{bio}</p>
+    </div>
+  </a>
+</div>

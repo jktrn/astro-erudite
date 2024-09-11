@@ -2,7 +2,7 @@
 import { type CollectionEntry, getCollection } from 'astro:content'
 import Layout from '@layouts/Layout.astro'
 import Container from '@components/Container.astro'
-import ArrowCard from '@components/ArrowCard.astro'
+import BlogCard from '@components/BlogCard.astro'
 
 const data = (await getCollection('blog'))
   .filter((post) => !post.data.draft)
@@ -36,7 +36,7 @@ const years = Object.keys(posts).sort((a, b) => parseInt(b) - parseInt(a))
                 <ul class="not-prose flex flex-col gap-4">
                   {posts[year].map((post) => (
                     <li>
-                      <ArrowCard entry={post} />
+                      <BlogCard entry={post} />
                     </li>
                   ))}
                 </ul>

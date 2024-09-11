@@ -2,7 +2,7 @@
 import { getCollection } from 'astro:content'
 import Layout from '@layouts/Layout.astro'
 import Container from '@components/Container.astro'
-import Image from 'astro/components/Image.astro'
+import { Badge } from '@/components/ui/badge'
 
 const blog = (await getCollection('blog')).filter((post) => !post.data.draft)
 
@@ -14,21 +14,18 @@ const tags = blog
 <Layout title="Tags" description="Tags">
   <Container>
     <div class="space-y-10">
-      <div class="font-semibold">Tags</div>
-      <ul class="flex flex-wrap">
+      <h1 class="text-3xl font-semibold">Tags</h1>
+      <div class="flex flex-wrap gap-2">
         {
           tags.map((tag) => (
-            <li class="my-3">
-              <a
-                href={`/tags/${tag}`}
-                class="mx-2 rounded-full px-3 py-2 transition-colors duration-300 ease-in-out"
-              >
+            <a href={`/tags/${tag}`}>
+              <Badge variant="secondary" className="hover:bg-secondary/80">
                 #{tag}
-              </a>
-            </li>
+              </Badge>
+            </a>
           ))
         }
-      </ul>
+      </div>
     </div>
   </Container>
 </Layout>

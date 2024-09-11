@@ -7,27 +7,34 @@ const items = [
   { href: '/blog', label: 'blog' },
   { href: '/authors', label: 'authors' },
   { href: '/about', label: 'about' },
-  { href: '/tags', label: 'tags' },
 ]
 ---
 
-<header class="sticky top-0 z-10 bg-background/50 backdrop-blur-md" transition:persist>
+<header
+  class="sticky top-0 z-10 bg-background/50 backdrop-blur-md"
+  transition:persist
+>
   <Container>
     <div class="flex items-center justify-between py-4">
-      <Link href="/" class="text-xl font-semibold hover:text-primary transition-colors duration-300">
+      <Link
+        href="/"
+        class="text-xl font-semibold transition-colors duration-300 hover:text-primary"
+      >
         {SITE.TITLE}
       </Link>
-      <nav class="flex items-center gap-4 md:gap-6 text-sm">
-        {items.map((item, index) => (
-          <Fragment key={item.href}>
-            <Link 
-              href={item.href}
-              class="transition-colors hover:text-foreground/80 text-foreground/60 capitalize"
-            >
-              {item.label}
-            </Link>
-          </Fragment>
-        ))}
+      <nav class="flex items-center gap-4 text-sm sm:gap-6">
+        {
+          items.map((item, index) => (
+            <Fragment key={item.href}>
+              <Link
+                href={item.href}
+                class="capitalize text-foreground/60 transition-colors hover:text-foreground/80"
+              >
+                {item.label}
+              </Link>
+            </Fragment>
+          ))
+        }
       </nav>
     </div>
   </Container>

@@ -1,29 +1,32 @@
 ---
-import { type CollectionEntry, getCollection, getEntry } from 'astro:content'
+import { type CollectionEntry, getCollection } from 'astro:content'
 import Layout from '@layouts/Layout.astro'
-import MemberCard from '@components/MemberCard.astro'
+import Container from '@components/Container.astro'
+import AuthorCard from '@components/AuthorCard.astro'
+import BlogCard from '@components/BlogCard.astro'
+import { Button } from '@/components/ui/button'
 
 export async function getStaticPaths() {
   const authors = await getCollection('authors')
-  return authors.map((member) => ({
-    params: { slug: member.slug },
-    props: { member },
+  return authors.map((author) => ({
+    params: { slug: author.slug },
+    props: { author },
   }))
 }
 
 type Props = {
-  member: CollectionEntry<'authors'>
+  author: CollectionEntry<'authors'>
 }
 
-const { member } = Astro.props
+const { author } = Astro.props
 
 const allPosts = await getCollection('blog')
-const memberPosts = allPosts
+const authorPosts = allPosts
   .filter((post) => {
     if (typeof post.data.author === 'string') {
-      return post.data.author === member.data.name && !post.data.draft
+      return post.data.author === author.data.name && !post.data.draft
     } else if (post.data.author && 'slug' in post.data.author) {
-      return post.data.author.slug === member.slug && !post.data.draft
+      return post.data.author.slug === author.slug && !post.data.draft
     }
     return false
   })
@@ -31,10 +34,35 @@ const memberPosts = allPosts
 ---
 
 <Layout
-  title={`${member.data.name} - Team Member`}
-  description={member.data.bio || `Profile of ${member.data.name}`}
+  title={`${author.data.name} - Author`}
+  description={author.data.bio || `Profile of ${author.data.name}`}
 >
-  <section class="mx-auto flex max-w-screen-xl flex-col gap-4">
-    <MemberCard member={member} />
-  </section>
+  <Container>
+    <a href="/authors">
+      <Button variant="ghost" className="mb-8">&larr; Back to authors</Button>
+    </a>
+    <div class="space-y-10">
+      <section>
+        <AuthorCard author={author} />
+      </section>
+      <section class="space-y-4">
+        <h2 class="text-2xl font-semibold">Posts by {author.data.name}</h2>
+        {
+          authorPosts.length > 0 ? (
+            <ul class="not-prose flex flex-col gap-4">
+              {authorPosts.map((post) => (
+                <li>
+                  <BlogCard entry={post} />
+                </li>
+              ))}
+            </ul>
+          ) : (
+            <p class="text-muted-foreground">
+              No posts available from this author.
+            </p>
+          )
+        }
+      </section>
+    </div>
+  </Container>
 </Layout>

@@ -6,10 +6,16 @@ import { ModeToggle } from '@components/ui/mode-toggle'
 
 <footer class="py-4">
   <Container>
-    <div class="flex justify-between items-center">
-      <div class="flex items-center space-x-4">
-        <ModeToggle client:load />
-        <p class="text-sm text-muted-foreground">&copy; {new Date().getFullYear()} All rights reserved.</p>
+    <div
+      class="flex flex-col items-center justify-center gap-y-2 sm:flex-row sm:justify-between"
+    >
+      <div class="flex items-center">
+        <div class="mr-2 hidden sm:block">
+          <ModeToggle client:load />
+        </div>
+        <p class="text-sm text-muted-foreground">
+          &copy; {new Date().getFullYear()} All rights reserved.
+        </p>
       </div>
       <SocialIcons />
     </div>

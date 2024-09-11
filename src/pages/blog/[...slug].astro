@@ -1,12 +1,14 @@
 ---
-import { type CollectionEntry, getCollection } from 'astro:content'
+import { type CollectionEntry, getCollection, getEntry } from 'astro:content'
 import Layout from '@layouts/Layout.astro'
 import Container from '@components/Container.astro'
 import FormattedDate from '@components/FormattedDate.astro'
 import { readingTime } from '@lib/utils'
-import BackToPrevious from '@components/BackToPrevious.astro'
 import PostNavigation from '@components/PostNavigation.astro'
 import TableOfContents from '@components/TableOfContents.astro'
+import { Image } from 'astro:assets'
+import { Badge } from '@/components/ui/badge'
+import { Button } from '@/components/ui/button'
 
 export async function getStaticPaths() {
   const posts = (await getCollection('blog'))
@@ -45,47 +47,112 @@ const prevPost = getPrevPost(currentPostSlug)
 
 const post = Astro.props
 const { Content, headings } = await post.render()
+
+let author = null
+if (
+  post.data.author &&
+  typeof post.data.author === 'object' &&
+  'collection' in post.data.author
+) {
+  author = await getEntry(post.data.author)
+} else if (typeof post.data.author === 'string') {
+  author = {
+    data: {
+      name: post.data.author,
+      avatar: '/favicons/android-chrome-512x512.png',
+    },
+  }
+}
 ---
 
 <Layout title={post.data.title} description={post.data.description}>
   <Container>
-    <div class="animate">
-      <BackToPrevious href="/blog">Back to blog</BackToPrevious>
-    </div>
-    <div class="my-10 space-y-4">
-      <div class="flex items-center gap-1.5">
-        <div class="font-base text-sm">
-          <FormattedDate date={post.data.date} />
+    <a href="/blog">
+      <Button variant="ghost" className="mb-8">&larr; Back to blog</Button>
+    </a>
+    {
+      post.data.image && (
+        <div class="mb-8 flex justify-center">
+          <Image
+            src={post.data.image}
+            alt={post.data.title}
+            width={1200}
+            height={630}
+            class="rounded-lg object-cover shadow-lg"
+          />
         </div>
-        &bull;
-        <div class="font-base text-sm">
-          {readingTime(post.body)}
-        </div>
+      )
+    }
+    <div class="mb-8 flex flex-col items-center gap-y-4">
+      <div class="flex items-center gap-3 text-sm text-muted-foreground">
+        <FormattedDate date={post.data.date} />
+        <span>&bull;</span>
+        <span>{readingTime(post.body)}</span>
       </div>
-      <h1 class="text-4xl font-semibold">
+      <h1 class="text-4xl font-bold leading-tight sm:text-5xl">
         {post.data.title}
       </h1>
-      <div class="font-base text-sm">
+      <div class="flex flex-wrap gap-2">
         {
           post.data.tags && post.data.tags.length > 0 ? (
             post.data.tags.map((tag) => (
-              <div class="my-1 inline-block">
-                <a
-                  href={`/tags/${tag}`}
-                  class="mx-1 rounded-full px-2 py-1 transition-colors duration-300 ease-in-out"
-                >
-                  #{tag}
+              <Button variant="outline" asChild>
+                <a href={`/tags/${tag}`}>
+                  <Badge variant="outline">{tag}</Badge>
                 </a>
-              </div>
+              </Button>
             ))
           ) : (
-            <span>No tags available</span>
+            <span class="text-sm text-muted-foreground">No tags available</span>
           )
         }
       </div>
+      {
+        author && (
+          <div>
+            {typeof post.data.author === 'object' &&
+            'collection' in post.data.author ? (
+              <Button variant="ghost" asChild>
+                <a
+                  class="group flex items-center gap-3 rounded-xl p-2 transition-colors duration-300 ease-in-out hover:bg-secondary"
+                  href={`/authors/${post.data.author.slug}`}
+                >
+                  <Image
+                    src={author.data.avatar}
+                    alt={`Avatar of ${author.data.name}`}
+                    width={48}
+                    height={48}
+                    class="rounded-full"
+                  />
+                  <div>
+                    <span class="font-medium group-hover:text-primary">
+                      {author.data.name}
+                    </span>
+                    <p class="text-sm text-muted-foreground">Author</p>
+                  </div>
+                </a>
+              </Button>
+            ) : (
+              <div class="flex items-center gap-3 rounded-xl p-2">
+                <Image
+                  src={author.data.avatar || '/default-avatar.png'}
+                  alt={`Avatar of ${author.data.name}`}
+                  width={48}
+                  height={48}
+                  class="rounded-full"
+                />
+                <div>
+                  <span class="font-medium">{author.data.name}</span>
+                  <p class="text-sm text-muted-foreground">Author</p>
+                </div>
+              </div>
+            )}
+          </div>
+        )
+      }
     </div>
     {headings.length > 0 && <TableOfContents headings={headings} />}
-    <article class="prose prose-neutral max-w-full dark:prose-invert prose-img:mx-auto prose-img:my-auto">
+    <article class="max-w-full">
       <Content />
       <div class="mt-24">
         <PostNavigation prevPost={prevPost} nextPost={nextPost} />

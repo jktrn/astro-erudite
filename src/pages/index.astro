@@ -2,7 +2,7 @@
 import Layout from '@layouts/Layout.astro'
 import Container from '@components/Container.astro'
 import { SITE } from '@consts'
-import ArrowCard from '@components/ArrowCard.astro'
+import BlogCard from '@components/BlogCard.astro'
 import Link from '@components/Link.astro'
 import { getCollection } from 'astro:content'
 
@@ -14,7 +14,7 @@ const blog = (await getCollection('blog'))
 
 <Layout title="Home" description="Home">
   <Container>
-    <section class="space-y-6">
+    <section class="space-y-4">
       <div class="flex flex-wrap items-center justify-between gap-y-2">
         <h2 class="font-semibold">Latest posts</h2>
         <Link href="/blog"> See all posts </Link>
@@ -23,7 +23,7 @@ const blog = (await getCollection('blog'))
         {
           blog.map((post) => (
             <li>
-              <ArrowCard entry={post} />
+              <BlogCard entry={post} />
             </li>
           ))
         }

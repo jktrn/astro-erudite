@@ -8,7 +8,13 @@ type Props = {
   'data-heading'?: string
 }
 
-const { href, external, class: className, 'data-heading': dataHeading, ...rest } = Astro.props
+const {
+  href,
+  external,
+  class: className,
+  'data-heading': dataHeading,
+  ...rest
+} = Astro.props
 ---
 
 <a
@@ -16,7 +22,7 @@ const { href, external, class: className, 'data-heading': dataHeading, ...rest }
   target={external ? '_blank' : '_self'}
   class={cn(
     'inline-block transition-colors duration-300 ease-in-out hover:underline underline-offset-[3px]',
-    className
+    className,
   )}
   data-heading={dataHeading}
   {...rest}

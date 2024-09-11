@@ -1,0 +1,61 @@
+---
+import type { CollectionEntry } from 'astro:content'
+import { formatDate, readingTime } from '@lib/utils'
+import { Image } from 'astro:assets'
+import { Badge } from '@/components/ui/badge'
+
+type Props = {
+  entry: CollectionEntry<'blog'>
+}
+
+const { entry } = Astro.props as {
+  entry: CollectionEntry<'blog'>
+}
+
+const formattedDate = formatDate(entry.data.date)
+const readTime = readingTime(entry.body)
+---
+
+<div
+  class="not-prose rounded-lg border p-4 transition-colors duration-300 ease-in-out hover:bg-secondary/50"
+>
+  <a href={`/${entry.collection}/${entry.slug}`} class="flex flex-wrap gap-4">
+    {
+      entry.data.image && (
+        <div class="flex-shrink-0">
+          <Image
+            src={entry.data.image}
+            alt={entry.data.title}
+            width={200}
+            height={200}
+            class="rounded-lg object-cover"
+          />
+        </div>
+      )
+    }
+    <div class="flex-grow">
+      <h3 class="mb-1 text-lg font-semibold">
+        {entry.data.title}
+      </h3>
+      <p class="mb-2 text-sm text-muted-foreground">
+        {entry.data.description}
+      </p>
+      <div
+        class="mb-2 flex items-center space-x-2 text-xs text-muted-foreground"
+      >
+        <span>{formattedDate}</span>
+        <span>&bull;</span>
+        <span>{readTime}</span>
+      </div>
+      {
+        entry.data.tags && (
+          <div class="flex flex-wrap gap-2">
+            {entry.data.tags.map((tag) => (
+              <Badge variant="secondary">{tag}</Badge>
+            ))}
+          </div>
+        )
+      }
+    </div>
+  </a>
+</div>

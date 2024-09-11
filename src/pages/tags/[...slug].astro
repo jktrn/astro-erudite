@@ -2,7 +2,7 @@
 import { type CollectionEntry, getCollection } from 'astro:content'
 import Layout from '@layouts/Layout.astro'
 import Container from '@components/Container.astro'
-import ArrowCard from '@components/ArrowCard.astro'
+import BlogCard from '@components/BlogCard.astro'
 
 type BlogPost = CollectionEntry<'blog'>
 
@@ -36,11 +36,11 @@ export async function getStaticPaths() {
 >
   <Container>
     <div class="space-y-10">
-      <div class="font-semibold">
-        Tag: <span
-          class="mx-2 rounded-full px-3 py-2 transition-colors duration-300 ease-in-out"
-          >#{tag}</span
-        >
+      <div class="flex items-center gap-2">
+        <h1 class="text-3xl font-semibold">Posts tagged with</h1>
+        <span class="rounded-full bg-secondary px-4 py-2 text-2xl font-medium">
+          {tag}
+        </span>
       </div>
       <div class="space-y-4">
         {
@@ -49,7 +49,7 @@ export async function getStaticPaths() {
               <div>
                 <ul class="not-prose flex flex-col gap-4">
                   <li>
-                    <ArrowCard entry={post} />
+                    <BlogCard entry={post} />
                   </li>
                 </ul>
               </div>

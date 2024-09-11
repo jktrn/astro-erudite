@@ -1,21 +1,25 @@
 ---
 import { getCollection } from 'astro:content'
 import Layout from '@layouts/Layout.astro'
-import MemberCard from '@components/MemberCard.astro'
+import Container from '@components/Container.astro'
+import AuthorCard from '@components/AuthorCard.astro'
 
 const authors = await getCollection('authors')
 ---
 
-<Layout title="authors" description="authors">
-  <section>
-    <ul class="not-prose grid grid-cols-1 gap-4 lg:grid-cols-2 xl:grid-cols-3">
-      {
-        authors.map((member) => (
-          <li>
-            <MemberCard member={member} />
-          </li>
-        ))
-      }
-    </ul>
-  </section>
+<Layout title="Authors" description="Authors">
+  <Container>
+    <div class="space-y-10">
+      <h1 class="text-3xl font-semibold">Authors</h1>
+      <ul class="not-prose flex flex-col gap-4">
+        {
+          authors.map((author) => (
+            <li>
+              <AuthorCard author={author} />
+            </li>
+          ))
+        }
+      </ul>
+    </div>
+  </Container>
 </Layout>

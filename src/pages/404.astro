@@ -2,18 +2,18 @@
 import Layout from '@layouts/Layout.astro'
 import Container from '@components/Container.astro'
 import Link from '@components/Link.astro'
-import BackToPrevious from '@components/BackToPrevious.astro'
 import { SITE } from '@consts'
+import { Button } from '@/components/ui/button'
 ---
 
 <Layout title="404" description={SITE.DESCRIPTION}>
   <Container>
     <div class="mt-16 grid place-items-center gap-3">
-      <h4 class="text-2xl font-semibold">
-        404: Page not found
-      </h4>
+      <h4 class="text-2xl font-semibold">404: Page not found</h4>
       <span>
-        <BackToPrevious href="/">Go to home page</BackToPrevious>
+        <a href="/">
+          <Button variant="outline"> Go to home page </Button>
+        </a>
       </span>
     </div>
   </Container>

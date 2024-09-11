@@ -93,7 +93,7 @@
 
   html {
     color-scheme: light;
-    scrollbar-gutter: stable;
+    scrollbar-gutter: stable both-edges;
   }
 
   html.dark {
