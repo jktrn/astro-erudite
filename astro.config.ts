@@ -35,8 +35,8 @@ export default defineConfig({
         rehypePrettyCode,
         {
           theme: {
-            light: 'vitesse-light',
-            dark: 'vitesse-dark',
+            light: 'github-light-high-contrast',
+            dark: 'github-dark-high-contrast',
           },
           transformers: [
             transformerNotationDiff(),

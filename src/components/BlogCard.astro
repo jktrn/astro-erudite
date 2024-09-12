@@ -16,7 +16,7 @@ const { entry } = Astro.props as {
 
 const formattedDate = formatDate(entry.data.date)
 const readTime = readingTime(entry.body)
-const authors = await parseAuthors(entry.data.author ?? [])
+const authors = await parseAuthors(entry.data.authors ?? [])
 ---
 
 <div

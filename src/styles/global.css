@@ -64,84 +64,111 @@
   *,
   *::before,
   *::after {
-    @apply !border-border;
+    @apply border-border;
   }
 
   html {
     color-scheme: light;
     scrollbar-gutter: stable both-edges;
-  }
 
-  html.dark {
-    color-scheme: dark;
-  }
+    &.dark {
+      color-scheme: dark;
+    }
 
-  ::-webkit-scrollbar-corner {
-    @apply bg-transparent;
+    ::-webkit-scrollbar-corner {
+      @apply bg-transparent;
+    }
   }
 }
 
 @layer components {
-  code[data-theme*=' '] span {
-    color: var(--shiki-light);
-  }
-
-  .dark code[data-theme*=' '] span {
-    color: var(--shiki-dark);
-  }
-
-  pre {
-    @apply max-h-[600px] overflow-auto rounded-xl border bg-secondary/20 py-4 text-sm leading-loose;
-  }
-
-  pre > code {
-    counter-reset: line;
-    @apply whitespace-pre-wrap;
-  }
-
-  code[data-line-numbers] {
-    counter-reset: line;
-  }
-
-  code[data-line-numbers] > [data-line]::before {
-    counter-increment: line;
-    content: counter(line);
-    @apply mr-4 inline-block w-4 text-right text-muted-foreground;
-  }
-
-  pre > code > span[data-line] {
-    @apply px-4;
-  }
-
-  [data-highlighted-line] {
-    @apply !bg-foreground/10;
-  }
-
-  [data-highlighted-chars] > span {
-    @apply rounded-md border !border-muted-foreground/40 !bg-muted p-1 font-semibold;
-  }
-
-  [data-rehype-pretty-code-title] {
-    @apply rounded-t-xl border-x border-t px-4 py-2 text-sm font-medium !text-foreground;
-  }
-
-  [data-rehype-pretty-code-title] + pre {
-    @apply mt-0 rounded-t-none;
-  }
-
-  .diff.add {
-    @apply bg-additive/15;
-  }
-
-  .diff.remove {
-    @apply bg-destructive/15;
-  }
-
-  article :not(pre) > code {
-    @apply relative rounded bg-muted/50 px-[0.3rem] py-[0.2rem] font-mono text-sm font-medium;
-  }
-
   article {
     @apply prose-headings:scroll-mt-20;
+
+    /* Removes background from <mark> elements */
+    mark {
+      @apply bg-transparent;
+    }
+
+    /* Blanket syntax highlighting */
+    code[data-theme*=' '] {
+      span {
+        color: var(--shiki-light);
+      }
+
+      .dark & span {
+        color: var(--shiki-dark);
+      }
+    }
+
+    /* Inline code */
+    :not(pre) > code {
+      @apply relative rounded bg-muted/50 px-[0.3rem] py-[0.2rem] font-mono text-sm font-medium;
+    }
+
+    /* Code blocks */
+    figure[data-rehype-pretty-code-figure] {
+      @apply relative;
+
+      /* Code block titles */
+      [data-rehype-pretty-code-title] {
+        @apply rounded-t-xl border-x border-t px-4 py-2 text-sm font-medium !text-foreground;
+
+        /* Remove top margin from code block if a title is present */
+        & + pre {
+          @apply mt-0 rounded-t-none;
+        }
+      }
+
+      /* Code block styles */
+      pre {
+        @apply static max-h-[600px] overflow-auto rounded-xl border bg-secondary/20 py-4 text-sm leading-loose;
+
+        /* Code block content */
+        > code {
+          @apply whitespace-pre-wrap;
+          counter-reset: line;
+
+          /* For code blocks with line numbers */
+          &[data-line-numbers] {
+            > [data-line]::before {
+              counter-increment: line;
+              content: counter(line);
+              @apply mr-4 inline-block w-4 text-right text-muted-foreground;
+            }
+          }
+
+          /* For each line in the code block */
+          > [data-line] {
+            @apply px-4;
+          }
+
+          /* Highlighted lines */
+          [data-highlighted-line] {
+            @apply bg-foreground/10;
+          }
+
+          /* Highlighted characters */
+          [data-highlighted-chars] > span {
+            @apply bg-muted-foreground/40 py-[7px];
+          }
+
+          /* Diff lines */
+          .diff {
+            &.add {
+              @apply bg-additive/15;
+            }
+            &.remove {
+              @apply bg-destructive/15;
+            }
+          }
+
+          /* Copy button */
+          > button:has(> span) {
+            @apply right-0.5 top-[3px] m-0 size-8 rounded-md bg-transparent p-1 backdrop-blur-none;
+          }
+        }
+      }
+    }
   }
 }

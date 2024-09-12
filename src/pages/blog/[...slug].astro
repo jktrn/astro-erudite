@@ -1,5 +1,5 @@
 ---
-import { type CollectionEntry, getCollection, getEntry } from 'astro:content'
+import { type CollectionEntry, getCollection } from 'astro:content'
 import Layout from '@layouts/Layout.astro'
 import Container from '@components/Container.astro'
 import { formatDate, readingTime } from '@lib/utils'
@@ -59,7 +59,7 @@ const prevPost = getPrevPost(currentPostSlug)
 const post = Astro.props
 const { Content, headings } = await post.render()
 
-const authors = await parseAuthors(post.data.author ?? [])
+const authors = await parseAuthors(post.data.authors ?? [])
 ---
 
 <Layout title={post.data.title} description={post.data.description}>
@@ -68,7 +68,7 @@ const authors = await parseAuthors(post.data.author ?? [])
       <BreadcrumbList>
         <BreadcrumbItem>
           <BreadcrumbLink href="/"
-            ><HomeIcon className="h-4 w-4" /></BreadcrumbLink
+            ><HomeIcon className="size-4" /></BreadcrumbLink
           >
         </BreadcrumbItem>
         <BreadcrumbSeparator />
@@ -147,7 +147,7 @@ const authors = await parseAuthors(post.data.author ?? [])
                 href={`/tags/${tag}`}
                 class={badgeVariants({ variant: 'secondary' })}
               >
-                <Hash className="mr-0.5 h-3 w-3" />
+                <Hash className="-translate-x-0.5 size-3" />
                 {tag}
               </a>
             ))
@@ -162,7 +162,7 @@ const authors = await parseAuthors(post.data.author ?? [])
 
     {headings.length > 0 && <TableOfContents headings={headings} />}
 
-    <article class="prose max-w-none dark:prose-invert">
+    <article class="prose prose-neutral max-w-none dark:prose-invert">
       <Content />
     </article>
 
@@ -185,13 +185,21 @@ const authors = await parseAuthors(post.data.author ?? [])
   <script>
     document.addEventListener('astro:page-load', () => {
       const scrollToTopButton = document.getElementById('scroll-to-top')
-      if (scrollToTopButton) {
+      const footer = document.querySelector('footer')
+
+      if (scrollToTopButton && footer) {
         scrollToTopButton.addEventListener('click', () => {
           window.scrollTo({ top: 0, behavior: 'smooth' })
         })
 
         window.addEventListener('scroll', () => {
-          scrollToTopButton.classList.toggle('hidden', window.scrollY <= 300)
+          const footerRect = footer.getBoundingClientRect()
+          const isFooterVisible = footerRect.top <= window.innerHeight
+
+          scrollToTopButton.classList.toggle(
+            'hidden',
+            window.scrollY <= 300 || isFooterVisible,
+          )
         })
       }
     })

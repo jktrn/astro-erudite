@@ -32,12 +32,7 @@ const { author } = Astro.props
 const allPosts = await getCollection('blog')
 const authorPosts = allPosts
   .filter((post) => {
-    if (typeof post.data.author === 'string') {
-      return post.data.author === author.data.name && !post.data.draft
-    } else if (post.data.author && 'slug' in post.data.author) {
-      return post.data.author.slug === author.slug && !post.data.draft
-    }
-    return false
+    return post.data.authors && post.data.authors.includes(author.slug)
   })
   .sort((a, b) => b.data.date.valueOf() - a.data.date.valueOf())
 ---
@@ -51,7 +46,7 @@ const authorPosts = allPosts
       <BreadcrumbList>
         <BreadcrumbItem>
           <BreadcrumbLink href="/"
-            ><HomeIcon className="h-4 w-4" /></BreadcrumbLink
+            ><HomeIcon className="size-4" /></BreadcrumbLink
           >
         </BreadcrumbItem>
         <BreadcrumbSeparator />

@@ -4,7 +4,7 @@ description: 'There should not be a single reason why you would need a command p
 date: '2024-07-25'
 tags: ['webdev', 'opinion']
 image: '/1200x630.png'
-author: ['enscribe', 'jktrn']
+authors: ['enscribe']
 ---
 
 ## Introduction
@@ -15,7 +15,7 @@ I have a lot of opinions about what makes a great blogging template. As a cumula
 
 astro-erudite is written in Astro, a framework hyperoptimized for static content such as blogs. Aesthetically, it is also designed to be as boring as possible while still maintaining maximum functionality, as to allow for the freedom of the developer (or the designer they hire) to make their blog uniquely their own. Within the codebase of this template I've included many nuances that, in my opinion (and there will be many, many opinions here), make the developer experience significantly more pleasant. I've also _excluded_ many features that, frankly, you don't need.
 
-### Welcoming some DX features
+## Welcoming some DX features
 
 This is a non-exhaustive list of features I believe are essential for a frictionless developer experience:
 
@@ -48,7 +48,7 @@ This is a non-exhaustive list of features I believe are essential for a friction
 
 - The `cn(){:ts}` function is a utility function which combines [clsx](https://www.npmjs.com/package/clsx) and [tailwind-merge](https://www.npmjs.com/package/tailwind-merge), two packages which allow painless conditional class addition and concatenation:
 
-  ```tsx
+  ```tsx title="src/lib/utils.ts" caption="A utility function for class name concatenation" showLineNumbers
   import { clsx, type ClassValue } from 'clsx'
   import { twMerge } from 'tailwind-merge'
 
@@ -59,7 +59,7 @@ This is a non-exhaustive list of features I believe are essential for a friction
 
   This needs to be in every single template. This is an example of it being used in my `<Link>{:tsx}` component:
 
-  ```astro showLineNumbers title="src/components/Link.astro" caption="A custom Link component with tailwind-merge and clsx" {10-14}
+  ```astro showLineNumbers title="src/components/Link.astro" caption="A custom Link component with tailwind-merge and clsx" {17-21}
   ---
   import { cn } from '@lib/utils'
 
@@ -95,7 +95,7 @@ This is a non-exhaustive list of features I believe are essential for a friction
 
   Awesome!
 
-### Welcoming some UX features
+## Welcoming some UX features
 
 Within the blog itself (as in the layout, appearance, and navigation) are features that I believe are essential for a great user experience:
 
@@ -103,9 +103,11 @@ Within the blog itself (as in the layout, appearance, and navigation) are featur
 - Theme selectors should be self-explanatory. I've added one on the top right of the header, which is also `sticky` and not `absolute` such that it doesn't ignore the document flow (and thus you won't have to add `mt-20` to the top of every single page).
 - The table of contents of a post shouldn't be reduced to a `<details closed>{:html}` at the start of a blog post on desktop. You'd need to go to the top of the page to navigate through items. I've added a sticky `TableOfContents` component which always hangs out around the unused left side margin of a blog post. I'll still use a collapsible `<details>{:html}` element for the table of contents on mobile though since obviously a table of contents on the side is unfeasible for small screens.
 - Every page, except the homepage, will have a `<Breadcrumb>{:tsx}` component which shows you your current location in the site hierarchy. I don't see these often in blog templates even though they are so amazing for both discoverability (SEO and crawling) and user experience (the user always knows how "deep" they are in the site).
-- You can specify a post author via frontmatter. If this post author's slug is found within the `Authors` collection, then it will render particular info from that author's frontmatter file, `[author-name].md` (e.g. avatar, link to profile).
+- You can specify multiple post authors via frontmatter. If this post author's slug is found within the `Authors` collection, then it will render particular info from that author's frontmatter file, `[author-name].md` (e.g. avatar, link to profile). For example, the previous post (2024 Post) has two authors: "enscribe" and "jktrn", where "enscribe" is the only author with a custom avatar since "jktrn" is unregistered.
+  - Each author will have their own page, which lists all of their posts. If you're the only author throughout the entire blog then you can simply disregard all aspects regarding both inserting authors and the `Authors` collection.
+- Each tag will also have their own page, which lists all of the posts under that tag!
 
-### Foregoing some slop
+## Foregoing some slop
 
 - Goodbye, [ESLint](https://eslint.org/)! There have been so many occasions where I've had to deal with blogging templates with in-built pre-commit hooks which enforce contrived and arbitrary linting rules that, frankly, I couldn't be bothered with. Obviously, linting is awesome for ensuring consistency and best practice, but that's with shared and large codebases. You're dealing with, at most, your mediocre MDX blog posts and some interior fetching. It's just not worth the hypertension.
 

@@ -1,37 +1,59 @@
 ---
 import { Twitter, Github, Linkedin, Mail, Rss } from 'lucide-react'
 import { SITE } from '@consts'
+import { buttonVariants } from '@/components/ui/button'
+import Link from '@components/Link.astro'
 ---
 
 <ul class="not-prose flex flex-wrap gap-2" role="list">
   <li>
-    <a href="#" class="inline-block" aria-label="Twitter" title="Twitter">
-      <Twitter />
-    </a>
+    <Link
+      href="#"
+      aria-label="Twitter"
+      title="Twitter"
+      class={buttonVariants({ variant: 'outline', size: 'icon' })}
+    >
+      <Twitter className="size-4" />
+    </Link>
   </li>
   <li>
-    <a href="#" class="inline-block" aria-label="GitHub" title="GitHub">
-      <Github />
-    </a>
+    <Link
+      href="#"
+      aria-label="GitHub"
+      title="GitHub"
+      class={buttonVariants({ variant: 'outline', size: 'icon' })}
+    >
+      <Github className="size-4" />
+    </Link>
   </li>
   <li>
-    <a href="#" class="inline-block" aria-label="LinkedIn" title="LinkedIn">
-      <Linkedin />
-    </a>
+    <Link
+      href="#"
+      aria-label="LinkedIn"
+      title="LinkedIn"
+      class={buttonVariants({ variant: 'outline', size: 'icon' })}
+    >
+      <Linkedin className="size-4" />
+    </Link>
   </li>
   <li>
-    <a href="#" class="inline-block" aria-label="Email" title="Email">
-      <Mail />
-    </a>
+    <Link
+      href="#"
+      aria-label="Email"
+      title="Email"
+      class={buttonVariants({ variant: 'outline', size: 'icon' })}
+    >
+      <Mail className="size-4" />
+    </Link>
   </li>
   <li>
-    <a
+    <Link
       href={`${SITE.SITEURL}/rss.xml`}
-      class="inline-block"
       aria-label="RSS feed"
       title="RSS feed"
+      class={buttonVariants({ variant: 'outline', size: 'icon' })}
     >
-      <Rss />
-    </a>
+      <Rss className="size-4" />
+    </Link>
   </li>
 </ul>
