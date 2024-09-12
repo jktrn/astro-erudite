@@ -40,11 +40,11 @@ if (
 >
   <Link
     href={`/${entry.collection}/${entry.slug}`}
-    class="flex flex-wrap gap-4"
+    class="flex flex-col gap-4 sm:flex-row"
   >
     {
       entry.data.image && (
-        <div class="flex-shrink-0">
+        <div class="sm:flex-shrink-0">
           <Image
             src={entry.data.image}
             alt={entry.data.title}
@@ -63,7 +63,7 @@ if (
         {entry.data.description}
       </p>
       <div
-        class="mb-2 flex items-center space-x-2 text-xs text-muted-foreground"
+        class="mb-2 flex flex-wrap items-center gap-x-2 text-xs text-muted-foreground"
       >
         {
           author && (

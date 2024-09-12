@@ -21,31 +21,32 @@ const blog = (await getCollection('blog'))
 ---
 
 <Layout title="Home" description="Home">
-  <Container>
-    <section class="space-y-6">
+  <Container class="flex flex-col gap-y-6">
+    <section>
       <Card>
         <CardHeader>
           <CardTitle className="text-3xl">er·u·dite</CardTitle>
           <CardDescription
-            >/ˈer(y)əˌdīt/ &bull; <span
-              class="font-semibold text-muted-foreground">adjective</span
+            >/ˈer(y)əˌdīt/ &bull; <span class="font-semibold">adjective</span
             ></CardDescription
           >
         </CardHeader>
         <CardContent>
-          <p>having or showing great knowledge or learning.</p>
+          <p class="text-sm">
+            astro-erudite is an opinionated, no-frills static blogging template
+            built with <Link href="https://astro.build" external underline
+              >Astro</Link
+            >. To learn more about why this template exists, read <Link
+              href="/blog/the-state-of-static-blogs"
+              underline>The State of Static Blogs in 2024</Link
+            >.
+          </p>
         </CardContent>
       </Card>
-      <div class="mt-8">
-        <p class="prose min-w-full dark:prose-invert">
-          {SITE.TITLE} is an opinionated, no-frills static blogging template built
-          with Astro.
-        </p>
-      </div>
-      <div class="flex flex-wrap items-center justify-between gap-y-2">
-        <h2 class="text-2xl font-bold">Latest posts</h2>
-      </div>
-      <ul class="not-prose flex flex-col gap-4">
+    </section>
+    <section class="flex flex-col gap-y-4">
+      <h2 class="text-2xl font-bold">Latest posts</h2>
+      <ul class="not-prose flex flex-col gap-y-4">
         {
           blog.map((post) => (
             <li>

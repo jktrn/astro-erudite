@@ -13,11 +13,12 @@ import {
   BreadcrumbSeparator,
 } from '@/components/ui/breadcrumb'
 import { HomeIcon } from 'lucide-react'
+import { cn } from '@lib/utils'
 ---
 
 <Layout title="404" description={SITE.DESCRIPTION}>
-  <Container>
-    <Breadcrumb className="mb-6">
+  <Container class="flex grow flex-col gap-y-6">
+    <Breadcrumb>
       <BreadcrumbList>
         <BreadcrumbItem>
           <BreadcrumbLink href="/"
@@ -32,7 +33,7 @@ import { HomeIcon } from 'lucide-react'
     </Breadcrumb>
 
     <section
-      class="flex min-h-[50vh] flex-col items-center justify-center space-y-6 text-center"
+      class="flex flex-col items-center justify-center gap-y-4 text-center"
     >
       <div class="max-w-md">
         <h1 class="mb-4 text-3xl font-bold">404: Page not found</h1>
@@ -40,16 +41,17 @@ import { HomeIcon } from 'lucide-react'
           Oops! The page you're looking for doesn't exist.
         </p>
       </div>
-      <div>
-        <Link
-          href="/"
-          class={buttonVariants({ variant: 'outline' }) + ' group'}
-        >
-          <span class="mr-1.5 transition-transform group-hover:-translate-x-1"
-            >&larr;</span
-          > Go to home page
-        </Link>
-      </div>
+      <Link
+        href="/"
+        class={cn(
+          buttonVariants({ variant: 'outline' }),
+          'flex gap-x-1.5 group',
+        )}
+      >
+        <span class="transition-transform group-hover:-translate-x-1"
+          >&larr;</span
+        > Go to home page
+      </Link>
     </section>
   </Container>
 </Layout>

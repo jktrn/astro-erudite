@@ -15,8 +15,8 @@ import { HomeIcon } from 'lucide-react'
 ---
 
 <Layout title="About" description={SITE.DESCRIPTION}>
-  <Container>
-    <Breadcrumb className="mb-6">
+  <Container class="flex flex-col gap-y-6">
+    <Breadcrumb>
       <BreadcrumbList>
         <BreadcrumbItem>
           <BreadcrumbLink href="/"
@@ -30,7 +30,7 @@ import { HomeIcon } from 'lucide-react'
       </BreadcrumbList>
     </Breadcrumb>
 
-    <section class="space-y-6">
+    <section>
       <div class="min-w-full">
         <h1 class="mb-4 text-3xl font-bold">Some more about us</h1>
         <p class="prose dark:prose-invert">

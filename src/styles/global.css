@@ -2,34 +2,6 @@
 @tailwind components;
 @tailwind utilities;
 
-:root {
-  --astro-code-color-text: #09090b;
-  --astro-code-color-background: #fafafa;
-  --astro-code-token-comment: #a19595;
-  --astro-code-token-keyword: #f47067;
-  --astro-code-token-string: #00a99a;
-  --astro-code-token-function: #429996;
-  --astro-code-token-constant: #2b70c5;
-  --astro-code-token-parameter: #4e8fdf;
-  --astro-code-token-string-expression: #ae42a0;
-  --astro-code-token-punctuation: #8996a3;
-  --astro-code-token-link: #8d85ff;
-}
-
-.dark {
-  --astro-code-color-text: #fafafa;
-  --astro-code-color-background: #09090b;
-  --astro-code-token-comment: #a19595;
-  --astro-code-token-keyword: #f47067;
-  --astro-code-token-string: #00a99a;
-  --astro-code-token-function: #6eafad;
-  --astro-code-token-constant: #b3cceb;
-  --astro-code-token-parameter: #4e8fdf;
-  --astro-code-token-string-expression: #bf7db6;
-  --astro-code-token-punctuation: #8996a3;
-  --astro-code-token-link: #8d85ff;
-}
-
 @layer base {
   :root {
     --background: 0 0% 100%;
@@ -103,6 +75,10 @@
   html.dark {
     color-scheme: dark;
   }
+
+  ::-webkit-scrollbar-corner {
+    @apply bg-transparent;
+  }
 }
 
 @layer components {
@@ -115,11 +91,12 @@
   }
 
   pre {
-    @apply max-h-[600px] overflow-auto rounded-xl border bg-secondary/20 p-4 text-sm leading-loose;
+    @apply max-h-[600px] overflow-auto rounded-xl border bg-secondary/20 py-4 text-sm leading-loose;
   }
 
   pre > code {
     counter-reset: line;
+    @apply whitespace-pre-wrap;
   }
 
   code[data-line-numbers] {
@@ -130,6 +107,10 @@
     counter-increment: line;
     content: counter(line);
     @apply mr-4 inline-block w-4 text-right text-muted-foreground;
+  }
+
+  pre > code > span[data-line] {
+    @apply px-4;
   }
 
   [data-highlighted-line] {
@@ -154,5 +135,9 @@
 
   .diff.remove {
     @apply bg-destructive/15;
+  }
+
+  article :not(pre) > code {
+    @apply relative rounded bg-muted px-[0.3rem] py-[0.2rem] font-mono text-sm font-medium;
   }
 }

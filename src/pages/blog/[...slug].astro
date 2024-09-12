@@ -16,7 +16,7 @@ import {
   BreadcrumbPage,
   BreadcrumbSeparator,
 } from '@/components/ui/breadcrumb'
-import { HomeIcon } from 'lucide-react'
+import { Hash, HomeIcon } from 'lucide-react'
 import { cn } from '@/lib/utils'
 import { Separator } from '@/components/ui/separator'
 import Link from '@components/Link.astro'
@@ -156,6 +156,7 @@ if (
                 href={`/tags/${tag}`}
                 class={badgeVariants({ variant: 'secondary' })}
               >
+                <Hash className="mr-0.5 h-3 w-3" />
                 {tag}
               </a>
             ))

@@ -3,6 +3,7 @@ import mdx from '@astrojs/mdx'
 import react from '@astrojs/react'
 import sitemap from '@astrojs/sitemap'
 import tailwind from '@astrojs/tailwind'
+import { transformerCopyButton } from '@rehype-pretty/transformers'
 import {
   transformerMetaHighlight,
   transformerNotationDiff,
@@ -26,13 +27,6 @@ export default defineConfig({
     react(),
   ],
   markdown: {
-    // shikiConfig: {
-    //   transformers: [
-    //     transformerNotationDiff(),
-    //     transformerNotationFocus(),
-    //     transformerMetaHighlight(),
-    //   ],
-    // },
     syntaxHighlight: false,
     rehypePlugins: [
       rehypeHeadingIds,
@@ -44,7 +38,14 @@ export default defineConfig({
             light: 'vitesse-light',
             dark: 'vitesse-dark',
           },
-          transformers: [transformerNotationDiff(), transformerMetaHighlight()],
+          transformers: [
+            transformerNotationDiff(),
+            transformerMetaHighlight(),
+            transformerCopyButton({
+              visibility: 'hover',
+              feedbackDuration: 1000,
+            }),
+          ],
         },
       ],
     ],
