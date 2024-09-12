@@ -3,6 +3,8 @@ import Container from '@components/Container.astro'
 import Link from '@components/Link.astro'
 import { SITE } from '@consts'
 import { ModeToggle } from '@/components/ui/mode-toggle'
+import { Image } from 'astro:assets'
+import logo from '../../public/static/logo.svg'
 
 const items = [
   { href: '/blog', label: 'blog' },
@@ -16,11 +18,12 @@ const items = [
   transition:persist
 >
   <Container>
-    <div class="flex items-center justify-between py-4">
+    <div class="flex flex-wrap items-center justify-between gap-x-4 py-4">
       <Link
         href="/"
-        class="text-xl font-semibold transition-colors duration-300 hover:text-primary"
+        class="flex flex-shrink-0 items-center gap-2 text-xl font-semibold transition-colors duration-300 hover:text-primary"
       >
+        <Image src={logo} alt="Logo" class="size-8 rounded-sm" />
         {SITE.TITLE}
       </Link>
       <div class="flex items-center gap-4">

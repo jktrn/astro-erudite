@@ -4,6 +4,7 @@ import { formatDate, readingTime, parseAuthors } from '@lib/utils'
 import { Image } from 'astro:assets'
 import { Badge } from '@/components/ui/badge'
 import { Separator } from '@/components/ui/separator'
+import AvatarComponent from '@/components/ui/avatar'
 import Link from './Link.astro'
 
 type Props = {
@@ -54,12 +55,12 @@ const authors = await parseAuthors(entry.data.authors ?? [])
             <>
               {authors.map((author) => (
                 <div class="flex items-center gap-x-1.5">
-                  <Image
+                  <AvatarComponent
+                    client:load
                     src={author.avatar}
                     alt={author.name}
-                    width={18}
-                    height={18}
-                    class="rounded-full"
+                    fallback={author.name[0]}
+                    className="size-5 rounded-full"
                   />
                   <span>{author.name}</span>
                 </div>

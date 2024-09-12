@@ -62,7 +62,11 @@ const { Content, headings } = await post.render()
 const authors = await parseAuthors(post.data.authors ?? [])
 ---
 
-<Layout title={post.data.title} description={post.data.description}>
+<Layout
+  title={post.data.title}
+  description={post.data.description}
+  image={post.data.image ?? '/static/1200x630.png'}
+>
   <Container>
     <Breadcrumb className="mb-6">
       <BreadcrumbList>
@@ -89,7 +93,7 @@ const authors = await parseAuthors(post.data.authors ?? [])
           alt={post.data.title}
           width={1200}
           height={630}
-          class="mb-8 rounded-xl object-cover shadow-lg"
+          class="mb-8 rounded-xl object-cover"
         />
       )
     }
@@ -162,7 +166,7 @@ const authors = await parseAuthors(post.data.authors ?? [])
 
     {headings.length > 0 && <TableOfContents headings={headings} />}
 
-    <article class="prose prose-neutral max-w-none dark:prose-invert">
+    <article class="prose prose-stone max-w-none dark:prose-invert">
       <Content />
     </article>
 
@@ -170,7 +174,7 @@ const authors = await parseAuthors(post.data.authors ?? [])
   </Container>
 
   <Button
-    variant="secondary"
+    variant="outline"
     size="icon"
     className="group fixed bottom-8 right-8 z-50 hidden"
     id="scroll-to-top"

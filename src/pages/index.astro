@@ -20,7 +20,7 @@ const blog = (await getCollection('blog'))
   .slice(0, SITE.NUM_POSTS_ON_HOMEPAGE)
 ---
 
-<Layout title="Home" description="Home">
+<Layout title={SITE.TITLE} description={SITE.DESCRIPTION}>
   <Container class="flex flex-col gap-y-6">
     <section>
       <Card>

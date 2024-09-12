@@ -112,7 +112,7 @@
 
       /* Code block titles */
       [data-rehype-pretty-code-title] {
-        @apply rounded-t-xl border-x border-t px-4 py-2 text-sm font-medium !text-foreground;
+        @apply rounded-t-xl border-x border-t px-4 py-2 text-sm font-medium text-foreground;
 
         /* Remove top margin from code block if a title is present */
         & + pre {

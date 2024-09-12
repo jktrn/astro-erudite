@@ -1,7 +1,7 @@
 ---
 import type { CollectionEntry } from 'astro:content'
-import { Image } from 'astro:assets'
 import Link from '@components/Link.astro'
+import AvatarComponent from '@/components/ui/avatar'
 
 type Props = {
   author: CollectionEntry<'authors'>
@@ -15,12 +15,12 @@ const { name, avatar, bio } = author.data
   class="rounded-xl border p-4 transition-colors duration-300 ease-in-out hover:bg-secondary/50"
 >
   <Link href={`/authors/${author.slug}`} class="flex flex-wrap gap-4">
-    <Image
+    <AvatarComponent
+      client:load
       src={avatar}
       alt={`Avatar of ${name}`}
-      width={128}
-      height={128}
-      class="rounded-xl object-cover"
+      fallback={name[0]}
+      className="size-32 rounded-md"
     />
     <div class="flex-grow">
       <h3 class="mb-1 text-lg font-semibold">{name}</h3>
