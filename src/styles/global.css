@@ -138,6 +138,10 @@
   }
 
   article :not(pre) > code {
-    @apply relative rounded bg-muted px-[0.3rem] py-[0.2rem] font-mono text-sm font-medium;
+    @apply relative rounded bg-muted/50 px-[0.3rem] py-[0.2rem] font-mono text-sm font-medium;
+  }
+
+  article {
+    @apply prose-headings:scroll-mt-20;
   }
 }

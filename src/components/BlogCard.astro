@@ -1,11 +1,10 @@
 ---
 import type { CollectionEntry } from 'astro:content'
-import { formatDate, readingTime } from '@lib/utils'
+import { formatDate, readingTime, parseAuthors } from '@lib/utils'
 import { Image } from 'astro:assets'
 import { Badge } from '@/components/ui/badge'
 import { Separator } from '@/components/ui/separator'
 import Link from './Link.astro'
-import { getEntry } from 'astro:content'
 
 type Props = {
   entry: CollectionEntry<'blog'>
@@ -17,22 +16,7 @@ const { entry } = Astro.props as {
 
 const formattedDate = formatDate(entry.data.date)
 const readTime = readingTime(entry.body)
-
-let author = null
-if (
-  entry.data.author &&
-  typeof entry.data.author === 'object' &&
-  'collection' in entry.data.author
-) {
-  author = await getEntry(entry.data.author)
-} else if (typeof entry.data.author === 'string') {
-  author = {
-    data: {
-      name: entry.data.author,
-      avatar: '/favicons/android-chrome-512x512.png',
-    },
-  }
-}
+const authors = await parseAuthors(entry.data.author ?? [])
 ---
 
 <div
@@ -66,18 +50,20 @@ if (
         class="mb-2 flex flex-wrap items-center gap-x-2 text-xs text-muted-foreground"
       >
         {
-          author && (
+          authors.length > 0 && (
             <>
-              <div class="flex items-center gap-1.5">
-                <Image
-                  src={author.data.avatar}
-                  alt={author.data.name}
-                  width={18}
-                  height={18}
-                  class="rounded-full"
-                />
-                <span>{author.data.name}</span>
-              </div>
+              {authors.map((author) => (
+                <div class="flex items-center gap-x-1.5">
+                  <Image
+                    src={author.avatar}
+                    alt={author.name}
+                    width={18}
+                    height={18}
+                    class="rounded-full"
+                  />
+                  <span>{author.name}</span>
+                </div>
+              ))}
               <Separator orientation="vertical" className="h-4" />
             </>
           )

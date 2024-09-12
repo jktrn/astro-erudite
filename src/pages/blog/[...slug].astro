@@ -6,7 +6,7 @@ import { formatDate, readingTime } from '@lib/utils'
 import PostNavigation from '@components/PostNavigation.astro'
 import TableOfContents from '@components/TableOfContents.astro'
 import { Image } from 'astro:assets'
-import { Badge, badgeVariants } from '@/components/ui/badge'
+import { badgeVariants } from '@/components/ui/badge'
 import { Button } from '@/components/ui/button'
 import {
   Breadcrumb,
@@ -16,10 +16,10 @@ import {
   BreadcrumbPage,
   BreadcrumbSeparator,
 } from '@/components/ui/breadcrumb'
-import { Hash, HomeIcon } from 'lucide-react'
-import { cn } from '@/lib/utils'
+import { Hash, HomeIcon, ArrowUp } from 'lucide-react'
 import { Separator } from '@/components/ui/separator'
 import Link from '@components/Link.astro'
+import { parseAuthors } from '@lib/utils'
 
 export async function getStaticPaths() {
   const posts = (await getCollection('blog'))
@@ -59,21 +59,7 @@ const prevPost = getPrevPost(currentPostSlug)
 const post = Astro.props
 const { Content, headings } = await post.render()
 
-let author = null
-if (
-  post.data.author &&
-  typeof post.data.author === 'object' &&
-  'collection' in post.data.author
-) {
-  author = await getEntry(post.data.author)
-} else if (typeof post.data.author === 'string') {
-  author = {
-    data: {
-      name: post.data.author,
-      avatar: '/favicons/android-chrome-512x512.png',
-    },
-  }
-}
+const authors = await parseAuthors(post.data.author ?? [])
 ---
 
 <Layout title={post.data.title} description={post.data.description}>
@@ -114,40 +100,45 @@ if (
       </h1>
 
       <div
-        class="flex items-center justify-center gap-3 text-sm text-muted-foreground"
+        class="flex flex-wrap items-center justify-center gap-2 text-sm text-muted-foreground"
       >
         {
-          author && (
+          authors.length > 0 && (
             <>
-              <div class="flex items-center gap-2">
-                <Image
-                  src={author.data.avatar}
-                  alt={author.data.name}
-                  width={24}
-                  height={24}
-                  class="rounded-full"
-                />
-                {typeof post.data.author === 'object' &&
-                'collection' in post.data.author ? (
-                  <a
-                    href={`/authors/${post.data.author.slug}`}
-                    class="hover:text-primary"
-                  >
-                    {author.data.name}
-                  </a>
-                ) : (
-                  <span>{author.data.name}</span>
-                )}
+              <div class="flex items-center gap-x-2">
+                {authors.map((author) => (
+                  <div class="flex items-center gap-x-1.5">
+                    <Image
+                      src={author.avatar}
+                      alt={author.name}
+                      width={24}
+                      height={24}
+                      class="rounded-full"
+                    />
+                    {author.isRegistered ? (
+                      <Link
+                        href={`/authors/${author.name}`}
+                        underline
+                        class="text-foreground"
+                      >
+                        <span>{author.name}</span>
+                      </Link>
+                    ) : (
+                      <span>{author.name}</span>
+                    )}
+                  </div>
+                ))}
               </div>
               <Separator orientation="vertical" className="h-4" />
             </>
           )
         }
-        <span>{formatDate(post.data.date)}</span>
-        <Separator orientation="vertical" className="h-4" />
-        <span>{readingTime(post.body)}</span>
+        <div class="flex items-center gap-2">
+          <span>{formatDate(post.data.date)}</span>
+          <Separator orientation="vertical" className="h-4" />
+          <span>{readingTime(post.body)}</span>
+        </div>
       </div>
-
       <div class="mt-4 flex flex-wrap justify-center gap-2">
         {
           post.data.tags && post.data.tags.length > 0 ? (
@@ -177,4 +168,32 @@ if (
 
     <PostNavigation prevPost={prevPost} nextPost={nextPost} />
   </Container>
+
+  <Button
+    variant="secondary"
+    size="icon"
+    className="group fixed bottom-8 right-8 z-50 hidden"
+    id="scroll-to-top"
+    title="Scroll to top"
+    aria-label="Scroll to top"
+  >
+    <ArrowUp
+      className="mx-auto size-4 transition-all group-hover:-translate-y-0.5"
+    />
+  </Button>
+
+  <script>
+    document.addEventListener('astro:page-load', () => {
+      const scrollToTopButton = document.getElementById('scroll-to-top')
+      if (scrollToTopButton) {
+        scrollToTopButton.addEventListener('click', () => {
+          window.scrollTo({ top: 0, behavior: 'smooth' })
+        })
+
+        window.addEventListener('scroll', () => {
+          scrollToTopButton.classList.toggle('hidden', window.scrollY <= 300)
+        })
+      }
+    })
+  </script>
 </Layout>

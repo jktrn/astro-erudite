@@ -3,6 +3,7 @@ import { type CollectionEntry, getCollection } from 'astro:content'
 import Layout from '@layouts/Layout.astro'
 import Container from '@components/Container.astro'
 import BlogCard from '@components/BlogCard.astro'
+import { Hash } from 'lucide-react'
 
 type BlogPost = CollectionEntry<'blog'>
 
@@ -38,8 +39,10 @@ export async function getStaticPaths() {
     <div class="space-y-10">
       <div class="flex items-center gap-2">
         <h1 class="text-3xl font-semibold">Posts tagged with</h1>
-        <span class="rounded-full bg-secondary px-4 py-2 text-2xl font-medium">
-          {tag}
+        <span
+          class="flex items-center gap-x-1 rounded-full bg-secondary px-4 py-2 text-2xl font-medium"
+        >
+          <Hash className="size-6" />{tag}
         </span>
       </div>
       <div class="space-y-4">
