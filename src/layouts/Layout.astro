@@ -1,7 +1,7 @@
 ---
+import Footer from '@components/Footer.astro'
 import Head from '@components/Head.astro'
 import Header from '@components/Header.astro'
-import Footer from '@components/Footer.astro'
 import { SITE } from '@consts'
 
 type Props = {
@@ -24,7 +24,7 @@ const { title, description, image } = Astro.props
   </head>
   <body>
     <div
-      class="box-border flex h-fit min-h-screen flex-col gap-y-6 bg-background px-4 font-sans text-foreground antialiased"
+      class="box-border flex h-fit min-h-screen flex-col gap-y-6 px-4 font-sans antialiased"
     >
       <Header />
       <main class="flex-grow">

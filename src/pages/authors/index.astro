@@ -1,36 +1,16 @@
 ---
-import { getCollection } from 'astro:content'
-import Layout from '@layouts/Layout.astro'
-import Container from '@components/Container.astro'
+import Breadcrumbs from '@/components/Breadcrumbs.astro'
 import AuthorCard from '@components/AuthorCard.astro'
-import {
-  Breadcrumb,
-  BreadcrumbItem,
-  BreadcrumbLink,
-  BreadcrumbList,
-  BreadcrumbPage,
-  BreadcrumbSeparator,
-} from '@/components/ui/breadcrumb'
-import { HomeIcon } from 'lucide-react'
+import Container from '@components/Container.astro'
+import Layout from '@layouts/Layout.astro'
+import { getCollection } from 'astro:content'
 
 const authors = await getCollection('authors')
 ---
 
 <Layout title="Authors" description="A list of authors on this site.">
-  <Container>
-    <Breadcrumb className="mb-6">
-      <BreadcrumbList>
-        <BreadcrumbItem>
-          <BreadcrumbLink href="/"
-            ><HomeIcon className="size-4" /></BreadcrumbLink
-          >
-        </BreadcrumbItem>
-        <BreadcrumbSeparator />
-        <BreadcrumbItem>
-          <BreadcrumbPage>Authors</BreadcrumbPage>
-        </BreadcrumbItem>
-      </BreadcrumbList>
-    </Breadcrumb>
+  <Container class="flex flex-col gap-y-6">
+    <Breadcrumbs items={[{ label: 'Authors' }]} />
     <ul class="not-prose flex flex-col gap-4">
       {
         authors.map((author) => (

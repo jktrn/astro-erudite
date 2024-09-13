@@ -1,19 +1,10 @@
 ---
-import { type CollectionEntry, getCollection } from 'astro:content'
-import Layout from '@layouts/Layout.astro'
-import Container from '@components/Container.astro'
+import Breadcrumbs from '@/components/Breadcrumbs.astro'
 import AuthorCard from '@components/AuthorCard.astro'
 import BlogCard from '@components/BlogCard.astro'
-import { Button } from '@/components/ui/button'
-import {
-  Breadcrumb,
-  BreadcrumbItem,
-  BreadcrumbLink,
-  BreadcrumbList,
-  BreadcrumbPage,
-  BreadcrumbSeparator,
-} from '@/components/ui/breadcrumb'
-import { HomeIcon } from 'lucide-react'
+import Container from '@components/Container.astro'
+import Layout from '@layouts/Layout.astro'
+import { type CollectionEntry, getCollection } from 'astro:content'
 
 export async function getStaticPaths() {
   const authors = await getCollection('authors')
@@ -38,50 +29,37 @@ const authorPosts = allPosts
 ---
 
 <Layout
-  title={`${author.data.name} - Author`}
+  title={`${author.data.name} (Author)`}
   description={author.data.bio || `Profile of ${author.data.name}.`}
 >
-  <Container>
-    <Breadcrumb className="mb-6">
-      <BreadcrumbList>
-        <BreadcrumbItem>
-          <BreadcrumbLink href="/"
-            ><HomeIcon className="size-4" /></BreadcrumbLink
-          >
-        </BreadcrumbItem>
-        <BreadcrumbSeparator />
-        <BreadcrumbItem>
-          <BreadcrumbLink href="/authors">Authors</BreadcrumbLink>
-        </BreadcrumbItem>
-        <BreadcrumbSeparator />
-        <BreadcrumbItem>
-          <BreadcrumbPage>{author.data.name}</BreadcrumbPage>
-        </BreadcrumbItem>
-      </BreadcrumbList>
-    </Breadcrumb>
+  <Container class="flex flex-col gap-y-6">
+    <Breadcrumbs
+      items={[
+        { href: '/authors', label: 'Authors' },
+        { label: author.data.name },
+      ]}
+    />
 
-    <div class="space-y-10">
-      <section>
-        <AuthorCard author={author} />
-      </section>
-      <section class="space-y-4">
-        <h2 class="text-2xl font-semibold">Posts by {author.data.name}</h2>
-        {
-          authorPosts.length > 0 ? (
-            <ul class="not-prose flex flex-col gap-4">
-              {authorPosts.map((post) => (
-                <li>
-                  <BlogCard entry={post} />
-                </li>
-              ))}
-            </ul>
-          ) : (
-            <p class="text-muted-foreground">
-              No posts available from this author.
-            </p>
-          )
-        }
-      </section>
-    </div>
+    <section>
+      <AuthorCard author={author} linkDisabled />
+    </section>
+    <section class="flex flex-col gap-y-4">
+      <h2 class="text-2xl font-semibold">Posts by {author.data.name}</h2>
+      {
+        authorPosts.length > 0 ? (
+          <ul class="not-prose flex flex-col gap-4">
+            {authorPosts.map((post) => (
+              <li>
+                <BlogCard entry={post} />
+              </li>
+            ))}
+          </ul>
+        ) : (
+          <p class="text-muted-foreground">
+            No posts available from this author.
+          </p>
+        )
+      }
+    </section>
   </Container>
 </Layout>

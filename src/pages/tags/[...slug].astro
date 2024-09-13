@@ -1,8 +1,9 @@
 ---
-import { type CollectionEntry, getCollection } from 'astro:content'
-import Layout from '@layouts/Layout.astro'
-import Container from '@components/Container.astro'
 import BlogCard from '@components/BlogCard.astro'
+import Breadcrumbs from '@components/Breadcrumbs.astro'
+import Container from '@components/Container.astro'
+import Layout from '@layouts/Layout.astro'
+import { type CollectionEntry, getCollection } from 'astro:content'
 import { Hash } from 'lucide-react'
 
 type BlogPost = CollectionEntry<'blog'>
@@ -35,31 +36,30 @@ export async function getStaticPaths() {
   title={`Posts tagged with "${tag}"`}
   description={`A collection of posts tagged with ${tag}.`}
 >
-  <Container>
-    <div class="space-y-10">
-      <div class="flex items-center gap-2">
-        <h1 class="text-3xl font-semibold">Posts tagged with</h1>
-        <span
-          class="flex items-center gap-x-1 rounded-full bg-secondary px-4 py-2 text-2xl font-medium"
-        >
-          <Hash className="size-6" />{tag}
-        </span>
-      </div>
-      <div class="space-y-4">
-        {
-          posts.map((post) => (
-            <section class="space-y-4">
-              <div>
-                <ul class="not-prose flex flex-col gap-4">
-                  <li>
-                    <BlogCard entry={post} />
-                  </li>
-                </ul>
-              </div>
-            </section>
-          ))
-        }
-      </div>
+  <Container class="flex flex-col gap-y-6">
+    <Breadcrumbs items={[{ href: '/tags', label: 'Tags' }, { label: tag }]} />
+    <div class="flex items-center gap-2">
+      <h1 class="text-3xl font-semibold">Posts tagged with</h1>
+      <span
+        class="flex items-center gap-x-1 rounded-full bg-secondary px-4 py-2 text-2xl font-medium"
+      >
+        <Hash className="size-6" />{tag}
+      </span>
+    </div>
+    <div class="flex flex-col gap-y-4">
+      {
+        posts.map((post) => (
+          <section class="flex flex-col gap-y-4">
+            <div>
+              <ul class="not-prose flex flex-col gap-4">
+                <li>
+                  <BlogCard entry={post} />
+                </li>
+              </ul>
+            </div>
+          </section>
+        ))
+      }
     </div>
   </Container>
 </Layout>

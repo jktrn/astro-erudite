@@ -1,11 +1,5 @@
 ---
-import Layout from '@layouts/Layout.astro'
-import Container from '@components/Container.astro'
-import { SITE } from '@consts'
-import BlogCard from '@components/BlogCard.astro'
 import { buttonVariants } from '@/components/ui/button'
-import { getCollection } from 'astro:content'
-import Link from '@components/Link.astro'
 import {
   Card,
   CardContent,
@@ -13,6 +7,12 @@ import {
   CardHeader,
   CardTitle,
 } from '@/components/ui/card'
+import BlogCard from '@components/BlogCard.astro'
+import Container from '@components/Container.astro'
+import Link from '@components/Link.astro'
+import { SITE } from '@consts'
+import Layout from '@layouts/Layout.astro'
+import { getCollection } from 'astro:content'
 
 const blog = (await getCollection('blog'))
   .filter((post) => !post.data.draft)
@@ -20,7 +20,7 @@ const blog = (await getCollection('blog'))
   .slice(0, SITE.NUM_POSTS_ON_HOMEPAGE)
 ---
 
-<Layout title={SITE.TITLE} description={SITE.DESCRIPTION}>
+<Layout title="Home" description={SITE.DESCRIPTION}>
   <Container class="flex flex-col gap-y-6">
     <section>
       <Card>

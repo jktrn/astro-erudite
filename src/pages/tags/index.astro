@@ -1,18 +1,11 @@
 ---
-import { getCollection } from 'astro:content'
-import Layout from '@layouts/Layout.astro'
+import Breadcrumbs from '@/components/Breadcrumbs.astro'
 import Container from '@components/Container.astro'
 import Link from '@components/Link.astro'
 import { badgeVariants } from '@components/ui/badge'
-import { Hash, HomeIcon } from 'lucide-react'
-import {
-  Breadcrumb,
-  BreadcrumbItem,
-  BreadcrumbLink,
-  BreadcrumbList,
-  BreadcrumbPage,
-  BreadcrumbSeparator,
-} from '@/components/ui/breadcrumb'
+import Layout from '@layouts/Layout.astro'
+import { getCollection } from 'astro:content'
+import { Hash } from 'lucide-react'
 
 const blog = (await getCollection('blog')).filter((post) => !post.data.draft)
 
@@ -22,37 +15,23 @@ const tags = blog
 ---
 
 <Layout title="Tags" description="A list of all tags used in blog posts">
-  <Container>
-    <div class="space-y-6">
-      <Breadcrumb>
-        <BreadcrumbList>
-          <BreadcrumbItem>
-            <BreadcrumbLink href="/"
-              ><HomeIcon className="size-4" /></BreadcrumbLink
-            >
-          </BreadcrumbItem>
-          <BreadcrumbSeparator />
-          <BreadcrumbItem>
-            <BreadcrumbPage>Tags</BreadcrumbPage>
-          </BreadcrumbItem>
-        </BreadcrumbList>
-      </Breadcrumb>
+  <Container class="flex flex-col gap-y-6">
+    <Breadcrumbs items={[{ label: 'Tags' }]} />
 
-      <div class="flex flex-col gap-4">
-        <h1 class="text-3xl font-semibold">Tags</h1>
-        <div class="flex flex-wrap gap-2">
-          {
-            tags.map((tag) => (
-              <Link
-                href={`/tags/${tag}`}
-                class={badgeVariants({ variant: 'secondary' })}
-              >
-                <Hash className="-translate-x-0.5 size-3" />
-                {tag}
-              </Link>
-            ))
-          }
-        </div>
+    <div class="flex flex-col gap-4">
+      <h1 class="text-3xl font-semibold">Tags</h1>
+      <div class="flex flex-wrap gap-2">
+        {
+          tags.map((tag) => (
+            <Link
+              href={`/tags/${tag}`}
+              class={badgeVariants({ variant: 'secondary' })}
+            >
+              <Hash className="-translate-x-0.5 size-3" />
+              {tag}
+            </Link>
+          ))
+        }
       </div>
     </div>
   </Container>

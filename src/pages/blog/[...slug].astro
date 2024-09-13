@@ -1,25 +1,17 @@
 ---
-import { type CollectionEntry, getCollection } from 'astro:content'
-import Layout from '@layouts/Layout.astro'
-import Container from '@components/Container.astro'
-import { formatDate, readingTime } from '@lib/utils'
-import PostNavigation from '@components/PostNavigation.astro'
-import TableOfContents from '@components/TableOfContents.astro'
-import { Image } from 'astro:assets'
+import Breadcrumbs from '@/components/Breadcrumbs.astro'
 import { badgeVariants } from '@/components/ui/badge'
 import { Button } from '@/components/ui/button'
-import {
-  Breadcrumb,
-  BreadcrumbItem,
-  BreadcrumbLink,
-  BreadcrumbList,
-  BreadcrumbPage,
-  BreadcrumbSeparator,
-} from '@/components/ui/breadcrumb'
-import { Hash, HomeIcon, ArrowUp } from 'lucide-react'
 import { Separator } from '@/components/ui/separator'
+import Container from '@components/Container.astro'
 import Link from '@components/Link.astro'
-import { parseAuthors } from '@lib/utils'
+import PostNavigation from '@components/PostNavigation.astro'
+import TableOfContents from '@components/TableOfContents.astro'
+import Layout from '@layouts/Layout.astro'
+import { formatDate, parseAuthors, readingTime } from '@lib/utils'
+import { Image } from 'astro:assets'
+import { type CollectionEntry, getCollection } from 'astro:content'
+import { ArrowUp, Hash } from 'lucide-react'
 
 export async function getStaticPaths() {
   const posts = (await getCollection('blog'))
@@ -67,24 +59,10 @@ const authors = await parseAuthors(post.data.authors ?? [])
   description={post.data.description}
   image={post.data.image ?? '/static/1200x630.png'}
 >
-  <Container>
-    <Breadcrumb className="mb-6">
-      <BreadcrumbList>
-        <BreadcrumbItem>
-          <BreadcrumbLink href="/"
-            ><HomeIcon className="size-4" /></BreadcrumbLink
-          >
-        </BreadcrumbItem>
-        <BreadcrumbSeparator />
-        <BreadcrumbItem>
-          <BreadcrumbLink href="/blog">Blog</BreadcrumbLink>
-        </BreadcrumbItem>
-        <BreadcrumbSeparator />
-        <BreadcrumbItem>
-          <BreadcrumbPage>{post.data.title}</BreadcrumbPage>
-        </BreadcrumbItem>
-      </BreadcrumbList>
-    </Breadcrumb>
+  <Container class="flex flex-col gap-y-6">
+    <Breadcrumbs
+      items={[{ href: '/blog', label: 'Blog' }, { label: post.data.title }]}
+    />
 
     {
       post.data.image && (
@@ -93,72 +71,76 @@ const authors = await parseAuthors(post.data.authors ?? [])
           alt={post.data.title}
           width={1200}
           height={630}
-          class="mb-8 rounded-xl object-cover"
+          class="rounded-xl object-cover"
         />
       )
     }
 
-    <section class="mb-8 text-center">
-      <h1 class="mb-4 text-4xl font-bold leading-tight sm:text-5xl">
-        {post.data.title}
-      </h1>
+    <section class="flex flex-col gap-6 text-center">
+      <div>
+        <h1 class="mb-4 text-4xl font-bold leading-tight sm:text-5xl">
+          {post.data.title}
+        </h1>
 
-      <div
-        class="flex flex-wrap items-center justify-center gap-2 text-sm text-muted-foreground"
-      >
-        {
-          authors.length > 0 && (
-            <>
-              <div class="flex items-center gap-x-2">
-                {authors.map((author) => (
-                  <div class="flex items-center gap-x-1.5">
-                    <Image
-                      src={author.avatar}
-                      alt={author.name}
-                      width={24}
-                      height={24}
-                      class="rounded-full"
-                    />
-                    {author.isRegistered ? (
-                      <Link
-                        href={`/authors/${author.name}`}
-                        underline
-                        class="text-foreground"
-                      >
+        <div
+          class="flex flex-wrap items-center justify-center gap-2 text-sm text-muted-foreground"
+        >
+          {
+            authors.length > 0 && (
+              <>
+                <div class="flex items-center gap-x-2">
+                  {authors.map((author) => (
+                    <div class="flex items-center gap-x-1.5">
+                      <Image
+                        src={author.avatar}
+                        alt={author.name}
+                        width={24}
+                        height={24}
+                        class="rounded-full"
+                      />
+                      {author.isRegistered ? (
+                        <Link
+                          href={`/authors/${author.name}`}
+                          underline
+                          class="text-foreground"
+                        >
+                          <span>{author.name}</span>
+                        </Link>
+                      ) : (
                         <span>{author.name}</span>
-                      </Link>
-                    ) : (
-                      <span>{author.name}</span>
-                    )}
-                  </div>
-                ))}
-              </div>
-              <Separator orientation="vertical" className="h-4" />
-            </>
-          )
-        }
-        <div class="flex items-center gap-2">
-          <span>{formatDate(post.data.date)}</span>
-          <Separator orientation="vertical" className="h-4" />
-          <span>{readingTime(post.body)}</span>
+                      )}
+                    </div>
+                  ))}
+                </div>
+                <Separator orientation="vertical" className="h-4" />
+              </>
+            )
+          }
+          <div class="flex items-center gap-2">
+            <span>{formatDate(post.data.date)}</span>
+            <Separator orientation="vertical" className="h-4" />
+            <span>{readingTime(post.body)}</span>
+          </div>
         </div>
-      </div>
-      <div class="mt-4 flex flex-wrap justify-center gap-2">
-        {
-          post.data.tags && post.data.tags.length > 0 ? (
-            post.data.tags.map((tag) => (
-              <a
-                href={`/tags/${tag}`}
-                class={badgeVariants({ variant: 'secondary' })}
-              >
-                <Hash className="-translate-x-0.5 size-3" />
-                {tag}
-              </a>
-            ))
-          ) : (
-            <span class="text-sm text-muted-foreground">No tags available</span>
-          )
-        }
+        <div class="mt-4 flex flex-wrap justify-center gap-2">
+          {
+            post.data.tags && post.data.tags.length > 0 ? (
+              post.data.tags.map((tag) => (
+                <a
+                  href={`/tags/${tag}`}
+                  class={badgeVariants({ variant: 'secondary' })}
+                >
+                  <Hash className="-translate-x-0.5 size-3" />
+                  {tag}
+                </a>
+              ))
+            ) : (
+              <span class="text-sm text-muted-foreground">
+                No tags available
+              </span>
+            )
+          }
+        </div>
       </div>
 
       <PostNavigation prevPost={prevPost} nextPost={nextPost} />

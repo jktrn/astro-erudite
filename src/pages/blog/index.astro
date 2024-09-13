@@ -1,17 +1,9 @@
 ---
-import { type CollectionEntry, getCollection } from 'astro:content'
-import Layout from '@layouts/Layout.astro'
-import Container from '@components/Container.astro'
+import Breadcrumbs from '@/components/Breadcrumbs.astro'
 import BlogCard from '@components/BlogCard.astro'
-import {
-  Breadcrumb,
-  BreadcrumbItem,
-  BreadcrumbLink,
-  BreadcrumbList,
-  BreadcrumbPage,
-  BreadcrumbSeparator,
-} from '@/components/ui/breadcrumb'
-import { HomeIcon } from 'lucide-react'
+import Container from '@components/Container.astro'
+import Layout from '@layouts/Layout.astro'
+import { type CollectionEntry, getCollection } from 'astro:content'
 
 const data = (await getCollection('blog'))
   .filter((post) => !post.data.draft)
@@ -35,19 +27,7 @@ const years = Object.keys(posts).sort((a, b) => parseInt(b) - parseInt(a))
 
 <Layout title="Blog" description="Blog">
   <Container class="flex flex-col gap-y-6">
-    <Breadcrumb>
-      <BreadcrumbList>
-        <BreadcrumbItem>
-          <BreadcrumbLink href="/"
-            ><HomeIcon className="size-4" /></BreadcrumbLink
-          >
-        </BreadcrumbItem>
-        <BreadcrumbSeparator />
-        <BreadcrumbItem>
-          <BreadcrumbPage>Blog</BreadcrumbPage>
-        </BreadcrumbItem>
-      </BreadcrumbList>
-    </Breadcrumb>
+    <Breadcrumbs items={[{ label: 'Blog' }]} />
 
     <div class="flex flex-col gap-y-8">
       {

@@ -1,16 +1,10 @@
 ---
+import { ModeToggle } from '@/components/ui/mode-toggle'
 import Container from '@components/Container.astro'
 import Link from '@components/Link.astro'
-import { SITE } from '@consts'
-import { ModeToggle } from '@/components/ui/mode-toggle'
+import { NAV_LINKS, SITE } from '@consts'
 import { Image } from 'astro:assets'
 import logo from '../../public/static/logo.svg'
-
-const items = [
-  { href: '/blog', label: 'blog' },
-  { href: '/authors', label: 'authors' },
-  { href: '/about', label: 'about' },
-]
 ---
 
 <header
@@ -29,7 +23,7 @@ const items = [
       <div class="flex items-center gap-4">
         <nav class="flex items-center gap-4 text-sm sm:gap-6">
           {
-            items.map((item) => (
+            NAV_LINKS.map((item) => (
               <Link
                 href={item.href}
                 class="capitalize text-foreground/60 transition-colors hover:text-foreground/80"

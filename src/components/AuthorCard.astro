@@ -1,30 +1,110 @@
 ---
-import type { CollectionEntry } from 'astro:content'
-import Link from '@components/Link.astro'
 import AvatarComponent from '@/components/ui/avatar'
+import { buttonVariants } from '@/components/ui/button'
+import { cn } from '@/lib/utils'
+import Link from '@components/Link.astro'
+import type { CollectionEntry } from 'astro:content'
+import { Github, Globe, Linkedin, Twitter } from 'lucide-react'
 
 type Props = {
   author: CollectionEntry<'authors'>
+  linkDisabled?: boolean
 }
-
-const { author } = Astro.props
-const { name, avatar, bio } = author.data
+const { author, linkDisabled = false } = Astro.props
+const { name, avatar, bio, pronouns, github, twitter, linkedin, website } =
+  author.data
 ---
 
 <div
-  class="rounded-xl border p-4 transition-colors duration-300 ease-in-out hover:bg-secondary/50"
+  class="rounded-xl border p-4 transition-colors duration-300 ease-in-out has-[a:hover]:bg-secondary/50"
 >
-  <Link href={`/authors/${author.slug}`} class="flex flex-wrap gap-4">
-    <AvatarComponent
-      client:load
-      src={avatar}
-      alt={`Avatar of ${name}`}
-      fallback={name[0]}
-      className="size-32 rounded-md"
-    />
-    <div class="flex-grow">
-      <h3 class="mb-1 text-lg font-semibold">{name}</h3>
-      <p class="text-sm text-muted-foreground">{bio}</p>
+  <div class="flex flex-wrap gap-4">
+    <Link
+      href={`/authors/${author.slug}`}
+      class={cn('block', linkDisabled && 'pointer-events-none')}
+    >
+      <AvatarComponent
+        client:load
+        src={avatar}
+        alt={`Avatar of ${name}`}
+        fallback={name[0]}
+        className={cn(
+          'size-32 rounded-md',
+          !linkDisabled &&
+            'transition-shadow duration-300 hover:cursor-pointer hover:ring-2 hover:ring-primary',
+        )}
+      />
+    </Link>
+    <div class="flex flex-grow flex-col justify-between">
+      <div>
+        <div class="flex items-center gap-2">
+          <h3 class="text-lg font-semibold">{name}</h3>
+          {
+            pronouns && (
+              <span class="text-sm text-muted-foreground">({pronouns})</span>
+            )
+          }
+        </div>
+        <p class="text-sm text-muted-foreground">{bio}</p>
+      </div>
+      <ul class="flex gap-2">
+        {
+          github && (
+            <li>
+              <Link
+                href={`https://github.com/${github}`}
+                aria-label="GitHub"
+                title="GitHub"
+                class={buttonVariants({ variant: 'outline', size: 'icon' })}
+              >
+                <Github className="size-4" />
+              </Link>
+            </li>
+          )
+        }
+        {
+          twitter && (
+            <li>
+              <Link
+                href={`https://twitter.com/${twitter}`}
+                aria-label="Twitter"
+                title="Twitter"
+                class={buttonVariants({ variant: 'outline', size: 'icon' })}
+              >
+                <Twitter className="size-4" />
+              </Link>
+            </li>
+          )
+        }
+        {
+          linkedin && (
+            <li>
+              <Link
+                href={`https://linkedin.com/in/${linkedin}`}
+                aria-label="LinkedIn"
+                title="LinkedIn"
+                class={buttonVariants({ variant: 'outline', size: 'icon' })}
+              >
+                <Linkedin className="size-4" />
+              </Link>
+            </li>
+          )
+        }
+        {
+          website && (
+            <li>
+              <Link
+                href={website}
+                aria-label="Website"
+                title="Website"
+                class={buttonVariants({ variant: 'outline', size: 'icon' })}
+              >
+                <Globe className="size-4" />
+              </Link>
+            </li>
+          )
+        }
+      </ul>
     </div>
-  </Link>
+  </div>
 </div>

@@ -1,5 +1,5 @@
 import { getEntry } from 'astro:content'
-import { clsx, type ClassValue } from 'clsx'
+import { type ClassValue, clsx } from 'clsx'
 import { twMerge } from 'tailwind-merge'
 
 export function cn(...inputs: ClassValue[]) {
@@ -29,14 +29,14 @@ export async function parseAuthors(authors: string[]) {
       const author = await getEntry('authors', slug)
       return {
         name: author?.data?.name || slug,
-        avatar: author?.data?.avatar || '/static/512x512.png',
+        avatar: author?.data?.avatar || '/static/logo.png',
         isRegistered: !!author,
       }
     } catch (error) {
       console.error(`Error fetching author with slug ${slug}:`, error)
       return {
         name: slug,
-        avatar: '/static/512x512.png',
+        avatar: '/static/logo.png',
         isRegistered: false,
       }
     }
