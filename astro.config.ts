@@ -17,7 +17,7 @@ import remarkToc from 'remark-toc'
 
 // https://astro.build/config
 export default defineConfig({
-  site: 'https://astro-micro-academic.vercel.app',
+  site: 'https://astro-erudite.vercel.app',
   integrations: [
     tailwind({
       applyBaseStyles: false,
