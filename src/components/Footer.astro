@@ -1,5 +1,6 @@
 ---
 import Container from '@components/Container.astro'
+import { SOCIAL_LINKS } from '@consts'
 import SocialIcons from './SocialIcons.astro'
 ---
 
@@ -13,7 +14,7 @@ import SocialIcons from './SocialIcons.astro'
           &copy; {new Date().getFullYear()} All rights reserved.
         </p>
       </div>
-      <SocialIcons />
+      <SocialIcons links={SOCIAL_LINKS} />
     </div>
   </Container>
 </footer>

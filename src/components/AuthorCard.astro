@@ -1,18 +1,35 @@
 ---
 import AvatarComponent from '@/components/ui/avatar'
-import { buttonVariants } from '@/components/ui/button'
 import { cn } from '@/lib/utils'
 import Link from '@components/Link.astro'
+import type { Link as SocialLink } from '@consts'
 import type { CollectionEntry } from 'astro:content'
-import { Github, Globe, Linkedin, Twitter } from 'lucide-react'
+import SocialIcons from './SocialIcons.astro'
 
 type Props = {
   author: CollectionEntry<'authors'>
   linkDisabled?: boolean
 }
 const { author, linkDisabled = false } = Astro.props
-const { name, avatar, bio, pronouns, github, twitter, linkedin, website } =
-  author.data
+const {
+  name,
+  avatar,
+  bio,
+  pronouns,
+  github,
+  twitter,
+  linkedin,
+  website,
+  mail,
+} = author.data
+
+const socialLinks: SocialLink[] = [
+  website && { href: website, label: 'Website' },
+  github && { href: github, label: 'GitHub' },
+  twitter && { href: twitter, label: 'Twitter' },
+  linkedin && { href: linkedin, label: 'LinkedIn' },
+  mail && { href: mail, label: 'Email' },
+].filter(Boolean) as SocialLink[]
 ---
 
 <div
@@ -47,64 +64,7 @@ const { name, avatar, bio, pronouns, github, twitter, linkedin, website } =
         </div>
         <p class="text-sm text-muted-foreground">{bio}</p>
       </div>
-      <ul class="flex gap-2">
-        {
-          github && (
-            <li>
-              <Link
-                href={`https://github.com/${github}`}
-                aria-label="GitHub"
-                title="GitHub"
-                class={buttonVariants({ variant: 'outline', size: 'icon' })}
-              >
-                <Github className="size-4" />
-              </Link>
-            </li>
-          )
-        }
-        {
-          twitter && (
-            <li>
-              <Link
-                href={`https://twitter.com/${twitter}`}
-                aria-label="Twitter"
-                title="Twitter"
-                class={buttonVariants({ variant: 'outline', size: 'icon' })}
-              >
-                <Twitter className="size-4" />
-              </Link>
-            </li>
-          )
-        }
-        {
-          linkedin && (
-            <li>
-              <Link
-                href={`https://linkedin.com/in/${linkedin}`}
-                aria-label="LinkedIn"
-                title="LinkedIn"
-                class={buttonVariants({ variant: 'outline', size: 'icon' })}
-              >
-                <Linkedin className="size-4" />
-              </Link>
-            </li>
-          )
-        }
-        {
-          website && (
-            <li>
-              <Link
-                href={website}
-                aria-label="Website"
-                title="Website"
-                class={buttonVariants({ variant: 'outline', size: 'icon' })}
-              >
-                <Globe className="size-4" />
-              </Link>
-            </li>
-          )
-        }
-      </ul>
+      <SocialIcons links={socialLinks} />
     </div>
   </div>
 </div>

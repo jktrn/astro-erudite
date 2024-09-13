@@ -6,7 +6,7 @@ export type Site = {
   SITEURL: string
 }
 
-export type NavigationLink = {
+export type Link = {
   href: string
   label: string
 }
@@ -20,8 +20,15 @@ export const SITE: Site = {
   SITEURL: 'https://astro-erudite.vercel.app',
 }
 
-export const NAV_LINKS: NavigationLink[] = [
+export const NAV_LINKS: Link[] = [
   { href: '/blog', label: 'blog' },
   { href: '/authors', label: 'authors' },
   { href: '/about', label: 'about' },
+]
+
+export const SOCIAL_LINKS: Link[] = [
+  { href: 'https://github.com/jktrn', label: 'GitHub' },
+  { href: 'https://twitter.com/enscry', label: 'Twitter' },
+  { href: 'jason@enscribe.dev', label: 'Email' },
+  { href: '/rss.xml', label: 'RSS' },
 ]

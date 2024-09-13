@@ -34,7 +34,7 @@ function buildToc(headings: Heading[]) {
     Table of Contents
     <svg
       xmlns="http://www.w3.org/2000/svg"
-      class="h-5 w-5 transition-transform group-open:rotate-180"
+      class="size-5 transition-transform group-open:rotate-180"
       viewBox="0 0 20 20"
       fill="currentColor"
     >
@@ -45,7 +45,7 @@ function buildToc(headings: Heading[]) {
     </svg>
   </summary>
   <nav>
-    <ul class="py-3">
+    <ul class="pt-3">
       {toc.map((heading) => <TableOfContentsHeading heading={heading} />)}
     </ul>
   </nav>

@@ -1,59 +1,57 @@
 ---
 import { buttonVariants } from '@/components/ui/button'
+import { cn } from '@/lib/utils'
 import Link from '@components/Link.astro'
-import { SITE } from '@consts'
-import { Github, Linkedin, Mail, Rss, Twitter } from 'lucide-react'
+import type { Link as SocialLink } from '@consts'
+import {
+  Github,
+  Globe,
+  Linkedin,
+  Mail,
+  MessageCircleQuestion,
+  Rss,
+  Twitter,
+} from 'lucide-react'
+
+interface Props {
+  links: SocialLink[]
+  className?: string
+}
+
+const { links, className } = Astro.props
+
+const iconMap = {
+  Website: Globe,
+  GitHub: Github,
+  LinkedIn: Linkedin,
+  Twitter: Twitter,
+  Email: Mail,
+  RSS: Rss,
+}
+
+const getSocialLink = ({ href, label }: SocialLink) => ({
+  href: label === 'Email' ? `mailto:${href}` : href,
+  ariaLabel: label,
+  Icon: iconMap[label as keyof typeof iconMap] || MessageCircleQuestion,
+})
 ---
 
-<ul class="not-prose flex flex-wrap gap-2" role="list">
-  <li>
-    <Link
-      href="#"
-      aria-label="Twitter"
-      title="Twitter"
-      class={buttonVariants({ variant: 'outline', size: 'icon' })}
-    >
-      <Twitter className="size-4" />
-    </Link>
-  </li>
-  <li>
-    <Link
-      href="#"
-      aria-label="GitHub"
-      title="GitHub"
-      class={buttonVariants({ variant: 'outline', size: 'icon' })}
-    >
-      <Github className="size-4" />
-    </Link>
-  </li>
-  <li>
-    <Link
-      href="#"
-      aria-label="LinkedIn"
-      title="LinkedIn"
-      class={buttonVariants({ variant: 'outline', size: 'icon' })}
-    >
-      <Linkedin className="size-4" />
-    </Link>
-  </li>
-  <li>
-    <Link
-      href="#"
-      aria-label="Email"
-      title="Email"
-      class={buttonVariants({ variant: 'outline', size: 'icon' })}
-    >
-      <Mail className="size-4" />
-    </Link>
-  </li>
-  <li>
-    <Link
-      href={`${SITE.SITEURL}/rss.xml`}
-      aria-label="RSS feed"
-      title="RSS feed"
-      class={buttonVariants({ variant: 'outline', size: 'icon' })}
-    >
-      <Rss className="size-4" />
-    </Link>
-  </li>
+<ul class={cn('not-prose flex flex-wrap gap-2', className)} role="list">
+  {
+    links.map((link) => {
+      const { href, ariaLabel, Icon } = getSocialLink(link)
+      return (
+        <li>
+          <Link
+            href={href}
+            aria-label={ariaLabel}
+            title={ariaLabel}
+            class={buttonVariants({ variant: 'outline', size: 'icon' })}
+          >
+            <Icon className="size-4" />
+          </Link>
+        </li>
+      )
+    })
+  }
 </ul>
