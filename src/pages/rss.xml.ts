@@ -9,13 +9,8 @@ export async function GET(context: APIContext) {
       (post) => !post.data.draft,
     )
 
-    // Filter posts by tag 'rss-feed'
-    const filteredBlogs = blog.filter(
-      (post) => post.data.tags && post.data.tags.includes('rss-feed'),
-    )
-
     // Sort posts by date
-    const items = [...filteredBlogs].sort(
+    const items = [...blog].sort(
       (a, b) =>
         new Date(b.data.date).valueOf() - new Date(a.data.date).valueOf(),
     )

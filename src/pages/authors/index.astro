@@ -11,14 +11,18 @@ const authors = await getCollection('authors')
 <Layout title="Authors" description="A list of authors on this site.">
   <Container class="flex flex-col gap-y-6">
     <Breadcrumbs items={[{ label: 'Authors' }]} />
-    <ul class="not-prose flex flex-col gap-4">
-      {
-        authors.map((author) => (
-          <li>
-            <AuthorCard author={author} />
-          </li>
-        ))
-      }
-    </ul>
+    {authors.length > 0 ? (
+      <ul class="not-prose flex flex-col gap-4">
+        {
+          authors.map((author) => (
+            <li>
+              <AuthorCard author={author} />
+            </li>
+          ))
+        }
+      </ul>
+    ) : (
+      <p class="text-center text-muted-foreground">No authors found.</p>
+    )}
   </Container>
 </Layout>
