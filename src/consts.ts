@@ -14,7 +14,7 @@ export type NavigationLink = {
 export const SITE: Site = {
   TITLE: 'astro-erudite',
   DESCRIPTION:
-    'astro-erudite is a opinionated, no-frills blogging template. Built with Astro.',
+    'astro-erudite is a opinionated, no-frills blogging template—built with Astro, Tailwind, and shadcn/ui.',
   EMAIL: 'jason@enscribe.dev',
   NUM_POSTS_ON_HOMEPAGE: 2,
   SITEURL: 'https://astro-erudite.vercel.app',
