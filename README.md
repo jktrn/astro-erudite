@@ -45,7 +45,7 @@ This is a list of the various technologies used to build this website:
 
 ## Getting Started
 
-1. Hit &ldquo;Use this template&rdquo; to create a new repository in your own GitHub account with this template.
+1. Hit &ldquo;Use this template&rdquo;, the big green button on the top right, to create a new repository in your own GitHub account with this template.
 
 2. Clone the repository:
 
@@ -66,7 +66,7 @@ This is a list of the various technologies used to build this website:
    npm run dev
    ```
 
-5. Open your browser and visit `http://localhost:1234` to see your blog in action. The following commands are also available:
+5. Open your browser and visit `http://localhost:1234` to get started. The following commands are also available:
 
    | Command            | Description                                                     |
    | ------------------ | --------------------------------------------------------------- |
@@ -171,7 +171,7 @@ The blog post schema is defined as follows:
 
 ### Authors
 
-Add author information in `src/content/authors/` as Markdown files:
+Add author information in `src/content/authors/` as Markdown files. A file named `[author-name].md` can be associated with a blog post if `"author-name"` (the slug) is added to the `authors` field:
 
 ```yml
 ---
