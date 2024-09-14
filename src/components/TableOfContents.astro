@@ -1,28 +1,37 @@
 ---
+import { ChevronDown } from 'lucide-react'
 import TableOfContentsHeading from './TableOfContentsHeading.astro'
-
-// https://kld.dev/building-table-of-contents/
-const { headings } = Astro.props
-const toc = buildToc(headings)
 
 export interface Heading {
   depth: number
   slug: string
   text: string
+  subheadings: Heading[]
 }
 
-function buildToc(headings: Heading[]) {
+const { headings } = Astro.props
+const toc = buildToc(headings)
+
+function buildToc(headings: Heading[]): Heading[] {
   const toc: Heading[] = []
-  const parentHeadings = new Map()
+  const stack: Heading[] = []
+
   headings.forEach((h) => {
     const heading = { ...h, subheadings: [] }
-    parentHeadings.set(heading.depth, heading)
-    if (heading.depth === 2) {
+
+    while (stack.length > 0 && stack[stack.length - 1].depth >= heading.depth) {
+      stack.pop()
+    }
+
+    if (stack.length === 0) {
       toc.push(heading)
     } else {
-      parentHeadings.get(heading.depth - 1).subheadings.push(heading)
+      stack[stack.length - 1].subheadings.push(heading)
     }
+
+    stack.push(heading)
   })
+
   return toc
 }
 ---
@@ -32,17 +41,9 @@ function buildToc(headings: Heading[]) {
     class="flex cursor-pointer items-center justify-between text-xl font-semibold"
   >
     Table of Contents
-    <svg
-      xmlns="http://www.w3.org/2000/svg"
-      class="size-5 transition-transform group-open:rotate-180"
-      viewBox="0 0 20 20"
-      fill="currentColor"
-    >
-      <path
-        fill-rule="evenodd"
-        d="M5.293 7.293a1 1 0 011.414 0L10 10.586l3.293-3.293a1 1 0 111.414 1.414l-4 4a1 1 0 01-1.414 0l-4-4a1 1 0 010-1.414z"
-        clip-rule="evenodd"></path>
-    </svg>
+    <ChevronDown
+      className="size-5 transition-transform group-open:rotate-180"
+    />
   </summary>
   <nav>
     <ul class="pt-3">
@@ -50,11 +51,15 @@ function buildToc(headings: Heading[]) {
     </ul>
   </nav>
 </details>
+
 <nav
   class="overflow-wrap-break-word sticky top-16 hidden h-0 w-[calc(50vw-50%-4rem)] translate-x-[calc(-100%-2em)] text-xs leading-4 xl:block"
 >
   <div class="mr-6 flex justify-end">
-    <ul class="max-h-[calc(100vh-8rem)] space-y-2 overflow-y-auto">
+    <ul
+      class="max-h-[calc(100vh-8rem)] space-y-2 overflow-y-auto"
+      id="toc-container"
+    >
       <li>
         <h2 class="mb-2 text-lg font-semibold">Table of Contents</h2>
       </li>
@@ -62,3 +67,32 @@ function buildToc(headings: Heading[]) {
     </ul>
   </div>
 </nav>
+
+<script>
+  function setupToc() {
+    const observer = new IntersectionObserver((sections) => {
+      sections.forEach((section) => {
+        const heading = section.target.querySelector('h2, h3, h4, h5, h6')
+        if (!heading) return
+
+        const id = heading.getAttribute('id')
+        const link = document.querySelector(
+          `#toc-container li a[href="#${id}"]`,
+        )
+        if (!link) return
+
+        const addRemove = section.intersectionRatio > 0 ? 'add' : 'remove'
+        link.classList[addRemove]('font-semibold')
+        link.classList[addRemove]('text-foreground')
+      })
+    })
+
+    const sections = document.querySelectorAll('.prose section')
+    sections.forEach((section) => {
+      observer.observe(section)
+    })
+  }
+
+  document.addEventListener('astro:page-load', setupToc)
+  document.addEventListener('astro:after-swap', setupToc)
+</script>

@@ -14,6 +14,7 @@ import rehypePrettyCode from 'rehype-pretty-code'
 import remarkEmoji from 'remark-emoji'
 import remarkMath from 'remark-math'
 import remarkToc from 'remark-toc'
+import sectionize from '@hbsnow/rehype-sectionize'
 
 // https://astro.build/config
 export default defineConfig({
@@ -31,6 +32,8 @@ export default defineConfig({
     rehypePlugins: [
       rehypeHeadingIds,
       rehypeKatex,
+      // @ts-expect-error
+      sectionize,
       [
         rehypePrettyCode,
         {

@@ -8,7 +8,10 @@ const { heading } = Astro.props
 <li
   class="mr-2 list-inside list-disc px-6 py-1.5 text-sm text-foreground/60 xl:list-none xl:p-0"
 >
-  <Link href={'#' + heading.slug} class="toc-link" data-heading={heading.slug}>
+  <Link
+    href={'#' + heading.slug}
+    class="toc-link transition-colors duration-200"
+  >
     {heading.text}
   </Link>
   {
@@ -21,33 +24,3 @@ const { heading } = Astro.props
     )
   }
 </li>
-
-<script>
-  function updateActiveHeading() {
-    const headings = document.querySelectorAll('h2, h3, h4, h5, h6')
-    const tocLinks = document.querySelectorAll('.toc-link')
-
-    let currentHeading = ''
-
-    headings.forEach((heading) => {
-      const top = heading.getBoundingClientRect().top
-      if (top < 200) {
-        currentHeading = heading.id
-      }
-    })
-
-    tocLinks.forEach((link) => {
-      const headingSlug = link.getAttribute('data-heading')
-      if (headingSlug === currentHeading) {
-        link.classList.add('underline')
-        link.classList.add('text-foreground')
-      } else {
-        link.classList.remove('underline')
-        link.classList.remove('text-foreground')
-      }
-    })
-  }
-
-  window.addEventListener('scroll', updateActiveHeading)
-  window.addEventListener('load', updateActiveHeading)
-</script>

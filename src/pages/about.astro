@@ -16,16 +16,14 @@ const projects = await getCollection('projects')
     <section>
       <div class="min-w-full">
         <h1 class="mb-4 text-3xl font-bold">Some more about us</h1>
-        <p class="prose prose-neutral dark:prose-invert mb-8">
+        <p class="prose prose-neutral mb-8 dark:prose-invert">
           {SITE.TITLE} is an opinionated, no-frills static blogging template built
           with Astro.
         </p>
 
         <h2 class="mb-4 text-2xl font-semibold">Our Projects</h2>
         <div class="grid gap-6 sm:grid-cols-2 lg:grid-cols-3">
-          {projects.map((project) => (
-            <ProjectCard project={project} />
-          ))}
+          {projects.map((project) => <ProjectCard project={project} />)}
         </div>
       </div>
     </section>

@@ -1,7 +1,7 @@
 ---
-import { Image } from 'astro:assets'
 import { Badge } from '@/components/ui/badge'
 import Link from '@components/Link.astro'
+import { Image } from 'astro:assets'
 import type { CollectionEntry } from 'astro:content'
 
 type Props = {
@@ -11,7 +11,9 @@ type Props = {
 const { project } = Astro.props
 ---
 
-<div class="overflow-hidden rounded-xl border transition-colors duration-300 ease-in-out hover:bg-secondary/50">
+<div
+  class="overflow-hidden rounded-xl border transition-colors duration-300 ease-in-out hover:bg-secondary/50"
+>
   <Link href={project.data.link} class="block">
     <Image
       src={project.data.image}
@@ -22,11 +24,17 @@ const { project } = Astro.props
     />
     <div class="p-4">
       <h3 class="mb-2 text-lg font-semibold">{project.data.name}</h3>
-      <p class="mb-4 text-sm text-muted-foreground">{project.data.description}</p>
+      <p class="mb-4 text-sm text-muted-foreground">
+        {project.data.description}
+      </p>
       <div class="flex flex-wrap gap-2">
-        {project.data.tags.map((tag) => (
-          <Badge variant="secondary" showHash={false}>{tag}</Badge>
-        ))}
+        {
+          project.data.tags.map((tag) => (
+            <Badge variant="secondary" showHash={false}>
+              {tag}
+            </Badge>
+          ))
+        }
       </div>
     </div>
   </Link>

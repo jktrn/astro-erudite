@@ -23,13 +23,15 @@ export function ModeToggle() {
       theme === 'dark' ||
       (theme === 'system' &&
         window.matchMedia('(prefers-color-scheme: dark)').matches)
-    
+
     document.documentElement.classList.add('disable-transitions')
 
     document.documentElement.classList[isDark ? 'add' : 'remove']('dark')
-    
-    window.getComputedStyle(document.documentElement).getPropertyValue('opacity')
-    
+
+    window
+      .getComputedStyle(document.documentElement)
+      .getPropertyValue('opacity')
+
     requestAnimationFrame(() => {
       document.documentElement.classList.remove('disable-transitions')
     })

@@ -106,6 +106,54 @@ Within the blog itself (as in the layout, appearance, and navigation) are featur
 - You can specify multiple post authors via frontmatter. If this post author's slug is found within the `Authors` collection, then it will render particular info from that author's frontmatter file, `[author-name].md` (e.g. avatar, link to profile). For example, the previous post (2024 Post) has two authors: "enscribe" and "jktrn", where "enscribe" is the only author with a custom avatar since "jktrn" is unregistered.
   - Each author will have their own page, which lists all of their posts. If you're the only author throughout the entire blog then you can simply disregard all aspects regarding both inserting authors and the `Authors` collection.
 - Each tag will also have their own page, which lists all of the posts under that tag!
+- $\LaTeX$ is fully supported with [KaTeX](https://katex.org/):
+
+  <blockquote>
+
+  To solve the cubic equation $t^3 + pt + q = 0$ (where the real numbers
+  $p, q$ satisfy ${4p^3 + 27q^2} > 0$) one can use Cardano's formula:
+
+  $$
+    \sqrt[{3}]{
+      -\frac{q}{2}
+      +\sqrt{\frac{q^2}{4} + {\frac{p^{3}}{27}}}
+    }+
+    \sqrt[{3}]{
+      -\frac{q}{2}
+      -\sqrt{\frac{q^2}{4} + {\frac{p^{3}}{27}}}
+    }
+  $$
+
+  For any $u_1, \dots, u_n \in \mathbb{C}$ and
+  $v_1, \dots, v_n \in \mathbb{C}$, the Cauchy–Bunyakovsky–Schwarz
+  inequality can be written as follows:
+
+  $$
+    \left| \sum_{k=1}^n {u_k \bar{v_k}} \right|^2
+    \leq
+    {
+      \left( \sum_{k=1}^n {|u_k|} \right)^2
+      \left( \sum_{k=1}^n {|v_k|} \right)^2
+    }
+  $$
+
+  Finally, the determinant of a Vandermonde matrix can be calculated
+  using the following expression:
+
+  $$
+    \begin{vmatrix}
+    1 & x_1 & x_1^2 & \dots & x_1^{n-1} \\
+    1 & x_2 & x_2^2 & \dots & x_2^{n-1} \\
+    1 & x_3 & x_3^2 & \dots & x_3^{n-1} \\
+    \vdots & \vdots & \vdots & \ddots & \vdots \\
+    1 & x_n & x_n^2 & \dots & x_n^{n-1} \\
+    \end{vmatrix}
+    = {\prod_{1 \leq {i,j} \leq n} {(x_i - x_j)}}
+  $$
+
+  —<cite>[Three famous mathematical formulas](https://developer.mozilla.org/en-US/docs/Learn/MathML/First_steps/Three_famous_mathematical_formulas) (Mozilla Docs)</cite>
+
+  </blockquote>
 
 ## Foregoing some slop
 
@@ -117,3 +165,15 @@ Within the blog itself (as in the layout, appearance, and navigation) are featur
 - You really don't need a <abbr title="Content Management System">CMS</abbr> unless you have thousands of posts and/or are willing to navigate through a clunky management interface. Markdown and folders is really all you need, which you can organize to your preference via folder or file naming conventions.
 - If you have literally anything involving an `.env` file in a blogging site, please think about what you are doing very carefully.
 - Please do not override the browser's <kbd>Ctrl</kbd> + <kbd>K</kbd> functionality to open up a command palette. There should not be a single reason why a user would use a small context menu to browse your blog over the `/blog` route. Most of the time, command palettes on sites do nothing more than regurgitate shortcuts that are already on the same page you're hiding with the palette's modal.
+
+## Something important
+
+Before we wrap up, I want to emphasize that everything that I've shared here is based on my own personal opinions and experiences. While I believe these practices and choices lead to a better blogging experience, you're absolutely free to disagree.
+
+The web development community, especially in spaces like Twitter and various online forums, is constantly engaged in heated debates about what constitutes "best practices." You'll find a wide spectrum of viewpoints:
+
+1. Fundamentalists who adhere strictly to established patterns and completely disregard change,
+2. Accelerationists who gobble up whatever Vercel cooks as if it's the second coming of Christ,
+3. and everyone in between this spectrum who just wants to ship.
+
+I'm just another guy who loves to blog, and I wanted to share what particular technology stack worked the best for me in this particular use case. A stack for one project can be completely unusable for another. If you vehemently hate any of the design choices I've made then simply get rid of them. MIT license! Happy blogging.
