@@ -48,7 +48,6 @@
 
   html {
     color-scheme: light;
-    scrollbar-gutter: stable both-edges;
     @apply bg-background text-foreground;
 
     &.dark {
@@ -69,6 +68,10 @@
 @layer components {
   article {
     @apply prose-headings:scroll-mt-20;
+
+    .katex-display {
+      @apply overflow-x-auto overflow-y-hidden py-4;
+    }
 
     /* Removes background from <mark> elements */
     mark {
