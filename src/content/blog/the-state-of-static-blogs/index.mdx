@@ -24,24 +24,35 @@ This is a non-exhaustive list of features I believe are essential for a friction
 - [Shiki](https://github.com/shikijs/shiki) is a syntax highlighter for code blocks. Although Astro code blocks utilize Shiki under the hood, I've actually disabled the default code blocks in this template so that they don't collide with my preferred library [rehype-pretty-code](https://rehype-pretty.pages.dev), which is _also_ powered by Shiki but allows for line numbers, line highlighting, inline code snytax highlighting, and a transformers API for advanced customization such as manual `diff` visualization and line blurring. This library does not ship with any CSS, and it's up to you to style the code blocks and code block titles as you see fit. I've provided styles in `src/styles/global.css` within the `@layer components{:css}` directive if you wish to fiddle with them. The following code block is an example of how to style code blocks using rehype-pretty-code, and was generated with the following Markdown code:
 
   ````mdx
-  ```css title="src/styles/global.css" caption="Styling code blocks using rehype-pretty-code (with a caption down here)" showLineNumbers{80} {10-12} /pre/ /components/
+  ```css title="src/styles/global.css" caption="Styling code blocks using rehype-pretty-code (with a caption down here)" showLineNumbers{80} {10-12} /apply/ /components/
 
   ```
   ````
 
-  ```css title="src/styles/global.css" caption="Styling code blocks using rehype-pretty-code (with a caption down here)" showLineNumbers{80} {10-12} /pre/ /components/
+  ```css title="src/styles/global.css" caption="Styling code blocks using rehype-pretty-code (with a caption down here)" showLineNumbers{80} {10-12} /apply/ /components/
   @layer components {
-    code[data-theme*=' '] span {  /* [!code ++] */
-      color: var(--shiki-light); /* [!code ++] */
-    } /* [!code ++] */
+    article {
+      @apply prose-headings:scroll-mt-20;
 
-    .dark code[data-theme*=' '] span {  /* [!code --] */
-      color: var(--shiki-dark); /* [!code --] */
-    } /* [!code --] */
+      .katex-display {
+        @apply overflow-x-auto overflow-y-hidden;
+      }
 
-    pre {
-      @apply max-h-[600px] overflow-auto rounded-xl border bg-secondary/20 p-4 text-sm leading-loose;
-    }
+      /* Removes background from <mark> elements */
+      mark {
+        @apply bg-transparent;
+      }
+
+      /* Blanket syntax highlighting */
+      code[data-theme*=' '] {
+        span { /* [!code ++] */
+          color: var(--shiki-light); /* [!code ++] */
+        } /* [!code ++] */
+
+        .dark & span { /* [!code --] */
+          color: var(--shiki-dark); /* [!code --] */
+        } /* [!code --] */
+      }
   ```
 
   When I added those two diff additions and deletions, I simply added `/* [!code ++] */` and `/* [!code --] */` to the lines I wanted to highlight. Just use the comment syntax of whatever language you're attempting to highlight.
@@ -99,9 +110,9 @@ This is a non-exhaustive list of features I believe are essential for a friction
 
 Within the blog itself (as in the layout, appearance, and navigation) are features that I believe are essential for a great user experience:
 
-- Images are awesome and, by default, your blog post should have an image associated with it as part of the post's [Open Graph](https://ogp.me/) metadata. Since you can do whatever you want with the image, all of my dummy posts will have a placeholder image named `1200x630.png` (the correct dimensions for an image in a Twitter card). Whenever you load into a blog post, splat in the middle will be the image associated with that post in its frontmatter.
+- Images are awesome and, by default, your blog post should have an image associated with it as part of the post's [Open Graph](https://ogp.me/) metadata. Since you can do whatever you want with the image, all of my dummy posts will have a placeholder image placed within their folder in `src/content/blog/`. Whenever you load into a blog post, splat in the middle will be the image associated with that post in its frontmatter.
 - Theme selectors should be self-explanatory. I've added one on the top right of the header, which is also `sticky` and not `absolute` such that it doesn't ignore the document flow (and thus you won't have to add `mt-20` to the top of every single page).
-- The table of contents of a post shouldn't be reduced to a `<details closed>{:html}` at the start of a blog post on desktop. You'd need to go to the top of the page to navigate through items. I've added a sticky `TableOfContents` component which always hangs out around the unused left side margin of a blog post. I'll still use a collapsible `<details>{:html}` element for the table of contents on mobile though since obviously a table of contents on the side is unfeasible for small screens.
+- The table of contents of a post shouldn't be reduced to a `<details closed>{:html}` at the start of a blog post on desktop. You'd need to go to the top of the page to navigate through items. I've added a sticky `TableOfContents` component which always hangs out around the unused left side margin of a blog post. I also attached a very tiny client-side script using [`IntersectionObserver{:ts}`](https://developer.mozilla.org/en-US/docs/Web/API/IntersectionObserver) to highlight all of the headings you're viewing within the TOC as you scroll through the page&mdash;it also will handle nested headings in that the parent heading of a visible child will still be highlighted even if off-screen (see the dummy [2024 Post](/blog/2024-post) for an example of this). I'll still use a collapsible `<details>{:html}` element for the table of contents on mobile though since obviously a table of contents on the side is unfeasible for small screens.
 - Every page, except the homepage, will have a `<Breadcrumb>{:tsx}` component which shows you your current location in the site hierarchy. I don't see these often in blog templates even though they are so amazing for both discoverability (SEO and crawling) and user experience (the user always knows how "deep" they are in the site).
 - You can specify multiple post authors via frontmatter. If this post author's slug is found within the `Authors` collection, then it will render particular info from that author's frontmatter file, `[author-name].md` (e.g. avatar, link to profile). For example, the previous post (2024 Post) has two authors: "enscribe" and "jktrn", where "enscribe" is the only author with a custom avatar since "jktrn" is unregistered.
   - Each author will have their own page, which lists all of their posts. If you're the only author throughout the entire blog then you can simply disregard all aspects regarding both inserting authors and the `Authors` collection.
