@@ -1,0 +1,70 @@
+---
+import Breadcrumbs from '@/components/Breadcrumbs.astro'
+import PaginationComponent from '@/components/ui/pagination'
+import { SITE } from '@/consts'
+import BlogCard from '@components/BlogCard.astro'
+import Container from '@components/Container.astro'
+import Layout from '@layouts/Layout.astro'
+import type { PaginateFunction } from 'astro'
+import { type CollectionEntry, getCollection } from 'astro:content'
+
+export async function getStaticPaths({
+  paginate,
+}: {
+  paginate: PaginateFunction
+}) {
+  const allPosts = await getCollection('blog', ({ data }) => !data.draft)
+  return paginate(
+    allPosts.sort((a, b) => b.data.date.valueOf() - a.data.date.valueOf()),
+    { pageSize: SITE.POSTS_PER_PAGE },
+  )
+}
+
+const { page } = Astro.props
+
+const postsByYear = page.data.reduce(
+  (acc: Record<string, CollectionEntry<'blog'>[]>, post) => {
+    const year = post.data.date.getFullYear().toString()
+    ;(acc[year] ??= []).push(post)
+    return acc
+  },
+  {},
+)
+
+const years = Object.keys(postsByYear).sort((a, b) => parseInt(b) - parseInt(a))
+---
+
+<Layout title="Blog" description="Blog">
+  <Container class="flex grow flex-col gap-y-6">
+    <Breadcrumbs
+      items={[
+        { label: 'Blog', href: '/blog' },
+        { label: `Page ${page.currentPage}` },
+      ]}
+    />
+
+    <div class="flex min-h-[calc(100vh-18rem)] flex-col gap-y-8">
+      {
+        years.map((year) => (
+          <section class="flex flex-col gap-y-4">
+            <div class="font-semibold">{year}</div>
+            <ul class="not-prose flex flex-col gap-4">
+              {postsByYear[year].map((post) => (
+                <li>
+                  <BlogCard entry={post} />
+                </li>
+              ))}
+            </ul>
+          </section>
+        ))
+      }
+    </div>
+
+    <PaginationComponent
+      currentPage={page.currentPage}
+      totalPages={page.lastPage}
+      baseUrl="/blog/"
+      client:load
+    />
+  </Container>
+</Layout>
