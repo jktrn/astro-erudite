@@ -7,12 +7,12 @@ import { ArrowLeft, ArrowRight } from 'lucide-react'
 const { prevPost, nextPost } = Astro.props
 ---
 
-<div class="flex justify-between gap-4">
+<div class="flex flex-col gap-4 sm:flex-row">
   <Link
     href={prevPost ? `/blog/${prevPost.slug}` : '#'}
     class={cn(
       buttonVariants({ variant: 'outline' }),
-      'rounded-xl group flex items-center justify-start w-1/2 h-fit',
+      'rounded-xl group flex items-center justify-start w-full sm:w-1/2 h-fit',
       !prevPost && 'pointer-events-none opacity-50 cursor-not-allowed',
     )}
     aria-disabled={!prevPost}
@@ -24,7 +24,7 @@ const { prevPost, nextPost } = Astro.props
     </div>
     <div class="flex flex-col items-start overflow-hidden">
       <span class="text-left text-xs text-muted-foreground">Previous Post</span>
-      <span class="w-full truncate text-left"
+      <span class="w-full truncate text-left text-sm"
         >{prevPost?.data.title || 'Latest post!'}</span
       >
     </div>
@@ -33,14 +33,14 @@ const { prevPost, nextPost } = Astro.props
     href={nextPost ? `/blog/${nextPost.slug}` : '#'}
     class={cn(
       buttonVariants({ variant: 'outline' }),
-      'rounded-xl group flex items-center justify-end w-1/2 h-fit',
+      'rounded-xl group flex items-center justify-end w-full sm:w-1/2 h-fit',
       !nextPost && 'pointer-events-none opacity-50 cursor-not-allowed',
     )}
     aria-disabled={!nextPost}
   >
     <div class="flex flex-col items-end overflow-hidden">
       <span class="text-right text-xs text-muted-foreground">Next Post</span>
-      <span class="w-full truncate text-right"
+      <span class="w-full truncate text-right text-sm"
         >{nextPost?.data.title || 'Last post!'}</span
       >
     </div>
