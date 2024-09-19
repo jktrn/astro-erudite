@@ -40,19 +40,6 @@ const config: Config = {
         border: 'hsl(var(--border))',
         ring: 'hsl(var(--ring))',
       },
-      typography: {
-        DEFAULT: {
-          css: {
-            'code::before': 'false',
-            'code::after': 'false',
-            'blockquote p:first-of-type::before': 'false',
-            'blockquote p:last-of-type::after': 'false',
-            pre: 'false',
-            code: 'false',
-            'pre code': 'false',
-          },
-        },
-      },
     },
   },
   plugins: [require('@tailwindcss/typography'), require('tailwindcss-animate')],

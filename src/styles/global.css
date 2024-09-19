@@ -83,7 +83,7 @@
 
 @layer components {
   article {
-    @apply prose-headings:scroll-mt-20 prose-headings:break-words prose-p:break-words;
+    @apply prose-headings:scroll-mt-20 prose-headings:break-words prose-p:break-words prose-pre:!px-0;
 
     .katex-display {
       @apply overflow-x-auto overflow-y-hidden py-4;
