@@ -3,15 +3,7 @@ import { buttonVariants } from '@/components/ui/button'
 import { cn } from '@/lib/utils'
 import Link from '@components/Link.astro'
 import type { Link as SocialLink } from '@consts'
-import {
-  Github,
-  Globe,
-  Linkedin,
-  Mail,
-  MessageCircleQuestion,
-  Rss,
-  Twitter,
-} from 'lucide-react'
+import { Icon } from 'astro-icon/components'
 
 interface Props {
   links: SocialLink[]
@@ -21,25 +13,26 @@ interface Props {
 const { links, className } = Astro.props
 
 const iconMap = {
-  Website: Globe,
-  GitHub: Github,
-  LinkedIn: Linkedin,
-  Twitter: Twitter,
-  Email: Mail,
-  RSS: Rss,
+  Website: 'lucide:globe',
+  GitHub: 'lucide:github',
+  LinkedIn: 'lucide:linkedin',
+  Twitter: 'lucide:twitter',
+  Email: 'lucide:mail',
+  RSS: 'lucide:rss',
 }
 
 const getSocialLink = ({ href, label }: SocialLink) => ({
   href: label === 'Email' ? `mailto:${href}` : href,
   ariaLabel: label,
-  Icon: iconMap[label as keyof typeof iconMap] || MessageCircleQuestion,
+  iconName:
+    iconMap[label as keyof typeof iconMap] || 'lucide:message-circle-question',
 })
 ---
 
 <ul class={cn('not-prose flex flex-wrap gap-2', className)} role="list">
   {
     links.map((link) => {
-      const { href, ariaLabel, Icon } = getSocialLink(link)
+      const { href, ariaLabel, iconName } = getSocialLink(link)
       return (
         <li>
           <Link
@@ -48,7 +41,7 @@ const getSocialLink = ({ href, label }: SocialLink) => ({
             title={ariaLabel}
             class={buttonVariants({ variant: 'outline', size: 'icon' })}
           >
-            <Icon className="size-4" />
+            <Icon name={iconName} class="size-4" />
           </Link>
         </li>
       )

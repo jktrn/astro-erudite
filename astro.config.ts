@@ -16,6 +16,8 @@ import remarkMath from 'remark-math'
 import remarkToc from 'remark-toc'
 import sectionize from '@hbsnow/rehype-sectionize'
 
+import icon from 'astro-icon'
+
 // https://astro.build/config
 export default defineConfig({
   site: 'https://astro-erudite.vercel.app',
@@ -26,6 +28,7 @@ export default defineConfig({
     sitemap(),
     mdx(),
     react(),
+    icon(),
   ],
   markdown: {
     syntaxHighlight: false,

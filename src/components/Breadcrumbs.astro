@@ -7,12 +7,12 @@ import {
   BreadcrumbPage,
   BreadcrumbSeparator,
 } from '@/components/ui/breadcrumb'
-import { HomeIcon } from 'lucide-react'
+import { Icon } from 'astro-icon/components'
 
 export interface BreadcrumbItem {
   href?: string
   label: string
-  icon?: any
+  icon?: string
 }
 
 interface Props {
@@ -26,7 +26,7 @@ const { items } = Astro.props
   <BreadcrumbList>
     <BreadcrumbItem>
       <BreadcrumbLink href="/">
-        <HomeIcon className="size-4" />
+        <Icon name="lucide:home" class="size-4" />
       </BreadcrumbLink>
     </BreadcrumbItem>
     {
@@ -36,12 +36,12 @@ const { items } = Astro.props
           <BreadcrumbItem>
             {index === items.length - 1 ? (
               <BreadcrumbPage>
-                {item.icon && <item.icon className="size-4 mr-1" />}
+                {item.icon && <Icon name={item.icon} class="mr-1 size-4" />}
                 {item.label}
               </BreadcrumbPage>
             ) : (
               <BreadcrumbLink href={item.href}>
-                {item.icon && <item.icon className="size-4 mr-1" />}
+                {item.icon && <Icon name={item.icon} class="mr-1 size-4" />}
                 {item.label}
               </BreadcrumbLink>
             )}

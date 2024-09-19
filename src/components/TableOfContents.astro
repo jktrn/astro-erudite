@@ -1,5 +1,5 @@
 ---
-import { ChevronDown } from 'lucide-react'
+import { Icon } from 'astro-icon/components'
 import TableOfContentsHeading from './TableOfContentsHeading.astro'
 
 export interface Heading {
@@ -41,8 +41,9 @@ function buildToc(headings: Heading[]): Heading[] {
     class="flex cursor-pointer items-center justify-between text-xl font-semibold"
   >
     Table of Contents
-    <ChevronDown
-      className="size-5 transition-transform group-open:rotate-180"
+    <Icon
+      name="lucide:chevron-down"
+      class="size-5 transition-transform group-open:rotate-180"
     />
   </summary>
   <nav>

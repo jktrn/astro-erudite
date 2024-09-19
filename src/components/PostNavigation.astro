@@ -2,7 +2,7 @@
 import { buttonVariants } from '@/components/ui/button'
 import { cn } from '@/lib/utils'
 import Link from '@components/Link.astro'
-import { ArrowLeft, ArrowRight } from 'lucide-react'
+import { Icon } from 'astro-icon/components'
 
 const { prevPost, nextPost } = Astro.props
 ---
@@ -18,8 +18,9 @@ const { prevPost, nextPost } = Astro.props
     aria-disabled={!prevPost}
   >
     <div class="mr-2 flex-shrink-0">
-      <ArrowLeft
-        className="size-4 transition-transform group-hover:-translate-x-1"
+      <Icon
+        name="lucide:arrow-left"
+        class="size-4 transition-transform group-hover:-translate-x-1"
       />
     </div>
     <div class="flex flex-col items-start overflow-hidden">
@@ -45,8 +46,9 @@ const { prevPost, nextPost } = Astro.props
       >
     </div>
     <div class="ml-2 flex-shrink-0">
-      <ArrowRight
-        className="size-4 transition-transform group-hover:translate-x-1"
+      <Icon
+        name="lucide:arrow-right"
+        class="size-4 transition-transform group-hover:translate-x-1"
       />
     </div>
   </Link>

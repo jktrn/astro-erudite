@@ -9,9 +9,9 @@ import PostNavigation from '@components/PostNavigation.astro'
 import TableOfContents from '@components/TableOfContents.astro'
 import Layout from '@layouts/Layout.astro'
 import { formatDate, parseAuthors, readingTime } from '@lib/utils'
+import { Icon } from 'astro-icon/components'
 import { Image } from 'astro:assets'
 import { type CollectionEntry, getCollection } from 'astro:content'
-import { ArrowUp, Hash } from 'lucide-react'
 
 export async function getStaticPaths() {
   const posts = (await getCollection('blog'))
@@ -130,7 +130,7 @@ const authors = await parseAuthors(post.data.authors ?? [])
                   href={`/tags/${tag}`}
                   class={badgeVariants({ variant: 'secondary' })}
                 >
-                  <Hash className="-translate-x-0.5 size-3" />
+                  <Icon name="lucide:hash" class="size-3 -translate-x-0.5" />
                   {tag}
                 </a>
               ))
@@ -163,8 +163,9 @@ const authors = await parseAuthors(post.data.authors ?? [])
     title="Scroll to top"
     aria-label="Scroll to top"
   >
-    <ArrowUp
-      className="mx-auto size-4 transition-all group-hover:-translate-y-0.5"
+    <Icon
+      name="lucide:arrow-up"
+      class="mx-auto size-4 transition-all group-hover:-translate-y-0.5"
     />
   </Button>
 

@@ -4,8 +4,8 @@ import Container from '@components/Container.astro'
 import Link from '@components/Link.astro'
 import { badgeVariants } from '@components/ui/badge'
 import Layout from '@layouts/Layout.astro'
+import { Icon } from 'astro-icon/components'
 import { getCollection } from 'astro:content'
-import { Hash } from 'lucide-react'
 
 const blog = (await getCollection('blog')).filter((post) => !post.data.draft)
 
@@ -27,7 +27,7 @@ const tags = blog
               href={`/tags/${tag}`}
               class={badgeVariants({ variant: 'secondary' })}
             >
-              <Hash className="-translate-x-0.5 size-3" />
+              <Icon name="lucide:hash" class="size-3 -translate-x-0.5" />
               {tag}
             </Link>
           ))
