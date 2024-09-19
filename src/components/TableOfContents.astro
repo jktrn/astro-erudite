@@ -57,7 +57,7 @@ function buildToc(headings: Heading[]): Heading[] {
 >
   <div class="mr-6 flex justify-end">
     <ul
-      class="max-h-[calc(100vh-8rem)] flex flex-col gap-y-2 overflow-y-auto mr-6 justify-end"
+      class="mr-6 flex max-h-[calc(100vh-8rem)] flex-col justify-end gap-y-2 overflow-y-auto"
       id="toc-container"
     >
       <li>
@@ -70,21 +70,29 @@ function buildToc(headings: Heading[]): Heading[] {
 
 <script>
   function setupToc() {
-    const observer = new IntersectionObserver((sections) => {
-      sections.forEach((section) => {
-        const heading = section.target.querySelector('h2, h3, h4, h5, h6')
-        if (!heading) return
+    const header = document.querySelector('header')
+    const headerHeight = header ? header.offsetHeight : 0
 
-        const id = heading.getAttribute('id')
-        const link = document.querySelector(
-          `#toc-container li a[href="#${id}"]`,
-        )
-        if (!link) return
+    const observer = new IntersectionObserver(
+      (sections) => {
+        sections.forEach((section) => {
+          const heading = section.target.querySelector('h2, h3, h4, h5, h6')
+          if (!heading) return
 
-        const addRemove = section.intersectionRatio > 0 ? 'add' : 'remove'
-        link.classList[addRemove]('text-foreground')
-      })
-    })
+          const id = heading.getAttribute('id')
+          const link = document.querySelector(
+            `#toc-container li a[href="#${id}"]`,
+          )
+          if (!link) return
+
+          const addRemove = section.isIntersecting ? 'add' : 'remove'
+          link.classList[addRemove]('text-foreground')
+        })
+      },
+      {
+        rootMargin: `-${headerHeight}px 0px 0px 0px`,
+      },
+    )
 
     const sections = document.querySelectorAll('.prose section')
     sections.forEach((section) => {
