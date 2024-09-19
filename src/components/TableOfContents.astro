@@ -82,7 +82,6 @@ function buildToc(headings: Heading[]): Heading[] {
         if (!link) return
 
         const addRemove = section.intersectionRatio > 0 ? 'add' : 'remove'
-        link.classList[addRemove]('font-semibold')
         link.classList[addRemove]('text-foreground')
       })
     })
