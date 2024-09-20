@@ -1,8 +1,8 @@
 ---
-import BlogCard from '@components/BlogCard.astro'
-import Breadcrumbs from '@components/Breadcrumbs.astro'
-import Container from '@components/Container.astro'
-import Layout from '@layouts/Layout.astro'
+import BlogCard from '@/components/BlogCard.astro'
+import Breadcrumbs from '@/components/Breadcrumbs.astro'
+import Container from '@/components/Container.astro'
+import Layout from '@/layouts/Layout.astro'
 import { Icon } from 'astro-icon/components'
 import { type CollectionEntry, getCollection } from 'astro:content'
 
@@ -37,7 +37,12 @@ export async function getStaticPaths() {
   description={`A collection of posts tagged with ${tag}.`}
 >
   <Container class="flex flex-col gap-y-6">
-    <Breadcrumbs items={[{ href: '/tags', label: 'Tags' }, { label: tag }]} />
+    <Breadcrumbs
+      items={[
+        { href: '/tags', label: 'Tags', icon: 'lucide:tags' },
+        { label: tag, icon: 'lucide:tag' },
+      ]}
+    />
     <div class="flex flex-wrap items-center gap-2">
       <h1 class="text-3xl font-semibold">Posts tagged with</h1>
       <span

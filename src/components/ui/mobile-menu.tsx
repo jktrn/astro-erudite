@@ -6,7 +6,7 @@ import {
   DropdownMenuItem,
   DropdownMenuTrigger,
 } from '@/components/ui/dropdown-menu'
-import { NAV_LINKS } from '@consts'
+import { NAV_LINKS } from '@/consts'
 import { Menu } from 'lucide-react'
 
 const MobileMenu = () => {

@@ -77,13 +77,13 @@
 
   .disable-transitions,
   .disable-transitions * {
-    transition: none !important;
+    @apply !transition-none;
   }
 }
 
 @layer components {
   article {
-    @apply prose-headings:scroll-mt-20 prose-headings:break-words prose-p:break-words prose-pre:!px-0;
+    @apply prose-headings:scroll-mt-20 prose-headings:break-words prose-p:break-words prose-a:!decoration-muted-foreground prose-a:underline-offset-[3px] prose-a:transition-colors hover:prose-a:!decoration-foreground prose-pre:!px-0 prose-img:mx-auto;
 
     .katex-display {
       @apply overflow-x-auto overflow-y-hidden py-4;
@@ -169,7 +169,7 @@
 
           /* Copy button */
           > button:has(> span) {
-            @apply right-0.5 top-[3px] m-0 size-8 rounded-md bg-transparent p-1 backdrop-blur-none;
+            @apply right-0.5 top-[3px] m-0 size-8 rounded-md bg-background p-1 backdrop-blur-none transition-all;
           }
         }
       }

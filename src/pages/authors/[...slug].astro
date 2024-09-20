@@ -1,9 +1,9 @@
 ---
+import AuthorCard from '@/components/AuthorCard.astro'
+import BlogCard from '@/components/BlogCard.astro'
 import Breadcrumbs from '@/components/Breadcrumbs.astro'
-import AuthorCard from '@components/AuthorCard.astro'
-import BlogCard from '@components/BlogCard.astro'
-import Container from '@components/Container.astro'
-import Layout from '@layouts/Layout.astro'
+import Container from '@/components/Container.astro'
+import Layout from '@/layouts/Layout.astro'
 import { type CollectionEntry, getCollection } from 'astro:content'
 
 export async function getStaticPaths() {
@@ -35,8 +35,8 @@ const authorPosts = allPosts
   <Container class="flex flex-col gap-y-6">
     <Breadcrumbs
       items={[
-        { href: '/authors', label: 'Authors' },
-        { label: author.data.name },
+        { href: '/authors', label: 'Authors', icon: 'lucide:users' },
+        { label: author.data.name, icon: 'lucide:user' },
       ]}
     />
 

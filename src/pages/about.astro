@@ -1,9 +1,9 @@
 ---
 import Breadcrumbs from '@/components/Breadcrumbs.astro'
-import Container from '@components/Container.astro'
-import ProjectCard from '@components/ProjectCard.astro'
-import { SITE } from '@consts'
-import Layout from '@layouts/Layout.astro'
+import Container from '@/components/Container.astro'
+import ProjectCard from '@/components/ProjectCard.astro'
+import { SITE } from '@/consts'
+import Layout from '@/layouts/Layout.astro'
 import { getCollection } from 'astro:content'
 
 const projects = await getCollection('projects')
@@ -11,7 +11,7 @@ const projects = await getCollection('projects')
 
 <Layout title="About" description={SITE.DESCRIPTION}>
   <Container class="flex flex-col gap-y-6">
-    <Breadcrumbs items={[{ label: 'About' }]} />
+    <Breadcrumbs items={[{ label: 'About', icon: 'lucide:info' }]} />
 
     <section>
       <div class="min-w-full">

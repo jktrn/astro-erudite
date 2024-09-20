@@ -1,4 +1,7 @@
 ---
+import BlogCard from '@/components/BlogCard.astro'
+import Container from '@/components/Container.astro'
+import Link from '@/components/Link.astro'
 import { buttonVariants } from '@/components/ui/button'
 import {
   Card,
@@ -7,11 +10,8 @@ import {
   CardHeader,
   CardTitle,
 } from '@/components/ui/card'
-import BlogCard from '@components/BlogCard.astro'
-import Container from '@components/Container.astro'
-import Link from '@components/Link.astro'
-import { SITE } from '@consts'
-import Layout from '@layouts/Layout.astro'
+import { SITE } from '@/consts'
+import Layout from '@/layouts/Layout.astro'
 import { getCollection } from 'astro:content'
 
 const blog = (await getCollection('blog'))

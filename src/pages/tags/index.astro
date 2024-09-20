@@ -1,9 +1,9 @@
 ---
 import Breadcrumbs from '@/components/Breadcrumbs.astro'
-import Container from '@components/Container.astro'
-import Link from '@components/Link.astro'
-import { badgeVariants } from '@components/ui/badge'
-import Layout from '@layouts/Layout.astro'
+import Container from '@/components/Container.astro'
+import Link from '@/components/Link.astro'
+import { badgeVariants } from '@/components/ui/badge'
+import Layout from '@/layouts/Layout.astro'
 import { Icon } from 'astro-icon/components'
 import { getCollection } from 'astro:content'
 
@@ -16,7 +16,7 @@ const tags = blog
 
 <Layout title="Tags" description="A list of all tags used in blog posts">
   <Container class="flex flex-col gap-y-6">
-    <Breadcrumbs items={[{ label: 'Tags' }]} />
+    <Breadcrumbs items={[{ label: 'Tags', icon: 'lucide:tags' }]} />
 
     <div class="flex flex-col gap-4">
       <h1 class="text-3xl font-semibold">Tags</h1>

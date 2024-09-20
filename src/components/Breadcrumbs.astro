@@ -36,13 +36,17 @@ const { items } = Astro.props
           <BreadcrumbItem>
             {index === items.length - 1 ? (
               <BreadcrumbPage>
-                {item.icon && <Icon name={item.icon} class="mr-1 size-4" />}
-                {item.label}
+                <span class="flex items-center gap-x-2">
+                  {item.icon && <Icon name={item.icon} class="size-4" />}
+                  {item.label}
+                </span>
               </BreadcrumbPage>
             ) : (
               <BreadcrumbLink href={item.href}>
-                {item.icon && <Icon name={item.icon} class="mr-1 size-4" />}
-                {item.label}
+                <span class="flex items-center gap-x-2">
+                  {item.icon && <Icon name={item.icon} class="size-4" />}
+                  {item.label}
+                </span>
               </BreadcrumbLink>
             )}
           </BreadcrumbItem>

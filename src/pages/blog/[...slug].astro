@@ -1,14 +1,14 @@
 ---
 import Breadcrumbs from '@/components/Breadcrumbs.astro'
+import Container from '@/components/Container.astro'
+import Link from '@/components/Link.astro'
+import PostNavigation from '@/components/PostNavigation.astro'
+import TableOfContents from '@/components/TableOfContents.astro'
 import { badgeVariants } from '@/components/ui/badge'
 import { Button } from '@/components/ui/button'
 import { Separator } from '@/components/ui/separator'
-import Container from '@components/Container.astro'
-import Link from '@components/Link.astro'
-import PostNavigation from '@components/PostNavigation.astro'
-import TableOfContents from '@components/TableOfContents.astro'
-import Layout from '@layouts/Layout.astro'
-import { formatDate, parseAuthors, readingTime } from '@lib/utils'
+import Layout from '@/layouts/Layout.astro'
+import { formatDate, parseAuthors, readingTime } from '@/lib/utils'
 import { Icon } from 'astro-icon/components'
 import { Image } from 'astro:assets'
 import { type CollectionEntry, getCollection } from 'astro:content'
@@ -61,7 +61,10 @@ const authors = await parseAuthors(post.data.authors ?? [])
 >
   <Container class="flex flex-col gap-y-6">
     <Breadcrumbs
-      items={[{ href: '/blog', label: 'Blog' }, { label: post.data.title }]}
+      items={[
+        { href: '/blog', label: 'Blog', icon: 'lucide:archive' },
+        { label: post.data.title, icon: 'lucide:file-text' },
+      ]}
     />
 
     {

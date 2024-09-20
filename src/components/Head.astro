@@ -2,6 +2,7 @@
 import '../styles/global.css'
 import '../styles/katex.css'
 
+import { SITE } from '@/consts'
 import { ViewTransitions } from 'astro:transitions'
 
 interface Props {
@@ -36,6 +37,7 @@ const { title, description, image = '/static/twitter-card.png' } = Astro.props
 
 <meta property="og:type" content="website" />
 <meta property="og:url" content={Astro.url} />
+<meta property="og:site_name" content={SITE.TITLE} />
 <meta property="og:title" content={title} />
 <meta property="og:description" content={description} />
 <meta property="og:image" content={new URL(image, Astro.url)} />

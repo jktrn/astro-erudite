@@ -1,16 +1,16 @@
 ---
 import Breadcrumbs from '@/components/Breadcrumbs.astro'
+import Container from '@/components/Container.astro'
+import Link from '@/components/Link.astro'
 import { buttonVariants } from '@/components/ui/button'
-import Container from '@components/Container.astro'
-import Link from '@components/Link.astro'
-import { SITE } from '@consts'
-import Layout from '@layouts/Layout.astro'
-import { cn } from '@lib/utils'
+import { SITE } from '@/consts'
+import Layout from '@/layouts/Layout.astro'
+import { cn } from '@/lib/utils'
 ---
 
 <Layout title="404" description={SITE.DESCRIPTION}>
   <Container class="flex grow flex-col gap-y-6">
-    <Breadcrumbs items={[{ label: '???' }]} />
+    <Breadcrumbs items={[{ label: '???', icon: 'lucide:circle-help' }]} />
 
     <section
       class="flex flex-col items-center justify-center gap-y-4 text-center"

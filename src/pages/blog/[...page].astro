@@ -1,10 +1,10 @@
 ---
+import BlogCard from '@/components/BlogCard.astro'
 import Breadcrumbs from '@/components/Breadcrumbs.astro'
+import Container from '@/components/Container.astro'
 import PaginationComponent from '@/components/ui/pagination'
 import { SITE } from '@/consts'
-import BlogCard from '@components/BlogCard.astro'
-import Container from '@components/Container.astro'
-import Layout from '@layouts/Layout.astro'
+import Layout from '@/layouts/Layout.astro'
 import type { PaginateFunction } from 'astro'
 import { type CollectionEntry, getCollection } from 'astro:content'
 
@@ -38,8 +38,8 @@ const years = Object.keys(postsByYear).sort((a, b) => parseInt(b) - parseInt(a))
   <Container class="flex grow flex-col gap-y-6">
     <Breadcrumbs
       items={[
-        { label: 'Blog', href: '/blog' },
-        { label: `Page ${page.currentPage}` },
+        { label: 'Blog', href: '/blog', icon: 'lucide:archive' },
+        { label: `Page ${page.currentPage}`, icon: 'lucide:folder-open' },
       ]}
     />
 

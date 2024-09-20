@@ -1,8 +1,8 @@
 ---
+import Link from '@/components/Link.astro'
 import { buttonVariants } from '@/components/ui/button'
+import type { Link as SocialLink } from '@/consts'
 import { cn } from '@/lib/utils'
-import Link from '@components/Link.astro'
-import type { Link as SocialLink } from '@consts'
 import { Icon } from 'astro-icon/components'
 
 interface Props {
@@ -40,6 +40,7 @@ const getSocialLink = ({ href, label }: SocialLink) => ({
             aria-label={ariaLabel}
             title={ariaLabel}
             class={buttonVariants({ variant: 'outline', size: 'icon' })}
+            external
           >
             <Icon name={iconName} class="size-4" />
           </Link>

@@ -1,6 +1,6 @@
 ---
+import Link from '@/components/Link.astro'
 import { Badge } from '@/components/ui/badge'
-import Link from '@components/Link.astro'
 import { Image } from 'astro:assets'
 import type { CollectionEntry } from 'astro:content'
 
@@ -14,7 +14,7 @@ const { project } = Astro.props
 <div
   class="overflow-hidden rounded-xl border transition-colors duration-300 ease-in-out hover:bg-secondary/50"
 >
-  <Link href={project.data.link} class="block">
+  <Link href={project.data.link} class="block" external>
     <Image
       src={project.data.image}
       alt={project.data.name}
