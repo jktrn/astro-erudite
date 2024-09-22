@@ -103,7 +103,7 @@ const authors = await parseAuthors(post.data.authors ?? [])
                       />
                       {author.isRegistered ? (
                         <Link
-                          href={`/authors/${author.name}`}
+                          href={`/authors/${author.slug}`}
                           underline
                           class="text-foreground"
                         >
