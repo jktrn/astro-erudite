@@ -6,7 +6,7 @@ const { heading } = Astro.props
 ---
 
 <li
-  class="mr-2 list-inside list-disc px-6 py-1.5 text-sm text-foreground/60 xl:list-none xl:p-0"
+  class="list-inside list-disc px-4 py-1.5 text-sm text-foreground/60 xl:list-none xl:p-0"
 >
   <Link
     href={'#' + heading.slug}
@@ -16,7 +16,7 @@ const { heading } = Astro.props
   </Link>
   {
     heading.subheadings.length > 0 && (
-      <ul class="translate-x-3 xl:ml-4 xl:mt-2 xl:translate-x-0 xl:space-y-2">
+      <ul class="translate-x-3 xl:ml-4 xl:mt-2 xl:flex xl:translate-x-0 xl:flex-col xl:gap-2">
         {heading.subheadings.map((subheading: Heading) => (
           <Astro.self heading={subheading} />
         ))}

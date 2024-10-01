@@ -1,4 +1,5 @@
 ---
+import { ScrollArea } from '@/components/ui/scroll-area'
 import { Icon } from 'astro-icon/components'
 import TableOfContentsHeading from './TableOfContentsHeading.astro'
 
@@ -46,26 +47,30 @@ function buildToc(headings: Heading[]): Heading[] {
       class="size-5 transition-transform group-open:rotate-180"
     />
   </summary>
-  <nav>
-    <ul class="pt-3">
-      {toc.map((heading) => <TableOfContentsHeading heading={heading} />)}
-    </ul>
-  </nav>
+  <ScrollArea client:load className="h-64" type="always">
+    <nav>
+      <ul class="pt-3">
+        {toc.map((heading) => <TableOfContentsHeading heading={heading} />)}
+      </ul>
+    </nav>
+  </ScrollArea>
 </details>
 
 <nav
-  class="overflow-wrap-break-word sticky top-16 hidden h-0 w-[calc(50vw-50%-4rem)] translate-x-[calc(-100%-2em)] text-xs leading-4 xl:block"
+  class="sticky top-[5.5rem] hidden h-0 w-[calc(50vw-50%-4rem)] translate-x-[calc(-100%-2em)] text-xs leading-4 xl:block"
 >
-  <div class="mr-6 flex justify-end">
-    <ul
-      class="mr-6 flex max-h-[calc(100vh-8rem)] flex-col justify-end gap-y-2 overflow-y-auto"
-      id="toc-container"
-    >
-      <li>
-        <h2 class="mb-2 text-lg font-semibold">Table of Contents</h2>
-      </li>
-      {toc.map((heading) => <TableOfContentsHeading heading={heading} />)}
-    </ul>
+  <div class="flex justify-end pr-6">
+    <ScrollArea client:load className="max-h-[calc(100vh-8rem)]" type="always">
+      <ul
+        class="flex flex-col justify-end gap-y-2 overflow-y-auto pr-8"
+        id="toc-container"
+      >
+        <li>
+          <h2 class="mb-2 text-lg font-semibold">Table of Contents</h2>
+        </li>
+        {toc.map((heading) => <TableOfContentsHeading heading={heading} />)}
+      </ul>
+    </ScrollArea>
   </div>
 </nav>
 
