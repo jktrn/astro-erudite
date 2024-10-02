@@ -47,7 +47,7 @@ function buildToc(headings: Heading[]): Heading[] {
       class="size-5 transition-transform group-open:rotate-180"
     />
   </summary>
-  <ScrollArea client:load className="h-64" type="always">
+  <ScrollArea client:load className="flex max-h-64 flex-col overflow-y-auto" type="always">
     <nav>
       <ul class="pt-3">
         {toc.map((heading) => <TableOfContentsHeading heading={heading} />)}
