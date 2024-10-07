@@ -1,6 +1,5 @@
 ---
 import Breadcrumbs from '@/components/Breadcrumbs.astro'
-import Container from '@/components/Container.astro'
 import Link from '@/components/Link.astro'
 import PostNavigation from '@/components/PostNavigation.astro'
 import TableOfContents from '@/components/TableOfContents.astro'
@@ -59,14 +58,16 @@ const authors = await parseAuthors(post.data.authors ?? [])
   description={post.data.description}
   image={post.data.image?.src ?? '/static/1200x630.png'}
 >
-  <Container class="flex flex-col gap-y-6">
+  <section
+    class="grid grid-cols-[minmax(0px,1fr)_min(768px,100%)_minmax(0px,1fr)] gap-y-6 *:px-4"
+  >
     <Breadcrumbs
       items={[
         { href: '/blog', label: 'Blog', icon: 'lucide:archive' },
         { label: post.data.title, icon: 'lucide:file-text' },
       ]}
+      class="col-start-2"
     />
-
     {
       post.data.image && (
         <Image
@@ -74,14 +75,13 @@ const authors = await parseAuthors(post.data.authors ?? [])
           alt={post.data.title}
           width={1200}
           height={630}
-          class="object-cover"
+          class="col-span-full mx-auto w-full max-w-[1000px] object-cover"
         />
       )
     }
-
-    <section class="flex flex-col gap-6 text-center">
-      <div>
-        <h1 class="mb-4 text-4xl font-bold leading-tight sm:text-5xl">
+    <section class="col-start-2 flex flex-col gap-y-6 text-center">
+      <div class="flex flex-col gap-y-4">
+        <h1 class="text-4xl font-bold leading-tight sm:text-5xl">
           {post.data.title}
         </h1>
 
@@ -125,7 +125,7 @@ const authors = await parseAuthors(post.data.authors ?? [])
             <span>{readingTime(post.body)}</span>
           </div>
         </div>
-        <div class="mt-4 flex flex-wrap justify-center gap-2">
+        <div class="flex flex-wrap justify-center gap-2">
           {
             post.data.tags && post.data.tags.length > 0 ? (
               post.data.tags.map((tag) => (
@@ -151,12 +151,14 @@ const authors = await parseAuthors(post.data.authors ?? [])
 
     {headings.length > 0 && <TableOfContents headings={headings} />}
 
-    <article class="prose prose-neutral max-w-none dark:prose-invert">
+    <article
+      class="prose prose-neutral col-start-2 max-w-none dark:prose-invert"
+    >
       <Content />
     </article>
 
     <PostNavigation prevPost={prevPost} nextPost={nextPost} />
-  </Container>
+  </section>
 
   <Button
     variant="outline"

@@ -37,7 +37,10 @@ function buildToc(headings: Heading[]): Heading[] {
 }
 ---
 
-<details open class="group block rounded-xl border p-4 xl:hidden">
+<details
+  open
+  class="group col-start-2 mx-4 block rounded-xl border p-4 xl:hidden"
+>
   <summary
     class="flex cursor-pointer items-center justify-between text-xl font-semibold"
   >
@@ -47,7 +50,11 @@ function buildToc(headings: Heading[]): Heading[] {
       class="size-5 transition-transform group-open:rotate-180"
     />
   </summary>
-  <ScrollArea client:load className="flex max-h-64 flex-col overflow-y-auto" type="always">
+  <ScrollArea
+    client:load
+    className="flex max-h-64 flex-col overflow-y-auto"
+    type="always"
+  >
     <nav>
       <ul class="pt-3">
         {toc.map((heading) => <TableOfContentsHeading heading={heading} />)}
@@ -57,12 +64,12 @@ function buildToc(headings: Heading[]): Heading[] {
 </details>
 
 <nav
-  class="sticky top-[5.5rem] hidden h-0 w-[calc(50vw-50%-4rem)] translate-x-[calc(-100%-2em)] text-xs leading-4 xl:block"
+  class="sticky top-[5.5rem] col-start-1 hidden h-[calc(100vh-5.5rem)] text-xs leading-4 xl:block"
 >
-  <div class="flex justify-end pr-6">
+  <div class="flex justify-end">
     <ScrollArea client:load className="max-h-[calc(100vh-8rem)]" type="always">
       <ul
-        class="flex flex-col justify-end gap-y-2 overflow-y-auto pr-8"
+        class="flex flex-col justify-end gap-y-2 overflow-y-auto px-8"
         id="toc-container"
       >
         <li>
