@@ -31,14 +31,14 @@ function getPostIndex(slug: string): number {
   return posts.findIndex((post) => post.slug === slug)
 }
 
-function getNextPost(slug: string): Props | null {
+function getPrevPost(slug: string): Props | null {
   const postIndex = getPostIndex(slug)
   return postIndex !== -1 && postIndex < posts.length - 1
     ? posts[postIndex + 1]
     : null
 }
 
-function getPrevPost(slug: string): Props | null {
+function getNextPost(slug: string): Props | null {
   const postIndex = getPostIndex(slug)
   return postIndex > 0 ? posts[postIndex - 1] : null
 }
