@@ -24,9 +24,9 @@ const { prevPost, nextPost } = Astro.props
       />
     </div>
     <div class="flex flex-col items-start overflow-hidden">
-      <span class="text-left text-xs text-muted-foreground">Latest Post</span>
+      <span class="text-left text-xs text-muted-foreground">Next Post</span>
       <span class="w-full truncate text-left text-sm"
-        >{nextPost?.data.title || 'Last post!'}</span
+        >{nextPost?.data.title || 'Latest post!'}</span
       >
     </div>
   </Link>
@@ -43,7 +43,7 @@ const { prevPost, nextPost } = Astro.props
       <span class="text-right text-xs text-muted-foreground">Previous Post</span
       >
       <span class="w-full truncate text-right text-sm"
-        >{prevPost?.data.title || 'Latest post!'}</span
+        >{prevPost?.data.title || 'Last post!'}</span
       >
     </div>
     <div class="ml-2 flex-shrink-0">
