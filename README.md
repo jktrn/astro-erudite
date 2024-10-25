@@ -16,19 +16,13 @@ astro-erudite is an opinionated, no-frills static blogging template built with [
 
 ---
 
-## Technology Stack
+## Community Examples
 
-This is a list of the various technologies used to build this template:
+Below are some fantastic examples of websites based on this template. If you wish to add your site to this list, open a pull request!
 
-| Category            | Technology Name                                                                                    |
-| ------------------- | -------------------------------------------------------------------------------------------------- |
-| Framework           | [Astro](https://astro.build/)                                                                      |
-| Styling             | [Tailwind](https://tailwindcss.com)                                                                |
-| Components          | [shadcn/ui](https://ui.shadcn.com/)                                                                |
-| Content             | [MDX](https://mdxjs.com/)                                                                          |
-| Syntax Highlighting | [Shiki](https://github.com/shikijs/shiki) + [rehype-pretty-code](https://rehype-pretty.pages.dev/) |
-| Graphics            | [Figma](https://www.figma.com/)                                                                    |
-| Deployment          | [Vercel](https://vercel.com)                                                                       |
+| Site | Author | Description/Features | Source |
+|------|--------|----------------------|--------|
+| [enscribe.dev](https://enscribe.dev) | [@jktrn](https://github.com/jktrn) | Heavily modified bento-style homepage with client interactivity, with custom MDX components! | [→](https://github.com/jktrn/enscribe.dev) |
 
 ## Features
 
@@ -42,13 +36,19 @@ This is a list of the various technologies used to build this template:
 - Supports author profiles (with a dedicated authors page) and adding multiple authors per post.
 - Supports project tags (with a dedicated tags page) for easy post categorization and discovery.
 
-## Community Examples
+## Technology Stack
 
-Below are some fantastic examples of websites based on this template. If you wish to add your site to this list, open a pull request!
+This is a list of the various technologies used to build this template:
 
-| Site | Author | Description/Features | Source |
-|------|--------|-------------|--------|
-| [enscribe.dev](https://enscribe.dev) | [@jktrn](https://github.com/jktrn) | Heavily modified bento-style homepage with client interactivity, with custom MDX components! | [→](https://github.com/jktrn/enscribe.dev) |
+| Category            | Technology Name                                                                                    |
+| ------------------- | -------------------------------------------------------------------------------------------------- |
+| Framework           | [Astro](https://astro.build/)                                                                      |
+| Styling             | [Tailwind](https://tailwindcss.com)                                                                |
+| Components          | [shadcn/ui](https://ui.shadcn.com/)                                                                |
+| Content             | [MDX](https://mdxjs.com/)                                                                          |
+| Syntax Highlighting | [Shiki](https://github.com/shikijs/shiki) + [rehype-pretty-code](https://rehype-pretty.pages.dev/) |
+| Graphics            | [Figma](https://www.figma.com/)                                                                    |
+| Deployment          | [Vercel](https://vercel.com)                                                                       |
 
 ## Getting Started
 
