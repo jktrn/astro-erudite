@@ -11,13 +11,14 @@
 
 astro-erudite is an opinionated, no-frills static blogging template built with [Astro](https://astro.build/), [Tailwind](https://tailwindcss.com/), and [shadcn/ui](https://ui.shadcn.com/). Extraordinarily loosely based off the [Astro Micro](https://astro-micro.vercel.app/) theme by [trevortylerlee](https://github.com/trevortylerlee).
 
-To learn more about why this template exists, read [The State of Static Blogs in 2024](https://astro-erudite.vercel.app/blog/the-state-of-static-blogs), where I share my take on what constitutes a great blogging template and my goals while developing this one.
+> [!NOTE]
+> To learn more about why this template exists, read [The State of Static Blogs in 2024](https://astro-erudite.vercel.app/blog/the-state-of-static-blogs), where I share my take on what constitutes a great blogging template and my goals while developing this one.
 
 ---
 
 ## Technology Stack
 
-This is a list of the various technologies used to build this website:
+This is a list of the various technologies used to build this template:
 
 | Category            | Technology Name                                                                                    |
 | ------------------- | -------------------------------------------------------------------------------------------------- |
@@ -28,8 +29,6 @@ This is a list of the various technologies used to build this website:
 | Syntax Highlighting | [Shiki](https://github.com/shikijs/shiki) + [rehype-pretty-code](https://rehype-pretty.pages.dev/) |
 | Graphics            | [Figma](https://www.figma.com/)                                                                    |
 | Deployment          | [Vercel](https://vercel.com)                                                                       |
-
----
 
 ## Features
 
@@ -42,6 +41,14 @@ This is a list of the various technologies used to build this website:
 - [RSS](https://en.wikipedia.org/wiki/RSS) feeds and sitemap generation!
 - Supports author profiles (with a dedicated authors page) and adding multiple authors per post.
 - Supports project tags (with a dedicated tags page) for easy post categorization and discovery.
+
+## Community Examples
+
+Below are some fantastic examples of websites based on this template. If you wish to add your site to this list, open a pull request!
+
+| Site | Author | Description/Features | Source |
+|------|--------|-------------|--------|
+| [enscribe.dev](https://enscribe.dev) | [@jktrn](https://github.com/jktrn) | Heavily modified bento-style homepage with client interactivity, with custom MDX components! | [→](https://github.com/jktrn/enscribe.dev) |
 
 ## Getting Started
 
@@ -201,7 +208,8 @@ The author schema is defined as follows:
 | `linkedin` | `string.url()`   | Must be a valid URL.                                                                                                                | Optional |
 | `discord`  | `string.url()`   | Must be a valid URL.                                                                                                                | Optional |
 
-You can add as many social media links as you want, as long as you adjust the schema! Make sure you also support the new field in the `src/components/SocialIcons.astro` component.
+> [!TIP]
+> You can add as many social media links as you want, as long as you adjust the schema! Make sure you also support the new field in the `src/components/SocialIcons.astro` component.
 
 ### Projects
 
