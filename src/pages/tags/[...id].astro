@@ -23,7 +23,7 @@ export async function getStaticPaths() {
   )
 
   return uniqueTags.map((tag) => ({
-    params: { slug: tag },
+    params: { id: tag },
     props: {
       tag,
       posts: posts.filter((post) => post.data.tags?.includes(tag)),

@@ -1,5 +1,5 @@
-import rss from '@astrojs/rss'
 import { SITE } from '@/consts'
+import rss from '@astrojs/rss'
 import type { APIContext } from 'astro'
 import { getCollection } from 'astro:content'
 
@@ -24,7 +24,7 @@ export async function GET(context: APIContext) {
         title: item.data.title,
         description: item.data.description,
         pubDate: item.data.date,
-        link: `/${item.collection}/${item.slug}/`,
+        link: `/${item.collection}/${item.id}/`,
       })),
     })
   } catch (error) {

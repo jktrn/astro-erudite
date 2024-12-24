@@ -2,7 +2,8 @@
 import AvatarComponent from '@/components/ui/avatar'
 import { Badge } from '@/components/ui/badge'
 import { Separator } from '@/components/ui/separator'
-import { formatDate, parseAuthors, readingTime } from '@/lib/utils'
+import { parseAuthors } from '@/lib/server-utils'
+import { formatDate, readingTime } from '@/lib/utils'
 import { Image } from 'astro:assets'
 import type { CollectionEntry } from 'astro:content'
 import Link from './Link.astro'
@@ -16,7 +17,7 @@ const { entry } = Astro.props as {
 }
 
 const formattedDate = formatDate(entry.data.date)
-const readTime = readingTime(entry.body)
+const readTime = readingTime(entry.body!)
 const authors = await parseAuthors(entry.data.authors ?? [])
 ---
 
@@ -24,7 +25,7 @@ const authors = await parseAuthors(entry.data.authors ?? [])
   class="not-prose rounded-xl border p-4 transition-colors duration-300 ease-in-out hover:bg-secondary/50"
 >
   <Link
-    href={`/${entry.collection}/${entry.slug}`}
+    href={`/${entry.collection}/${entry.id}`}
     class="flex flex-col gap-4 sm:flex-row"
   >
     {

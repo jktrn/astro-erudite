@@ -9,7 +9,7 @@ import { type CollectionEntry, getCollection } from 'astro:content'
 export async function getStaticPaths() {
   const authors = await getCollection('authors')
   return authors.map((author) => ({
-    params: { slug: author.slug },
+    params: { id: author.id },
     props: { author },
   }))
 }
@@ -23,7 +23,7 @@ const { author } = Astro.props
 const allPosts = await getCollection('blog')
 const authorPosts = allPosts
   .filter((post) => {
-    return post.data.authors && post.data.authors.includes(author.slug)
+    return post.data.authors && post.data.authors.includes(author.id)
   })
   .sort((a, b) => b.data.date.valueOf() - a.data.date.valueOf())
 ---
