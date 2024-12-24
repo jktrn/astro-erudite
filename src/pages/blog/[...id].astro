@@ -7,17 +7,18 @@ import { badgeVariants } from '@/components/ui/badge'
 import { Button } from '@/components/ui/button'
 import { Separator } from '@/components/ui/separator'
 import Layout from '@/layouts/Layout.astro'
-import { formatDate, parseAuthors, readingTime } from '@/lib/utils'
+import { parseAuthors } from '@/lib/server-utils'
+import { formatDate, readingTime } from '@/lib/utils'
 import { Icon } from 'astro-icon/components'
 import { Image } from 'astro:assets'
-import { type CollectionEntry, getCollection } from 'astro:content'
+import { type CollectionEntry, getCollection, render } from 'astro:content'
 
 export async function getStaticPaths() {
   const posts = (await getCollection('blog'))
     .filter((post) => !post.data.draft)
     .sort((a, b) => b.data.date.valueOf() - a.data.date.valueOf())
   return posts.map((post) => ({
-    params: { slug: post.slug },
+    params: { id: post.id },
     props: post,
   }))
 }
@@ -27,28 +28,28 @@ const posts = (await getCollection('blog'))
   .filter((post) => !post.data.draft)
   .sort((a, b) => b.data.date.valueOf() - a.data.date.valueOf())
 
-function getPostIndex(slug: string): number {
-  return posts.findIndex((post) => post.slug === slug)
+function getPostIndex(id: string): number {
+  return posts.findIndex((post) => post.id === id)
 }
 
-function getPrevPost(slug: string): Props | null {
-  const postIndex = getPostIndex(slug)
+function getPrevPost(id: string): Props | null {
+  const postIndex = getPostIndex(id)
   return postIndex !== -1 && postIndex < posts.length - 1
     ? posts[postIndex + 1]
     : null
 }
 
-function getNextPost(slug: string): Props | null {
-  const postIndex = getPostIndex(slug)
+function getNextPost(id: string): Props | null {
+  const postIndex = getPostIndex(id)
   return postIndex > 0 ? posts[postIndex - 1] : null
 }
 
-const currentPostSlug = Astro.params.slug
-const nextPost = getNextPost(currentPostSlug)
-const prevPost = getPrevPost(currentPostSlug)
+const currentPostId = Astro.params.id
+const nextPost = getNextPost(currentPostId)
+const prevPost = getPrevPost(currentPostId)
 
 const post = Astro.props
-const { Content, headings } = await post.render()
+const { Content, headings } = await render(post)
 
 const authors = await parseAuthors(post.data.authors ?? [])
 ---
@@ -103,7 +104,7 @@ const authors = await parseAuthors(post.data.authors ?? [])
                       />
                       {author.isRegistered ? (
                         <Link
-                          href={`/authors/${author.slug}`}
+                          href={`/authors/${author.id}`}
                           underline
                           class="text-foreground"
                         >
@@ -122,7 +123,7 @@ const authors = await parseAuthors(post.data.authors ?? [])
           <div class="flex items-center gap-2">
             <span>{formatDate(post.data.date)}</span>
             <Separator orientation="vertical" className="h-4" />
-            <span>{readingTime(post.body)}</span>
+            <span>{readingTime(post.body!)}</span>
           </div>
         </div>
         <div class="flex flex-wrap justify-center gap-2">

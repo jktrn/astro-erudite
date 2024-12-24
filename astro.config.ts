@@ -43,7 +43,6 @@ export default defineConfig({
       ],
       rehypeHeadingIds,
       rehypeKatex,
-      // @ts-expect-error
       sectionize,
       [
         rehypePrettyCode,

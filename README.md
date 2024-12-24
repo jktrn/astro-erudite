@@ -173,12 +173,12 @@ The blog post schema is defined as follows:
 | `date`        | `coerce.date()` | Must be in `YYYY-MM-DD` format.                                                                                                                                                   | Yes      |
 | `image`       | `image()`       | Must be exactly 1200px &times; 630px.                                                                                                                                             | Optional |
 | `tags`        | `string[]`      | Preferably use kebab-case for these.                                                                                                                                              | Optional |
-| `authors`     | `string[]`      | If the author has a profile, use the slug associated with their Markdown file in `src/content/authors/` (e.g. if their file is named `jane-doe.md`, use `jane-doe` in the array). | Optional |
+| `authors`     | `string[]`      | If the author has a profile, use the id associated with their Markdown file in `src/content/authors/` (e.g. if their file is named `jane-doe.md`, use `jane-doe` in the array). | Optional |
 | `draft`       | `boolean`       | Defaults to `false` if not provided.                                                                                                                                              | Optional |
 
 ### Authors
 
-Add author information in `src/content/authors/` as Markdown files. A file named `[author-name].md` can be associated with a blog post if `"author-name"` (the slug) is added to the `authors` field:
+Add author information in `src/content/authors/` as Markdown files. A file named `[author-name].md` can be associated with a blog post if `"author-name"` (the id) is added to the `authors` field:
 
 ```yml
 ---
