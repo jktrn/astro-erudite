@@ -12,30 +12,44 @@ const { project } = Astro.props
 ---
 
 <div
-  class="overflow-hidden rounded-xl border transition-colors duration-300 ease-in-out hover:bg-secondary/50"
+  class="not-prose rounded-xl border p-4 transition-colors duration-300 ease-in-out hover:bg-secondary/50"
 >
-  <Link href={project.data.link} class="block" external>
-    <Image
-      src={project.data.image}
-      alt={project.data.name}
-      width={400}
-      height={200}
-      class="w-full object-cover"
-    />
-    <div class="p-4">
-      <h3 class="mb-2 text-lg font-semibold">{project.data.name}</h3>
-      <p class="mb-4 text-sm text-muted-foreground">
+  <Link
+    href={project.data.link}
+    class="flex flex-col gap-4 sm:flex-row"
+    external
+  >
+    {
+      project.data.image && (
+        <div class="max-w-[200px] sm:flex-shrink-0">
+          <Image
+            src={project.data.image}
+            alt={project.data.name}
+            width={1200}
+            height={630}
+            class="object-cover"
+          />
+        </div>
+      )
+    }
+    <div class="flex-grow">
+      <h3 class="mb-1 text-lg font-semibold">
+        {project.data.name}
+      </h3>
+      <p class="mb-2 text-sm text-muted-foreground">
         {project.data.description}
       </p>
-      <div class="flex flex-wrap gap-2">
-        {
-          project.data.tags.map((tag) => (
-            <Badge variant="secondary" showHash={false}>
-              {tag}
-            </Badge>
-          ))
-        }
-      </div>
+      {
+        project.data.tags && (
+          <div class="flex flex-wrap gap-2">
+            {project.data.tags.map((tag: string) => (
+              <Badge variant="secondary" showHash={false}>
+                {tag}
+              </Badge>
+            ))}
+          </div>
+        )
+      }
     </div>
   </Link>
 </div>

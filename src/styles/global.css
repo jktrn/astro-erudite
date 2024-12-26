@@ -124,6 +124,19 @@
         }
       }
 
+      /* Shadcn-like scrollbar */
+      pre::-webkit-scrollbar {
+        @apply h-2.5 w-2.5;
+      }
+
+      pre::-webkit-scrollbar-track {
+        @apply bg-transparent;
+      }
+
+      pre::-webkit-scrollbar-thumb {
+        @apply rounded-full bg-border bg-clip-padding p-px;
+      }
+
       /* Code block styles */
       pre {
         @apply static max-h-[600px] overflow-auto rounded-xl border bg-secondary/20 py-4 text-sm leading-loose;

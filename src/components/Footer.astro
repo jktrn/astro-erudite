@@ -1,6 +1,8 @@
 ---
 import Container from '@/components/Container.astro'
+import { Separator } from '@/components/ui/separator'
 import { SOCIAL_LINKS } from '@/consts'
+import Link from './Link.astro'
 import SocialIcons from './SocialIcons.astro'
 ---
 
@@ -9,9 +11,18 @@ import SocialIcons from './SocialIcons.astro'
     <div
       class="flex flex-col items-center justify-center gap-y-2 sm:flex-row sm:justify-between"
     >
-      <div class="flex items-center">
-        <p class="text-center text-sm text-muted-foreground">
+      <div class="flex items-center gap-x-2">
+        <span class="text-center text-sm text-muted-foreground">
           &copy; {new Date().getFullYear()} All rights reserved.
+        </span>
+        <Separator orientation="vertical" className="h-4" />
+        <p class="text-center text-sm text-muted-foreground">
+          Made with 🤍 by <Link
+            href="https://github.com/jktrn"
+            class="text-foreground"
+            external
+            underline>enscribe</Link
+          >!
         </p>
       </div>
       <SocialIcons links={SOCIAL_LINKS} />

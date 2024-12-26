@@ -1,6 +1,7 @@
 ---
 import Breadcrumbs from '@/components/Breadcrumbs.astro'
 import Container from '@/components/Container.astro'
+import Link from '@/components/Link.astro'
 import ProjectCard from '@/components/ProjectCard.astro'
 import { SITE } from '@/consts'
 import Layout from '@/layouts/Layout.astro'
@@ -15,14 +16,39 @@ const projects = await getCollection('projects')
 
     <section>
       <div class="min-w-full">
-        <h1 class="mb-4 text-3xl font-bold">Some more about us</h1>
-        <p class="prose prose-neutral mb-8 dark:prose-invert">
-          {SITE.TITLE} is an opinionated, no-frills static blogging template built
-          with Astro.
-        </p>
+        <div class="prose prose-neutral mb-8 dark:prose-invert">
+          <p class="mb-4">
+            astro-erudite is an opinionated, no-frills static blogging template
+            that prioritizes simplicity and performance, built with <Link
+              href="https://astro.build"
+              class="text-foreground"
+              external
+              underline>Astro</Link
+            >, <Link
+              href="https://tailwindcss.com"
+              class="text-foreground"
+              external
+              underline>Tailwind</Link
+            >, and <Link
+              href="https://ui.shadcn.com"
+              class="text-foreground"
+              external
+              underline>shadcn/ui</Link
+            >. It provides a clean foundation for your content while being
+            extremely easy to customize.
+          </p>
+          <p>
+            To learn more about the philosophy behind this template, check out
+            the following blog post: <Link
+              href="/blog/the-state-of-static-blogs"
+              class="text-foreground"
+              underline>The State of Static Blogs in 2024</Link
+            >.
+          </p>
+        </div>
 
-        <h2 class="mb-4 text-2xl font-semibold">Our Projects</h2>
-        <div class="grid gap-6 sm:grid-cols-2 lg:grid-cols-3">
+        <h2 class="mb-4 text-2xl font-semibold">Example Projects Listing</h2>
+        <div class="flex flex-col gap-4">
           {projects.map((project) => <ProjectCard project={project} />)}
         </div>
       </div>

@@ -1,4 +1,4 @@
-import { getEntry } from "astro:content"
+import { getEntry } from 'astro:content'
 
 export async function parseAuthors(authors: string[]) {
   if (!authors || authors.length === 0) return []

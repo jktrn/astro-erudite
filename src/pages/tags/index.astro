@@ -9,9 +9,17 @@ import { getCollection } from 'astro:content'
 
 const blog = (await getCollection('blog')).filter((post) => !post.data.draft)
 
-const tags = blog
-  .flatMap((post) => post.data.tags)
-  .filter((tag, index, self) => self.indexOf(tag) === index)
+const tagCounts = blog.reduce((acc, post) => {
+  post.data.tags?.forEach((tag) => {
+    acc.set(tag, (acc.get(tag) || 0) + 1)
+  })
+  return acc
+}, new Map())
+
+const tags = [...tagCounts.keys()].sort((a, b) => {
+  const countDiff = tagCounts.get(b)! - tagCounts.get(a)!
+  return countDiff !== 0 ? countDiff : a.localeCompare(b)
+})
 ---
 
 <Layout title="Tags" description="A list of all tags used in blog posts">
@@ -19,7 +27,6 @@ const tags = blog
     <Breadcrumbs items={[{ label: 'Tags', icon: 'lucide:tags' }]} />
 
     <div class="flex flex-col gap-4">
-      <h1 class="text-3xl font-semibold">Tags</h1>
       <div class="flex flex-wrap gap-2">
         {
           tags.map((tag) => (
@@ -29,6 +36,9 @@ const tags = blog
             >
               <Icon name="lucide:hash" class="size-3 -translate-x-0.5" />
               {tag}
+              <span class="ml-1.5 text-muted-foreground">
+                ({tagCounts.get(tag)})
+              </span>
             </Link>
           ))
         }
