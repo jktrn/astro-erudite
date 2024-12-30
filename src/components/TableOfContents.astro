@@ -42,7 +42,7 @@ function buildToc(headings: Heading[]): Heading[] {
   class="group col-start-2 mx-4 block rounded-xl border p-4 xl:hidden"
 >
   <summary
-    class="flex cursor-pointer items-center justify-between text-xl font-semibold"
+    class="flex cursor-pointer items-center justify-between pb-4 text-xl font-semibold"
   >
     Table of Contents
     <Icon
@@ -56,9 +56,8 @@ function buildToc(headings: Heading[]): Heading[] {
     type="always"
   >
     <nav>
-      <ul class="pt-3">
-        {toc.map((heading) => <TableOfContentsHeading heading={heading} />)}
-      </ul>
+      <ul></ul>
+      {toc.map((heading) => <TableOfContentsHeading heading={heading} />)}
     </nav>
   </ScrollArea>
 </details>
