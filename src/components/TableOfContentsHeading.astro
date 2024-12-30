@@ -6,11 +6,11 @@ const { heading } = Astro.props
 ---
 
 <li
-  class="list-inside list-disc px-4 py-1.5 text-sm text-foreground/60 xl:list-none xl:p-0"
+  class="list-inside list-disc px-4 text-sm text-foreground/60 xl:list-none xl:p-0"
 >
   <Link
     href={'#' + heading.slug}
-    class="toc-link underline decoration-transparent underline-offset-[3px] transition-colors duration-200 hover:decoration-inherit"
+    class="py-1 underline decoration-transparent underline-offset-[3px] transition-colors duration-200 hover:decoration-inherit"
   >
     {heading.text}
   </Link>
