@@ -23,6 +23,7 @@ Below are some fantastic examples of websites based on this template. If you wis
 | Site | Author | Description/Features | Source |
 |------|--------|----------------------|--------|
 | [enscribe.dev](https://enscribe.dev) | [@jktrn](https://github.com/jktrn) | Heavily modified bento-style homepage with client interactivity, with custom MDX components! | [→](https://github.com/jktrn/enscribe.dev) |
+| [emile.sh](https://emile.sh) | [@echoghi](https://github.com/echoghi) | A minimalist personal blog using the [flexoki](https://stephango.com/flexoki) theme | [→](https://github.com/echoghi/v5) |
 
 ## Features
 
