@@ -25,6 +25,7 @@ Below are some fantastic examples of websites based on this template. If you wis
 | [enscribe.dev](https://enscribe.dev) | [@jktrn](https://github.com/jktrn) | Heavily modified bento-style homepage with client interactivity, with custom MDX components! | [→](https://github.com/jktrn/enscribe.dev) |
 | [emile.sh](https://emile.sh) | [@echoghi](https://github.com/echoghi) | A minimalist personal blog using the [flexoki](https://stephango.com/flexoki) theme | [→](https://github.com/echoghi/v5) |
 | [decentparadox.me](https://decentparadox.me) | [@decentparadox](https://github.com/decentparadox) | A heavily customized personal portfolio with a sci-fi theme! | [→](https://github.com/decentparadox/decentparadox.me) |
+| [flocto.github.io](https://flocto.github.io/) | [@flocto](https://github.com/flocto) | A slightly modified personal blog | [→](https://github.com/flocto/flocto.github.io) |
 ## Features
 
 - [Astro](https://astro.build/)&rsquo;s [Islands](https://docs.astro.build/en/concepts/islands/) architecture for partial/selective hydration and client-side interactivity while maintaining a fast-to-render static site.
