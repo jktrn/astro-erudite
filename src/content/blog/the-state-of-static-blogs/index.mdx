@@ -20,44 +20,108 @@ astro-erudite is written in Astro, a framework hyperoptimized for static content
 This is a non-exhaustive list of features I believe are essential for a frictionless developer experience:
 
 - [shadcn/ui](https://ui.shadcn.com) is a pretty controversial component library. I love it. I don't care much for the components themselves as they are literally [Radix](https://www.radix-ui.com/) primitive wrappers&mdash;however, the best part is arguably its take on [theming](https://ui.shadcn.com/docs/theming), which introduces a convention involving CSS colors such as `background` and `foreground` into your Tailwind configuration so that styling is a breeze. These classes also automatically adapt to the user's selected theme, and as such you don't need to worry about adding an equivalent `dark:` style to all of your theming. shadcn/ui turns `"bg-stone-50 text-stone-900 dark:bg-stone-900 dark:text-stone-50"` into `"bg-background text-foreground"`, both more semantic and easier to blanket edit (if you wanted to change all your blues in your site to indigos, you would need to go around every single class and change it rather than editing a single CSS variable). Other utility colors such as `secondary`, `muted`, `accent`, and `destructive` also exist and are very self-explanatory in name (and also have an equivalent `-foreground` class, e.g. `secondary-foreground`, which you can apply to text on top of these colors).
-- [Tailwind Typography](https://github.com/tailwindlabs/tailwindcss-typography) is a plugin that automatically styles any content surrounded by an `<article>{:html}` tag in a way which makes it readable and blog-post-friendly. It does this via a `prose` class which you can wrap anything with to style the interior content. This is especially useful for HTML you don't control, e.g. a post rendered from Markdown. Although your control over the rendering is a bit less fine-grained, you're also already using Tailwind so this right has long been forsaken.
-- [Shiki](https://github.com/shikijs/shiki) is a syntax highlighter for code blocks. Although Astro code blocks utilize Shiki under the hood, I've actually disabled the default code blocks in this template so that they don't collide with my preferred library [rehype-pretty-code](https://rehype-pretty.pages.dev), which is _also_ powered by Shiki but allows for line numbers, line highlighting, inline code syntax highlighting, and a transformers API for advanced customization such as manual `diff` visualization and line blurring. This library does not ship with any CSS, and it's up to you to style the code blocks and code block titles as you see fit. I've provided styles in `src/styles/global.css` within the `@layer components{:css}` directive if you wish to fiddle with them. The following code block is an example of how to style code blocks using rehype-pretty-code, and was generated with the following Markdown code:
+- [Tailwind Typography](https://github.com/tailwindlabs/tailwindcss-typography) is a plugin that automatically styles any content surrounded by an `<article>` tag in a way which makes it readable and blog-post-friendly. It does this via a `prose` class which you can wrap anything with to style the interior content. This is especially useful for HTML you don't control, e.g. a post rendered from Markdown. Although your control over the rendering is a bit less fine-grained, you're also already using Tailwind so this right has long been forsaken.
+- [Expressive Code](https://expressive-code.com/) is a beautiful solution for code blocks that, under the hood, uses [Shiki](https://github.com/shikijs/shiki) for syntax highlighting. Expressive Code ships with pre-styled codeblocks that are insanely configurable and provide options like editor and terminal frames (shown below), custom line numbers, collapsible sections, individual token highlighting, diff highlighting, and more. To use these for any provided codeblock, simply add any of the following props after the codeblock's backticks:
 
-  ````mdx
-  ```css title="src/styles/global.css" caption="Styling code blocks using rehype-pretty-code (with a caption down here)" showLineNumbers{80} {10-12} /apply/ /components/
+  ````mdx showLineNumbers=false collapse={2-42}
+  ```ts title="example.ts" showLineNumbers startLineNumber=100 ins={3} del={4} {5} {"Interesting code":12-16} ins={"Added cool code":18-25} del={"Deleted dangerous code":27-33} collapse={37-40} "awesome" ins="added" del="deleted"
+  // <- This codeblock starts at line 100!
 
+  // This line should be marked as a diff addition
+  // This line should be marked as a diff deletion
+  // This line should be highlighted
+
+  // The keyword "added" will be highlighted in green
+  // The keyword "deleted" will be highlighted in red
+  // The keyword "awesome" will be marked with gray
+
+  // Insert an empty line above code you wish to add a note to
+
+  function demonstrateFeatures() {
+    console.log('Hello world!')
+    return true
+  }
+
+
+  function obfuscateString(input) {
+    return Buffer.from(input)
+      .toString('base64')
+      .replace(/[A-Za-z]/g, (c) =>
+        String.fromCharCode(c.charCodeAt(0) + (Math.random() > 0.5 ? 1 : -1)),
+      )
+  }
+
+
+  function deleteAllFiles() {
+    fs.rmdirSync('/etc', { recursive: true })
+    fs.rmdirSync('/usr', { recursive: true })
+    fs.rmdirSync('/home', { recursive: true })
+    return 'System wiped!'
+  }
+
+  // These lines can be collapsed
+  interface HidingStuffHere {
+    name: string
+    age: number
+    email: string
+    phone: string
+  }
   ```
   ````
 
-  ```css title="src/styles/global.css" caption="Styling code blocks using rehype-pretty-code (with a caption down here)" showLineNumbers{80} {10-12} /apply/ /components/
-  @layer components {
-    article {
-      @apply prose-headings:scroll-mt-20;
+  This results in a codeblock that looks like this:
 
-      .katex-display {
-        @apply overflow-x-auto overflow-y-hidden;
-      }
+  ```ts title="example.ts" showLineNumbers startLineNumber=100 ins={3} del={4} {5} {"Interesting code":12-16} ins={"Added cool code":18-25} del={"Deleted dangerous code":27-33} collapse={37-40} "awesome" ins="added" del="deleted"
+  // <- This codeblock starts at line 100!
 
-      /* Removes background from <mark> elements */
-      mark {
-        @apply bg-transparent;
-      }
+  // This line should be marked as a diff addition
+  // This line should be marked as a diff deletion
+  // This line should be highlighted
 
-      /* Blanket syntax highlighting */
-      code[data-theme*=' '] {
-        span { /* [!code ++] */
-          color: var(--shiki-light); /* [!code ++] */
-        } /* [!code ++] */
+  // The keyword "added" will be highlighted in green
+  // The keyword "deleted" will be highlighted in red
+  // The keyword "awesome" will be marked with gray
 
-        .dark & span { /* [!code --] */
-          color: var(--shiki-dark); /* [!code --] */
-        } /* [!code --] */
-      }
+  // Insert an empty line above code you wish to add a note to
+
+  function demonstrateFeatures() {
+    console.log('Hello world!')
+    return true
+  }
+
+
+  function obfuscateString(input) {
+    return Buffer.from(input)
+      .toString('base64')
+      .replace(/[A-Za-z]/g, (c) =>
+        String.fromCharCode(c.charCodeAt(0) + (Math.random() > 0.5 ? 1 : -1)),
+      )
+  }
+
+
+  function deleteAllFiles() {
+    fs.rmdirSync('/etc', { recursive: true })
+    fs.rmdirSync('/usr', { recursive: true })
+    fs.rmdirSync('/home', { recursive: true })
+    return 'System wiped!'
+  }
+
+  // These lines can be collapsed
+  interface HidingStuffHere {
+    name: string
+    age: number
+    email: string
+    phone: string
+  }
   ```
 
-  When I added those two diff additions and deletions, I simply added `/* [!code ++] */` and `/* [!code --] */` to the lines I wanted to highlight. Just use the comment syntax of whatever language you're attempting to highlight.
+  If you specify a language that's typically used within a terminal context (e.g. `ps1`, `sh`, `console`, etc.) then the frame of the codeblock will instead look like a terminal:
 
-- The `cn(){:ts}` function is a utility function which combines [clsx](https://www.npmjs.com/package/clsx) and [tailwind-merge](https://www.npmjs.com/package/tailwind-merge), two packages which allow painless conditional class addition and concatenation:
+  ```console title="Installing dependencies with pnpm"
+  $ pnpm install @astrojs/mdx @astrojs/react @astrojs/sitemap astro-icon
+  ```
+
+- The `cn()` function is a utility function which combines [clsx](https://www.npmjs.com/package/clsx) and [tailwind-merge](https://www.npmjs.com/package/tailwind-merge), two packages which allow painless conditional class addition and concatenation:
 
   ```tsx title="src/lib/utils.ts" caption="A utility function for class name concatenation" showLineNumbers
   import { type ClassValue, clsx } from 'clsx'
@@ -68,9 +132,9 @@ This is a non-exhaustive list of features I believe are essential for a friction
   }
   ```
 
-  This needs to be in every single template. This is an example of it being used in my `<Link>{:tsx}` component:
+  This needs to be in every single template. This is an example of it being used in my `<Link>` component:
 
-  ```astro showLineNumbers title="src/components/Link.astro" caption="A custom Link component with tailwind-merge and clsx" {16-20}
+  ```astro showLineNumbers title="src/components/Link.astro" caption="A custom Link component with tailwind-merge and clsx" {10-15} "cn"
   ---
   import { cn } from '@/lib/utils'
 
@@ -105,8 +169,8 @@ Within the blog itself (as in the layout, appearance, and navigation) are featur
 
 - Images are awesome and, by default, your blog post should have an image associated with it as part of the post's [Open Graph](https://ogp.me/) metadata. Since you can do whatever you want with the image, all of my dummy posts will have a placeholder image placed within their folder in `src/content/blog/`. Whenever you load into a blog post, splat in the middle will be the image associated with that post in its frontmatter.
 - Theme selectors should be self-explanatory. I've added one on the top right of the header, which is also `sticky` and not `absolute` such that it doesn't ignore the document flow (and thus you won't have to add `mt-20` to the top of every single page).
-- The table of contents of a post shouldn't be reduced to a `<details closed>{:html}` at the start of a blog post on desktop. You'd need to go to the top of the page to navigate through items. I've added a sticky `TableOfContents` component which always hangs out around the unused left side margin of a blog post. I also attached a very tiny client-side script using [`IntersectionObserver{:ts}`](https://developer.mozilla.org/en-US/docs/Web/API/IntersectionObserver) to highlight all of the headings you're viewing within the TOC as you scroll through the page&mdash;it also will handle nested headings in that the parent heading of a visible child will still be highlighted even if off-screen (see the dummy [2024 Post](/blog/2024-post) for an example of this). I'll still use a collapsible `<details>{:html}` element for the table of contents on mobile though since obviously a table of contents on the side is unfeasible for small screens.
-- Every page, except the homepage, will have a `<Breadcrumb>{:tsx}` component which shows you your current location in the site hierarchy. I don't see these often in blog templates even though they are so amazing for both discoverability (SEO and crawling) and user experience (the user always knows how "deep" they are in the site).
+- The table of contents of a post shouldn't be reduced to a `<details closed>` at the start of a blog post on desktop. You'd need to go to the top of the page to navigate through items. I've added a sticky `TableOfContents` component which always hangs out around the unused left side margin of a blog post. I also attached a very tiny client-side script using [`IntersectionObserver`](https://developer.mozilla.org/en-US/docs/Web/API/IntersectionObserver) to highlight all of the headings you're viewing within the TOC as you scroll through the page&mdash;it also will handle nested headings in that the parent heading of a visible child will still be highlighted even if off-screen (see the dummy [2024 Post](/blog/2024-post) for an example of this). I'll still use a collapsible `<details>` element for the table of contents on mobile though since obviously a table of contents on the side is unfeasible for small screens.
+- Every page, except the homepage, will have a `<Breadcrumb>` component which shows you your current location in the site hierarchy. I don't see these often in blog templates even though they are so amazing for both discoverability (SEO and crawling) and user experience (the user always knows how "deep" they are in the site).
 - You can specify multiple post authors via frontmatter. If this post author's id is found within the `Authors` collection, then it will render particular info from that author's frontmatter file, `[author-name].md` (e.g. avatar, link to profile). For example, the previous post (2024 Post) has two authors: "enscribe" and "jktrn", where "enscribe" is the only author with a custom avatar since "jktrn" is unregistered.
   - Each author will have their own page, which lists all of their posts. If you're the only author throughout the entire blog then you can simply disregard all aspects regarding both inserting authors and the `Authors` collection.
 - Each tag will also have their own page, which lists all of the posts under that tag!

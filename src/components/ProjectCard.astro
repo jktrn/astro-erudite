@@ -21,7 +21,7 @@ const { project } = Astro.props
   >
     {
       project.data.image && (
-        <div class="max-w-[200px] sm:flex-shrink-0">
+        <div class="max-w-[200px] sm:shrink-0">
           <Image
             src={project.data.image}
             alt={project.data.name}
@@ -32,7 +32,7 @@ const { project } = Astro.props
         </div>
       )
     }
-    <div class="flex-grow">
+    <div class="grow">
       <h3 class="mb-1 text-lg font-semibold">
         {project.data.name}
       </h3>

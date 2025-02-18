@@ -17,7 +17,7 @@ const { prevPost, nextPost } = Astro.props
     )}
     aria-disabled={!nextPost}
   >
-    <div class="mr-2 flex-shrink-0">
+    <div class="mr-2 shrink-0">
       <Icon
         name="lucide:arrow-left"
         class="size-4 transition-transform group-hover:-translate-x-1"
@@ -46,7 +46,7 @@ const { prevPost, nextPost } = Astro.props
         >{prevPost?.data.title || 'Last post!'}</span
       >
     </div>
-    <div class="ml-2 flex-shrink-0">
+    <div class="ml-2 shrink-0">
       <Icon
         name="lucide:arrow-right"
         class="size-4 transition-transform group-hover:translate-x-1"
