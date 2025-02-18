@@ -12,7 +12,7 @@ const { project } = Astro.props
 ---
 
 <div
-  class="not-prose rounded-xl border p-4 transition-colors duration-300 ease-in-out hover:bg-secondary/50"
+  class="not-prose hover:bg-secondary/50 rounded-xl border p-4 transition-colors duration-300 ease-in-out"
 >
   <Link
     href={project.data.link}
@@ -36,7 +36,7 @@ const { project } = Astro.props
       <h3 class="mb-1 text-lg font-semibold">
         {project.data.name}
       </h3>
-      <p class="mb-2 text-sm text-muted-foreground">
+      <p class="text-muted-foreground mb-2 text-sm">
         {project.data.description}
       </p>
       {

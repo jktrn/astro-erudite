@@ -22,7 +22,7 @@ const authors = await parseAuthors(entry.data.authors ?? [])
 ---
 
 <div
-  class="not-prose rounded-xl border p-4 transition-colors duration-300 ease-in-out hover:bg-secondary/50"
+  class="not-prose hover:bg-secondary/50 rounded-xl border p-4 transition-colors duration-300 ease-in-out"
 >
   <Link
     href={`/${entry.collection}/${entry.id}`}
@@ -45,11 +45,11 @@ const authors = await parseAuthors(entry.data.authors ?? [])
       <h3 class="mb-1 text-lg font-semibold">
         {entry.data.title}
       </h3>
-      <p class="mb-2 text-sm text-muted-foreground">
+      <p class="text-muted-foreground mb-2 text-sm">
         {entry.data.description}
       </p>
       <div
-        class="mb-2 flex flex-wrap items-center gap-x-2 text-xs text-muted-foreground"
+        class="text-muted-foreground mb-2 flex flex-wrap items-center gap-x-2 text-xs"
       >
         {
           authors.length > 0 && (
