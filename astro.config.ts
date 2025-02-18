@@ -31,35 +31,35 @@ export default defineConfig({
         wrap: true,
         collapseStyle: 'collapsible-auto',
         overridesByLang: {
-          'ansi,bash,bat,batch,cmd,console,powershell,ps,ps1,psd1,psm1,sh,shell,shellscript,shellsession,zsh,text':
+          'ansi,bat,bash,batch,cmd,console,powershell,ps,ps1,psd1,psm1,sh,shell,shellscript,shellsession,text,zsh':
             {
               showLineNumbers: false,
             },
         },
       },
       styleOverrides: {
+        borderColor: 'var(--border)',
         codeFontFamily: 'var(--font-mono)',
-        uiFontFamily: 'var(--font-sans)',
-        borderColor: 'var(--color-border)',
         codeBackground:
-          'color-mix(in oklab, var(--color-secondary) 25%, transparent)',
+          'color-mix(in oklab, var(--secondary) 25%, transparent)',
         frames: {
           editorActiveTabBackground:
-            'color-mix(in oklab, var(--color-secondary) 25%, transparent)',
+            'color-mix(in oklab, var(--secondary) 25%, transparent)',
           editorActiveTabIndicatorBottomColor: 'transparent',
           editorActiveTabIndicatorTopColor: 'transparent',
-          editorTabBarBorderBottomColor: 'transparent',
           editorTabBarBackground: 'transparent',
-          terminalTitlebarBorderBottomColor: 'transparent',
-          terminalTitlebarBackground: 'transparent',
+          editorTabBarBorderBottomColor: 'transparent',
           frameBoxShadowCssValue: 'none',
           terminalBackground:
-            'color-mix(in oklab, var(--color-secondary) 25%, transparent)',
-          terminalTitlebarForeground: 'var(--color-muted-foreground)',
+            'color-mix(in oklab, var(--secondary) 25%, transparent)',
+          terminalTitlebarBackground: 'transparent',
+          terminalTitlebarBorderBottomColor: 'transparent',
+          terminalTitlebarForeground: 'var(--muted-foreground)',
         },
         lineNumbers: {
-          foreground: 'var(--color-muted-foreground)',
+          foreground: 'var(--muted-foreground)',
         },
+        uiFontFamily: 'var(--font-sans)',
       },
     }),
     mdx(),
