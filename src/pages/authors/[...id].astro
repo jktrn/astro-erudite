@@ -48,7 +48,7 @@ const authorPosts = allPosts
       {
         authorPosts.length > 0 ? (
           <ul class="not-prose flex flex-col gap-4">
-            {authorPosts.map((post) => (
+            {authorPosts.filter(post => !post.data.draft).map((post) => (
               <li>
                 <BlogCard entry={post} />
               </li>
