@@ -82,7 +82,7 @@ const authors = await parseAuthors(post.data.authors ?? [])
     }
     <section class="col-start-2 flex flex-col gap-y-6 text-center">
       <div class="flex flex-col gap-y-4">
-        <h1 class="text-4xl leading-tight font-bold text-pretty sm:text-5xl">
+        <h1 class="text-4xl leading-tight font-medium text-pretty sm:text-5xl">
           {post.data.title}
         </h1>
 
@@ -116,13 +116,13 @@ const authors = await parseAuthors(post.data.authors ?? [])
                     </div>
                   ))}
                 </div>
-                <Separator orientation="vertical" className="h-4" />
+                <Separator orientation="vertical" className="h-4!" />
               </>
             )
           }
           <div class="flex items-center gap-2">
             <span>{formatDate(post.data.date)}</span>
-            <Separator orientation="vertical" className="h-4" />
+            <Separator orientation="vertical" className="h-4!" />
             <span>{readingTime(post.body!)}</span>
           </div>
         </div>
@@ -134,7 +134,7 @@ const authors = await parseAuthors(post.data.authors ?? [])
                   href={`/tags/${tag}`}
                   class={badgeVariants({ variant: 'secondary' })}
                 >
-                  <Icon name="lucide:hash" class="size-3 -translate-x-0.5" />
+                  <Icon name="lucide:hash" class="size-3" />
                   {tag}
                 </a>
               ))

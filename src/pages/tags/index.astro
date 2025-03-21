@@ -34,7 +34,7 @@ const tags = [...tagCounts.keys()].sort((a, b) => {
               href={`/tags/${tag}`}
               class={badgeVariants({ variant: 'secondary' })}
             >
-              <Icon name="lucide:hash" class="size-3 -translate-x-0.5" />
+              <Icon name="lucide:hash" class="size-3" />
               {tag}
               <span class="text-muted-foreground ml-1.5">
                 ({tagCounts.get(tag)})

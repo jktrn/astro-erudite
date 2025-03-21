@@ -7,25 +7,25 @@ import { Icon } from 'astro-icon/components'
 const { prevPost, nextPost } = Astro.props
 ---
 
-<div class="col-start-2 flex flex-col gap-4 sm:flex-row">
+<div class="col-start-2 grid grid-cols-1 sm:grid-cols-2 gap-4">
   <Link
     href={nextPost ? `/blog/${nextPost.id}` : '#'}
     class={cn(
       buttonVariants({ variant: 'outline' }),
-      'rounded-xl group flex items-center justify-start w-full sm:w-1/2 h-fit',
+      'rounded-xl group flex items-center justify-start w-full h-full',
       !nextPost && 'pointer-events-none opacity-50 cursor-not-allowed',
     )}
     aria-disabled={!nextPost}
   >
-    <div class="mr-2 shrink-0">
+    <div class="mr-2 flex-shrink-0">
       <Icon
         name="lucide:arrow-left"
         class="size-4 transition-transform group-hover:-translate-x-1"
       />
     </div>
-    <div class="flex flex-col items-start overflow-hidden">
+    <div class="flex flex-col items-start text-wrap">
       <span class="text-muted-foreground text-left text-xs">Next Post</span>
-      <span class="w-full truncate text-left text-sm"
+      <span class="w-full text-left text-sm text-pretty text-ellipsis"
         >{nextPost?.data.title || 'Latest post!'}</span
       >
     </div>
@@ -34,19 +34,19 @@ const { prevPost, nextPost } = Astro.props
     href={prevPost ? `/blog/${prevPost.id}` : '#'}
     class={cn(
       buttonVariants({ variant: 'outline' }),
-      'rounded-xl group flex items-center justify-end w-full sm:w-1/2 h-fit',
+      'rounded-xl group flex items-center justify-end w-full h-full',
       !prevPost && 'pointer-events-none opacity-50 cursor-not-allowed',
     )}
     aria-disabled={!prevPost}
   >
-    <div class="flex flex-col items-end overflow-hidden">
+    <div class="flex flex-col items-end text-wrap">
       <span class="text-muted-foreground text-right text-xs">Previous Post</span
       >
-      <span class="w-full truncate text-right text-sm"
+      <span class="w-full text-right text-sm text-pretty text-ellipsis"
         >{prevPost?.data.title || 'Last post!'}</span
       >
     </div>
-    <div class="ml-2 shrink-0">
+    <div class="ml-2 flex-shrink-0">
       <Icon
         name="lucide:arrow-right"
         class="size-4 transition-transform group-hover:translate-x-1"

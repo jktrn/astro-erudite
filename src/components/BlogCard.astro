@@ -6,6 +6,7 @@ import { parseAuthors } from '@/lib/server-utils'
 import { formatDate, readingTime } from '@/lib/utils'
 import { Image } from 'astro:assets'
 import type { CollectionEntry } from 'astro:content'
+import { Icon } from 'astro-icon/components'
 import Link from './Link.astro'
 
 type Props = {
@@ -42,7 +43,7 @@ const authors = await parseAuthors(entry.data.authors ?? [])
       )
     }
     <div class="grow">
-      <h3 class="mb-1 text-lg font-semibold">
+      <h3 class="mb-1 text-lg font-medium">
         {entry.data.title}
       </h3>
       <p class="text-muted-foreground mb-2 text-sm">
@@ -66,19 +67,22 @@ const authors = await parseAuthors(entry.data.authors ?? [])
                   <span>{author.name}</span>
                 </div>
               ))}
-              <Separator orientation="vertical" className="h-4" />
+              <Separator orientation="vertical" className="h-4!" />
             </>
           )
         }
         <span>{formattedDate}</span>
-        <Separator orientation="vertical" className="h-4" />
+        <Separator orientation="vertical" className="h-4!" />
         <span>{readTime}</span>
       </div>
       {
         entry.data.tags && (
           <div class="flex flex-wrap gap-2">
             {entry.data.tags.map((tag) => (
-              <Badge variant="secondary">{tag}</Badge>
+              <Badge variant="secondary" className="flex items-center gap-x-1">
+                <Icon name="lucide:hash" class="size-3" />
+                {tag}
+              </Badge>
             ))}
           </div>
         )

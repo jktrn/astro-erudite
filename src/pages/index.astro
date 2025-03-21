@@ -27,7 +27,7 @@ const blog = (await getCollection('blog'))
         <CardHeader>
           <CardTitle className="text-3xl">er·u·dite</CardTitle>
           <CardDescription
-            >/ˈer(y)əˌdīt/ &bull; <span class="font-semibold">adjective</span
+            >/ˈer(y)əˌdīt/ &bull; <span class="font-medium">adjective</span
             ></CardDescription
           >
         </CardHeader>
@@ -73,7 +73,7 @@ const blog = (await getCollection('blog'))
       </Card>
     </section>
     <section class="flex flex-col gap-y-4">
-      <h2 class="text-2xl font-bold">Latest posts</h2>
+      <h2 class="text-2xl font-medium">Latest posts</h2>
       <ul class="not-prose flex flex-col gap-y-4">
         {
           blog.map((post) => (
