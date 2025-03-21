@@ -43,7 +43,7 @@ const { project } = Astro.props
         project.data.tags && (
           <div class="flex flex-wrap gap-2">
             {project.data.tags.map((tag: string) => (
-              <Badge variant="secondary" showHash={false}>
+              <Badge variant="secondary">
                 {tag}
               </Badge>
             ))}
