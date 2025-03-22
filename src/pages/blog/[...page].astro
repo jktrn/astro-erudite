@@ -48,7 +48,7 @@ const years = Object.keys(postsByYear).sort((a, b) => parseInt(b) - parseInt(a))
         years.map((year) => (
           <section class="flex flex-col gap-y-4">
             <div class="font-medium">{year}</div>
-            <ul class="not-prose flex flex-col gap-4">
+            <ul class="flex flex-col gap-4">
               {postsByYear[year].map((post) => (
                 <li>
                   <BlogCard entry={post} />

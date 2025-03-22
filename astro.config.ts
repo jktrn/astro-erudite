@@ -9,7 +9,7 @@ import expressiveCode from 'astro-expressive-code'
 import { rehypeHeadingIds } from '@astrojs/markdown-remark'
 import rehypeExternalLinks from 'rehype-external-links'
 import rehypeKatex from 'rehype-katex'
-import sectionize from '@hbsnow/rehype-sectionize'
+// import sectionize from '@hbsnow/rehype-sectionize'
 import remarkEmoji from 'remark-emoji'
 import remarkMath from 'remark-math'
 import remarkToc from 'remark-toc'
@@ -89,7 +89,7 @@ export default defineConfig({
       ],
       rehypeHeadingIds,
       rehypeKatex,
-      sectionize,
+      // sectionize,
     ],
     remarkPlugins: [remarkToc, remarkMath, remarkEmoji],
   },

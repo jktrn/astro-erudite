@@ -1,5 +1,5 @@
+@import 'https://cdn.jsdelivr.net/npm/katex@0.12.0/dist/katex.min.css';
 @import 'tailwindcss';
-@plugin '@tailwindcss/typography';
 
 @custom-variant dark (&:is(.dark *));
 
@@ -53,13 +53,8 @@
 }
 
 :root {
-  --radius: 0.625rem;
   --background: oklch(1 0 0);
   --foreground: oklch(0.145 0 0);
-  --card: oklch(1 0 0);
-  --card-foreground: oklch(0.145 0 0);
-  --popover: oklch(1 0 0);
-  --popover-foreground: oklch(0.145 0 0);
   --primary: oklch(0.205 0 0);
   --primary-foreground: oklch(0.985 0 0);
   --secondary: oklch(0.97 0 0);
@@ -76,10 +71,6 @@
 .dark {
   --background: oklch(0.145 0 0);
   --foreground: oklch(0.985 0 0);
-  --card: oklch(0.205 0 0);
-  --card-foreground: oklch(0.985 0 0);
-  --popover: oklch(0.205 0 0);
-  --popover-foreground: oklch(0.985 0 0);
   --primary: oklch(0.922 0 0);
   --primary-foreground: oklch(0.205 0 0);
   --secondary: oklch(0.269 0 0);
@@ -118,34 +109,5 @@
   .disable-transitions,
   .disable-transitions * {
     @apply transition-none!;
-  }
-}
-
-@layer components {
-  article {
-    @apply prose-headings:scroll-mt-20 prose-headings:break-words [&>section]:first:prose-headings:mt-0!;
-    @apply prose-headings:font-medium! prose-code:font-medium!;
-    @apply prose-p:break-words;
-    @apply prose-a:break-words! prose-a:decoration-muted-foreground! prose-a:underline-offset-[3px] prose-a:transition-colors prose-a:hover:decoration-foreground!;
-    @apply prose-pre:px-0! prose-img:mx-auto;
-
-    .katex-display {
-      @apply overflow-x-auto overflow-y-hidden py-4;
-    }
-
-    /* Removes background from <mark> elements */
-    mark {
-      @apply bg-transparent;
-    }
-
-    /* Adjacent expressive-code blocks */
-    div.expressive-code:has(+ div.expressive-code) {
-      @apply mb-4;
-    }
-
-    /* Inline code */
-    :not(pre) > code {
-      @apply bg-muted/50 relative rounded-sm px-[0.3rem] py-[0.2rem] font-mono text-sm font-medium before:content-none! after:content-none!;
-    }
   }
 }

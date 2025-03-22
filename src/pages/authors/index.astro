@@ -13,7 +13,7 @@ const authors = await getCollection('authors')
     <Breadcrumbs items={[{ label: 'Authors', icon: 'lucide:users' }]} />
     {
       authors.length > 0 ? (
-        <ul class="not-prose flex flex-col gap-4">
+        <ul class="flex flex-col gap-4">
           {authors.map((author) => (
             <li>
               <AuthorCard author={author} />
