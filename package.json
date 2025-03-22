@@ -9,7 +9,8 @@
     "build": "astro check && astro build",
     "preview": "astro preview",
     "astro": "astro",
-    "prettier": "prettier --write ."
+    "prettier": "prettier --write .",
+    "postinstall": "patch-package"
   },
   "dependencies": {
     "@astrojs/check": "^0.9.4",
