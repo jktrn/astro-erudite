@@ -120,7 +120,7 @@ export const SOCIAL_LINKS: Link[] = [
 
 ### Color Palette
 
-Colors are defined in `src/styles/global.css` in [<abbr title="Hue, Saturation, Lightness">HSL</abbr> format](https://en.wikipedia.org/wiki/HSL_and_HSV), using the [shadcn/ui](https://ui.shadcn.com/) convention:
+Colors are defined in `src/styles/global.css` in [OKLCH format](https://developer.mozilla.org/en-US/docs/Web/CSS/color_value/oklch), using the [shadcn/ui](https://ui.shadcn.com/) convention:
 
 ```css
 :root {
