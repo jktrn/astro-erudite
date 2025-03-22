@@ -13,6 +13,7 @@ import rehypePrettyCode from 'rehype-pretty-code'
 // import sectionize from '@hbsnow/rehype-sectionize'
 import remarkEmoji from 'remark-emoji'
 import remarkMath from 'remark-math'
+import remarkSectionize from 'remark-sectionize'
 import remarkToc from 'remark-toc'
 
 import { pluginCollapsibleSections } from '@expressive-code/plugin-collapsible-sections'
@@ -102,6 +103,6 @@ export default defineConfig({
         },
       ],
     ],
-    remarkPlugins: [remarkToc, remarkMath, remarkEmoji],
+    remarkPlugins: [remarkToc, remarkMath, remarkEmoji, remarkSectionize],
   },
 })

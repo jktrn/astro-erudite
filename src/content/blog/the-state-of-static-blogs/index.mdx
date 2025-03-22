@@ -123,7 +123,7 @@ This is a non-exhaustive list of features I believe are essential for a friction
 
 - The `cn(){:js}` function is a utility function which combines [clsx](https://www.npmjs.com/package/clsx) and [tailwind-merge](https://www.npmjs.com/package/tailwind-merge), two packages which allow painless conditional class addition and concatenation:
 
-  ```tsx title="src ＞ lib ＞ utils.ts" caption="A utility function for class name concatenation" showLineNumbers
+  ```tsx title="src⠀›⠀lib⠀›⠀utils.ts" caption="A utility function for class name concatenation" showLineNumbers
   import { type ClassValue, clsx } from 'clsx'
   import { twMerge } from 'tailwind-merge'
 
@@ -134,7 +134,7 @@ This is a non-exhaustive list of features I believe are essential for a friction
 
   This needs to be in every single template. This is an example of it being used in my `<Link>{:html}` component:
 
-  ```astro showLineNumbers title="src ＞ components ＞ Link.astro" caption="A custom Link component with tailwind-merge and clsx" {10-15} "cn"
+  ```astro showLineNumbers title="src⠀›⠀components⠀›⠀Link.astro" caption="A custom Link component with tailwind-merge and clsx" {10-15} "cn"
   ---
   import { cn } from '@/lib/utils'
 
