@@ -1,0 +1,13 @@
+diff --git a/node_modules/rehype-pretty-code/dist/index.js b/node_modules/rehype-pretty-code/dist/index.js
+index 9142858..9f59dc9 100644
+--- a/node_modules/rehype-pretty-code/dist/index.js
++++ b/node_modules/rehype-pretty-code/dist/index.js
+@@ -22,7 +22,7 @@ function isInlineCode(element, parent, bypass = false) {
+   return element.tagName === "code" && isElement(parent) && parent.tagName !== "pre" || element.tagName === "inlineCode";
+ }
+ function isBlockCode(element) {
+-  return element.tagName === "pre" && Array.isArray(element.children) && element.children.length === 1 && isElement(element.children[0]) && element.children[0].tagName === "code";
++  return false;
+ }
+ function getInlineCodeLang(meta, defaultFallbackLang) {
+   const placeholder = "\0";

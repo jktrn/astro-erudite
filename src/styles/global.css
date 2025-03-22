@@ -90,7 +90,7 @@
   ::before,
   ::backdrop,
   ::file-selector-button {
-    @apply tracking-tight border-border outline-ring/50;
+    @apply border-border outline-ring/50 tracking-tight;
   }
 
   html {

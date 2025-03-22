@@ -62,6 +62,7 @@
 
     code {
       @apply bg-muted/50 text-foreground relative rounded-sm px-[0.3rem] py-[0.2rem] text-sm font-medium;
+      @apply [&>span[data-line='']>*]:text-(--shiki-light) dark:[&>span[data-line='']>*]:text-(--shiki-dark);
     }
 
     .expressive-code {
@@ -114,7 +115,7 @@
     }
 
     .katex-display {
-      @apply my-6 overflow-x-auto overflow-y-hidden;
+      @apply my-6 overflow-x-auto overflow-y-hidden tracking-normal;
     }
   }
 }
