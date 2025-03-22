@@ -140,7 +140,7 @@ const PaginationComponent: React.FC<PaginationProps> = ({
     <Pagination>
       <PaginationContent className="flex-wrap">
         <PaginationItem>
-          <PaginationPrevious 
+          <PaginationPrevious
             href={currentPage > 1 ? getPageUrl(currentPage - 1) : undefined}
             isDisabled={currentPage === 1}
           />
@@ -148,7 +148,7 @@ const PaginationComponent: React.FC<PaginationProps> = ({
 
         {pages.map((page) => (
           <PaginationItem key={page}>
-            <PaginationLink 
+            <PaginationLink
               href={getPageUrl(page)}
               isActive={page === currentPage}
             >
@@ -165,7 +165,9 @@ const PaginationComponent: React.FC<PaginationProps> = ({
 
         <PaginationItem>
           <PaginationNext
-            href={currentPage < totalPages ? getPageUrl(currentPage + 1) : undefined}
+            href={
+              currentPage < totalPages ? getPageUrl(currentPage + 1) : undefined
+            }
             isDisabled={currentPage === totalPages}
           />
         </PaginationItem>
@@ -181,7 +183,6 @@ interface PaginationProps {
 }
 
 export default PaginationComponent
-
 
 export {
   Pagination,

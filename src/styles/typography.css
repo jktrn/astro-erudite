@@ -5,7 +5,7 @@
     @apply text-foreground text-base leading-8 [&>*]:first:mt-0 [&>*]:last:mb-0;
 
     p {
-      @apply text-foreground/80 my-5 leading-7 [&:not(:first-child)]:mt-5;
+      @apply text-foreground/80 my-5 leading-7 not-first:mt-5;
     }
 
     h1 {
@@ -41,11 +41,11 @@
     }
 
     ul {
-      @apply marker:text-foreground/30 my-5 ml-6 list-disc [&>li]:mt-4;
+      @apply marker:text-foreground/30 my-5 ml-6 list-disc [&>li]:mt-2;
     }
 
     ol {
-      @apply marker:text-foreground/30 my-5 ml-6 list-decimal [&>li]:mt-4;
+      @apply marker:text-foreground/30 my-5 ml-6 list-decimal [&>li]:mt-2;
       @apply [&[type='A']]:list-[upper-alpha] [&[type='I']]:list-[upper-roman] [&[type='a']]:list-[lower-alpha] [&[type='i']]:list-[lower-roman];
     }
 
@@ -66,11 +66,11 @@
     }
 
     .expressive-code {
-      @apply my-6;
+      @apply my-6 [&_.title]:font-medium!;
     }
 
     blockquote {
-      @apply my-6 border-l-2 pl-6 text-sm;
+      @apply [&_*]:text-muted-foreground my-6 border-l-2 pl-6;
     }
 
     hr {

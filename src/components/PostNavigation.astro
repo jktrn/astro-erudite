@@ -7,7 +7,7 @@ import { Icon } from 'astro-icon/components'
 const { prevPost, nextPost } = Astro.props
 ---
 
-<div class="col-start-2 grid grid-cols-1 sm:grid-cols-2 gap-4">
+<div class="col-start-2 grid grid-cols-1 gap-4 sm:grid-cols-2">
   <Link
     href={nextPost ? `/blog/${nextPost.id}` : '#'}
     class={cn(

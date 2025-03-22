@@ -24,7 +24,7 @@ export default defineConfig({
   site: 'https://astro-erudite.vercel.app',
   integrations: [
     expressiveCode({
-      themes: ['min-light', 'min-dark'],
+      themes: ['github-light', 'github-dark'],
       plugins: [pluginCollapsibleSections(), pluginLineNumbers()],
       useDarkModeMediaQuery: false,
       themeCssSelector: (theme) => `.${theme.name.split('-')[1]}`,
@@ -44,6 +44,7 @@ export default defineConfig({
         codeBackground:
           'color-mix(in oklab, var(--secondary) 25%, transparent)',
         frames: {
+          editorActiveTabForeground: 'var(--muted-foreground)',
           editorActiveTabBackground:
             'color-mix(in oklab, var(--secondary) 25%, transparent)',
           editorActiveTabIndicatorBottomColor: 'transparent',
@@ -95,8 +96,8 @@ export default defineConfig({
         rehypePrettyCode,
         {
           theme: {
-            light: 'min-light',
-            dark: 'min-dark',
+            light: 'github-light',
+            dark: 'github-dark',
           },
         },
       ],
