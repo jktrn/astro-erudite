@@ -3,13 +3,6 @@ import BlogCard from '@/components/BlogCard.astro'
 import Container from '@/components/Container.astro'
 import Link from '@/components/Link.astro'
 import { buttonVariants } from '@/components/ui/button'
-import {
-  Card,
-  CardContent,
-  CardDescription,
-  CardHeader,
-  CardTitle,
-} from '@/components/ui/card'
 import { SITE } from '@/consts'
 import Layout from '@/layouts/Layout.astro'
 import { getCollection } from 'astro:content'
@@ -23,16 +16,15 @@ const blog = (await getCollection('blog'))
 <Layout title="Home" description={SITE.DESCRIPTION}>
   <Container class="flex flex-col gap-y-6">
     <section>
-      <Card>
-        <CardHeader>
-          <CardTitle className="text-3xl">er·u·dite</CardTitle>
-          <CardDescription
-            >/ˈer(y)əˌdīt/ &bull; <span class="font-semibold">adjective</span
-            ></CardDescription
-          >
-        </CardHeader>
-        <CardContent>
-          <p class="mb-2 text-sm text-muted-foreground">
+      <div class="rounded-lg border">
+        <div class="flex flex-col space-y-1.5 p-6">
+          <h3 class="text-3xl leading-none font-medium">er·u·dite</h3>
+          <p class="text-muted-foreground text-sm">
+            /ˈer(y)əˌdīt/ &bull; <span class="font-medium">adjective</span>
+          </p>
+        </div>
+        <div class="p-6 pt-0">
+          <p class="text-muted-foreground mb-2 text-sm">
             astro-erudite is an opinionated, no-frills static blogging template
             built with <Link
               href="https://astro.build"
@@ -56,7 +48,7 @@ const blog = (await getCollection('blog'))
               underline>Astro Micro</Link
             > theme.
           </p>
-          <p class="text-sm text-muted-foreground">
+          <p class="text-muted-foreground text-sm">
             To use this template, check out the <Link
               href="https://github.com/jktrn/astro-erudite"
               class="text-foreground"
@@ -69,12 +61,12 @@ const blog = (await getCollection('blog'))
               underline>The State of Static Blogs in 2024</Link
             >.
           </p>
-        </CardContent>
-      </Card>
+        </div>
+      </div>
     </section>
     <section class="flex flex-col gap-y-4">
-      <h2 class="text-2xl font-bold">Latest posts</h2>
-      <ul class="not-prose flex flex-col gap-y-4">
+      <h2 class="text-2xl font-medium">Latest posts</h2>
+      <ul class="flex flex-col gap-y-4">
         {
           blog.map((post) => (
             <li>

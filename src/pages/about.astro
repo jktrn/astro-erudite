@@ -16,7 +16,7 @@ const projects = await getCollection('projects')
 
     <section>
       <div class="min-w-full">
-        <div class="prose prose-neutral mb-8 dark:prose-invert">
+        <div class="prose mb-8">
           <p class="mb-4">
             astro-erudite is an opinionated, no-frills static blogging template
             that prioritizes simplicity and performance, built with <Link
@@ -47,7 +47,7 @@ const projects = await getCollection('projects')
           </p>
         </div>
 
-        <h2 class="mb-4 text-2xl font-semibold">Example Projects Listing</h2>
+        <h2 class="mb-4 text-2xl font-medium">Example Projects Listing</h2>
         <div class="flex flex-col gap-4">
           {projects.map((project) => <ProjectCard project={project} />)}
         </div>

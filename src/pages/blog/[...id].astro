@@ -60,7 +60,7 @@ const authors = await parseAuthors(post.data.authors ?? [])
   image={post.data.image?.src ?? '/static/1200x630.png'}
 >
   <section
-    class="grid grid-cols-[minmax(0px,1fr)_min(768px,100%)_minmax(0px,1fr)] gap-y-6 *:px-4"
+    class="grid grid-cols-[minmax(0px,1fr)_min(var(--breakpoint-md),100%)_minmax(0px,1fr)] gap-y-6 *:px-4"
   >
     <Breadcrumbs
       items={[
@@ -82,12 +82,12 @@ const authors = await parseAuthors(post.data.authors ?? [])
     }
     <section class="col-start-2 flex flex-col gap-y-6 text-center">
       <div class="flex flex-col gap-y-4">
-        <h1 class="text-4xl font-bold leading-tight sm:text-5xl">
+        <h1 class="text-4xl leading-tight font-medium text-pretty sm:text-5xl">
           {post.data.title}
         </h1>
 
         <div
-          class="flex flex-wrap items-center justify-center gap-2 text-sm text-muted-foreground"
+          class="text-muted-foreground flex flex-wrap items-center justify-center gap-2 text-sm"
         >
           {
             authors.length > 0 && (
@@ -116,13 +116,13 @@ const authors = await parseAuthors(post.data.authors ?? [])
                     </div>
                   ))}
                 </div>
-                <Separator orientation="vertical" className="h-4" />
+                <Separator orientation="vertical" className="h-4!" />
               </>
             )
           }
           <div class="flex items-center gap-2">
             <span>{formatDate(post.data.date)}</span>
-            <Separator orientation="vertical" className="h-4" />
+            <Separator orientation="vertical" className="h-4!" />
             <span>{readingTime(post.body!)}</span>
           </div>
         </div>
@@ -134,12 +134,12 @@ const authors = await parseAuthors(post.data.authors ?? [])
                   href={`/tags/${tag}`}
                   class={badgeVariants({ variant: 'secondary' })}
                 >
-                  <Icon name="lucide:hash" class="size-3 -translate-x-0.5" />
+                  <Icon name="lucide:hash" class="size-3" />
                   {tag}
                 </a>
               ))
             ) : (
-              <span class="text-sm text-muted-foreground">
+              <span class="text-muted-foreground text-sm">
                 No tags available
               </span>
             )
@@ -152,9 +152,7 @@ const authors = await parseAuthors(post.data.authors ?? [])
 
     {headings.length > 0 && <TableOfContents headings={headings} />}
 
-    <article
-      class="prose prose-neutral col-start-2 max-w-none dark:prose-invert"
-    >
+    <article class="prose col-start-2 max-w-none">
       <Content />
     </article>
 
@@ -164,7 +162,7 @@ const authors = await parseAuthors(post.data.authors ?? [])
   <Button
     variant="outline"
     size="icon"
-    className="group fixed bottom-8 right-8 z-50 hidden"
+    className="group fixed right-8 bottom-8 z-50 hidden"
     id="scroll-to-top"
     title="Scroll to top"
     aria-label="Scroll to top"

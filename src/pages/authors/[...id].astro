@@ -44,10 +44,10 @@ const authorPosts = allPosts
       <AuthorCard author={author} linkDisabled />
     </section>
     <section class="flex flex-col gap-y-4">
-      <h2 class="text-2xl font-semibold">Posts by {author.data.name}</h2>
+      <h2 class="text-2xl font-medium">Posts by {author.data.name}</h2>
       {
         authorPosts.length > 0 ? (
-          <ul class="not-prose flex flex-col gap-4">
+          <ul class="flex flex-col gap-4">
             {authorPosts.filter(post => !post.data.draft).map((post) => (
               <li>
                 <BlogCard entry={post} />

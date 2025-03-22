@@ -33,7 +33,7 @@ const socialLinks: SocialLink[] = [
 ---
 
 <div
-  class="overflow-hidden rounded-xl border p-4 transition-colors duration-300 ease-in-out has-[a:hover]:bg-secondary/50"
+  class="has-[a:hover]:bg-secondary/50 overflow-hidden rounded-xl border p-4 transition-colors duration-300 ease-in-out"
 >
   <div class="flex flex-wrap gap-4">
     <Link
@@ -48,21 +48,21 @@ const socialLinks: SocialLink[] = [
         className={cn(
           'size-32 rounded-md',
           !linkDisabled &&
-            'transition-shadow duration-300 hover:cursor-pointer hover:ring-2 hover:ring-primary',
+            'hover:ring-primary transition-shadow duration-300 hover:cursor-pointer hover:ring-2',
         )}
       />
     </Link>
-    <div class="flex flex-grow flex-col justify-between gap-y-4">
+    <div class="flex grow flex-col justify-between gap-y-4">
       <div>
         <div class="flex flex-wrap items-center gap-x-2">
-          <h3 class="text-lg font-semibold">{name}</h3>
+          <h3 class="text-lg font-medium">{name}</h3>
           {
             pronouns && (
-              <span class="text-sm text-muted-foreground">({pronouns})</span>
+              <span class="text-muted-foreground text-sm">({pronouns})</span>
             )
           }
         </div>
-        <p class="text-sm text-muted-foreground">{bio}</p>
+        <p class="text-muted-foreground text-sm">{bio}</p>
       </div>
       <SocialIcons links={socialLinks} />
     </div>

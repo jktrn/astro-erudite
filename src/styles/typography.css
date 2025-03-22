@@ -1,0 +1,122 @@
+@reference './global.css';
+
+@layer components {
+  .prose {
+    @apply text-foreground text-base leading-8;
+    @apply [&>*]:first:mt-0 [&>*]:last:mb-0 [&>section:first-child>*]:mt-0 [&>section:last-child>*]:mb-0;
+
+    p {
+      @apply text-foreground/80 my-5 leading-7 not-first:mt-5;
+    }
+
+    h1 {
+      @apply text-foreground mt-0 mb-6 scroll-m-20 text-4xl leading-tight font-medium;
+    }
+
+    h2 {
+      @apply text-foreground mt-8 mb-4 scroll-m-20 text-2xl leading-tight font-medium;
+    }
+
+    h3 {
+      @apply text-foreground mt-6 mb-4 scroll-m-20 text-xl leading-snug font-medium;
+    }
+
+    h4 {
+      @apply text-foreground mt-6 mb-3 scroll-m-20 text-lg leading-normal font-medium;
+    }
+
+    h5 {
+      @apply text-foreground mt-5 mb-3 scroll-m-20 leading-normal font-medium;
+    }
+
+    h6 {
+      @apply text-foreground mt-5 mb-3 scroll-m-20 leading-normal font-medium;
+    }
+
+    a {
+      @apply text-foreground decoration-muted-foreground hover:decoration-foreground font-medium break-words underline underline-offset-[3px] transition-colors;
+    }
+
+    strong {
+      @apply text-foreground font-medium;
+    }
+
+    ul {
+      @apply marker:text-foreground/30 my-5 ml-6 list-disc [&>li]:mt-2;
+    }
+
+    ol {
+      @apply marker:text-foreground/30 my-5 ml-6 list-decimal [&>li]:mt-2;
+      @apply [&[type='A']]:list-[upper-alpha] [&[type='I']]:list-[upper-roman] [&[type='a']]:list-[lower-alpha] [&[type='i']]:list-[lower-roman];
+    }
+
+    li {
+      @apply text-foreground/80 pl-2 leading-7 [&>p]:my-0;
+    }
+
+    ul ul,
+    ol ol,
+    ul ol,
+    ol ul {
+      @apply marker:text-foreground/30 my-2 ml-6;
+    }
+
+    code {
+      @apply bg-muted/50 text-foreground relative rounded-sm px-[0.3rem] py-[0.2rem] text-sm font-medium;
+      @apply [&>span[data-line='']>*]:text-(--shiki-light) dark:[&>span[data-line='']>*]:text-(--shiki-dark);
+    }
+
+    .expressive-code {
+      @apply my-6 [&_.title]:font-medium!;
+    }
+
+    blockquote {
+      @apply [&_*]:text-muted-foreground my-6 border-l-2 pl-6;
+    }
+
+    hr {
+      @apply border-border my-8 border-t;
+    }
+
+    table {
+      @apply my-8 w-full text-sm;
+    }
+
+    thead {
+      @apply border-muted-foreground/30 border-b;
+    }
+
+    th {
+      @apply border px-4 py-2 text-left font-medium [&[align=center]]:text-center [&[align=right]]:text-right;
+    }
+
+    tbody tr {
+      @apply border-muted-foreground/20 even:bg-muted/50 border-b;
+    }
+
+    td {
+      @apply border px-4 py-2 text-left [&[align=center]]:text-center [&[align=right]]:text-right;
+    }
+
+    img,
+    video {
+      @apply my-8;
+    }
+
+    figure {
+      @apply my-8;
+    }
+
+    figcaption {
+      @apply text-muted-foreground mt-3 text-sm;
+    }
+
+    kbd {
+      @apply text-foreground bg-muted border-border rounded-md border px-2 py-1 text-xs font-medium shadow-sm;
+    }
+
+    .katex-display {
+      @apply my-6 overflow-x-auto overflow-y-hidden tracking-normal;
+    }
+  }
+}

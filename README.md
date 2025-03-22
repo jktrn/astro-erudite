@@ -20,18 +20,19 @@ astro-erudite is an opinionated, no-frills static blogging template built with [
 
 Below are some fantastic examples of websites based on this template. If you wish to add your site to this list, open a pull request!
 
-| Site | Author | Description/Features | Source |
-|------|--------|----------------------|--------|
-| [enscribe.dev](https://enscribe.dev) | [@jktrn](https://github.com/jktrn) | Heavily modified bento-style homepage with client interactivity, with custom MDX components! | [→](https://github.com/jktrn/enscribe.dev) |
-| [emile.sh](https://emile.sh) | [@echoghi](https://github.com/echoghi) | A minimalist personal blog using the [flexoki](https://stephango.com/flexoki) theme | [→](https://github.com/echoghi/v5) |
-| [decentparadox.me](https://decentparadox.me) | [@decentparadox](https://github.com/decentparadox) | A heavily customized personal portfolio with a sci-fi theme! | [→](https://github.com/decentparadox/decentparadox.me) |
-| [flocto.github.io](https://flocto.github.io/) | [@flocto](https://github.com/flocto) | A slightly modified personal blog | [→](https://github.com/flocto/flocto.github.io) |
-[dumbprism.me](https://www.dumbprism.me/) | [@dumbprism](https://github.com/dumbprism) | A customized portfolio inspired by enscribe's bento grid style adding my gist of UI |  [→](https://github.com/dumbprism/dumbprism-portfolio) |  
+| Site                                          | Author                                             | Description/Features                                                                         | Source                                                 |
+| --------------------------------------------- | -------------------------------------------------- | -------------------------------------------------------------------------------------------- | ------------------------------------------------------ |
+| [enscribe.dev](https://enscribe.dev)          | [@jktrn](https://github.com/jktrn)                 | Heavily modified bento-style homepage with client interactivity, with custom MDX components! | [→](https://github.com/jktrn/enscribe.dev)             |
+| [emile.sh](https://emile.sh)                  | [@echoghi](https://github.com/echoghi)             | A minimalist personal blog using the [flexoki](https://stephango.com/flexoki) theme          | [→](https://github.com/echoghi/v5)                     |
+| [decentparadox.me](https://decentparadox.me)  | [@decentparadox](https://github.com/decentparadox) | A heavily customized personal portfolio with a sci-fi theme!                                 | [→](https://github.com/decentparadox/decentparadox.me) |
+| [flocto.github.io](https://flocto.github.io/) | [@flocto](https://github.com/flocto)               | A slightly modified personal blog                                                            | [→](https://github.com/flocto/flocto.github.io)        |
+| [dumbprism.me](https://www.dumbprism.me/)     | [@dumbprism](https://github.com/dumbprism)         | A customized portfolio inspired by enscribe's bento grid style adding my gist of UI          | [→](https://github.com/dumbprism/dumbprism-portfolio)  |
+
 ## Features
 
 - [Astro](https://astro.build/)&rsquo;s [Islands](https://docs.astro.build/en/concepts/islands/) architecture for partial/selective hydration and client-side interactivity while maintaining a fast-to-render static site.
 - [shadcn/ui](https://ui.shadcn.com/)&rsquo;s [Tailwind](https://tailwindcss.com/) color convention for automatic styling across both light and dark themes. Includes accessible, theme-aware UI components for navigation, buttons, etc.
-- [rehype-pretty-code](https://rehype-pretty.pages.dev/) with [Shiki](https://github.com/shikijs/shiki) for advanced code block styling, highlighting, and code block titles/captions.
+- [Expressive Code](https://expressive-code.com/) for advanced code block styling, highlighting, and code block titles/captions.
 - Blog post authoring using [MDX](https://mdxjs.com/) for component-style content, alongside $\LaTeX$ rendering using [KaTeX](https://katex.org/).
 - Astro [View Transitions](https://docs.astro.build/en/guides/view-transitions/) in <abbr title="Single Page Application">SPA</abbr> mode for smooth, opt-in animations during route switching.
 - SEO optimization with fine-grained control over metadata and [Open Graph](https://ogp.me/) tags for each post.
@@ -43,15 +44,15 @@ Below are some fantastic examples of websites based on this template. If you wis
 
 This is a list of the various technologies used to build this template:
 
-| Category            | Technology Name                                                                                    |
-| ------------------- | -------------------------------------------------------------------------------------------------- |
-| Framework           | [Astro](https://astro.build/)                                                                      |
-| Styling             | [Tailwind](https://tailwindcss.com)                                                                |
-| Components          | [shadcn/ui](https://ui.shadcn.com/)                                                                |
-| Content             | [MDX](https://mdxjs.com/)                                                                          |
-| Syntax Highlighting | [Shiki](https://github.com/shikijs/shiki) + [rehype-pretty-code](https://rehype-pretty.pages.dev/) |
-| Graphics            | [Figma](https://www.figma.com/)                                                                    |
-| Deployment          | [Vercel](https://vercel.com)                                                                       |
+| Category   | Technology Name                                                                            |
+| ---------- | ------------------------------------------------------------------------------------------ |
+| Framework  | [Astro](https://astro.build/)                                                              |
+| Styling    | [Tailwind](https://tailwindcss.com)                                                        |
+| Components | [shadcn/ui](https://ui.shadcn.com/)                                                        |
+| Content    | [MDX](https://mdxjs.com/)                                                                  |
+| Codeblocks | [Expressive Code](https://expressive-code.com/), [Shiki](https://github.com/shikijs/shiki) |
+| Graphics   | [Figma](https://www.figma.com/)                                                            |
+| Deployment | [Vercel](https://vercel.com)                                                               |
 
 ## Getting Started
 
@@ -122,29 +123,27 @@ export const SOCIAL_LINKS: Link[] = [
 Colors are defined in `src/styles/global.css` in [<abbr title="Hue, Saturation, Lightness">HSL</abbr> format](https://en.wikipedia.org/wiki/HSL_and_HSV), using the [shadcn/ui](https://ui.shadcn.com/) convention:
 
 ```css
-@layer base {
-  :root {
-    --background: 0 0% 100%;
-    --foreground: 0 0% 3.9%;
-    --primary: 0 0% 9%;
-    --primary-foreground: 0 0% 98%;
-    --secondary: 0 0% 80.1%;
-    --secondary-foreground: 0 0% 9%;
-    --muted: 0 0% 80.1%;
-    --muted-foreground: 0 0% 45.1%;
-    --accent: 0 0% 80.1%;
-    --accent-foreground: 0 0% 9%;
-    --additive: 112 50% 36%; /* Unique to astro-erudite */
-    --additive-foreground: 0 0% 98%; /* Unique to astro-erudite */
-    --destructive: 0 84.2% 60.2%;
-    --destructive-foreground: 0 0% 98%;
-    --border: 0 0% 89.8%;
-    --ring: 0 0% 3.9%;
-  }
+:root {
+  --background: oklch(1 0 0);
+  --foreground: oklch(0.145 0 0);
+  --card: oklch(1 0 0);
+  --card-foreground: oklch(0.145 0 0);
+  --popover: oklch(1 0 0);
+  --popover-foreground: oklch(0.145 0 0);
+  --primary: oklch(0.205 0 0);
+  --primary-foreground: oklch(0.985 0 0);
+  --secondary: oklch(0.97 0 0);
+  --secondary-foreground: oklch(0.205 0 0);
+  --muted: oklch(0.97 0 0);
+  --muted-foreground: oklch(0.556 0 0);
+  --accent: oklch(0.97 0 0);
+  --accent-foreground: oklch(0.205 0 0);
+  --destructive: oklch(0.577 0.245 27.325);
+  --border: oklch(0.922 0 0);
+  --ring: oklch(0.708 0 0);
+}
 
-  .dark {
-    /* ... */
-  }
+.dark {
   /* ... */
 }
 ```
@@ -169,15 +168,15 @@ draft: false
 
 The blog post schema is defined as follows:
 
-| Field         | Type (Zod)      | Requirements                                                                                                                                                                      | Required |
-| ------------- | --------------- | --------------------------------------------------------------------------------------------------------------------------------------------------------------------------------- | -------- |
-| `title`       | `string`        | Must be ≤60 characters.                                                                                                                                                           | Yes      |
-| `description` | `string`        | Must be ≤155 characters.                                                                                                                                                          | Yes      |
-| `date`        | `coerce.date()` | Must be in `YYYY-MM-DD` format.                                                                                                                                                   | Yes      |
-| `image`       | `image()`       | Must be exactly 1200px &times; 630px.                                                                                                                                             | Optional |
-| `tags`        | `string[]`      | Preferably use kebab-case for these.                                                                                                                                              | Optional |
+| Field         | Type (Zod)      | Requirements                                                                                                                                                                    | Required |
+| ------------- | --------------- | ------------------------------------------------------------------------------------------------------------------------------------------------------------------------------- | -------- |
+| `title`       | `string`        | Must be ≤60 characters.                                                                                                                                                         | Yes      |
+| `description` | `string`        | Must be ≤155 characters.                                                                                                                                                        | Yes      |
+| `date`        | `coerce.date()` | Must be in `YYYY-MM-DD` format.                                                                                                                                                 | Yes      |
+| `image`       | `image()`       | Should be exactly 1200px &times; 630px.                                                                                                                                         | Optional |
+| `tags`        | `string[]`      | Preferably use kebab-case for these.                                                                                                                                            | Optional |
 | `authors`     | `string[]`      | If the author has a profile, use the id associated with their Markdown file in `src/content/authors/` (e.g. if their file is named `jane-doe.md`, use `jane-doe` in the array). | Optional |
-| `draft`       | `boolean`       | Defaults to `false` if not provided.                                                                                                                                              | Optional |
+| `draft`       | `boolean`       | Defaults to `false` if not provided.                                                                                                                                            | Optional |
 
 ### Authors
 
@@ -230,13 +229,13 @@ link: 'https://example.com'
 
 The project schema is defined as follows:
 
-| Field         | Type (Zod)     | Requirements                          | Required |
-| ------------- | -------------- | ------------------------------------- | -------- |
-| `name`        | `string`       | n/a                                   | Yes      |
-| `description` | `string`       | n/a                                   | Yes      |
-| `tags`        | `string[]`     | n/a                                   | Yes      |
-| `image`       | `image()`      | Must be exactly 1200px &times; 630px. | Yes      |
-| `link`        | `string.url()` | Must be a valid URL.                  | Yes      |
+| Field         | Type (Zod)     | Requirements                            | Required |
+| ------------- | -------------- | --------------------------------------- | -------- |
+| `name`        | `string`       | n/a                                     | Yes      |
+| `description` | `string`       | n/a                                     | Yes      |
+| `tags`        | `string[]`     | n/a                                     | Yes      |
+| `image`       | `image()`      | Should be exactly 1200px &times; 630px. | Yes      |
+| `link`        | `string.url()` | Must be a valid URL.                    | Yes      |
 
 ## License
 
