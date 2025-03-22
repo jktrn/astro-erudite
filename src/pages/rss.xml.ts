@@ -5,26 +5,18 @@ import { getCollection } from 'astro:content'
 
 export async function GET(context: APIContext) {
   try {
-    const blog = (await getCollection('blog')).filter(
-      (post) => !post.data.draft,
-    )
+    const posts = await getCollection('blog', ({ data }) => !data.draft)
+    posts.sort((a, b) => b.data.date.valueOf() - a.data.date.valueOf())
 
-    // Sort posts by date
-    const items = [...blog].sort(
-      (a, b) =>
-        new Date(b.data.date).valueOf() - new Date(a.data.date).valueOf(),
-    )
-
-    // Return RSS feed
     return rss({
       title: SITE.TITLE,
       description: SITE.DESCRIPTION,
       site: context.site ?? SITE.SITEURL,
-      items: items.map((item) => ({
-        title: item.data.title,
-        description: item.data.description,
-        pubDate: item.data.date,
-        link: `/${item.collection}/${item.id}/`,
+      items: posts.map((post) => ({
+        title: post.data.title,
+        description: post.data.description,
+        pubDate: post.data.date,
+        link: `/blog/${post.id}/`,
       })),
     })
   } catch (error) {

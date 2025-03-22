@@ -9,7 +9,7 @@
 
 </div>
 
-astro-erudite is an opinionated, no-frills static blogging template built with [Astro](https://astro.build/), [Tailwind](https://tailwindcss.com/), and [shadcn/ui](https://ui.shadcn.com/). Extraordinarily loosely based off the [Astro Micro](https://astro-micro.vercel.app/) theme by [trevortylerlee](https://github.com/trevortylerlee).
+astro-erudite is an opinionated, unstyled static blogging template built with [Astro](https://astro.build/), [Tailwind](https://tailwindcss.com/), and [shadcn/ui](https://ui.shadcn.com/). Extraordinarily loosely based off the [Astro Micro](https://astro-micro.vercel.app/) theme by [trevortylerlee](https://github.com/trevortylerlee).
 
 > [!NOTE]
 > To learn more about why this template exists, read [The State of Static Blogs in 2024](https://astro-erudite.vercel.app/blog/the-state-of-static-blogs), where I share my take on what constitutes a great blogging template and my goals while developing this one.
@@ -27,7 +27,7 @@ Below are some fantastic examples of websites based on this template. If you wis
 | [decentparadox.me](https://decentparadox.me)  | [@decentparadox](https://github.com/decentparadox) | A heavily customized personal portfolio with a sci-fi theme!                                 | [→](https://github.com/decentparadox/decentparadox.me) |
 | [flocto.github.io](https://flocto.github.io/) | [@flocto](https://github.com/flocto)               | A slightly modified personal blog                                                            | [→](https://github.com/flocto/flocto.github.io)        |
 | [dumbprism.me](https://www.dumbprism.me/)     | [@dumbprism](https://github.com/dumbprism)         | A customized portfolio inspired by enscribe's bento grid style adding my gist of UI          | [→](https://github.com/dumbprism/dumbprism-portfolio)  |
-| [hyuki.dev](https://hyuki.dev/)               | [@snow0406](https://github.com/snow0406)           | A minimalist blog with a blue color scheme, focusing on simplicity !                         | [→](https://github.com/Snow0406/hyuki.dev)             |
+| [hyuki.dev](https://hyuki.dev/)               | [@snow0406](https://github.com/snow0406)           | A minimalist blog with a blue color scheme, focusing on simplicity!                          | [→](https://github.com/Snow0406/hyuki.dev)             |
 
 ## Features
 
@@ -98,7 +98,7 @@ Edit the `src/consts.ts` file to update your site's metadata, navigation links, 
 export const SITE: Site = {
   TITLE: 'astro-erudite',
   DESCRIPTION:
-    'astro-erudite is a opinionated, no-frills blogging template—built with Astro, Tailwind, and shadcn/ui.',
+    'astro-erudite is a opinionated, unstyled blogging template—built with Astro, Tailwind, and shadcn/ui.',
   EMAIL: 'jason@enscribe.dev',
   NUM_POSTS_ON_HOMEPAGE: 2,
   SITEURL: 'https://astro-erudite.vercel.app',
@@ -147,6 +147,20 @@ Colors are defined in `src/styles/global.css` in [OKLCH format](https://develope
 .dark {
   /* ... */
 }
+```
+
+### Favicons
+
+Favicons are generated using [RealFaviconGenerator](https://realfavicongenerator.net/). To adjust the favicons, replace the files in the `public/` directory (such as `favicon.ico`, `favicon.svg`, `apple-touch-icon.png`, etc.) with your own. After updating the favicon files, you'll also need to adjust the references in `src/components/Head.astro` to match your new favicon filenames and paths:
+
+```html
+<!-- Replace these with the generated meta tags -->
+<link rel="icon" type="image/png" href="/favicon-96x96.png" sizes="96x96" />
+<link rel="icon" type="image/svg+xml" href="/favicon.svg" />
+<link rel="shortcut icon" href="/favicon.ico" />
+<link rel="apple-touch-icon" sizes="180x180" href="/apple-touch-icon.png" />
+<meta name="apple-mobile-web-app-title" content="astro-erudite" />
+<link rel="manifest" href="/site.webmanifest" />
 ```
 
 ## Adding Content
@@ -198,18 +212,18 @@ mail: 'jason@enscribe.dev'
 
 The author schema is defined as follows:
 
-| Field      | Type (Zod)       | Requirements                                                                                                                        | Required |
-| ---------- | ---------------- | ----------------------------------------------------------------------------------------------------------------------------------- | -------- |
-| `name`     | `string`         | n/a                                                                                                                                 | Yes      |
-| `pronouns` | `string`         | n/a                                                                                                                                 | Optional |
-| `avatar`   | `string.url()`   | Must be a valid URL. Preferably use [Gravatar](https://en.gravatar.com/site/implement/images/) with the `?size=256` size parameter. | Yes      |
-| `bio`      | `string`         | n/a                                                                                                                                 | Optional |
-| `mail`     | `string.email()` | Must be a valid email address.                                                                                                      | Optional |
-| `website`  | `string.url()`   | Must be a valid URL.                                                                                                                | Optional |
-| `twitter`  | `string.url()`   | Must be a valid URL.                                                                                                                | Optional |
-| `github`   | `string.url()`   | Must be a valid URL.                                                                                                                | Optional |
-| `linkedin` | `string.url()`   | Must be a valid URL.                                                                                                                | Optional |
-| `discord`  | `string.url()`   | Must be a valid URL.                                                                                                                | Optional |
+| Field      | Type (Zod)                                 | Requirements                                                                                                                                                             | Required |
+| ---------- | ------------------------------------------ | ------------------------------------------------------------------------------------------------------------------------------------------------------------------------ | -------- |
+| `name`     | `string`                                   | n/a                                                                                                                                                                      | Yes      |
+| `pronouns` | `string`                                   | n/a                                                                                                                                                                      | Optional |
+| `avatar`   | `string.url()` or `string.startsWith('/')` | Should be either a valid URL or a path starting with `/`. Preferably use [Gravatar](https://en.gravatar.com/site/implement/images/) with the `?size=256` size parameter. | Yes      |
+| `bio`      | `string`                                   | n/a                                                                                                                                                                      | Optional |
+| `mail`     | `string.email()`                           | Must be a valid email address.                                                                                                                                           | Optional |
+| `website`  | `string.url()`                             | Must be a valid URL.                                                                                                                                                     | Optional |
+| `twitter`  | `string.url()`                             | Must be a valid URL.                                                                                                                                                     | Optional |
+| `github`   | `string.url()`                             | Must be a valid URL.                                                                                                                                                     | Optional |
+| `linkedin` | `string.url()`                             | Must be a valid URL.                                                                                                                                                     | Optional |
+| `discord`  | `string.url()`                             | Must be a valid URL.                                                                                                                                                     | Optional |
 
 > [!TIP]
 > You can add as many social media links as you want, as long as you adjust the schema! Make sure you also support the new field in the `src/components/SocialIcons.astro` component.

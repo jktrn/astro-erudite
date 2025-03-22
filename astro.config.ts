@@ -10,7 +10,6 @@ import { rehypeHeadingIds } from '@astrojs/markdown-remark'
 import rehypeExternalLinks from 'rehype-external-links'
 import rehypeKatex from 'rehype-katex'
 import rehypePrettyCode from 'rehype-pretty-code'
-// import sectionize from '@hbsnow/rehype-sectionize'
 import remarkEmoji from 'remark-emoji'
 import remarkMath from 'remark-math'
 import remarkSectionize from 'remark-sectionize'
@@ -92,7 +91,6 @@ export default defineConfig({
       ],
       rehypeHeadingIds,
       rehypeKatex,
-      // sectionize,
       [
         rehypePrettyCode,
         {

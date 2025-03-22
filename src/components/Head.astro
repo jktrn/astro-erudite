@@ -19,6 +19,10 @@ const { title, description, image = '/static/twitter-card.png' } = Astro.props
 <meta charset="utf-8" />
 <meta name="viewport" content="width=device-width,initial-scale=1" />
 <meta name="generator" content={Astro.generator} />
+<meta http-equiv="X-UA-Compatible" content="IE=edge" />
+<meta name="mobile-web-app-capable" content="yes" />
+<meta name="apple-mobile-web-app-capable" content="yes" />
+<meta name="format-detection" content="telephone=no,date=no,address=no,email=no,url=no" />
 
 <link rel="canonical" href={canonicalURL} />
 <link rel="sitemap" href="/sitemap-index.xml" />
@@ -26,14 +30,17 @@ const { title, description, image = '/static/twitter-card.png' } = Astro.props
 <title>{title}</title>
 <meta name="title" content={title} />
 <meta name="description" content={description} />
+<meta name="author" content={SITE.TITLE} />
 
+<link rel="icon" type="image/png" href="/favicon-96x96.png" sizes="96x96" />
+<link rel="icon" type="image/svg+xml" href="/favicon.svg" />
+<link rel="shortcut icon" href="/favicon.ico" />
 <link rel="apple-touch-icon" sizes="180x180" href="/apple-touch-icon.png" />
-<link rel="icon" type="image/png" sizes="32x32" href="/favicon-32x32.png" />
-<link rel="icon" type="image/png" sizes="16x16" href="/favicon-16x16.png" />
+<meta name="apple-mobile-web-app-title" content="astro-erudite" />
 <link rel="manifest" href="/site.webmanifest" />
-<link rel="mask-icon" href="/safari-pinned-tab.svg" color="#121212" />
-<meta name="msapplication-TileColor" content="#121212" />
-<meta name="theme-color" content="#121212" />
+
+<meta name="theme-color" content="#121212" media="(prefers-color-scheme: dark)" />
+<meta name="theme-color" content="#ffffff" media="(prefers-color-scheme: light)" />
 
 <meta property="og:type" content="website" />
 <meta property="og:url" content={Astro.url} />
@@ -81,7 +88,6 @@ const { title, description, image = '/static/twitter-card.png' } = Astro.props
   setDarkMode(document)
 
   document.addEventListener('astro:before-swap', (ev) => {
-    // Pass the incoming document to set the theme on it
     setDarkMode(ev.newDocument)
   })
 </script>
