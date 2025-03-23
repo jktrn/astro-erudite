@@ -28,7 +28,7 @@ const socialLinks: SocialLink[] = [
   github && { href: github, label: 'GitHub' },
   twitter && { href: twitter, label: 'Twitter' },
   linkedin && { href: linkedin, label: 'LinkedIn' },
-  mail && { href: mail, label: 'Email' },
+  mail && { href: `mailto:${mail}`, label: 'Email' },
 ].filter(Boolean) as SocialLink[]
 ---
 
