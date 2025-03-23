@@ -10,10 +10,10 @@ import { getCollection } from 'astro:content'
 const blog = (await getCollection('blog'))
   .filter((post) => !post.data.draft)
   .sort((a, b) => b.data.date.valueOf() - a.data.date.valueOf())
-  .slice(0, SITE.NUM_POSTS_ON_HOMEPAGE)
+  .slice(0, SITE.featuredPostCount)
 ---
 
-<Layout title="Home" description={SITE.DESCRIPTION}>
+<Layout title="Home" description={SITE.description}>
   <Container class="flex flex-col gap-y-6">
     <section>
       <div class="rounded-lg border">

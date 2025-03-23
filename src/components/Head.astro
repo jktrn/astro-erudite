@@ -30,7 +30,7 @@ const { title, description, image = '/static/twitter-card.png' } = Astro.props
 <title>{title}</title>
 <meta name="title" content={title} />
 <meta name="description" content={description} />
-<meta name="author" content={SITE.TITLE} />
+<meta name="author" content={SITE.title} />
 
 <link rel="icon" type="image/png" href="/favicon-96x96.png" sizes="96x96" />
 <link rel="icon" type="image/svg+xml" href="/favicon.svg" />
@@ -44,7 +44,7 @@ const { title, description, image = '/static/twitter-card.png' } = Astro.props
 
 <meta property="og:type" content="website" />
 <meta property="og:url" content={Astro.url} />
-<meta property="og:site_name" content={SITE.TITLE} />
+<meta property="og:site_name" content={SITE.title} />
 <meta property="og:title" content={title} />
 <meta property="og:description" content={description} />
 <meta property="og:image" content={new URL(image, Astro.url)} />

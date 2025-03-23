@@ -94,28 +94,30 @@ This is a list of the various technologies used to build this template:
 
 Edit the `src/consts.ts` file to update your site's metadata, navigation links, and social links:
 
-```typescript
+```ts
 export const SITE: Site = {
-  TITLE: 'astro-erudite',
-  DESCRIPTION:
+  title: 'astro-erudite',
+  description:
     'astro-erudite is a opinionated, unstyled blogging template—built with Astro, Tailwind, and shadcn/ui.',
-  EMAIL: 'jason@enscribe.dev',
-  NUM_POSTS_ON_HOMEPAGE: 2,
-  SITEURL: 'https://astro-erudite.vercel.app',
+  href: 'https://astro-erudite.vercel.app',
+  featuredPostCount: 2,
+  postsPerPage: 3,
 }
 
-export const NAV_LINKS: Link[] = [
-  { href: '/blog', label: 'blog' },
-  { href: '/authors', label: 'authors' },
-  { href: '/about', label: 'about' },
-  { href: '/tags', label: 'tags' },
+export const NAV_LINKS: SocialLink[] = [
+  {
+    href: '/blog',
+    label: 'blog',
+  },
+  // ...
 ]
 
-export const SOCIAL_LINKS: Link[] = [
-  { href: 'https://github.com/jktrn', label: 'GitHub' },
-  { href: 'https://twitter.com/enscry', label: 'Twitter' },
-  { href: 'jason@enscribe.dev', label: 'Email' },
-  { href: '/rss.xml', label: 'RSS' },
+export const SOCIAL_LINKS: SocialLink[] = [
+  {
+    href: 'https://github.com/jktrn',
+    label: 'GitHub',
+  },
+  // ...
 ]
 ```
 
@@ -185,8 +187,8 @@ The blog post schema is defined as follows:
 
 | Field         | Type (Zod)      | Requirements                                                                                                                                                                    | Required |
 | ------------- | --------------- | ------------------------------------------------------------------------------------------------------------------------------------------------------------------------------- | -------- |
-| `title`       | `string`        | Must be ≤60 characters.                                                                                                                                                         | Yes      |
-| `description` | `string`        | Must be ≤155 characters.                                                                                                                                                        | Yes      |
+| `title`       | `string`        | Should be ≤60 characters.                                                                                                                                                       | Yes      |
+| `description` | `string`        | Should be ≤155 characters.                                                                                                                                                      | Yes      |
 | `date`        | `coerce.date()` | Must be in `YYYY-MM-DD` format.                                                                                                                                                 | Yes      |
 | `image`       | `image()`       | Should be exactly 1200px &times; 630px.                                                                                                                                         | Optional |
 | `tags`        | `string[]`      | Preferably use kebab-case for these.                                                                                                                                            | Optional |
