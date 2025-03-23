@@ -10,7 +10,7 @@ const { title = SITE.title, description = SITE.description } = Astro.props
 const image = new URL('/static/1200x630.png', Astro.site)
 ---
 
-<title>{title}</title>
+<title>{`${title} | ${SITE.title}`}</title>
 <meta name="description" content={description} />
 <link rel="canonical" href={SITE.href} />
 

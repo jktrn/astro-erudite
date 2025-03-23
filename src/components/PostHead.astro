@@ -8,33 +8,33 @@ interface Props {
 
 const { post } = Astro.props
 
-const postTitle = post.data.title || SITE.title
-const postDescription = post.data.description || SITE.description
-const fallbackImage = new URL('/static/1200x630.png', Astro.site)
+const title = post.data.title || SITE.title
+const description = post.data.description || SITE.description
+const image = new URL('/static/1200x630.png', Astro.site)
 ---
 
-<title>{`${postTitle} | ${SITE.title}`}</title>
-<meta name="title" content={`${postTitle} | ${SITE.title}`} />
-<meta name="description" content={postDescription} />
+<title>{`${title} | ${SITE.title}`}</title>
+<meta name="title" content={`${title} | ${SITE.title}`} />
+<meta name="description" content={description} />
 <link rel="canonical" href={SITE.href} />
 
-<meta property="og:title" content={postTitle} />
-<meta property="og:description" content={postDescription} />
+<meta property="og:title" content={title} />
+<meta property="og:description" content={description} />
 <meta
   property="og:image"
-  content={`${SITE.href}${post?.data?.image?.src}` || fallbackImage}
+  content={`${SITE.href}${post?.data?.image?.src}` || image}
 />
-<meta property="og:image:alt" content={postTitle} />
+<meta property="og:image:alt" content={title} />
 <meta property="og:type" content="website" />
 <meta property="og:locale" content={SITE.locale} />
 
-<meta name="twitter:title" content={postTitle} />
-<meta name="twitter:description" content={postDescription} />
+<meta name="twitter:title" content={title} />
+<meta name="twitter:description" content={description} />
 <meta
   property="twitter:image"
-  content={`${SITE.href}${post?.data?.image?.src}` || fallbackImage}
+  content={`${SITE.href}${post?.data?.image?.src}` || image}
 />
-<meta name="twitter:image:alt" content={postTitle} />
+<meta name="twitter:image:alt" content={title} />
 <meta name="twitter:card" content="summary_large_image" />
 
 {
