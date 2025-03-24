@@ -15,7 +15,7 @@ const projects = (await getCollection('projects')).sort((a, b) => {
 ---
 
 <Layout>
-  <PageHead slot="head" title="About" description={SITE.description} />
+  <PageHead slot="head" title="About" />
   <Breadcrumbs items={[{ label: 'About', icon: 'lucide:info' }]} />
 
   <section>

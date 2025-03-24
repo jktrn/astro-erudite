@@ -9,11 +9,7 @@ const authors = await getCollection('authors')
 ---
 
 <Layout>
-  <PageHead
-    slot="head"
-    title="Authors"
-    description="A list of authors on this site."
-  />
+  <PageHead slot="head" title="Authors" />
   <Breadcrumbs items={[{ label: 'Authors', icon: 'lucide:users' }]} />
   {
     authors.length > 0 ? (

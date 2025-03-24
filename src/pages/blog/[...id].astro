@@ -23,7 +23,8 @@ export async function getStaticPaths() {
     props: post,
   }))
 }
-type Props = CollectionEntry<'blog'>
+
+interface Props extends CollectionEntry<'blog'> {}
 
 const posts = (await getCollection('blog'))
   .filter((post) => !post.data.draft)
@@ -80,13 +81,13 @@ const authors = await parseAuthors(post.data.authors ?? [])
       )
     }
     <section class="col-start-2 flex flex-col gap-y-6 text-center">
-      <div class="flex flex-col gap-y-4">
-        <h1 class="text-4xl leading-tight font-medium text-pretty sm:text-5xl">
+      <div class="flex flex-col">
+        <h1 class="text-4xl leading-tight font-medium text-pretty sm:text-5xl mb-2">
           {post.data.title}
         </h1>
 
         <div
-          class="text-muted-foreground flex flex-wrap items-center justify-center gap-2 text-sm"
+          class="text-muted-foreground flex flex-wrap items-center justify-center gap-2 text-sm mb-4"
         >
           {
             authors.length > 0 && (

@@ -23,11 +23,7 @@ const tags = [...tagCounts.keys()].sort((a, b) => {
 ---
 
 <Layout>
-  <PageHead
-    slot="head"
-    title="Tags"
-    description="A list of all tags used in blog posts"
-  />
+  <PageHead slot="head" title="Tags" />
   <Breadcrumbs items={[{ label: 'Tags', icon: 'lucide:tags' }]} />
 
   <div class="flex flex-col gap-4">
