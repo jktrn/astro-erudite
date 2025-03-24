@@ -7,7 +7,11 @@ import { SITE } from '@/consts'
 import Layout from '@/layouts/Layout.astro'
 import { getCollection } from 'astro:content'
 
-const projects = await getCollection('projects')
+const projects = (await getCollection('projects')).sort((a, b) => {
+  const dateA = a.data.startDate?.getTime() || 0
+  const dateB = b.data.startDate?.getTime() || 0
+  return dateB - dateA
+})
 ---
 
 <Layout>
