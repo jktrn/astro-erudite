@@ -97,8 +97,7 @@ Edit the `src/consts.ts` file to update your site's metadata, navigation links, 
 ```ts
 export const SITE: Site = {
   title: 'astro-erudite',
-  description:
-    'astro-erudite is a opinionated, unstyled blogging template—built with Astro, Tailwind, and shadcn/ui.',
+  description: // ...
   href: 'https://astro-erudite.vercel.app',
   featuredPostCount: 2,
   postsPerPage: 3,
@@ -129,10 +128,6 @@ Colors are defined in `src/styles/global.css` in [OKLCH format](https://develope
 :root {
   --background: oklch(1 0 0);
   --foreground: oklch(0.145 0 0);
-  --card: oklch(1 0 0);
-  --card-foreground: oklch(0.145 0 0);
-  --popover: oklch(1 0 0);
-  --popover-foreground: oklch(0.145 0 0);
   --primary: oklch(0.205 0 0);
   --primary-foreground: oklch(0.985 0 0);
   --secondary: oklch(0.97 0 0);
@@ -153,7 +148,7 @@ Colors are defined in `src/styles/global.css` in [OKLCH format](https://develope
 
 ### Favicons
 
-Favicons are generated using [RealFaviconGenerator](https://realfavicongenerator.net/). To adjust the favicons, replace the files in the `public/` directory (such as `favicon.ico`, `favicon.svg`, `apple-touch-icon.png`, etc.) with your own. After updating the favicon files, you'll also need to adjust the references in `src/components/Head.astro` to match your new favicon filenames and paths:
+Favicons are generated using [RealFaviconGenerator](https://realfavicongenerator.net/). To adjust the favicons, replace the files in the `public/` directory (such as `favicon.ico`, `favicon.svg`, `apple-touch-icon.png`, etc.) with your own. After updating the favicon files, you'll also need to adjust the references in `src/components/Favicons.astro` to match your new favicon filenames and paths:
 
 ```html
 <!-- Replace these with the generated meta tags -->
@@ -241,18 +236,22 @@ description: 'This is an example project description! You should replace this wi
 tags: ['Framework A', 'Library B', 'Tool C', 'Resource D']
 image: '/static/1200x630.png'
 link: 'https://example.com'
+startDate: '2024-01-01'
+endDate: '2024-01-01'
 ---
 ```
 
 The project schema is defined as follows:
 
-| Field         | Type (Zod)     | Requirements                            | Required |
-| ------------- | -------------- | --------------------------------------- | -------- |
-| `name`        | `string`       | n/a                                     | Yes      |
-| `description` | `string`       | n/a                                     | Yes      |
-| `tags`        | `string[]`     | n/a                                     | Yes      |
-| `image`       | `image()`      | Should be exactly 1200px &times; 630px. | Yes      |
-| `link`        | `string.url()` | Must be a valid URL.                    | Yes      |
+| Field         | Type (Zod)      | Requirements                            | Required |
+| ------------- | --------------- | --------------------------------------- | -------- |
+| `name`        | `string`        | n/a                                     | Yes      |
+| `description` | `string`        | n/a                                     | Yes      |
+| `tags`        | `string[]`      | n/a                                     | Yes      |
+| `image`       | `image()`       | Should be exactly 1200px &times; 630px. | Yes      |
+| `link`        | `string.url()`  | Must be a valid URL.                    | Yes      |
+| `startDate`   | `coerce.date()` | Must be in `YYYY-MM-DD` format.         | Optional |
+| `endDate`     | `coerce.date()` | Must be in `YYYY-MM-DD` format.         | Optional |
 
 ## License
 
