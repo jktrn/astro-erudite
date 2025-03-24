@@ -39,7 +39,7 @@ function buildToc(headings: Heading[]): Heading[] {
 
 <details
   open
-  class="group col-start-2 mx-4 block rounded-xl border p-4 xl:hidden"
+  class="group col-start-2 block rounded-xl border p-4 xl:hidden"
 >
   <summary
     class="flex cursor-pointer items-center justify-between text-xl font-medium group-open:pb-4"
@@ -65,11 +65,11 @@ function buildToc(headings: Heading[]): Heading[] {
 <nav
   class="sticky top-20 col-start-1 hidden h-[calc(100vh-5rem)] text-xs leading-4 xl:block"
 >
-  <div class="flex justify-end">
+  <div class="flex justify-end mr-8">
     <ScrollArea client:load className="max-h-[calc(100vh-8rem)]" type="always">
       <ul
-        class="flex flex-col justify-end gap-y-2 overflow-y-auto px-8"
-        id="toc-container"
+        class="flex flex-col justify-end gap-y-2 overflow-y-auto mx-8"
+        id="table-of-contents"
       >
         <li>
           <h2 class="mb-2 text-lg font-medium">Table of Contents</h2>
@@ -93,7 +93,7 @@ function buildToc(headings: Heading[]): Heading[] {
 
           const id = heading.getAttribute('id')
           const link = document.querySelector(
-            `#toc-container li a[href="#${id}"]`,
+            `#table-of-contents li a[href="#${id}"]`,
           )
           if (!link) return
 

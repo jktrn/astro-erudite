@@ -7,7 +7,7 @@ import { Icon } from 'astro-icon/components'
 const { prevPost, nextPost } = Astro.props
 ---
 
-<div class="col-start-2 grid grid-cols-1 gap-4 sm:grid-cols-2">
+<nav class="col-start-2 grid grid-cols-1 gap-4 sm:grid-cols-2">
   <Link
     href={nextPost ? `/blog/${nextPost.id}` : '#'}
     class={cn(
@@ -17,17 +17,15 @@ const { prevPost, nextPost } = Astro.props
     )}
     aria-disabled={!nextPost}
   >
-    <div class="mr-2 flex-shrink-0">
-      <Icon
-        name="lucide:arrow-left"
-        class="size-4 transition-transform group-hover:-translate-x-1"
-      />
-    </div>
-    <div class="flex flex-col items-start text-wrap">
-      <span class="text-muted-foreground text-left text-xs">Next Post</span>
-      <span class="w-full text-left text-sm text-pretty text-ellipsis"
-        >{nextPost?.data.title || 'Latest post!'}</span
-      >
+    <Icon
+      name="lucide:arrow-left"
+      class="mr-2 size-4 transition-transform group-hover:-translate-x-1"
+    />
+    <div class="flex flex-col items-start overflow-hidden">
+      <span class="text-muted-foreground text-xs">Next Post</span>
+      <span class="w-full truncate text-left text-sm">
+        {nextPost?.data.title || 'Latest post!'}
+      </span>
     </div>
   </Link>
   <Link
@@ -39,18 +37,15 @@ const { prevPost, nextPost } = Astro.props
     )}
     aria-disabled={!prevPost}
   >
-    <div class="flex flex-col items-end text-wrap">
-      <span class="text-muted-foreground text-right text-xs">Previous Post</span
-      >
-      <span class="w-full text-right text-sm text-pretty text-ellipsis"
-        >{prevPost?.data.title || 'Last post!'}</span
-      >
+    <div class="flex flex-col items-end overflow-hidden">
+      <span class="text-muted-foreground text-xs">Previous Post</span>
+      <span class="w-full truncate text-right text-sm">
+        {prevPost?.data.title || 'Last post!'}
+      </span>
     </div>
-    <div class="ml-2 flex-shrink-0">
-      <Icon
-        name="lucide:arrow-right"
-        class="size-4 transition-transform group-hover:translate-x-1"
-      />
-    </div>
+    <Icon
+      name="lucide:arrow-right"
+      class="ml-2 size-4 transition-transform group-hover:translate-x-1"
+    />
   </Link>
-</div>
+</nav>

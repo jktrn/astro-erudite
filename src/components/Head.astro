@@ -1,93 +1,35 @@
 ---
-import '../styles/global.css'
-import '../styles/typography.css'
-
 import { SITE } from '@/consts'
 import { ClientRouter } from 'astro:transitions'
-
-interface Props {
-  title: string
-  description: string
-  image?: string
-}
-
-const canonicalURL = new URL(Astro.url.pathname, Astro.site)
-
-const { title, description, image = '/static/twitter-card.png' } = Astro.props
+import Favicons from './Favicons.astro'
 ---
 
-<meta charset="utf-8" />
-<meta name="viewport" content="width=device-width,initial-scale=1" />
-<meta name="generator" content={Astro.generator} />
-<meta http-equiv="X-UA-Compatible" content="IE=edge" />
-<meta name="mobile-web-app-capable" content="yes" />
-<meta name="apple-mobile-web-app-capable" content="yes" />
-<meta name="format-detection" content="telephone=no,date=no,address=no,email=no,url=no" />
+<head>
+  <meta charset="utf-8" />
+  <meta http-equiv="X-UA-Compatible" content="IE=edge" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0, user-scalable=yes" />
+  <meta name="generator" content={Astro.generator} />
+  
+  <meta name="description" content={SITE.description} />
+  <meta name="author" content={SITE.title} />
+  <meta name="robots" content="index, follow" />
+  
+  <meta name="HandheldFriendly" content="True" />
+  <meta name="mobile-web-app-capable" content="yes" />
+  <meta name="apple-mobile-web-app-capable" content="yes" />
+  <meta name="apple-mobile-web-app-status-bar-style" content="default" />
+  <meta name="format-detection" content="telephone=no,date=no,address=no,email=no,url=no" />
+  
+  <meta name="theme-color" content="#121212" media="(prefers-color-scheme: dark)" />
+  <meta name="theme-color" content="#121212" media="(prefers-color-scheme: light)" />
+  
+  <link rel="canonical" href={Astro.url} />
+  <link rel="sitemap" href="/sitemap-index.xml" />
+  <link rel="manifest" href="/site.webmanifest" />
+  <link rel="alternate" type="application/rss+xml" title={SITE.title} href={new URL('rss.xml', Astro.site)} />
 
-<link rel="canonical" href={canonicalURL} />
-<link rel="sitemap" href="/sitemap-index.xml" />
+  <Favicons />
+  <ClientRouter />
 
-<title>{title}</title>
-<meta name="title" content={title} />
-<meta name="description" content={description} />
-<meta name="author" content={SITE.title} />
-
-<link rel="icon" type="image/png" href="/favicon-96x96.png" sizes="96x96" />
-<link rel="icon" type="image/svg+xml" href="/favicon.svg" />
-<link rel="shortcut icon" href="/favicon.ico" />
-<link rel="apple-touch-icon" sizes="180x180" href="/apple-touch-icon.png" />
-<meta name="apple-mobile-web-app-title" content="astro-erudite" />
-<link rel="manifest" href="/site.webmanifest" />
-
-<meta name="theme-color" content="#121212" media="(prefers-color-scheme: dark)" />
-<meta name="theme-color" content="#ffffff" media="(prefers-color-scheme: light)" />
-
-<meta property="og:type" content="website" />
-<meta property="og:url" content={Astro.url} />
-<meta property="og:site_name" content={SITE.title} />
-<meta property="og:title" content={title} />
-<meta property="og:description" content={description} />
-<meta property="og:image" content={new URL(image, Astro.url)} />
-
-<meta property="twitter:card" content="summary_large_image" />
-<meta property="twitter:url" content={Astro.url} />
-<meta property="twitter:title" content={title} />
-<meta property="twitter:description" content={description} />
-<meta property="twitter:image" content={new URL(image, Astro.url)} />
-
-<ClientRouter />
-
-<script is:inline>
-  function setDarkMode(document) {
-    const getThemePreference = () => {
-      if (
-        typeof localStorage !== 'undefined' &&
-        localStorage.getItem('theme')
-      ) {
-        return localStorage.getItem('theme')
-      }
-      return window.matchMedia('(prefers-color-scheme: dark)').matches
-        ? 'dark'
-        : 'theme-light'
-    }
-    const isDark = getThemePreference() === 'dark'
-    document.documentElement.classList[isDark ? 'add' : 'remove']('dark')
-
-    if (typeof localStorage !== 'undefined') {
-      const observer = new MutationObserver(() => {
-        const isDark = document.documentElement.classList.contains('dark')
-        localStorage.setItem('theme', isDark ? 'dark' : 'theme-light')
-      })
-      observer.observe(document.documentElement, {
-        attributes: true,
-        attributeFilter: ['class'],
-      })
-    }
-  }
-
-  setDarkMode(document)
-
-  document.addEventListener('astro:before-swap', (ev) => {
-    setDarkMode(ev.newDocument)
-  })
-</script>
+  <slot />
+</head>

@@ -1,6 +1,7 @@
 ---
 import Breadcrumbs from '@/components/Breadcrumbs.astro'
 import Link from '@/components/Link.astro'
+import PostHead from '@/components/PostHead.astro'
 import PostNavigation from '@/components/PostNavigation.astro'
 import TableOfContents from '@/components/TableOfContents.astro'
 import { badgeVariants } from '@/components/ui/badge'
@@ -22,7 +23,8 @@ export async function getStaticPaths() {
     props: post,
   }))
 }
-type Props = CollectionEntry<'blog'>
+
+interface Props extends CollectionEntry<'blog'> {}
 
 const posts = (await getCollection('blog'))
   .filter((post) => !post.data.draft)
@@ -54,21 +56,19 @@ const { Content, headings } = await render(post)
 const authors = await parseAuthors(post.data.authors ?? [])
 ---
 
-<Layout
-  title={post.data.title}
-  description={post.data.description}
-  image={post.data.image?.src ?? '/static/1200x630.png'}
->
+<Layout isWide>
+  <PostHead slot="head" post={post} />
   <section
-    class="grid grid-cols-[minmax(0px,1fr)_min(var(--breakpoint-md),100%)_minmax(0px,1fr)] gap-y-6 *:px-4"
+    class="grid grid-cols-[minmax(0px,1fr)_min(calc(var(--breakpoint-md)-2rem),100%)_minmax(0px,1fr)] gap-y-6"
   >
-    <Breadcrumbs
-      items={[
-        { href: '/blog', label: 'Blog', icon: 'lucide:archive' },
-        { label: post.data.title, icon: 'lucide:file-text' },
-      ]}
-      class="col-start-2"
-    />
+    <div class="col-start-2">
+      <Breadcrumbs
+        items={[
+          { href: '/blog', label: 'Blog', icon: 'lucide:archive' },
+          { label: post.data.title, icon: 'lucide:file-text' },
+        ]}
+      />
+    </div>
     {
       post.data.image && (
         <Image
@@ -76,18 +76,18 @@ const authors = await parseAuthors(post.data.authors ?? [])
           alt={post.data.title}
           width={1200}
           height={630}
-          class="col-span-full mx-auto w-full max-w-[1000px] object-cover"
+          class="col-span-full mx-auto w-full max-w-5xl object-cover"
         />
       )
     }
     <section class="col-start-2 flex flex-col gap-y-6 text-center">
-      <div class="flex flex-col gap-y-4">
-        <h1 class="text-4xl leading-tight font-medium text-pretty sm:text-5xl">
+      <div class="flex flex-col">
+        <h1 class="text-4xl leading-tight font-medium text-pretty sm:text-5xl mb-2">
           {post.data.title}
         </h1>
 
         <div
-          class="text-muted-foreground flex flex-wrap items-center justify-center gap-2 text-sm"
+          class="text-muted-foreground flex flex-wrap items-center justify-center gap-2 text-sm mb-4"
         >
           {
             authors.length > 0 && (

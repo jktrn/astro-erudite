@@ -2,7 +2,7 @@
 import AuthorCard from '@/components/AuthorCard.astro'
 import BlogCard from '@/components/BlogCard.astro'
 import Breadcrumbs from '@/components/Breadcrumbs.astro'
-import Container from '@/components/Container.astro'
+import PageHead from '@/components/PageHead.astro'
 import Layout from '@/layouts/Layout.astro'
 import { type CollectionEntry, getCollection } from 'astro:content'
 
@@ -14,7 +14,7 @@ export async function getStaticPaths() {
   }))
 }
 
-type Props = {
+interface Props {
   author: CollectionEntry<'authors'>
 }
 
@@ -28,38 +28,40 @@ const authorPosts = allPosts
   .sort((a, b) => b.data.date.valueOf() - a.data.date.valueOf())
 ---
 
-<Layout
-  title={`${author.data.name} (Author)`}
-  description={author.data.bio || `Profile of ${author.data.name}.`}
->
-  <Container class="flex flex-col gap-y-6">
-    <Breadcrumbs
-      items={[
-        { href: '/authors', label: 'Authors', icon: 'lucide:users' },
-        { label: author.data.name, icon: 'lucide:user' },
-      ]}
-    />
+<Layout>
+  <PageHead
+    slot="head"
+    title={`${author.data.name} (Author)`}
+    description={author.data.bio || `Profile of ${author.data.name}.`}
+  />
+  <Breadcrumbs
+    items={[
+      { href: '/authors', label: 'Authors', icon: 'lucide:users' },
+      { label: author.data.name, icon: 'lucide:user' },
+    ]}
+  />
 
-    <section>
-      <AuthorCard author={author} linkDisabled />
-    </section>
-    <section class="flex flex-col gap-y-4">
-      <h2 class="text-2xl font-medium">Posts by {author.data.name}</h2>
-      {
-        authorPosts.length > 0 ? (
-          <ul class="flex flex-col gap-4">
-            {authorPosts.filter(post => !post.data.draft).map((post) => (
+  <section>
+    <AuthorCard author={author} />
+  </section>
+  <section class="flex flex-col gap-y-4">
+    <h2 class="text-2xl font-medium">Posts by {author.data.name}</h2>
+    {
+      authorPosts.length > 0 ? (
+        <ul class="flex flex-col gap-4">
+          {authorPosts
+            .filter((post) => !post.data.draft)
+            .map((post) => (
               <li>
                 <BlogCard entry={post} />
               </li>
             ))}
-          </ul>
-        ) : (
-          <p class="text-muted-foreground">
-            No posts available from this author.
-          </p>
-        )
-      }
-    </section>
-  </Container>
+        </ul>
+      ) : (
+        <p class="text-muted-foreground">
+          No posts available from this author.
+        </p>
+      )
+    }
+  </section>
 </Layout>

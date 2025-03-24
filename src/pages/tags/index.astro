@@ -1,7 +1,7 @@
 ---
 import Breadcrumbs from '@/components/Breadcrumbs.astro'
-import Container from '@/components/Container.astro'
 import Link from '@/components/Link.astro'
+import PageHead from '@/components/PageHead.astro'
 import { badgeVariants } from '@/components/ui/badge'
 import Layout from '@/layouts/Layout.astro'
 import { Icon } from 'astro-icon/components'
@@ -22,27 +22,26 @@ const tags = [...tagCounts.keys()].sort((a, b) => {
 })
 ---
 
-<Layout title="Tags" description="A list of all tags used in blog posts">
-  <Container class="flex flex-col gap-y-6">
-    <Breadcrumbs items={[{ label: 'Tags', icon: 'lucide:tags' }]} />
+<Layout>
+  <PageHead slot="head" title="Tags" />
+  <Breadcrumbs items={[{ label: 'Tags', icon: 'lucide:tags' }]} />
 
-    <div class="flex flex-col gap-4">
-      <div class="flex flex-wrap gap-2">
-        {
-          tags.map((tag) => (
-            <Link
-              href={`/tags/${tag}`}
-              class={badgeVariants({ variant: 'secondary' })}
-            >
-              <Icon name="lucide:hash" class="size-3" />
-              {tag}
-              <span class="text-muted-foreground ml-1.5">
-                ({tagCounts.get(tag)})
-              </span>
-            </Link>
-          ))
-        }
-      </div>
+  <div class="flex flex-col gap-4">
+    <div class="flex flex-wrap gap-2">
+      {
+        tags.map((tag) => (
+          <Link
+            href={`/tags/${tag}`}
+            class={badgeVariants({ variant: 'secondary' })}
+          >
+            <Icon name="lucide:hash" class="size-3" />
+            {tag}
+            <span class="text-muted-foreground ml-1.5">
+              ({tagCounts.get(tag)})
+            </span>
+          </Link>
+        ))
+      }
     </div>
-  </Container>
+  </div>
 </Layout>

@@ -1,8 +1,7 @@
 ---
-import Container from '@/components/Container.astro'
 import Link from '@/components/Link.astro'
+import ThemeToggle from '@/components/ThemeToggle.astro'
 import MobileMenu from '@/components/ui/mobile-menu'
-import { ModeToggle } from '@/components/ui/mode-toggle'
 import { NAV_LINKS, SITE } from '@/consts'
 import { Image } from 'astro:assets'
 import logo from '../../public/static/logo.svg'
@@ -12,31 +11,28 @@ import logo from '../../public/static/logo.svg'
   class="bg-background/50 sticky top-0 z-10 backdrop-blur-md"
   transition:persist
 >
-  <Container>
-    <div class="flex flex-wrap items-center justify-between gap-4 py-4">
-      <Link
-        href="/"
-        class="hover:text-primary flex shrink-0 items-center gap-2 text-xl font-medium transition-colors duration-300"
-      >
-        <Image src={logo} alt="Logo" class="size-8" />
-        {SITE.title}
-      </Link>
-      <div class="flex items-center gap-2 md:gap-4">
-        <nav class="hidden items-center gap-4 text-sm sm:gap-6 md:flex">
-          {
-            NAV_LINKS.map((item) => (
-              <Link
-                href={item.href}
-                class="text-foreground/60 hover:text-foreground/80 capitalize transition-colors"
-              >
-                {item.label}
-              </Link>
-            ))
-          }
-        </nav>
-        <MobileMenu client:load transition:persist />
-        <ModeToggle client:load transition:persist />
-      </div>
+  <div
+    class="mx-auto flex max-w-3xl flex-wrap items-center justify-between gap-4 p-4"
+  >
+    <Link href="/" class="flex shrink-0 items-center gap-2 text-xl font-medium">
+      <Image src={logo} alt="Logo" class="size-8" />
+      {SITE.title}
+    </Link>
+    <div class="flex items-center gap-2 md:gap-4">
+      <nav class="hidden items-center gap-4 text-sm sm:gap-6 md:flex">
+        {
+          NAV_LINKS.map((item) => (
+            <Link
+              href={item.href}
+              class="text-foreground/60 hover:text-foreground/80 capitalize transition-colors"
+            >
+              {item.label}
+            </Link>
+          ))
+        }
+      </nav>
+      <MobileMenu client:load transition:persist />
+      <ThemeToggle transition:persist />
     </div>
-  </Container>
+  </div>
 </header>
