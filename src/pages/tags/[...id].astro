@@ -3,33 +3,28 @@ import BlogCard from '@/components/BlogCard.astro'
 import Breadcrumbs from '@/components/Breadcrumbs.astro'
 import PageHead from '@/components/PageHead.astro'
 import Layout from '@/layouts/Layout.astro'
+import { getAllTags, getPostsByTag } from '@/lib/data-utils'
 import { Icon } from 'astro-icon/components'
-import { type CollectionEntry, getCollection } from 'astro:content'
 
-type BlogPost = CollectionEntry<'blog'>
+export async function getStaticPaths() {
+  const tagMap = await getAllTags()
+  const uniqueTags = Array.from(tagMap.keys())
 
-type Props = {
-  tag: string
-  posts: BlogPost[]
+  return Promise.all(
+    uniqueTags.map(async (tag) => {
+      const posts = await getPostsByTag(tag)
+      return {
+        params: { id: tag },
+        props: {
+          tag,
+          posts,
+        },
+      }
+    }),
+  )
 }
 
 const { tag, posts } = Astro.props
-
-export async function getStaticPaths() {
-  const posts = await getCollection('blog')
-  const tags = posts.flatMap((post) => post.data.tags || [])
-  const uniqueTags = Array.from(
-    new Set(tags.filter((tag): tag is string => typeof tag === 'string')),
-  )
-
-  return uniqueTags.map((tag) => ({
-    params: { id: tag },
-    props: {
-      tag,
-      posts: posts.filter((post) => post.data.tags?.includes(tag)),
-    },
-  }))
-}
 ---
 
 <Layout>
@@ -44,6 +39,7 @@ export async function getStaticPaths() {
       { label: tag, icon: 'lucide:tag' },
     ]}
   />
+
   <div class="flex flex-wrap items-center gap-2">
     <h1 class="text-3xl font-medium">Posts tagged with</h1>
     <span
@@ -52,19 +48,14 @@ export async function getStaticPaths() {
       <Icon name="lucide:hash" class="size-6 -translate-x-0.5" />{tag}
     </span>
   </div>
-  <div class="flex flex-col gap-y-4">
+
+  <ul class="flex flex-col gap-y-4">
     {
       posts.map((post) => (
-        <section class="flex flex-col gap-y-4">
-          <div>
-            <ul class="flex flex-col gap-4">
-              <li>
-                <BlogCard entry={post} />
-              </li>
-            </ul>
-          </div>
-        </section>
+        <li>
+          <BlogCard entry={post} />
+        </li>
       ))
     }
-  </div>
+  </ul>
 </Layout>

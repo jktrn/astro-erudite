@@ -3,15 +3,10 @@ import Breadcrumbs from '@/components/Breadcrumbs.astro'
 import Link from '@/components/Link.astro'
 import PageHead from '@/components/PageHead.astro'
 import ProjectCard from '@/components/ProjectCard.astro'
-import { SITE } from '@/consts'
 import Layout from '@/layouts/Layout.astro'
-import { getCollection } from 'astro:content'
+import { getAllProjects } from '@/lib/data-utils'
 
-const projects = (await getCollection('projects')).sort((a, b) => {
-  const dateA = a.data.startDate?.getTime() || 0
-  const dateB = b.data.startDate?.getTime() || 0
-  return dateB - dateA
-})
+const projects = await getAllProjects()
 ---
 
 <Layout>

@@ -3,9 +3,9 @@ import AuthorCard from '@/components/AuthorCard.astro'
 import Breadcrumbs from '@/components/Breadcrumbs.astro'
 import PageHead from '@/components/PageHead.astro'
 import Layout from '@/layouts/Layout.astro'
-import { getCollection } from 'astro:content'
+import { getAllAuthors } from '@/lib/data-utils'
 
-const authors = await getCollection('authors')
+const authors = await getAllAuthors()
 ---
 
 <Layout>
