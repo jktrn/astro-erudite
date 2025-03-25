@@ -4,22 +4,10 @@ import Link from '@/components/Link.astro'
 import PageHead from '@/components/PageHead.astro'
 import { badgeVariants } from '@/components/ui/badge'
 import Layout from '@/layouts/Layout.astro'
+import { getSortedTags } from '@/lib/data-utils'
 import { Icon } from 'astro-icon/components'
-import { getCollection } from 'astro:content'
 
-const blog = (await getCollection('blog')).filter((post) => !post.data.draft)
-
-const tagCounts = blog.reduce((acc, post) => {
-  post.data.tags?.forEach((tag) => {
-    acc.set(tag, (acc.get(tag) || 0) + 1)
-  })
-  return acc
-}, new Map())
-
-const tags = [...tagCounts.keys()].sort((a, b) => {
-  const countDiff = tagCounts.get(b)! - tagCounts.get(a)!
-  return countDiff !== 0 ? countDiff : a.localeCompare(b)
-})
+const sortedTags = await getSortedTags()
 ---
 
 <Layout>
@@ -29,7 +17,7 @@ const tags = [...tagCounts.keys()].sort((a, b) => {
   <div class="flex flex-col gap-4">
     <div class="flex flex-wrap gap-2">
       {
-        tags.map((tag) => (
+        sortedTags.map(({ tag, count }) => (
           <Link
             href={`/tags/${tag}`}
             class={badgeVariants({ variant: 'secondary' })}
@@ -37,7 +25,7 @@ const tags = [...tagCounts.keys()].sort((a, b) => {
             <Icon name="lucide:hash" class="size-3" />
             {tag}
             <span class="text-muted-foreground ml-1.5">
-              ({tagCounts.get(tag)})
+              ({count})
             </span>
           </Link>
         ))

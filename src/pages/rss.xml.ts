@@ -1,12 +1,11 @@
 import { SITE } from '@/consts'
 import rss from '@astrojs/rss'
 import type { APIContext } from 'astro'
-import { getCollection } from 'astro:content'
+import { getAllPosts } from '@/lib/data-utils'
 
 export async function GET(context: APIContext) {
   try {
-    const posts = await getCollection('blog', ({ data }) => !data.draft)
-    posts.sort((a, b) => b.data.date.valueOf() - a.data.date.valueOf())
+    const posts = await getAllPosts()
 
     return rss({
       title: SITE.title,

@@ -8,51 +8,24 @@ import { badgeVariants } from '@/components/ui/badge'
 import { Button } from '@/components/ui/button'
 import { Separator } from '@/components/ui/separator'
 import Layout from '@/layouts/Layout.astro'
-import { parseAuthors } from '@/lib/server-utils'
+import { getAdjacentPosts, getAllPosts, parseAuthors } from '@/lib/data-utils'
 import { formatDate, readingTime } from '@/lib/utils'
 import { Icon } from 'astro-icon/components'
 import { Image } from 'astro:assets'
-import { type CollectionEntry, getCollection, render } from 'astro:content'
+import { render } from 'astro:content'
 
 export async function getStaticPaths() {
-  const posts = (await getCollection('blog'))
-    .filter((post) => !post.data.draft)
-    .sort((a, b) => b.data.date.valueOf() - a.data.date.valueOf())
+  const posts = await getAllPosts()
   return posts.map((post) => ({
     params: { id: post.id },
     props: post,
   }))
 }
 
-interface Props extends CollectionEntry<'blog'> {}
-
-const posts = (await getCollection('blog'))
-  .filter((post) => !post.data.draft)
-  .sort((a, b) => b.data.date.valueOf() - a.data.date.valueOf())
-
-function getPostIndex(id: string): number {
-  return posts.findIndex((post) => post.id === id)
-}
-
-function getPrevPost(id: string): Props | null {
-  const postIndex = getPostIndex(id)
-  return postIndex !== -1 && postIndex < posts.length - 1
-    ? posts[postIndex + 1]
-    : null
-}
-
-function getNextPost(id: string): Props | null {
-  const postIndex = getPostIndex(id)
-  return postIndex > 0 ? posts[postIndex - 1] : null
-}
-
-const currentPostId = Astro.params.id
-const nextPost = getNextPost(currentPostId)
-const prevPost = getPrevPost(currentPostId)
-
 const post = Astro.props
+const currentPostId = Astro.params.id
 const { Content, headings } = await render(post)
-
+const { next, prev } = await getAdjacentPosts(currentPostId)
 const authors = await parseAuthors(post.data.authors ?? [])
 ---
 
@@ -82,12 +55,14 @@ const authors = await parseAuthors(post.data.authors ?? [])
     }
     <section class="col-start-2 flex flex-col gap-y-6 text-center">
       <div class="flex flex-col">
-        <h1 class="text-4xl leading-tight font-medium text-pretty sm:text-5xl mb-2">
+        <h1
+          class="mb-2 text-4xl leading-tight font-medium text-pretty sm:text-5xl"
+        >
           {post.data.title}
         </h1>
 
         <div
-          class="text-muted-foreground flex flex-wrap items-center justify-center gap-2 text-sm mb-4"
+          class="text-muted-foreground mb-4 flex flex-wrap items-center justify-center gap-2 text-sm"
         >
           {
             authors.length > 0 && (
@@ -147,7 +122,7 @@ const authors = await parseAuthors(post.data.authors ?? [])
         </div>
       </div>
 
-      <PostNavigation prevPost={prevPost} nextPost={nextPost} />
+      <PostNavigation prevPost={prev} nextPost={next} />
     </section>
 
     {headings.length > 0 && <TableOfContents headings={headings} />}
@@ -156,7 +131,7 @@ const authors = await parseAuthors(post.data.authors ?? [])
       <Content />
     </article>
 
-    <PostNavigation prevPost={prevPost} nextPost={nextPost} />
+    <PostNavigation prevPost={prev} nextPost={next} />
   </section>
 
   <Button
