@@ -27,6 +27,8 @@ const image = new URL('/static/1200x630.png', Astro.site)
 <meta property="og:image:alt" content={title} />
 <meta property="og:type" content="website" />
 <meta property="og:locale" content={SITE.locale} />
+<meta property="og:site_name" content={SITE.title} />
+<meta property="og:url" content={Astro.url} />
 
 <meta name="twitter:title" content={title} />
 <meta name="twitter:description" content={description} />
