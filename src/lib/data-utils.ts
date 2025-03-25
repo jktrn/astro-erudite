@@ -1,4 +1,4 @@
-import { getCollection, getEntry, type CollectionEntry } from 'astro:content'
+import { getCollection, type CollectionEntry } from 'astro:content'
 
 export async function getAllPosts(): Promise<CollectionEntry<'blog'>[]> {
   const posts = await getCollection('blog')
@@ -84,27 +84,19 @@ export function groupPostsByYear(
 export async function parseAuthors(authorIds: string[] = []) {
   if (!authorIds.length) return []
 
-  const parseAuthor = async (id: string) => {
-    try {
-      const author = await getEntry('authors', id)
-      return {
-        id,
-        name: author?.data?.name || id,
-        avatar: author?.data?.avatar || '/static/logo.png',
-        isRegistered: !!author,
-      }
-    } catch (error) {
-      console.error(`Error fetching author with id ${id}:`, error)
-      return {
-        id,
-        name: id,
-        avatar: '/static/logo.png',
-        isRegistered: false,
-      }
-    }
-  }
+  const allAuthors = await getAllAuthors()
+  const authorMap = new Map(allAuthors.map((author) => [author.id, author]))
 
-  return await Promise.all(authorIds.map(parseAuthor))
+  return authorIds.map((id) => {
+    const author = authorMap.get(id)
+
+    return {
+      id,
+      name: author?.data?.name || id,
+      avatar: author?.data?.avatar || '/static/logo.png',
+      isRegistered: !!author,
+    }
+  })
 }
 
 export async function getPostsByAuthor(
