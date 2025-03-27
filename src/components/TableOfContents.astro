@@ -1,84 +1,62 @@
 ---
 import { ScrollArea } from '@/components/ui/scroll-area'
+import { cn } from '@/lib/utils'
+import type { MarkdownHeading } from 'astro'
 import { Icon } from 'astro-icon/components'
-import TableOfContentsHeading from './TableOfContentsHeading.astro'
 
-export interface Heading {
-  depth: number
-  slug: string
-  text: string
-  subheadings: Heading[]
+type Props = {
+  headings: MarkdownHeading[]
 }
 
 const { headings } = Astro.props
-const toc = buildToc(headings)
 
-function buildToc(headings: Heading[]): Heading[] {
-  const toc: Heading[] = []
-  const stack: Heading[] = []
-
-  headings.forEach((h) => {
-    const heading = { ...h, subheadings: [] }
-
-    while (stack.length > 0 && stack[stack.length - 1].depth >= heading.depth) {
-      stack.pop()
-    }
-
-    if (stack.length === 0) {
-      toc.push(heading)
-    } else {
-      stack[stack.length - 1].subheadings.push(heading)
-    }
-
-    stack.push(heading)
-  })
-
-  return toc
+function getHeadingMargin(depth: number) {
+  if (depth < 3) return ''
+  return `ml-${(depth - 2) * 4}`
 }
 ---
 
 <details
   open
-  class="group col-start-2 block rounded-xl border p-4 xl:hidden"
+  class="group col-start-2 rounded-xl border p-4 xl:sticky xl:top-20 xl:col-start-1 xl:mr-8 xl:ml-auto xl:h-[calc(100vh-5rem)] xl:max-w-fit xl:rounded-none xl:border-none xl:p-0"
 >
   <summary
-    class="flex cursor-pointer items-center justify-between text-xl font-medium group-open:pb-4"
+    class="flex cursor-pointer items-center justify-between text-xl font-medium group-open:pb-4 xl:hidden"
   >
-    Table of Contents
+    <span>Table of Contents</span>
     <Icon
       name="lucide:chevron-down"
-      class="size-5 transition-transform group-open:rotate-180"
+      class="size-5 shrink-0 transition-transform group-open:rotate-180"
     />
   </summary>
+
   <ScrollArea
     client:load
-    className="flex max-h-64 flex-col overflow-y-auto"
+    className="flex max-h-64 flex-col overflow-y-auto xl:max-h-[calc(100vh-8rem)]"
     type="always"
   >
-    <nav>
-      <ul></ul>
-      {toc.map((heading) => <TableOfContentsHeading heading={heading} />)}
-    </nav>
+    <ul class="flex list-none flex-col gap-y-2 px-4 xl:mr-8">
+      <li class="hidden text-lg font-medium xl:block">Table of Contents</li>
+      {
+        headings.map((heading) => (
+          <li
+            class={cn(
+              'text-foreground/60 px-4 text-sm xl:p-0',
+              getHeadingMargin(heading.depth),
+            )}
+          >
+            <a
+              href={`#${heading.slug}`}
+              class="marker:text-foreground/30 list-item list-disc underline decoration-transparent underline-offset-[3px] transition-colors duration-200 hover:decoration-inherit xl:list-none"
+            >
+              {heading.text}
+            </a>
+          </li>
+        ))
+      }
+    </ul>
   </ScrollArea>
 </details>
-
-<nav
-  class="sticky top-20 col-start-1 hidden h-[calc(100vh-5rem)] text-xs leading-4 xl:block"
->
-  <div class="flex justify-end mr-8">
-    <ScrollArea client:load className="max-h-[calc(100vh-8rem)]" type="always">
-      <ul
-        class="flex flex-col justify-end gap-y-2 overflow-y-auto mx-8"
-        id="table-of-contents"
-      >
-        <li>
-          <h2 class="mb-2 text-lg font-medium">Table of Contents</h2>
-        </li>
-        {toc.map((heading) => <TableOfContentsHeading heading={heading} />)}
-      </ul>
-    </ScrollArea>
-  </div>
-</nav>
 
 <script>
   function setupToc() {

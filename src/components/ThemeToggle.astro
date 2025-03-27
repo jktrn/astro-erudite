@@ -39,16 +39,16 @@ import { Icon } from 'astro-icon/components'
 <script>
   function handleToggleClick() {
     const element = document.documentElement
-    
+
     element.classList.add('disable-transitions')
     element.classList.toggle('dark')
-    
+
     window.getComputedStyle(element).getPropertyValue('opacity')
-    
+
     requestAnimationFrame(() => {
       element.classList.remove('disable-transitions')
     })
-    
+
     const isDark = element.classList.contains('dark')
     localStorage.setItem('theme', isDark ? 'dark' : 'light')
   }
@@ -61,25 +61,25 @@ import { Icon } from 'astro-icon/components'
   }
 
   initThemeToggle()
-  
+
   document.addEventListener('astro:after-swap', () => {
     const storedTheme = localStorage.getItem('theme')
     const element = document.documentElement
-    
+
     element.classList.add('disable-transitions')
-    
+
     window.getComputedStyle(element).getPropertyValue('opacity')
-    
+
     if (storedTheme === 'dark') {
       element.classList.add('dark')
     } else {
       element.classList.remove('dark')
     }
-    
+
     requestAnimationFrame(() => {
       element.classList.remove('disable-transitions')
     })
-    
+
     initThemeToggle()
   })
 </script>

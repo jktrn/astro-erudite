@@ -116,7 +116,7 @@
     }
 
     .katex-display {
-      @apply my-6 py-2 overflow-x-auto overflow-y-hidden tracking-normal;
+      @apply my-6 overflow-x-auto overflow-y-hidden py-2 tracking-normal;
     }
   }
 }

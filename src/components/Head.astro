@@ -7,26 +7,45 @@ import Favicons from './Favicons.astro'
 <head>
   <meta charset="utf-8" />
   <meta http-equiv="X-UA-Compatible" content="IE=edge" />
-  <meta name="viewport" content="width=device-width, initial-scale=1.0, user-scalable=yes" />
+  <meta
+    name="viewport"
+    content="width=device-width, initial-scale=1.0, user-scalable=yes"
+  />
   <meta name="generator" content={Astro.generator} />
-  
+
   <meta name="description" content={SITE.description} />
   <meta name="author" content={SITE.title} />
   <meta name="robots" content="index, follow" />
-  
+
   <meta name="HandheldFriendly" content="True" />
   <meta name="mobile-web-app-capable" content="yes" />
   <meta name="apple-mobile-web-app-capable" content="yes" />
   <meta name="apple-mobile-web-app-status-bar-style" content="default" />
-  <meta name="format-detection" content="telephone=no,date=no,address=no,email=no,url=no" />
-  
-  <meta name="theme-color" content="#121212" media="(prefers-color-scheme: dark)" />
-  <meta name="theme-color" content="#121212" media="(prefers-color-scheme: light)" />
-  
+  <meta
+    name="format-detection"
+    content="telephone=no,date=no,address=no,email=no,url=no"
+  />
+
+  <meta
+    name="theme-color"
+    content="#121212"
+    media="(prefers-color-scheme: dark)"
+  />
+  <meta
+    name="theme-color"
+    content="#121212"
+    media="(prefers-color-scheme: light)"
+  />
+
   <link rel="canonical" href={Astro.url} />
   <link rel="sitemap" href="/sitemap-index.xml" />
   <link rel="manifest" href="/site.webmanifest" />
-  <link rel="alternate" type="application/rss+xml" title={SITE.title} href={new URL('rss.xml', Astro.site)} />
+  <link
+    rel="alternate"
+    type="application/rss+xml"
+    title={SITE.title}
+    href={new URL('rss.xml', Astro.site)}
+  />
 
   <Favicons />
   <ClientRouter />
