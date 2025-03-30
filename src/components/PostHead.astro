@@ -11,6 +11,7 @@ const { post } = Astro.props
 const title = post.data.title || SITE.title
 const description = post.data.description || SITE.description
 const image = new URL('/static/1200x630.png', Astro.site)
+const author = post.data.authors ? post.data.authors.join(', ') : SITE.author
 ---
 
 <title>{`${title} | ${SITE.title}`}</title>
@@ -29,6 +30,7 @@ const image = new URL('/static/1200x630.png', Astro.site)
 <meta property="og:locale" content={SITE.locale} />
 <meta property="og:site_name" content={SITE.title} />
 <meta property="og:url" content={Astro.url} />
+<meta property="og:author" content={author} />
 
 <meta name="twitter:title" content={title} />
 <meta name="twitter:description" content={description} />
@@ -38,6 +40,7 @@ const image = new URL('/static/1200x630.png', Astro.site)
 />
 <meta name="twitter:image:alt" content={title} />
 <meta name="twitter:card" content="summary_large_image" />
+<meta name="twitter:creator" content={author} />
 
 {
   post?.data.tags &&
