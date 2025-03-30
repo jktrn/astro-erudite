@@ -28,8 +28,12 @@ const MobileMenu = () => {
   }, [])
 
   return (
-    <DropdownMenu open={isOpen} onOpenChange={setIsOpen} modal={false}>
-      <DropdownMenuTrigger asChild>
+    <DropdownMenu open={isOpen} onOpenChange={(val) => setIsOpen(val)}>
+      <DropdownMenuTrigger asChild
+        onClick={() => {
+          setIsOpen((val) => !val);
+        }}
+      >
         <Button
           variant="outline"
           size="icon"
