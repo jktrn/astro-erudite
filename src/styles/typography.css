@@ -112,7 +112,7 @@
     }
 
     kbd {
-      @apply text-foreground bg-muted border-border rounded-md border px-2 py-1 text-xs font-medium shadow-sm;
+      @apply text-foreground bg-muted border-border rounded-md border px-2 py-1 text-xs font-medium;
     }
 
     .katex-display {
