@@ -62,7 +62,7 @@
     }
 
     code {
-      @apply bg-muted/50 text-foreground relative rounded-sm px-[0.3rem] py-[0.2rem] text-sm font-medium;
+      @apply bg-muted/50 text-foreground relative rounded-sm px-[0.3rem] py-[0.2rem] text-sm font-medium break-words;
       @apply [&>span[data-line='']>*]:text-(--shiki-light) dark:[&>span[data-line='']>*]:text-(--shiki-dark);
     }
 
@@ -79,7 +79,7 @@
     }
 
     table {
-      @apply my-8 w-full text-sm;
+      @apply my-6 block w-full overflow-x-auto text-sm;
     }
 
     thead {
@@ -87,24 +87,21 @@
     }
 
     th {
-      @apply border px-4 py-2 text-left font-medium [&[align=center]]:text-center [&[align=right]]:text-right;
+      @apply px-4 py-2 text-left font-medium [&[align=center]]:text-center [&[align=right]]:text-right;
     }
 
-    tbody tr {
-      @apply border-muted-foreground/20 even:bg-muted/50 border-b;
+    tr {
+      @apply border-muted-foreground/30 border-y first:border-t-0 last:border-b-0;
     }
 
     td {
-      @apply border px-4 py-2 text-left [&[align=center]]:text-center [&[align=right]]:text-right;
+      @apply px-4 py-2 text-left align-top leading-6 break-words [&_img]:my-2 [&_li]:mt-0 [&_ol]:my-0 [&_p]:my-2! [&_p]:first:mt-0! [&_p]:last:mb-0! [&_ul]:my-0 [&>.expressive-code]:my-2 [&[align=center]]:text-center [&[align=right]]:text-right;
     }
 
     img,
-    video {
-      @apply my-8;
-    }
-
+    video,
     figure {
-      @apply my-8;
+      @apply my-6;
     }
 
     figcaption {
@@ -116,7 +113,7 @@
     }
 
     .katex-display {
-      @apply my-6 overflow-x-auto overflow-y-hidden py-2 tracking-normal;
+      @apply text-foreground/80 my-6 overflow-x-auto overflow-y-hidden py-2 tracking-normal;
     }
   }
 }
