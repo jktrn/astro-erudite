@@ -2,35 +2,34 @@
 
 @layer components {
   .prose {
-    @apply text-foreground text-base leading-8;
-    @apply [&>*]:first:mt-0 [&>*]:last:mb-0 [&>section:first-child>*]:mt-0 [&>section:last-child>*]:mb-0;
+    @apply text-foreground text-base leading-7;
 
     p {
-      @apply text-foreground/80 my-5 leading-7 not-first:mt-5;
+      @apply text-foreground/80 my-5 not-first:mt-5;
     }
 
     h1 {
-      @apply text-foreground mt-0 mb-6 scroll-m-20 text-4xl leading-tight font-medium;
+      @apply text-foreground mt-0 mb-6 scroll-m-20 text-4xl leading-5 font-medium;
     }
 
     h2 {
-      @apply text-foreground mt-8 mb-4 scroll-m-20 text-2xl leading-tight font-medium;
+      @apply text-foreground mt-8 mb-4 scroll-m-20 text-2xl leading-5 font-medium;
     }
 
     h3 {
-      @apply text-foreground mt-6 mb-4 scroll-m-20 text-xl leading-snug font-medium;
+      @apply text-foreground mt-6 mb-4 scroll-m-20 text-xl leading-6 font-medium;
     }
 
     h4 {
-      @apply text-foreground mt-6 mb-3 scroll-m-20 text-lg leading-normal font-medium;
+      @apply text-foreground mt-6 mb-3 scroll-m-20 text-lg leading-6 font-medium;
     }
 
     h5 {
-      @apply text-foreground mt-5 mb-3 scroll-m-20 leading-normal font-medium;
+      @apply text-foreground mt-5 mb-3 scroll-m-20 leading-6 font-medium;
     }
 
     h6 {
-      @apply text-foreground mt-5 mb-3 scroll-m-20 leading-normal font-medium;
+      @apply text-foreground mt-5 mb-3 scroll-m-20 leading-6 font-medium;
     }
 
     a {
@@ -51,7 +50,7 @@
     }
 
     li {
-      @apply text-foreground/80 pl-2 leading-7 [&>p]:my-0;
+      @apply text-foreground/80 pl-2 [&>p]:my-0;
     }
 
     ul ul,
@@ -66,12 +65,8 @@
       @apply [&>span[data-line='']>*]:text-(--shiki-light) dark:[&>span[data-line='']>*]:text-(--shiki-dark);
     }
 
-    .expressive-code {
-      @apply my-6 [&_.title]:font-medium!;
-    }
-
     blockquote {
-      @apply [&_*]:text-muted-foreground my-6 border-l-2 pl-6;
+      @apply [&_*]:text-muted-foreground small my-6 border-l-2 pl-6;
     }
 
     hr {
@@ -87,7 +82,8 @@
     }
 
     th {
-      @apply px-4 py-2 text-left font-medium [&[align=center]]:text-center [&[align=right]]:text-right;
+      @apply px-4 py-2 font-medium;
+      @apply text-left [&[align=center]]:text-center [&[align=right]]:text-right;
     }
 
     tr {
@@ -95,17 +91,19 @@
     }
 
     td {
-      @apply px-4 py-2 text-left align-top leading-6 break-words [&_img]:my-2 [&_li]:mt-0 [&_ol]:my-0 [&_p]:my-2! [&_p]:first:mt-0! [&_p]:last:mb-0! [&_ul]:my-0 [&>.expressive-code]:my-2 [&[align=center]]:text-center [&[align=right]]:text-right;
+      @apply fix-margin text-foreground/80 small px-4 py-2 align-top break-words;
+      @apply text-left [&[align=center]]:text-center [&[align=right]]:text-right;
     }
 
     img,
     video,
-    figure {
+    figure,
+    .expressive-code {
       @apply my-6;
     }
 
-    figcaption {
-      @apply text-muted-foreground mt-3 text-sm;
+    summary {
+      @apply [&~*]:small [&~*]:fix-margin;
     }
 
     kbd {
@@ -116,4 +114,12 @@
       @apply text-foreground/80 my-6 overflow-x-auto overflow-y-hidden py-2 tracking-normal;
     }
   }
+}
+
+@utility fix-margin {
+  @apply [&>*]:first:mt-0! [&>*]:last:mb-0!;
+}
+
+@utility small {
+  @apply text-sm leading-6 [&_code]:text-xs [&_img,video,figure,details,blockquote,.katex-display,.expressive-code]:my-4! [&_li,ol]:mt-0 [&_p]:my-2! [&_ul]:my-0;
 }

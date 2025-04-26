@@ -49,7 +49,7 @@ After I replied that I hadn't figured out a workaround yet, they sent me a brill
 
 This happened to be exactly what I needed! I went into my `node_modules` directory and made the changes manually:
 
-```js title="node_modules⠀›⠀rehype-pretty-code⠀›⠀dist⠀›⠀index.js" startLineNumber=18 ins={9} del={8}
+```js title="node_modules/rehype-pretty-code/dist/index.js" startLineNumber=18 ins={9} del={8}
 function isInlineCode(element, parent, bypass = false) {
   if (bypass) {
     return false;
@@ -64,7 +64,7 @@ function isBlockCode(element) {
 
 From here, I ran `npx patch-package rehype-pretty-code`, which created a `patches/rehype-pretty-code+0.14.1.patch` file with the changes I made:
 
-```diff title="patches⠀›⠀rehype-pretty-code+0.14.1.patch"
+```diff title="patches/rehype-pretty-code+0.14.1.patch"
 --- a/node_modules/rehype-pretty-code/dist/index.js
 +++ b/node_modules/rehype-pretty-code/dist/index.js
 @@ -22,7 +22,7 @@ function isInlineCode(element, parent, bypass = false) {

@@ -39,6 +39,7 @@ export default defineConfig({
         },
       },
       styleOverrides: {
+        codeFontSize: '0.75rem',
         borderColor: 'var(--border)',
         codeFontFamily: 'var(--font-mono)',
         codeBackground:
@@ -49,6 +50,7 @@ export default defineConfig({
             'color-mix(in oklab, var(--secondary) 25%, transparent)',
           editorActiveTabIndicatorBottomColor: 'transparent',
           editorActiveTabIndicatorTopColor: 'transparent',
+          editorTabBorderRadius: '0',
           editorTabBarBackground: 'transparent',
           editorTabBarBorderBottomColor: 'transparent',
           frameBoxShadowCssValue: 'none',
