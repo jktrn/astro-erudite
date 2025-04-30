@@ -1,6 +1,6 @@
 {
-  "name": "astro-erudite",
-  "short_name": "astro-erudite",
+  "name": "worldwidewong",
+  "short_name": "WWW",
   "icons": [
     {
       "src": "/web-app-manifest-192x192.png",
@@ -15,7 +15,7 @@
       "purpose": "maskable"
     }
   ],
-  "theme_color": "#ffffff",
-  "background_color": "#000000",
+  "theme_color": "#bfffdb",
+  "background_color": "#ffffff",
   "display": "standalone"
 }

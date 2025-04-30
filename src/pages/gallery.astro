@@ -15,31 +15,36 @@ console.log(albums);
 <Layout>
   <PageHead slot="head" title="Gallery" />
   <Breadcrumbs items={[{ label: 'Gallery', icon: 'lucide:images' }]} />
-<div class="p-8">
-  <div class="mx-auto container max-w-(--breakpoint-sm) grid grid-cols-2 gap-8">
-    {
-      albums.map((album) => (
-        <a
-          href={`/gallery/${album.id}`}
-          class="group transition-all mb-4 block"
-        >
-          <Image
-            src={album.data.cover}
-            alt={album.data.coverAlt}
-            format="avif"
-            quality="mid"
-            class:list={[
-              "rounded-lg transition-all",
-              "group-hover:shadow-lg group-hover:opacity-90"
-            ]}
-          />
-           <div class="mt-4 text-center text-neutral-700">
-            <strong class="font-normal">{album.data.title}</strong>
-            <p class="text-xs">{album.data.description}</p>
-          </div>
-        </a>
-      ))
-    }
-  </div>
-</div>
+
+  <section>
+
+    <div class="mx-auto container flex flex-col gap-8 pt-8">
+      {
+        albums.map((album) => (
+          <a
+            href={`/gallery/${album.id}`}
+            class="group transition-all mb-4 block relative max-h-64 flex flex-row border border-gray-200 shadow-sm"
+          >
+            <div class="basis-1/3">
+  
+            <Image
+              src={album.data.cover}
+              alt={album.data.coverAlt}
+              format="avif"
+              quality="mid"
+              class:list={[
+                "h-full w-auto",
+                "group-hover:shadow-lg group-hover:opacity-90"
+              ]}
+            />
+            </div>
+            <div class="p-4 basis-2/3 text-neutral-700">
+              <strong class="text-2xl font-medium">{album.data.title}</strong>
+              <p class="text-xs">{album.data.description}</p>
+            </div>
+          </a>
+        ))
+      }
+    </div>
+  </section>
 </Layout>
