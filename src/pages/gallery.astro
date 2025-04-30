@@ -1,0 +1,45 @@
+---
+import Breadcrumbs from '@/components/Breadcrumbs.astro'
+import Link from '@/components/Link.astro'
+import PageHead from '@/components/PageHead.astro'
+import ProjectCard from '@/components/ProjectCard.astro'
+import Layout from '@/layouts/Layout.astro'
+import { getAllProjects } from '@/lib/data-utils'
+import { Picture, Image } from 'astro:assets';
+import { getCollection } from "astro:content";
+
+const albums = await getCollection("albums");
+
+console.log(albums);
+---
+<Layout>
+  <PageHead slot="head" title="Gallery" />
+  <Breadcrumbs items={[{ label: 'Gallery', icon: 'lucide:images' }]} />
+<div class="p-8">
+  <div class="mx-auto container max-w-(--breakpoint-sm) grid grid-cols-2 gap-8">
+    {
+      albums.map((album) => (
+        <a
+          href={`/gallery/${album.id}`}
+          class="group transition-all mb-4 block"
+        >
+          <Image
+            src={album.data.cover}
+            alt={album.data.coverAlt}
+            format="avif"
+            quality="mid"
+            class:list={[
+              "rounded-lg transition-all",
+              "group-hover:shadow-lg group-hover:opacity-90"
+            ]}
+          />
+           <div class="mt-4 text-center text-neutral-700">
+            <strong class="font-normal">{album.data.title}</strong>
+            <p class="text-xs">{album.data.description}</p>
+          </div>
+        </a>
+      ))
+    }
+  </div>
+</div>
+</Layout>

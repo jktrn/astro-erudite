@@ -1,0 +1,50 @@
+---
+import GalleryLayout from '@/layouts/Gallery.astro'
+import PhotoSwipe from "../../components/PhotoSwipe.astro";
+
+import { getCollection } from "astro:content";
+import { getAlbumImages } from '@/lib/data-utils'
+import { Image } from "astro:assets";
+
+
+
+export async function getStaticPaths() {
+    const albums = await getCollection("albums");
+  
+    const paths = Object.values(albums).map((album) => {
+      return {
+        params: {id: album.id},
+        props: {album}
+       
+      };
+    });
+  
+    return paths;
+  }
+
+  const { album } = Astro.props;
+  const images = await getAlbumImages(album.id);
+---
+
+<GalleryLayout
+	title={album.data.title}
+	description="Lorem ipsum dolor sit amet"
+	pubDate={new Date('August 08 2021')}
+	heroImage="/blog-placeholder-about.jpg"
+>
+
+<div class="text-center my-16 mb-32">
+<PhotoSwipe imageFolder={album.id} />
+  <div>
+  </div>
+
+
+
+  <p class="text-lg my-4 text-center">
+    <a href="/gallery/" class="text-white hover:underline"
+      >Go back →</a
+    >
+  </p>
+</div>
+
+</GalleryLayout>

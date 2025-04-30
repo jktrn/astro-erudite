@@ -1,0 +1,55 @@
+---
+import '@/styles/global.css'
+import '@/styles/typography.css'
+
+import Footer from '@/components/Footer.astro'
+import Head from '@/components/Head.astro'
+import Header from '@/components/Header.astro'
+import { SITE } from '@/consts'
+import { cn } from '@/lib/utils'
+
+const { isWide = false } = Astro.props
+---
+
+<!doctype html>
+<html lang={SITE.locale}>
+  <Head>
+    <slot name="head" />
+  </Head>
+  <body>
+    <div class="flex h-fit min-h-screen flex-col gap-y-6 font-sans">
+      <Header />
+      <main class="grow">
+        <div
+          class={cn(
+            'mx-auto flex grow flex-col gap-y-6 px-4',
+            !isWide && 'max-w-3xl',
+          )}
+        >
+          <slot />
+        </div>
+      </main>
+      <Footer />
+    </div>
+    <script>
+        import PhotoSwipeLightbox from 'photoswipe/lightbox';
+		import 'photoswipe/style.css';
+
+		const lightbox = new PhotoSwipeLightbox({
+			gallery: '#my-gallery',
+			children: 'a',
+			showHideAnimationType: 'fade',
+			initialZoomLevel: 0.5,
+			showAnimationDuration: 1000,
+			pswpModule: () => import("photoswipe"),
+		});
+		
+		document.addEventListener(
+			'astro:page-load',
+			() => { if (lightbox) lightbox.init() },
+			{ once: false },
+			)
+
+    </script>
+  </body>
+</html>

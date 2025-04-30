@@ -45,4 +45,15 @@ const projects = defineCollection({
     }),
 })
 
-export const collections = { blog, authors, projects }
+const albums = defineCollection({
+	loader: glob({ base: './src/content/albums', pattern: '*.yaml' }),
+	schema: ({ image }) => z.object({
+		title: z.string(),
+		description: z.string(),
+		pubDate: z.coerce.date(),
+		cover: image(),
+		coverAlt: z.string(),
+	  }),
+  });
+
+export const collections = { blog, authors, projects, albums }

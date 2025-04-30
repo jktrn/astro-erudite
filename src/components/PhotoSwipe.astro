@@ -1,0 +1,72 @@
+---
+import type { ImageMetadata } from "astro";
+import { Image, getImage } from "astro:assets";
+
+interface Props {
+	imageFolder: string;
+}
+
+const { imageFolder } = Astro.props;
+const images = import.meta.glob<{ default: ImageMetadata }>("/src/content/albums/**/*.{jpeg,jpg,png}");
+const imagePaths = Object.keys(images).filter((imagePath) => {
+	return imagePath.startsWith(`/src/content/albums/${imageFolder}/`);
+});
+---
+
+<div
+	id="gallery"
+	class="container mx-auto px-2 pb-2 grid grid-cols-2 md:grid-cols-3 gap-2"
+>
+	{
+		imagePaths.map(async (imagePath) => {
+			let image = images[imagePath]();
+			let optimizedImage = await getImage({
+				src: image,
+				width: 1920,
+			});
+
+			return (
+				<a
+					href={optimizedImage.src}
+					data-pswp-width={optimizedImage.attributes.width}
+					data-pswp-height={optimizedImage.attributes.height}
+					target="_blank"
+					class="overflow-hidden rounded-md border-[1px] border-primary hover:border-secondary"
+				>
+					<Image
+						src={image}
+						alt={"altText"}
+						height={350}
+						class={
+							"object-cover w-full grayscale-[80%] hover:grayscale-0 transition duration-300 ease-in-out aspect-[3/2]"
+						}
+					/>
+				</a>
+			);
+		})
+	}
+</div>
+
+<script>
+	import PhotoSwipeLightbox from "photoswipe/lightbox";
+	import "photoswipe/style.css";
+
+	let lightbox: PhotoSwipeLightbox;
+
+	document.addEventListener("astro:page-load", () => {
+        lightbox = new PhotoSwipeLightbox({
+            gallery: "#gallery",
+            children: "a",
+			initialZoomLevel: 0.5,
+			showAnimationDuration: 300,
+			showHideAnimationType: 'fade',
+            pswpModule: () => import("photoswipe"),
+        });
+
+        lightbox.init();
+    });
+
+	document.addEventListener("astro:before-swap", () => {
+        lightbox.destroy();
+    });
+</script>
