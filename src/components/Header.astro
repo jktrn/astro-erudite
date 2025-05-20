@@ -12,14 +12,14 @@ import logo from '../../public/static/logo.svg'
   transition:persist
 >
   <div
-    class="mx-auto flex max-w-3xl flex-wrap items-center justify-between gap-4 p-4"
+    class="mx-auto flex max-w-3xl flex-wrap items-center justify-between gap-4 border-b px-4 py-3 sm:border-none"
   >
-    <Link href="/" class="flex shrink-0 items-center gap-2 text-xl font-medium">
-      <Image src={logo} alt="Logo" class="size-8" />
-      {SITE.title}
+    <Link href="/" class="flex shrink-0 items-center justify-center gap-3">
+      <Image src={logo} alt="Logo" class="size-5 sm:size-6" />
+      <span class="h-full text-lg font-medium">{SITE.title}</span>
     </Link>
-    <div class="flex items-center gap-2 md:gap-4">
-      <nav class="hidden items-center gap-4 text-sm sm:gap-6 md:flex">
+    <div class="flex items-center sm:gap-4">
+      <nav class="hidden items-center gap-4 text-sm sm:flex sm:gap-6">
         {
           NAV_LINKS.map((item) => (
             <Link

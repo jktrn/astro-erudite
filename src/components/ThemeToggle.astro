@@ -3,7 +3,13 @@ import { Button } from '@/components/ui/button'
 import { Icon } from 'astro-icon/components'
 ---
 
-<Button id="theme-toggle" variant="outline" size="icon" title="Toggle theme">
+<Button
+  id="theme-toggle"
+  variant="ghost"
+  size="icon"
+  title="Toggle theme"
+  className="-me-2 size-8"
+>
   <Icon
     name="lucide:sun"
     class="size-4 scale-100 rotate-0 transition-all dark:scale-0 dark:-rotate-90"
