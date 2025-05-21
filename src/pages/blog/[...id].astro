@@ -30,15 +30,15 @@ const { next, prev } = await getAdjacentPosts(currentPostId)
 const authors = await parseAuthors(post.data.authors ?? [])
 ---
 
-<Layout isWide>
+<Layout>
   <PostHead slot="head" post={post} />
   {
     headings && headings.length > 0 && (
-      <TOCMobile slot="mobile-sticky-bar" headings={headings} />
+      <TOCMobile slot="table-of-contents" headings={headings} />
     )
   }
   <section
-    class="grid grid-cols-[minmax(0px,1fr)_min(calc(var(--breakpoint-md)-2rem),100%)_minmax(0px,1fr)] gap-y-6"
+    class="relative left-[calc(50%-50vw)] grid w-screen grid-cols-[minmax(0px,1fr)_min(calc(var(--breakpoint-md)-2rem),100%)_minmax(0px,1fr)] gap-y-6 px-4"
   >
     <div class="col-start-2">
       <Breadcrumbs
