@@ -2,7 +2,6 @@
 import { ScrollArea } from '@/components/ui/scroll-area'
 import { cn } from '@/lib/utils'
 import type { MarkdownHeading } from 'astro'
-import { Icon } from 'astro-icon/components'
 
 type Props = {
   headings: MarkdownHeading[]
@@ -21,41 +20,28 @@ function getHeadingMargin(depth: number): string {
 }
 ---
 
-<details
-  open
-  class="group col-start-2 rounded-xl border p-4 xl:sticky xl:top-20 xl:col-start-1 xl:mr-8 xl:ml-auto xl:h-[calc(100vh-5rem)] xl:max-w-fit xl:rounded-none xl:border-none xl:p-0 hidden xl:block"
->
-  <summary
-    class="flex cursor-pointer items-center justify-between text-xl font-medium group-open:pb-4 xl:hidden"
-  >
-    <span>Table of Contents</span>
-    <Icon
-      name="lucide:chevron-down"
-      class="size-5 shrink-0 transition-transform group-open:rotate-180"
-    />
-  </summary>
-
+<div class="sticky top-20 hidden h-[calc(100vh-5rem)] max-w-fit xl:block col-start-1 row-span-1 mr-8 ml-auto">
   <ScrollArea
     client:load
-    className="flex max-h-64 flex-col overflow-y-auto xl:max-h-[calc(100vh-8rem)]"
+    className="flex max-h-[calc(100vh-8rem)] flex-col overflow-y-auto"
     type="always"
   >
     <ul
-      class="flex list-none flex-col gap-y-2 px-4 xl:mr-8"
+      class="flex list-none flex-col gap-y-2 px-4 mr-8"
       id="table-of-contents"
     >
-      <li class="hidden text-lg font-medium xl:block">Table of Contents</li>
+      <li class="text-lg font-medium">Table of Contents</li>
       {
         headings.map((heading) => (
           <li
             class={cn(
-              'text-foreground/60 px-4 text-sm xl:p-0',
+              'text-foreground/60 text-sm',
               getHeadingMargin(heading.depth),
             )}
           >
             <a
               href={`#${heading.slug}`}
-              class="marker:text-foreground/30 list-item list-disc underline decoration-transparent underline-offset-[3px] transition-colors duration-200 hover:decoration-inherit xl:list-none"
+              class="marker:text-foreground/30 list-none underline decoration-transparent underline-offset-[3px] transition-colors duration-200 hover:decoration-inherit"
             >
               {heading.text}
             </a>
@@ -64,7 +50,7 @@ function getHeadingMargin(depth: number): string {
       }
     </ul>
   </ScrollArea>
-</details>
+</div>
 
 <script>
   function setupToc() {

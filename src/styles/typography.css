@@ -2,7 +2,7 @@
 
 @layer components {
   .prose {
-    @apply text-foreground text-base leading-7 [&>section:first-of-type>*:first-child]:mt-0;
+    @apply text-foreground text-base leading-7 [&>link[rel="stylesheet"]+*]:mt-0;
 
     p {
       @apply text-foreground/80 my-5 not-first:mt-5;
