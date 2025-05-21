@@ -3,20 +3,28 @@ import Breadcrumbs from '@/components/Breadcrumbs.astro'
 import Link from '@/components/Link.astro'
 import PostHead from '@/components/PostHead.astro'
 import PostNavigation from '@/components/PostNavigation.astro'
+import SubpostsList from '@/components/SubpostsList.astro'
 import TOCDesktop from '@/components/TOCDesktop.astro'
 import TOCMobile from '@/components/TOCMobile.astro'
 import { badgeVariants } from '@/components/ui/badge'
 import { Button } from '@/components/ui/button'
 import { Separator } from '@/components/ui/separator'
 import Layout from '@/layouts/Layout.astro'
-import { getAdjacentPosts, getAllPosts, parseAuthors } from '@/lib/data-utils'
+import {
+  getAdjacentPosts,
+  getAllPostsAndSubposts,
+  getParentId,
+  hasSubposts,
+  isSubpost,
+  parseAuthors,
+} from '@/lib/data-utils'
 import { formatDate, readingTime } from '@/lib/utils'
 import { Icon } from 'astro-icon/components'
 import { Image } from 'astro:assets'
 import { render } from 'astro:content'
 
 export async function getStaticPaths() {
-  const posts = await getAllPosts()
+  const posts = await getAllPostsAndSubposts()
   return posts.map((post) => ({
     params: { id: post.id },
     props: post,
@@ -26,17 +34,22 @@ export async function getStaticPaths() {
 const post = Astro.props
 const currentPostId = Astro.params.id
 const { Content, headings } = await render(post)
-const { next, prev } = await getAdjacentPosts(currentPostId)
 const authors = await parseAuthors(post.data.authors ?? [])
+
+const isCurrentSubpost = isSubpost(currentPostId)
+const navigation = await getAdjacentPosts(currentPostId)
+
+const hasChildPosts = await hasSubposts(currentPostId)
 ---
 
 <Layout>
   <PostHead slot="head" post={post} />
   {
-    headings && headings.length > 0 && (
+    headings?.length > 0 && (
       <TOCMobile slot="table-of-contents" headings={headings} />
     )
   }
+
   <section
     class="relative left-[calc(50%-50vw)] grid w-screen grid-cols-[minmax(0px,1fr)_min(calc(var(--breakpoint-md)-2rem),100%)_minmax(0px,1fr)] gap-y-6 px-4"
   >
@@ -44,10 +57,30 @@ const authors = await parseAuthors(post.data.authors ?? [])
       <Breadcrumbs
         items={[
           { href: '/blog', label: 'Blog', icon: 'lucide:archive' },
-          { label: post.data.title, icon: 'lucide:file-text' },
+          ...(hasChildPosts
+            ? [
+                {
+                  href: `/blog/${currentPostId}`,
+                  label: post.data.title,
+                  icon: 'lucide:folder',
+                },
+                {
+                  href: `/blog/${currentPostId}`,
+                  label: 'Index',
+                  icon: 'lucide:file-text',
+                },
+              ]
+            : [
+                {
+                  href: `/blog/${currentPostId}`,
+                  label: post.data.title,
+                  icon: 'lucide:file-text',
+                },
+              ]),
         ]}
       />
     </div>
+
     {
       post.data.image && (
         <Image
@@ -62,7 +95,10 @@ const authors = await parseAuthors(post.data.authors ?? [])
 
     <section class="col-start-2 flex flex-col gap-y-6 text-center">
       <div class="flex flex-col">
-        <h1 class="mb-2 text-4xl leading-tight font-medium text-pretty">
+        <h1
+          class="mb-2 text-4xl leading-tight font-medium text-pretty scroll-mt-30"
+          id="post-title"
+        >
           {post.data.title}
         </h1>
 
@@ -106,6 +142,7 @@ const authors = await parseAuthors(post.data.authors ?? [])
             <span>{readingTime(post.body!)}</span>
           </div>
         </div>
+
         <div class="flex flex-wrap justify-center gap-2">
           {
             post.data.tags && post.data.tags.length > 0 ? (
@@ -127,7 +164,11 @@ const authors = await parseAuthors(post.data.authors ?? [])
         </div>
       </div>
 
-      <PostNavigation prevPost={prev} nextPost={next} />
+      <PostNavigation
+        newerPost={navigation.newer}
+        olderPost={navigation.older}
+        parentPost={isCurrentSubpost ? navigation.parent : undefined}
+      />
     </section>
 
     {headings.length > 0 && <TOCDesktop headings={headings} />}
@@ -136,7 +177,22 @@ const authors = await parseAuthors(post.data.authors ?? [])
       <Content />
     </article>
 
-    <PostNavigation prevPost={prev} nextPost={next} />
+    {
+      (hasChildPosts || isCurrentSubpost) && (
+        <SubpostsList
+          parentId={
+            isCurrentSubpost ? getParentId(currentPostId) : currentPostId
+          }
+          className="w-64"
+        />
+      )
+    }
+
+    <PostNavigation
+      newerPost={navigation.newer}
+      olderPost={navigation.older}
+      parentPost={isCurrentSubpost ? navigation.parent : undefined}
+    />
   </section>
 
   <Button
