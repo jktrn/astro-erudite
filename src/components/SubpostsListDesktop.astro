@@ -43,7 +43,7 @@ const isActivePost = activePost?.id === currentPostId
                     class="size-4 flex-shrink-0"
                     aria-hidden="true"
                   />
-                  <span class="truncate">{activePost.data.title}</span>
+                  <span class="line-clamp-2">{activePost.data.title}</span>
                 </div>
               ) : (
                 <Link
@@ -55,7 +55,7 @@ const isActivePost = activePost?.id === currentPostId
                     class="size-4 flex-shrink-0"
                     aria-hidden="true"
                   />
-                  <span class="truncate">{activePost.data.title}</span>
+                  <span class="line-clamp-2">{activePost.data.title}</span>
                 </Link>
               )}
             </li>
@@ -73,7 +73,7 @@ const isActivePost = activePost?.id === currentPostId
                       class="size-4 flex-shrink-0"
                       aria-hidden="true"
                     />
-                    <span class="truncate">{subpost.data.title}</span>
+                    <span class="line-clamp-2">{subpost.data.title}</span>
                   </div>
                 ) : (
                   <Link
@@ -85,7 +85,7 @@ const isActivePost = activePost?.id === currentPostId
                       class="size-4 flex-shrink-0"
                       aria-hidden="true"
                     />
-                    <span class="truncate">{subpost.data.title}</span>
+                    <span class="line-clamp-2">{subpost.data.title}</span>
                   </Link>
                 ),
               )}
