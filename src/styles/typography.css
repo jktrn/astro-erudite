@@ -10,27 +10,27 @@
 
     /* Don't use an <h1> in your posts, one is already generated in blog/[...id].astro */
     h1 {
-      @apply text-foreground mt-0 mb-6 scroll-m-20 text-4xl font-medium;
+      @apply text-foreground mt-0 mb-6 scroll-mt-32 xl:scroll-mt-20 text-4xl font-medium;
     }
 
     h2 {
-      @apply text-foreground mt-8 mb-4 scroll-m-20 text-2xl font-medium;
+      @apply text-foreground mt-8 mb-4 scroll-mt-32 xl:scroll-mt-20 text-2xl font-medium;
     }
 
     h3 {
-      @apply text-foreground mt-6 mb-4 scroll-m-20 text-xl font-medium;
+      @apply text-foreground mt-6 mb-4 scroll-mt-32 xl:scroll-mt-20 text-xl font-medium;
     }
 
     h4 {
-      @apply text-foreground mt-6 mb-3 scroll-m-20 text-lg font-medium;
+      @apply text-foreground mt-6 mb-3 scroll-mt-32 xl:scroll-mt-20 text-lg font-medium;
     }
 
     h5 {
-      @apply text-foreground mt-5 mb-3 scroll-m-20 font-medium;
+      @apply text-foreground mt-5 mb-3 scroll-mt-32 xl:scroll-mt-20 font-medium;
     }
 
     h6 {
-      @apply text-foreground mt-5 mb-3 scroll-m-20 font-medium;
+      @apply text-foreground mt-5 mb-3 scroll-mt-32 xl:scroll-mt-20 font-medium;
     }
 
     a {
