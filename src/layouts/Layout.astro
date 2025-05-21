@@ -18,7 +18,9 @@ const { isWide = false } = Astro.props
   </Head>
   <body>
     <div class="flex h-fit min-h-screen flex-col gap-y-6 font-sans">
-      <div class="sticky top-0 z-50 bg-background/50 backdrop-blur-sm border-b sm:border-none">
+      <div
+        class="bg-background/50 sticky top-0 z-50 border-b backdrop-blur-sm sm:border-none"
+      >
         <Header />
         <slot name="mobile-sticky-bar" />
       </div>

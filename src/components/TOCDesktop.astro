@@ -156,6 +156,16 @@ function getHeadingMargin(depth: number): string {
     }
   }
 
+  function handleDesktopWindowResize() {
+    buildDesktopHeadingJurisdictions()
+
+    const newActiveHeadings = getDesktopHeadingsWithVisibleContent()
+    if (JSON.stringify(newActiveHeadings) !== JSON.stringify(activeHeadings)) {
+      activeHeadings = newActiveHeadings
+      updateDesktopActiveTocLinks(activeHeadings)
+    }
+  }
+
   function mainDesktopTocSetup() {
     initializeDesktopTocVariables()
     buildDesktopHeadingJurisdictions()
@@ -168,10 +178,14 @@ function getHeadingMargin(depth: number): string {
     handleDesktopTocScroll()
 
     window.addEventListener('scroll', handleDesktopTocScroll, { passive: true })
+    window.addEventListener('resize', handleDesktopWindowResize, {
+      passive: true,
+    })
   }
 
   function cleanupDesktopToc() {
     window.removeEventListener('scroll', handleDesktopTocScroll)
+    window.removeEventListener('resize', handleDesktopWindowResize)
     activeHeadings = []
     headingElements = []
     jurisdictions = []

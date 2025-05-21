@@ -284,11 +284,28 @@ function getHeadingMargin(depth: number): string {
 
     setupMobileTocInteraction()
     window.addEventListener('scroll', handleMobileTocScroll, { passive: true })
+
+    window.addEventListener('resize', handleWindowResize, { passive: true })
+  }
+
+  function handleWindowResize() {
+    buildHeadingJurisdictions()
+
+    const newActiveHeadings = getHeadingsWithVisibleContent()
+    if (
+      JSON.stringify(newActiveHeadings) !== JSON.stringify(activePageHeadings)
+    ) {
+      activePageHeadings = newActiveHeadings
+      updateTocHighlightsAndText(activePageHeadings)
+    }
+
+    updateProgressCircle()
   }
 
   function cleanupMobileToc() {
     window.removeEventListener('scroll', handleMobileTocScroll)
     window.removeEventListener('scroll', updateProgressCircle)
+    window.removeEventListener('resize', handleWindowResize)
     activePageHeadings = []
     headingElements = []
     headingJurisdictions = []
