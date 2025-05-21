@@ -1,0 +1,229 @@
+---
+import { cn } from '@/lib/utils'
+import type { MarkdownHeading } from 'astro'
+
+type Props = {
+  headings: MarkdownHeading[]
+}
+
+const { headings } = Astro.props
+const initialText = 'Overview'
+
+function getHeadingMargin(depth: number): string {
+  const margins: Record<number, string> = {
+    3: 'ml-4',
+    4: 'ml-8',
+    5: 'ml-12',
+    6: 'ml-16',
+  }
+  return margins[depth] || ''
+}
+---
+
+{
+  headings && headings.length > 0 && (
+    <div
+      id="mobile-toc-container"
+      class="w-full border-t border-b-0 sm:border-b xl:hidden"
+    >
+      <details class="group">
+        <summary
+          class="flex w-full cursor-pointer items-center justify-between"
+        >
+          <div class="mx-auto flex w-full max-w-3xl items-center px-4 py-3">
+            <div class="relative mr-2 size-4">
+              <svg class="h-4 w-4" viewBox="0 0 24 24">
+                <circle
+                  class="text-primary/20"
+                  cx="12"
+                  cy="12"
+                  r="10"
+                  fill="none"
+                  stroke="currentColor"
+                  stroke-width="2"
+                />
+                <circle
+                  id="mobile-toc-progress-circle"
+                  class="text-primary"
+                  cx="12"
+                  cy="12"
+                  r="10"
+                  fill="none"
+                  stroke="currentColor"
+                  stroke-width="2"
+                  stroke-dasharray="62.83"
+                  stroke-dashoffset="62.83"
+                  transform="rotate(-90 12 12)"
+                />
+              </svg>
+            </div>
+            <span
+              id="mobile-toc-current-section"
+              class="text-muted-foreground flex-grow truncate text-sm"
+            >
+              {initialText}
+            </span>
+            <span class="text-muted-foreground ml-2">
+              <svg
+                class="h-4 w-4 transition-transform duration-200 group-open:rotate-180"
+                xmlns="http://www.w3.org/2000/svg"
+                viewBox="0 0 24 24"
+                fill="none"
+                stroke="currentColor"
+                stroke-width="2"
+                stroke-linecap="round"
+                stroke-linejoin="round"
+              >
+                <polyline points="6 9 12 15 18 9" />
+              </svg>
+            </span>
+          </div>
+        </summary>
+
+        <div class="mx-auto max-h-[30vh] max-w-3xl overflow-y-auto">
+          <ul
+            class="flex list-none flex-col gap-y-2 px-4 pb-4"
+          >
+            {headings.map((heading) => (
+              <li
+                class={cn(
+                  'text-foreground/60 px-4 text-sm',
+                  getHeadingMargin(heading.depth),
+                )}
+              >
+                <a
+                  href={`#${heading.slug}`}
+                  class="toc-item underline decoration-transparent underline-offset-[3px] transition-colors duration-200 hover:decoration-inherit"
+                  data-heading-id={heading.slug}
+                >
+                  {heading.text}
+                </a>
+              </li>
+            ))}
+          </ul>
+        </div>
+      </details>
+    </div>
+  )
+}
+
+<script>
+  function setupMobileToc() {
+    const progressCircle = document.getElementById('mobile-toc-progress-circle')
+    const currentSectionElement = document.getElementById(
+      'mobile-toc-current-section',
+    )
+    const details = document.querySelector(
+      '#mobile-toc-container details',
+    ) as HTMLDetailsElement
+
+    if (!progressCircle || !currentSectionElement || !details) return
+
+    const CIRCLE_RADIUS = 10
+    const CIRCUMFERENCE = 2 * Math.PI * CIRCLE_RADIUS
+
+    progressCircle.style.strokeDasharray = CIRCUMFERENCE.toString()
+
+    const visibleHeadings: Record<string, boolean> = {}
+
+    function updateCurrentSection() {
+      const headingIds = Object.keys(visibleHeadings)
+
+      const lastHeadingId = headingIds[headingIds.length - 1]
+      const isLastHeadingVisible =
+        lastHeadingId && visibleHeadings[lastHeadingId]
+
+      const activeHeadingId = isLastHeadingVisible
+        ? lastHeadingId
+        : headingIds.find((id) => visibleHeadings[id])
+
+      if (activeHeadingId) {
+        const headingElement = document.getElementById(activeHeadingId)
+        if (headingElement && currentSectionElement) {
+          currentSectionElement.textContent = headingElement.textContent
+
+          document.querySelectorAll('.toc-item').forEach((item) => {
+            const headingId = item.getAttribute('data-heading-id')
+            if (headingId === activeHeadingId) {
+              item.classList.add('text-foreground')
+            } else {
+              item.classList.remove('text-foreground')
+            }
+          })
+        }
+      } else if (currentSectionElement) {
+        currentSectionElement.textContent = 'Overview'
+      }
+    }
+
+    function updateProgressCircle() {
+      const scrollableDistance =
+        document.documentElement.scrollHeight - window.innerHeight
+      const scrollProgress = Math.min(
+        Math.max(window.scrollY / scrollableDistance, 0),
+        1,
+      )
+      if (progressCircle) {
+        progressCircle.style.strokeDashoffset = (
+          CIRCUMFERENCE *
+          (1 - scrollProgress)
+        ).toString()
+      }
+    }
+
+    const header = document.querySelector('header')
+    const headerHeight = header ? header.offsetHeight : 0
+
+    const observer = new IntersectionObserver(
+      (sections) => {
+        let hasUpdates = false
+
+        sections.forEach((section) => {
+          const heading = section.target.querySelector('h2, h3, h4, h5, h6')
+          if (!heading) return
+
+          const id = heading.getAttribute('id')
+          if (!id) return
+
+          visibleHeadings[id] = section.isIntersecting
+          hasUpdates = true
+        })
+
+        if (hasUpdates) {
+          updateCurrentSection()
+        }
+      },
+      {
+        rootMargin: `-${headerHeight}px 0px 0px 0px`,
+      },
+    )
+
+    const sections = document.querySelectorAll('.prose section')
+    sections.forEach((section) => {
+      const heading = section.querySelector('h2, h3, h4, h5, h6')
+      if (heading && heading.id) {
+        visibleHeadings[heading.id] = false
+      }
+      observer.observe(section)
+    })
+
+    document.querySelectorAll('.toc-item').forEach((item) => {
+      item.addEventListener('click', () => {
+        details.open = false
+      })
+    })
+
+    window.addEventListener('scroll', updateProgressCircle, { passive: true })
+
+    updateProgressCircle()
+    updateCurrentSection()
+
+    document.addEventListener('astro:before-swap', () => {
+      window.removeEventListener('scroll', updateProgressCircle)
+      observer.disconnect()
+    })
+  }
+
+  document.addEventListener('astro:page-load', setupMobileToc)
+  document.addEventListener('astro:after-swap', setupMobileToc)
+</script>

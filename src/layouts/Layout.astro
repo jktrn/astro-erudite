@@ -18,7 +18,10 @@ const { isWide = false } = Astro.props
   </Head>
   <body>
     <div class="flex h-fit min-h-screen flex-col gap-y-6 font-sans">
-      <Header />
+      <div class="sticky top-0 z-50 bg-background/50 backdrop-blur-sm border-b sm:border-none">
+        <Header />
+        <slot name="mobile-sticky-bar" />
+      </div>
       <main class="grow">
         <div
           class={cn(

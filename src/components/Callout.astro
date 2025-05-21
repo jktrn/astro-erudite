@@ -163,7 +163,7 @@ const { title, variant = 'note', defaultOpen = true, ...rest } = Astro.props
   >
     <Icon
       name={calloutConfig[variant].icon}
-      class={cn('mr-2 size-4 flex-shrink-0', calloutConfig[variant].textColor)}
+      class={cn('mr-2 size-4 shrink-0', calloutConfig[variant].textColor)}
     />
     <span class={cn('font-medium mr-2', calloutConfig[variant].textColor)}>
       {capitalize(variant)}
