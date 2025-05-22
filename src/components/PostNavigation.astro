@@ -15,13 +15,13 @@ const isSubpost = !!parentPost
   )}
 >
   <Link
-    href={newerPost ? `/blog/${newerPost.id}` : '#'}
+    href={olderPost ? `/blog/${olderPost.id}` : '#'}
     class={cn(
       buttonVariants({ variant: 'outline' }),
       'rounded-xl group flex items-center justify-start size-full',
-      !newerPost && 'pointer-events-none opacity-50 cursor-not-allowed',
+      !olderPost && 'pointer-events-none opacity-50 cursor-not-allowed',
     )}
-    aria-disabled={!newerPost}
+    aria-disabled={!olderPost}
   >
     <Icon
       name="lucide:arrow-left"
@@ -29,12 +29,12 @@ const isSubpost = !!parentPost
     />
     <div class="flex flex-col items-start overflow-hidden text-wrap">
       <span class="text-muted-foreground text-left text-xs">
-        {isSubpost ? 'Next Subpost' : 'Next Post'}
+        {isSubpost ? 'Previous Subpost' : 'Previous Post'}
       </span>
       <span class="w-full text-left text-sm text-balance text-ellipsis">
         {
-          newerPost?.data.title ||
-            (isSubpost ? 'No newer subpost' : "You're at the newest post!")
+          olderPost?.data.title ||
+            (isSubpost ? 'No older subpost' : "You're at the oldest post!")
         }
       </span>
     </div>
@@ -67,22 +67,22 @@ const isSubpost = !!parentPost
   }
 
   <Link
-    href={olderPost ? `/blog/${olderPost.id}` : '#'}
+    href={newerPost ? `/blog/${newerPost.id}` : '#'}
     class={cn(
       buttonVariants({ variant: 'outline' }),
       'rounded-xl group flex items-center justify-end size-full',
-      !olderPost && 'pointer-events-none opacity-50 cursor-not-allowed',
+      !newerPost && 'pointer-events-none opacity-50 cursor-not-allowed',
     )}
-    aria-disabled={!olderPost}
+    aria-disabled={!newerPost}
   >
     <div class="flex flex-col items-end overflow-hidden text-wrap">
       <span class="text-muted-foreground text-right text-xs">
-        {isSubpost ? 'Previous Subpost' : 'Previous Post'}
+        {isSubpost ? 'Next Subpost' : 'Next Post'}
       </span>
       <span class="w-full text-right text-sm text-balance text-ellipsis">
         {
-          olderPost?.data.title ||
-            (isSubpost ? 'No older subpost' : "You're at the oldest post!")
+          newerPost?.data.title ||
+            (isSubpost ? 'No newer subpost' : "You're at the newest post!")
         }
       </span>
     </div>

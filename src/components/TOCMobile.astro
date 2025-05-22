@@ -1,6 +1,7 @@
 ---
 import { cn, getHeadingMargin } from '@/lib/utils'
 import type { MarkdownHeading } from 'astro'
+import { Icon } from 'astro-icon/components'
 
 type Props = {
   headings: MarkdownHeading[]
@@ -13,7 +14,7 @@ const { headings } = Astro.props
   headings && headings.length > 0 && (
     <div
       id="mobile-toc-container"
-      class="w-full border-t border-b-0 sm:border-b xl:hidden"
+      class="w-full xl:hidden"
     >
       <details class="group">
         <summary class="flex w-full cursor-pointer items-center justify-between">
@@ -51,18 +52,10 @@ const { headings } = Astro.props
               Overview
             </span>
             <span class="text-muted-foreground ml-2">
-              <svg
+              <Icon
+                name="lucide:chevron-down"
                 class="h-4 w-4 transition-transform duration-200 group-open:rotate-180"
-                xmlns="http://www.w3.org/2000/svg"
-                viewBox="0 0 24 24"
-                fill="none"
-                stroke="currentColor"
-                stroke-width="2"
-                stroke-linecap="round"
-                stroke-linejoin="round"
-              >
-                <polyline points="6 9 12 15 18 9" />
-              </svg>
+              />
             </span>
           </div>
         </summary>
