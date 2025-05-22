@@ -15,7 +15,7 @@ const isSubpost = !!parentPost
   )}
 >
   <Link
-    href={olderPost ? `/blog/${olderPost.id}` : '#'}
+    href={olderPost ? `/blog/${olderPost.id}#post-title` : '#'}
     class={cn(
       buttonVariants({ variant: 'outline' }),
       'rounded-xl group flex items-center justify-start size-full',
@@ -67,7 +67,7 @@ const isSubpost = !!parentPost
   }
 
   <Link
-    href={newerPost ? `/blog/${newerPost.id}` : '#'}
+    href={newerPost ? `/blog/${newerPost.id}#post-title` : '#'}
     class={cn(
       buttonVariants({ variant: 'outline' }),
       'rounded-xl group flex items-center justify-end size-full',
