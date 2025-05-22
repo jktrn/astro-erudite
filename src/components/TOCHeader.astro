@@ -1,0 +1,303 @@
+---
+import { cn, getHeadingMargin } from '@/lib/utils'
+import type { MarkdownHeading } from 'astro'
+import { Icon } from 'astro-icon/components'
+
+type Props = {
+  headings: MarkdownHeading[]
+}
+
+const { headings } = Astro.props
+---
+
+{
+  headings && headings.length > 0 && (
+    <div
+      id="mobile-toc-container"
+      class="w-full xl:hidden"
+    >
+      <details class="group">
+        <summary class="flex w-full cursor-pointer items-center justify-between">
+          <div class="mx-auto flex w-full max-w-3xl items-center px-4 py-3">
+            <div class="relative mr-2 size-4">
+              <svg class="h-4 w-4" viewBox="0 0 24 24">
+                <circle
+                  class="text-primary/20"
+                  cx="12"
+                  cy="12"
+                  r="10"
+                  fill="none"
+                  stroke="currentColor"
+                  stroke-width="2"
+                />
+                <circle
+                  id="mobile-toc-progress-circle"
+                  class="text-primary"
+                  cx="12"
+                  cy="12"
+                  r="10"
+                  fill="none"
+                  stroke="currentColor"
+                  stroke-width="2"
+                  stroke-dasharray="62.83"
+                  stroke-dashoffset="62.83"
+                  transform="rotate(-90 12 12)"
+                />
+              </svg>
+            </div>
+            <span
+              id="mobile-toc-current-section"
+              class="text-muted-foreground flex-grow truncate text-sm"
+            >
+              Overview
+            </span>
+            <span class="text-muted-foreground ml-2">
+              <Icon
+                name="lucide:chevron-down"
+                class="h-4 w-4 transition-transform duration-200 group-open:rotate-180"
+              />
+            </span>
+          </div>
+        </summary>
+
+        <div class="mx-auto max-h-[30vh] max-w-3xl overflow-y-auto">
+          <ul
+            class="flex list-none flex-col gap-y-2 px-4 pb-4"
+            id="mobile-table-of-contents"
+          >
+            {headings.map((heading) => (
+              <li
+                class={cn(
+                  'text-foreground/60 px-4 text-sm',
+                  getHeadingMargin(heading.depth),
+                )}
+              >
+                <a
+                  href={`#${heading.slug}`}
+                  class="toc-item underline decoration-transparent underline-offset-[3px] transition-colors duration-200 hover:decoration-inherit"
+                  data-heading-id={heading.slug}
+                >
+                  {heading.text}
+                </a>
+              </li>
+            ))}
+          </ul>
+        </div>
+      </details>
+    </div>
+  )
+}
+
+<script>
+  const INITIAL_OVERVIEW_TEXT = 'Overview'
+  const STICKY_HEADER_OFFSET = 102 + 36 // header height + heading top padding
+  const PROGRESS_CIRCLE_RADIUS = 10
+  const PROGRESS_CIRCLE_CIRCUMFERENCE = 2 * Math.PI * PROGRESS_CIRCLE_RADIUS
+
+  let progressCircleElement: HTMLElement | null = null
+  let currentSectionTextElement: HTMLElement | null = null
+  let tocDetailsElement: HTMLDetailsElement | null = null
+  let mobileTocListElement: HTMLElement | null = null
+  let headingElements: HTMLElement[] = []
+  let headingJurisdictions: { id: string; start: number; end: number }[] = []
+  let activePageHeadings: string[] = []
+
+  function initializeMobileTocVariables() {
+    progressCircleElement = document.getElementById(
+      'mobile-toc-progress-circle',
+    )
+    currentSectionTextElement = document.getElementById(
+      'mobile-toc-current-section',
+    )
+    tocDetailsElement = document.querySelector('#mobile-toc-container details')
+    mobileTocListElement = document.getElementById('mobile-table-of-contents')
+
+    if (progressCircleElement) {
+      progressCircleElement.style.strokeDasharray =
+        PROGRESS_CIRCLE_CIRCUMFERENCE.toString()
+      progressCircleElement.style.strokeDashoffset =
+        PROGRESS_CIRCLE_CIRCUMFERENCE.toString()
+    }
+  }
+
+  function buildHeadingJurisdictions() {
+    headingElements = Array.from(
+      document.querySelectorAll<HTMLElement>(
+        '.prose h2, .prose h3, .prose h4, .prose h5, .prose h6',
+      ),
+    )
+    if (headingElements.length === 0) {
+      headingJurisdictions = []
+      return
+    }
+    headingJurisdictions = headingElements.map((heading, index) => {
+      const nextHeading = headingElements[index + 1]
+      return {
+        id: heading.id,
+        start: heading.offsetTop,
+        end: nextHeading ? nextHeading.offsetTop : document.body.scrollHeight,
+      }
+    })
+  }
+
+  function getHeadingsWithVisibleContent(): string[] {
+    if (headingElements.length === 0) return []
+
+    const viewportTop = window.scrollY + STICKY_HEADER_OFFSET
+    const viewportBottom = window.scrollY + window.innerHeight
+    const visibleHeadingIds: string[] = []
+
+    headingElements.forEach((heading) => {
+      const headingTop = heading.offsetTop
+      const headingBottom = headingTop + heading.offsetHeight
+
+      if (
+        (headingTop >= viewportTop && headingTop <= viewportBottom) ||
+        (headingBottom >= viewportTop && headingBottom <= viewportBottom) ||
+        (headingTop <= viewportTop && headingBottom >= viewportBottom)
+      ) {
+        visibleHeadingIds.push(heading.id)
+      }
+    })
+
+    headingJurisdictions.forEach((jurisdiction) => {
+      if (
+        jurisdiction.start <= viewportBottom &&
+        jurisdiction.end >= viewportTop
+      ) {
+        const headingEl = document.getElementById(jurisdiction.id)
+        if (headingEl) {
+          const headingBottom = headingEl.offsetTop + headingEl.offsetHeight
+          if (
+            jurisdiction.end > headingBottom &&
+            ((headingBottom < viewportBottom &&
+              jurisdiction.end > viewportTop) ||
+              (viewportTop > headingBottom && viewportTop < jurisdiction.end))
+          ) {
+            visibleHeadingIds.push(jurisdiction.id)
+          }
+        }
+      }
+    })
+    return [...new Set(visibleHeadingIds)]
+  }
+
+  function updateTocHighlightsAndText(newActiveHeadings: string[]) {
+    if (!mobileTocListElement || !currentSectionTextElement) return
+
+    mobileTocListElement.querySelectorAll('.toc-item').forEach((item) => {
+      const tocItem = item as HTMLElement
+      const headingId = tocItem.dataset.headingId
+      if (headingId && newActiveHeadings.includes(headingId)) {
+        tocItem.classList.add('text-foreground')
+      } else {
+        tocItem.classList.remove('text-foreground')
+      }
+    })
+
+    let textToShow = INITIAL_OVERVIEW_TEXT
+    const activeHeadingTexts: string[] = []
+
+    if (newActiveHeadings.length > 0) {
+      for (const heading of headingElements) {
+        if (newActiveHeadings.includes(heading.id) && heading.textContent) {
+          activeHeadingTexts.push(heading.textContent.trim())
+        }
+      }
+    }
+
+    if (activeHeadingTexts.length > 0) {
+      textToShow = activeHeadingTexts.join(', ')
+    }
+
+    currentSectionTextElement.textContent = textToShow
+  }
+
+  function updateProgressCircle() {
+    if (!progressCircleElement) return
+    const scrollableDistance =
+      document.documentElement.scrollHeight - window.innerHeight
+    const scrollProgress =
+      scrollableDistance > 0
+        ? Math.min(Math.max(window.scrollY / scrollableDistance, 0), 1)
+        : 0
+    progressCircleElement.style.strokeDashoffset = (
+      PROGRESS_CIRCLE_CIRCUMFERENCE *
+      (1 - scrollProgress)
+    ).toString()
+  }
+
+  function handleMobileTocScroll() {
+    const newActiveHeadings = getHeadingsWithVisibleContent()
+    if (
+      JSON.stringify(newActiveHeadings) !== JSON.stringify(activePageHeadings)
+    ) {
+      activePageHeadings = newActiveHeadings
+      updateTocHighlightsAndText(activePageHeadings)
+    }
+    updateProgressCircle()
+  }
+
+  function setupMobileTocInteraction() {
+    if (!mobileTocListElement) return
+
+    mobileTocListElement.querySelectorAll('.toc-item').forEach((item) => {
+      item.addEventListener('click', () => {
+        if (tocDetailsElement) tocDetailsElement.open = false
+      })
+    })
+  }
+
+  function mainMobileTocSetup() {
+    initializeMobileTocVariables()
+    buildHeadingJurisdictions()
+
+    if (!currentSectionTextElement) return
+
+    if (headingElements.length === 0) {
+      currentSectionTextElement.textContent = INITIAL_OVERVIEW_TEXT
+      window.addEventListener('scroll', updateProgressCircle, { passive: true })
+      updateProgressCircle()
+      return
+    }
+
+    activePageHeadings = getHeadingsWithVisibleContent()
+    updateTocHighlightsAndText(activePageHeadings)
+    updateProgressCircle()
+
+    setupMobileTocInteraction()
+    window.addEventListener('scroll', handleMobileTocScroll, { passive: true })
+
+    window.addEventListener('resize', handleWindowResize, { passive: true })
+  }
+
+  function handleWindowResize() {
+    buildHeadingJurisdictions()
+
+    const newActiveHeadings = getHeadingsWithVisibleContent()
+    if (
+      JSON.stringify(newActiveHeadings) !== JSON.stringify(activePageHeadings)
+    ) {
+      activePageHeadings = newActiveHeadings
+      updateTocHighlightsAndText(activePageHeadings)
+    }
+
+    updateProgressCircle()
+  }
+
+  function cleanupMobileToc() {
+    window.removeEventListener('scroll', handleMobileTocScroll)
+    window.removeEventListener('scroll', updateProgressCircle)
+    window.removeEventListener('resize', handleWindowResize)
+    activePageHeadings = []
+    headingElements = []
+    headingJurisdictions = []
+  }
+
+  document.addEventListener('astro:page-load', mainMobileTocSetup)
+  document.addEventListener('astro:after-swap', () => {
+    cleanupMobileToc()
+    mainMobileTocSetup()
+  })
+  document.addEventListener('astro:before-swap', cleanupMobileToc)
+</script>

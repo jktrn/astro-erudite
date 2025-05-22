@@ -1,0 +1,146 @@
+---
+import {
+  getParentId,
+  getParentPost,
+  getPostById,
+  getSubpostsForParent,
+  isSubpost,
+} from '@/lib/data-utils'
+import { Icon } from 'astro-icon/components'
+
+const { parentId } = Astro.props
+const currentPostId = Astro.params.id as string
+const isCurrentSubpost = isSubpost(currentPostId)
+const rootParentId = isCurrentSubpost ? getParentId(currentPostId) : parentId
+
+const currentPost = !isCurrentSubpost ? await getPostById(currentPostId) : null
+const subposts = await getSubpostsForParent(rootParentId)
+const parentPost = isCurrentSubpost ? await getParentPost(currentPostId) : null
+
+const activePost = parentPost || currentPost
+const isActivePost = activePost?.id === currentPostId
+
+const currentSubpost = isCurrentSubpost
+  ? subposts.find((subpost) => subpost.id === currentPostId)
+  : null
+
+const displayTitle = currentSubpost
+  ? currentSubpost.data.title
+  : activePost?.data.title
+const displayIcon = currentSubpost ? 'lucide:file-text' : 'lucide:folder'
+---
+
+{
+  activePost && subposts.length > 0 && (
+    <div
+      id="mobile-subposts-container"
+      class="w-full xl:hidden"
+    >
+      <details class="group">
+        <summary class="flex w-full cursor-pointer items-center justify-between">
+          <div class="mx-auto flex w-full max-w-3xl items-center px-4 py-3">
+            <div class="relative mr-2 size-4">
+              <Icon
+                name={displayIcon}
+                class="size-4 flex-shrink-0"
+                aria-hidden="true"
+              />
+            </div>
+            <span
+              id="mobile-subposts-current"
+              class="text-muted-foreground flex-grow truncate text-sm"
+            >
+              {displayTitle}
+            </span>
+            <span class="text-muted-foreground ml-2">
+              <Icon
+                name="lucide:chevron-down"
+                class="h-4 w-4 transition-transform duration-200 group-open:rotate-180"
+              />
+            </span>
+          </div>
+        </summary>
+
+        <div class="mx-auto max-h-[30vh] max-w-3xl overflow-y-auto">
+          <ul class="flex list-none flex-col gap-y-1 px-4 pb-4">
+            {activePost && (
+              <li>
+                {isActivePost ? (
+                  <div class="text-foreground bg-muted flex items-center gap-2 rounded-md px-2 py-1.5 text-sm font-medium">
+                    <Icon
+                      name="lucide:folder"
+                      class="size-4 flex-shrink-0"
+                      aria-hidden="true"
+                    />
+                    <span class="line-clamp-2">{activePost.data.title}</span>
+                  </div>
+                ) : (
+                  <a
+                    href={`/blog/${activePost.id}`}
+                    class="subpost-item hover:text-foreground text-muted-foreground hover:bg-muted/50 flex items-center gap-2 rounded-md px-2 py-1.5 text-sm transition-colors"
+                  >
+                    <Icon
+                      name="lucide:folder"
+                      class="size-4 flex-shrink-0"
+                      aria-hidden="true"
+                    />
+                    <span class="line-clamp-2">{activePost.data.title}</span>
+                  </a>
+                )}
+              </li>
+            )}
+
+            {subposts.length > 0 && (
+              <div class="ml-4 space-y-1">
+                {subposts.map((subpost) =>
+                  currentPostId === subpost.id ? (
+                    <div class="text-foreground bg-muted flex items-center gap-2 rounded-md px-2 py-1.5 text-sm font-medium">
+                      <Icon
+                        name="lucide:file-text"
+                        class="size-4 flex-shrink-0"
+                        aria-hidden="true"
+                      />
+                      <span class="line-clamp-2">{subpost.data.title}</span>
+                    </div>
+                  ) : (
+                    <a
+                      href={`/blog/${subpost.id}`}
+                      class="subpost-item hover:text-foreground text-muted-foreground hover:bg-muted/50 flex items-center gap-2 rounded-md px-2 py-1.5 text-sm transition-colors"
+                      data-subpost-id={subpost.id}
+                    >
+                      <Icon
+                        name="lucide:file-text"
+                        class="size-4 flex-shrink-0"
+                        aria-hidden="true"
+                      />
+                      <span class="line-clamp-2">{subpost.data.title}</span>
+                    </a>
+                  ),
+                )}
+              </div>
+            )}
+          </ul>
+        </div>
+      </details>
+    </div>
+  )
+}
+
+<script>
+  function setupMobileSubpostsInteraction() {
+    const container = document.getElementById('mobile-subposts-container')
+    if (!container) return
+
+    const details = container.querySelector('details')
+    const links = container.querySelectorAll('.subpost-item')
+
+    links.forEach((link) => {
+      link.addEventListener('click', () => {
+        if (details) details.open = false
+      })
+    })
+  }
+
+  document.addEventListener('astro:page-load', setupMobileSubpostsInteraction)
+  document.addEventListener('astro:after-swap', setupMobileSubpostsInteraction)
+</script>

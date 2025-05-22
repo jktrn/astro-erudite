@@ -1,0 +1,190 @@
+---
+import { ScrollArea } from '@/components/ui/scroll-area'
+import { cn, getHeadingMargin } from '@/lib/utils'
+import type { MarkdownHeading } from 'astro'
+
+type Props = {
+  headings: MarkdownHeading[]
+}
+
+const { headings } = Astro.props
+---
+
+<div
+  class="sticky top-20 col-start-1 row-span-1 mr-8 ml-auto hidden h-[calc(100vh-5rem)] max-w-fit xl:block"
+>
+  <ScrollArea
+    client:load
+    className="flex max-h-[calc(100vh-8rem)] flex-col overflow-y-auto"
+    type="always"
+  >
+    <ul
+      class="mr-8 flex list-none flex-col gap-y-2 px-4"
+      id="table-of-contents"
+    >
+      <li class="text-lg font-medium">Table of Contents</li>
+      {
+        headings.map((heading) => (
+          <li
+            class={cn(
+              'text-foreground/60 text-sm',
+              getHeadingMargin(heading.depth),
+            )}
+          >
+            <a
+              href={`#${heading.slug}`}
+              class="marker:text-foreground/30 list-none underline decoration-transparent underline-offset-[3px] transition-colors duration-200 hover:decoration-inherit"
+              data-heading-link={heading.slug}
+            >
+              {heading.text}
+            </a>
+          </li>
+        ))
+      }
+    </ul>
+  </ScrollArea>
+</div>
+
+<script>
+  const STICKY_HEADER_OFFSET = 80
+
+  let tocLinks: NodeListOf<Element>
+  let activeHeadings: string[] = []
+  let headingElements: HTMLElement[] = []
+  let jurisdictions: { id: string; start: number; end: number }[] = []
+
+  function initializeDesktopTocVariables() {
+    tocLinks = document.querySelectorAll('[data-heading-link]')
+    activeHeadings = []
+  }
+
+  function buildDesktopHeadingJurisdictions() {
+    headingElements = Array.from(
+      document.querySelectorAll<HTMLElement>(
+        '.prose h2, .prose h3, .prose h4, .prose h5, .prose h6',
+      ),
+    )
+    if (headingElements.length === 0) {
+      jurisdictions = []
+      return
+    }
+    jurisdictions = headingElements.map((heading, index) => {
+      const nextHeading = headingElements[index + 1]
+      return {
+        id: heading.id,
+        start: heading.offsetTop,
+        end: nextHeading ? nextHeading.offsetTop : document.body.scrollHeight,
+      }
+    })
+  }
+
+  function updateDesktopActiveTocLinks(headingIds: string[]) {
+    tocLinks.forEach((link) => {
+      link.classList.remove('text-foreground')
+    })
+
+    headingIds.forEach((id) => {
+      if (id) {
+        const activeLink = document.querySelector(`[data-heading-link="${id}"]`)
+        if (activeLink) {
+          activeLink.classList.add('text-foreground')
+        }
+      }
+    })
+  }
+
+  function getDesktopHeadingsWithVisibleContent(): string[] {
+    if (headingElements.length === 0) return []
+
+    const viewportTop = window.scrollY + STICKY_HEADER_OFFSET
+    const viewportBottom = window.scrollY + window.innerHeight
+    const visibleHeadingIds: string[] = []
+
+    headingElements.forEach((heading) => {
+      const headingTop = heading.offsetTop
+      const headingBottom = headingTop + heading.offsetHeight
+
+      if (
+        (headingTop >= viewportTop && headingTop <= viewportBottom) ||
+        (headingBottom >= viewportTop && headingBottom <= viewportBottom) ||
+        (headingTop <= viewportTop && headingBottom >= viewportBottom)
+      ) {
+        visibleHeadingIds.push(heading.id)
+      }
+    })
+
+    jurisdictions.forEach((jurisdiction) => {
+      if (
+        jurisdiction.start <= viewportBottom &&
+        jurisdiction.end >= viewportTop
+      ) {
+        const headingEl = document.getElementById(jurisdiction.id)
+        if (headingEl) {
+          const headingBottom = headingEl.offsetTop + headingEl.offsetHeight
+
+          if (
+            jurisdiction.end > headingBottom &&
+            ((headingBottom < viewportBottom &&
+              jurisdiction.end > viewportTop) ||
+              (viewportTop > headingBottom && viewportTop < jurisdiction.end))
+          ) {
+            visibleHeadingIds.push(jurisdiction.id)
+          }
+        }
+      }
+    })
+
+    return [...new Set(visibleHeadingIds)]
+  }
+
+  function handleDesktopTocScroll() {
+    const newActiveHeadings = getDesktopHeadingsWithVisibleContent()
+
+    if (JSON.stringify(newActiveHeadings) !== JSON.stringify(activeHeadings)) {
+      activeHeadings = newActiveHeadings
+      updateDesktopActiveTocLinks(activeHeadings)
+    }
+  }
+
+  function handleDesktopWindowResize() {
+    buildDesktopHeadingJurisdictions()
+
+    const newActiveHeadings = getDesktopHeadingsWithVisibleContent()
+    if (JSON.stringify(newActiveHeadings) !== JSON.stringify(activeHeadings)) {
+      activeHeadings = newActiveHeadings
+      updateDesktopActiveTocLinks(activeHeadings)
+    }
+  }
+
+  function mainDesktopTocSetup() {
+    initializeDesktopTocVariables()
+    buildDesktopHeadingJurisdictions()
+
+    if (headingElements.length === 0) {
+      updateDesktopActiveTocLinks([])
+      return
+    }
+
+    handleDesktopTocScroll()
+
+    window.addEventListener('scroll', handleDesktopTocScroll, { passive: true })
+    window.addEventListener('resize', handleDesktopWindowResize, {
+      passive: true,
+    })
+  }
+
+  function cleanupDesktopToc() {
+    window.removeEventListener('scroll', handleDesktopTocScroll)
+    window.removeEventListener('resize', handleDesktopWindowResize)
+    activeHeadings = []
+    headingElements = []
+    jurisdictions = []
+  }
+
+  document.addEventListener('astro:page-load', mainDesktopTocSetup)
+  document.addEventListener('astro:after-swap', () => {
+    cleanupDesktopToc()
+    mainDesktopTocSetup()
+  })
+  document.addEventListener('astro:before-swap', cleanupDesktopToc)
+</script>

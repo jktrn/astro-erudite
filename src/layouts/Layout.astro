@@ -6,9 +6,6 @@ import Footer from '@/components/Footer.astro'
 import Head from '@/components/Head.astro'
 import Header from '@/components/Header.astro'
 import { SITE } from '@/consts'
-import { cn } from '@/lib/utils'
-
-const { isWide = false } = Astro.props
 ---
 
 <!doctype html>
@@ -16,16 +13,17 @@ const { isWide = false } = Astro.props
   <Head>
     <slot name="head" />
   </Head>
-  <body>
+  <body class="overflow-x-hidden">
     <div class="flex h-fit min-h-screen flex-col gap-y-6 font-sans">
-      <Header />
+      <div
+        class="bg-background/50 sticky top-0 z-50 divide-y backdrop-blur-sm xl:divide-none"
+      >
+        <Header />
+        <slot name="subposts-navigation" />
+        <slot name="table-of-contents" />
+      </div>
       <main class="grow">
-        <div
-          class={cn(
-            'mx-auto flex grow flex-col gap-y-6 px-4',
-            !isWide && 'max-w-3xl',
-          )}
-        >
+        <div class="mx-auto flex max-w-3xl grow flex-col gap-y-6 px-4">
           <slot />
         </div>
       </main>

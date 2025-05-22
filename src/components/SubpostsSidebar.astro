@@ -1,0 +1,98 @@
+---
+import Link from '@/components/Link.astro'
+import { ScrollArea } from '@/components/ui/scroll-area'
+import {
+  getParentId,
+  getParentPost,
+  getPostById,
+  getSubpostsForParent,
+  isSubpost,
+} from '@/lib/data-utils'
+import { Icon } from 'astro-icon/components'
+
+const { parentId } = Astro.props
+const currentPostId = Astro.params.id as string
+const isCurrentSubpost = isSubpost(currentPostId)
+const rootParentId = isCurrentSubpost ? getParentId(currentPostId) : parentId
+
+const currentPost = !isCurrentSubpost ? await getPostById(currentPostId) : null
+const subposts = await getSubpostsForParent(rootParentId)
+const parentPost = isCurrentSubpost ? await getParentPost(currentPostId) : null
+
+const activePost = parentPost || currentPost
+const isActivePost = activePost?.id === currentPostId
+---
+
+<div
+  class="sticky top-20 col-start-3 row-span-1 mr-auto ml-8 hidden h-[calc(100vh-5rem)] max-w-fit xl:block"
+>
+  <ScrollArea
+    client:load
+    className="flex max-h-[calc(100vh-8rem)] flex-col overflow-y-auto"
+    type="always"
+  >
+    <div class="w-64 px-4">
+      <ul class="space-y-1">
+        {
+          activePost && (
+            <li>
+              {isActivePost ? (
+                <div class="text-foreground bg-muted flex items-center gap-2 rounded-md px-2 py-1.5 text-sm font-medium">
+                  <Icon
+                    name="lucide:folder"
+                    class="size-4 flex-shrink-0"
+                    aria-hidden="true"
+                  />
+                  <span class="line-clamp-2">{activePost.data.title}</span>
+                </div>
+              ) : (
+                <Link
+                  href={`/blog/${activePost.id}#post-title`}
+                  class="hover:text-foreground text-muted-foreground hover:bg-muted/50 flex items-center gap-2 rounded-md px-2 py-1.5 text-sm transition-colors"
+                >
+                  <Icon
+                    name="lucide:folder"
+                    class="size-4 flex-shrink-0"
+                    aria-hidden="true"
+                  />
+                  <span class="line-clamp-2">{activePost.data.title}</span>
+                </Link>
+              )}
+            </li>
+          )
+        }
+
+        {
+          subposts.length > 0 && (
+            <li class="ml-4 space-y-1">
+              {subposts.map((subpost) =>
+                currentPostId === subpost.id ? (
+                  <div class="text-foreground bg-muted flex items-center gap-2 rounded-md px-2 py-1.5 text-sm font-medium">
+                    <Icon
+                      name="lucide:file-text"
+                      class="size-4 flex-shrink-0"
+                      aria-hidden="true"
+                    />
+                    <span class="line-clamp-2">{subpost.data.title}</span>
+                  </div>
+                ) : (
+                  <Link
+                    href={`/blog/${subpost.id}`}
+                    class="hover:text-foreground text-muted-foreground hover:bg-muted/50 flex items-center gap-2 rounded-md px-2 py-1.5 text-sm transition-colors"
+                  >
+                    <Icon
+                      name="lucide:file-text"
+                      class="size-4 flex-shrink-0"
+                      aria-hidden="true"
+                    />
+                    <span class="line-clamp-2">{subpost.data.title}</span>
+                  </Link>
+                ),
+              )}
+            </li>
+          )
+        }
+      </ul>
+    </div>
+  </ScrollArea>
+</div>
