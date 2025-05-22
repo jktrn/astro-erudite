@@ -3,10 +3,10 @@ import Breadcrumbs from '@/components/Breadcrumbs.astro'
 import Link from '@/components/Link.astro'
 import PostHead from '@/components/PostHead.astro'
 import PostNavigation from '@/components/PostNavigation.astro'
-import SubpostsListDesktop from '@/components/SubpostsListDesktop.astro'
-import SubpostsListMobile from '@/components/SubpostsListMobile.astro'
-import TOCDesktop from '@/components/TOCDesktop.astro'
-import TOCMobile from '@/components/TOCMobile.astro'
+import SubpostsSidebar from '@/components/SubpostsSidebar.astro'
+import SubpostsHeader from '@/components/SubpostsHeader.astro'
+import TOCSidebar from '@/components/TOCSidebar.astro'
+import TOCHeader from '@/components/TOCHeader.astro'
 import { badgeVariants } from '@/components/ui/badge'
 import { Button } from '@/components/ui/button'
 import { Separator } from '@/components/ui/separator'
@@ -49,7 +49,7 @@ const hasChildPosts = await hasSubposts(currentPostId)
   <PostHead slot="head" post={post} />
   {
     (hasChildPosts || isCurrentSubpost) && (
-      <SubpostsListMobile
+      <SubpostsHeader
         slot="subposts-navigation"
         parentId={
           isCurrentSubpost ? getParentId(currentPostId) : currentPostId
@@ -59,7 +59,7 @@ const hasChildPosts = await hasSubposts(currentPostId)
   }
   {
     headings?.length > 0 && (
-      <TOCMobile slot="table-of-contents" headings={headings} />
+      <TOCHeader slot="table-of-contents" headings={headings} />
     )
   }
 
@@ -197,7 +197,7 @@ const hasChildPosts = await hasSubposts(currentPostId)
       />
     </section>
 
-    {headings.length > 0 && <TOCDesktop headings={headings} />}
+    {headings.length > 0 && <TOCSidebar headings={headings} />}
 
     <article class="prose col-start-2 max-w-none">
       <Content />
@@ -205,7 +205,7 @@ const hasChildPosts = await hasSubposts(currentPostId)
 
     {
       (hasChildPosts || isCurrentSubpost) && (
-        <SubpostsListDesktop
+        <SubpostsSidebar
           parentId={
             isCurrentSubpost ? getParentId(currentPostId) : currentPostId
           }

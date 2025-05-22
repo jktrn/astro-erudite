@@ -36,7 +36,7 @@ This gives users the same level of navigation control as if they were on desktop
 
 The second major feature is something I'm calling "subposts," a way to organize related content in a parent-child hierarchy within your blog. This concept came from when I was writing [this](https://enscribe.dev/blog/japan-retrospective) travel blog post on my personal site, where I essentially wanted a "subpost" for each day of the trip since it was way too long to fit into a single post.
 
-Instead of creating separate blog posts in a "series" (and thus clogging up your blog post listings with a bunch of smaller, tangentially-related posts), you can now automatically establish a parent-child relationship between posts by creating a folder for your main topic with an `index.mdx` file as your parent post, then adding additional `.mdx` files in the same folder as subposts. For example, this very post demonstrates the feature by containing two subposts that explore the technical implementation details of each feature. On desktop, we display a `<SubpostsListDesktop>{:tsx}` component on the right-hand side of the page that shows a list of all the subposts alongside the parent post:
+Instead of creating separate blog posts in a "series" (and thus clogging up your blog post listings with a bunch of smaller, tangentially-related posts), you can now automatically establish a parent-child relationship between posts by creating a folder for your main topic with an `index.mdx` file as your parent post, then adding additional `.mdx` files in the same folder as subposts. For example, this very post demonstrates the feature by containing two subposts that explore the technical implementation details of each feature. On desktop, we display a `<SubpostsSidebar>{:tsx}` component on the right-hand side of the page that shows a list of all the subposts alongside the parent post:
 
 <div class="flex gap-4 flex-wrap justify-center [&_img,p,.expressive-code]:m-0">
   <div class="max-w-3xs border">
@@ -79,4 +79,4 @@ What's great about the way I engineered subposts is that it's fully backwards-co
 
 ## Go ahead and read the subposts
 
-On desktop, the `<SubpostsListDesktop>{:tsx}` sticks to the right column on your screen, and you can click on any of the subposts to read them. On mobile, it will turn into a `<SubpostsListMobile>{:tsx}` component that will appear underneath the sticky header, above the sticky table of contents we just added.
+On desktop, the `<SubpostsSidebar>{:tsx}` sticks to the right column on your screen, and you can click on any of the subposts to read them. On mobile, it will turn into a `<SubpostsHeader>{:tsx}` component that will appear underneath the sticky header, above the sticky table of contents we just added.

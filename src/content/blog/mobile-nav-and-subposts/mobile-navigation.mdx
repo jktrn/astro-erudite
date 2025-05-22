@@ -80,7 +80,7 @@ However, this approach had pretty complicated issues involving section nesting a
 
 The naming is interesting but I felt like it was the most intuitive to me. Basically, I created a system that assigns each heading a "territory" that extends from its position to the start of the next heading (or the end of the document):
 
-```javascript title="src/components/TOCMobile.astro" startLineNumber={123}
+```javascript title="src/components/TOCHeader.astro" startLineNumber={123}
 function buildHeadingJurisdictions() {
   headingElements = Array.from(
     document.querySelectorAll('.prose h2, .prose h3, .prose h4, .prose h5, .prose h6')
@@ -132,7 +132,7 @@ By showing all visible sections, we give users complete awareness of their posit
 
 The circular progress indicator provides immediate visual feedback about reading progress without requiring any interaction:
 
-```javascript title="src/components/TOCMobile.astro" startLineNumber={216}
+```javascript title="src/components/TOCHeader.astro" startLineNumber={216}
   function updateProgressCircle() {
     if (!progressCircleElement) return
     const scrollableDistance =
