@@ -43,7 +43,7 @@ const isSubpost = !!parentPost
   {
     isSubpost && (
       <Link
-        href={parentPost ? `/blog/${parentPost.id}` : '#'}
+        href={parentPost ? `/blog/${parentPost.id}#post-title` : '#'}
         class={cn(
           buttonVariants({ variant: 'outline' }),
           'group flex size-full items-center justify-center rounded-xl',
