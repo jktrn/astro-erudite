@@ -5,6 +5,7 @@ import {
   getParentId,
   getParentPost,
   getPostById,
+  getPostReadingTime,
   getSubpostsForParent,
   isSubpost,
 } from '@/lib/data-utils'
@@ -21,6 +22,16 @@ const parentPost = isCurrentSubpost ? await getParentPost(currentPostId) : null
 
 const activePost = parentPost || currentPost
 const isActivePost = activePost?.id === currentPostId
+
+const activePostReadingTime = activePost
+  ? await getPostReadingTime(activePost.id)
+  : null
+const subpostsWithReadingTime = await Promise.all(
+  subposts.map(async (subpost) => ({
+    ...subpost,
+    readingTime: await getPostReadingTime(subpost.id),
+  })),
+)
 ---
 
 <div
@@ -31,7 +42,7 @@ const isActivePost = activePost?.id === currentPostId
     className="flex max-h-[calc(100vh-8rem)] flex-col overflow-y-auto"
     type="always"
   >
-    <div class="w-64 px-4">
+    <div class="px-4">
       <ul class="space-y-1">
         {
           activePost && (
@@ -43,7 +54,14 @@ const isActivePost = activePost?.id === currentPostId
                     class="size-4 flex-shrink-0"
                     aria-hidden="true"
                   />
-                  <span class="line-clamp-2">{activePost.data.title}</span>
+                  <div class="flex flex-col">
+                    <span class="line-clamp-2">{activePost.data.title}</span>
+                    {activePostReadingTime && (
+                      <span class="text-muted-foreground/80 text-xs">
+                        {activePostReadingTime}
+                      </span>
+                    )}
+                  </div>
                 </div>
               ) : (
                 <Link
@@ -55,7 +73,14 @@ const isActivePost = activePost?.id === currentPostId
                     class="size-4 flex-shrink-0"
                     aria-hidden="true"
                   />
-                  <span class="line-clamp-2">{activePost.data.title}</span>
+                  <div class="flex flex-col">
+                    <span class="line-clamp-2">{activePost.data.title}</span>
+                    {activePostReadingTime && (
+                      <span class="text-muted-foreground/80 text-xs">
+                        {activePostReadingTime}
+                      </span>
+                    )}
+                  </div>
                 </Link>
               )}
             </li>
@@ -63,9 +88,9 @@ const isActivePost = activePost?.id === currentPostId
         }
 
         {
-          subposts.length > 0 && (
+          subpostsWithReadingTime.length > 0 && (
             <li class="ml-4 space-y-1">
-              {subposts.map((subpost) =>
+              {subpostsWithReadingTime.map((subpost) =>
                 currentPostId === subpost.id ? (
                   <div class="text-foreground bg-muted flex items-center gap-2 rounded-md px-2 py-1.5 text-sm font-medium">
                     <Icon
@@ -73,7 +98,12 @@ const isActivePost = activePost?.id === currentPostId
                       class="size-4 flex-shrink-0"
                       aria-hidden="true"
                     />
-                    <span class="line-clamp-2">{subpost.data.title}</span>
+                    <div class="flex flex-col">
+                      <span class="line-clamp-2">{subpost.data.title}</span>
+                      <span class="text-muted-foreground/80 text-xs">
+                        {subpost.readingTime}
+                      </span>
+                    </div>
                   </div>
                 ) : (
                   <Link
@@ -85,7 +115,12 @@ const isActivePost = activePost?.id === currentPostId
                       class="size-4 flex-shrink-0"
                       aria-hidden="true"
                     />
-                    <span class="line-clamp-2">{subpost.data.title}</span>
+                    <div class="flex flex-col">
+                      <span class="line-clamp-2">{subpost.data.title}</span>
+                      <span class="text-muted-foreground/80 text-xs">
+                        {subpost.readingTime}
+                      </span>
+                    </div>
                   </Link>
                 ),
               )}

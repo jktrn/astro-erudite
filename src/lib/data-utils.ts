@@ -1,4 +1,5 @@
 import { getCollection, type CollectionEntry } from 'astro:content'
+import { readingTime, calculateWordCountFromHtml } from '@/lib/utils'
 
 export async function getAllAuthors(): Promise<CollectionEntry<'authors'>[]> {
   return await getCollection('authors')
@@ -11,7 +12,9 @@ export async function getAllPosts(): Promise<CollectionEntry<'blog'>[]> {
     .sort((a, b) => b.data.date.valueOf() - a.data.date.valueOf())
 }
 
-export async function getAllPostsAndSubposts(): Promise<CollectionEntry<'blog'>[]> {
+export async function getAllPostsAndSubposts(): Promise<
+  CollectionEntry<'blog'>[]
+> {
   const posts = await getCollection('blog')
   return posts
     .filter((post) => !post.data.draft)
@@ -194,6 +197,35 @@ export async function parseAuthors(authorIds: string[] = []) {
 export async function getPostById(
   postId: string,
 ): Promise<CollectionEntry<'blog'> | null> {
-  const allPosts = await getAllPosts()
+  const allPosts = await getAllPostsAndSubposts()
   return allPosts.find((post) => post.id === postId) || null
+}
+
+export async function getSubpostCount(parentId: string): Promise<number> {
+  const subposts = await getSubpostsForParent(parentId)
+  return subposts.length
+}
+
+export async function getCombinedReadingTime(postId: string): Promise<string> {
+  const post = await getPostById(postId)
+  if (!post) return readingTime(0)
+
+  let totalWords = calculateWordCountFromHtml(post.body)
+
+  if (!isSubpost(postId)) {
+    const subposts = await getSubpostsForParent(postId)
+    for (const subpost of subposts) {
+      totalWords += calculateWordCountFromHtml(subpost.body)
+    }
+  }
+
+  return readingTime(totalWords)
+}
+
+export async function getPostReadingTime(postId: string): Promise<string> {
+  const post = await getPostById(postId)
+  if (!post) return readingTime(0)
+
+  const wordCount = calculateWordCountFromHtml(post.body)
+  return readingTime(wordCount)
 }
