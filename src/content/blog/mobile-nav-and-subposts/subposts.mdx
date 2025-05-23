@@ -102,51 +102,35 @@ As a TL;DR, subposts should only navigate among siblings and should be able to g
 
 - The breadcrumb component required careful thought to handle three distinct cases:
 
-    ```astro title="src/pages/blog/[...id].astro" startLineNumber={70} {"For subposts: Blog > Parent > Subpost":6-16} {"For parent posts: Blog > Parent > Index":20-30} {"For regular posts: Blog > Post":33-38}
+    ```astro title="src/pages/blog/[...id].astro" startLineNumber={70}
     <Breadcrumbs
-    items={[
-        { href: '/blog', label: 'Blog', icon: 'lucide:archive' },
+      items={[
+        { href: '/blog', label: 'Blog', icon: 'lucide:library-big' },
         ...(isCurrentSubpost && parentPost
-        ? [
-            
-            {
+          ? [
+              {
                 href: `/blog/${parentPost.id}`,
                 label: parentPost.data.title,
-                icon: 'lucide:folder',
-            },
-            {
+                icon: 'lucide:book-open',
+              },
+              {
                 href: `/blog/${currentPostId}`,
                 label: post.data.title,
                 icon: 'lucide:file-text',
-            },
+              },
             ]
-        : hasChildPosts
-        ? [
-
-            {
+          : [
+              {
                 href: `/blog/${currentPostId}`,
                 label: post.data.title,
-                icon: 'lucide:folder',
-            },
-            {
-                href: `/blog/${currentPostId}`,
-                label: 'Index',
-                icon: 'lucide:file-text',
-            },
-            ]
-        : [
-            
-            {
-                href: `/blog/${currentPostId}`,
-                label: post.data.title,
-                icon: 'lucide:file-text',
-            },
+                icon: 'lucide:book-open-text',
+              },
             ]),
-    ]}
+      ]}
     />
     ```
 
-    Showing parent posts (that have subposts) as "Parent > Index" rather than just "Parent" makes it more clear that the parent post itself is content, not just a container.
+    We append `-text` to `book-open` or `file` (for parent posts and subposts, respectively) to indicate the active post by differentiating it from inactive icons which would lack the text within the icon.
 
 - The main blog listing (alongside other listings, e.g. filtering by tags, filtering by author) should exclude subposts to avoid cluttering the feed:
 

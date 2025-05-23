@@ -73,13 +73,13 @@ const postReadingTime = await getPostReadingTime(currentPostId)
     <div class="col-start-2">
       <Breadcrumbs
         items={[
-          { href: '/blog', label: 'Blog', icon: 'lucide:archive' },
+          { href: '/blog', label: 'Blog', icon: 'lucide:library-big' },
           ...(isCurrentSubpost && parentPost
             ? [
                 {
                   href: `/blog/${parentPost.id}`,
                   label: parentPost.data.title,
-                  icon: 'lucide:folder',
+                  icon: 'lucide:book-open',
                 },
                 {
                   href: `/blog/${currentPostId}`,
@@ -87,26 +87,13 @@ const postReadingTime = await getPostReadingTime(currentPostId)
                   icon: 'lucide:file-text',
                 },
               ]
-            : hasChildPosts
-              ? [
-                  {
-                    href: `/blog/${currentPostId}`,
-                    label: post.data.title,
-                    icon: 'lucide:folder',
-                  },
-                  {
-                    href: `/blog/${currentPostId}`,
-                    label: 'Index',
-                    icon: 'lucide:file-text',
-                  },
-                ]
-              : [
-                  {
-                    href: `/blog/${currentPostId}`,
-                    label: post.data.title,
-                    icon: 'lucide:file-text',
-                  },
-                ]),
+            : [
+                {
+                  href: `/blog/${currentPostId}`,
+                  label: post.data.title,
+                  icon: 'lucide:book-open-text',
+                },
+              ]),
         ]}
       />
     </div>
@@ -177,8 +164,8 @@ const postReadingTime = await getPostReadingTime(currentPostId)
                   <Separator orientation="vertical" className="h-4!" />{' '}
                   <span class="flex items-center gap-1">
                     {' '}
-                    <Icon name="lucide:folder" class="size-3" /> {subpostCount}{' '}
-                    subpost{subpostCount === 1 ? '' : 's'}{' '}
+                    <Icon name="lucide:file-text" class="size-3" />{' '}
+                    {subpostCount} subpost{subpostCount === 1 ? '' : 's'}{' '}
                   </span>{' '}
                 </>
               )

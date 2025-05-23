@@ -45,7 +45,11 @@ const currentSubpostDetails = isCurrentSubpost
             <div class="relative mr-2 size-4">
               <Icon
                 name={
-                  currentSubpostDetails ? 'lucide:file-text' : 'lucide:folder'
+                  currentSubpostDetails
+                    ? 'lucide:file-text'
+                    : isActivePost
+                    ? 'lucide:book-open-text'
+                    : 'lucide:book-open'
                 }
                 class="size-4 flex-shrink-0"
                 aria-hidden="true"
@@ -74,7 +78,7 @@ const currentSubpostDetails = isCurrentSubpost
                 {isActivePost ? (
                   <div class="text-foreground bg-muted flex items-center gap-2 rounded-md px-2 py-1.5 text-sm font-medium">
                     <Icon
-                      name="lucide:folder"
+                      name="lucide:book-open-text"
                       class="size-4 flex-shrink-0"
                       aria-hidden="true"
                     />
@@ -93,7 +97,7 @@ const currentSubpostDetails = isCurrentSubpost
                     class="subpost-item hover:text-foreground text-muted-foreground hover:bg-muted/50 flex items-center gap-2 rounded-md px-2 py-1.5 text-sm transition-colors"
                   >
                     <Icon
-                      name="lucide:folder"
+                      name="lucide:book-open"
                       class="size-4 flex-shrink-0"
                       aria-hidden="true"
                     />
@@ -134,7 +138,7 @@ const currentSubpostDetails = isCurrentSubpost
                       data-subpost-id={subpost.id}
                     >
                       <Icon
-                        name="lucide:file-text"
+                        name="lucide:file"
                         class="size-4 flex-shrink-0"
                         aria-hidden="true"
                       />

@@ -80,7 +80,7 @@ const subpostCount = !isSubpost(entry.id) ? await getSubpostCount(entry.id) : 0
             <>
               <Separator orientation="vertical" className="h-4!" />
               <span class="flex items-center gap-1">
-                <Icon name="lucide:folder" class="size-3" />
+                <Icon name="lucide:file-text" class="size-3" />
                 {subpostCount} subpost{subpostCount === 1 ? '' : 's'}
               </span>
             </>
