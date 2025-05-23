@@ -148,7 +148,7 @@ Colors are defined in `src/styles/global.css` in [OKLCH format](https://develope
   --ring: oklch(0.708 0 0);
 }
 
-.dark {
+[data-theme="dark"] {
   /* ... */
 }
 ```

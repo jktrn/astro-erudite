@@ -1,7 +1,7 @@
 {
   "name": "astro-erudite",
   "type": "module",
-  "version": "1.6.0",
+  "version": "1.6.1",
   "private": true,
   "scripts": {
     "dev": "astro dev",
@@ -41,9 +41,9 @@
     "rehype-pretty-code": "^0.14.1",
     "remark-emoji": "^5.0.1",
     "remark-math": "^6.0.0",
-    "tailwind-merge": "^3.0.1",
-    "tailwindcss": "^4.0.7",
-    "typescript": "^5.7.3"
+    "tailwind-merge": "^3.3.0",
+    "tailwindcss": "^4.1.7",
+    "typescript": "^5.8.3"
   },
   "devDependencies": {
     "prettier": "^3.5.1",
