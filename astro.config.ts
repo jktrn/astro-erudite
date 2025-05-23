@@ -26,7 +26,7 @@ export default defineConfig({
       themes: ['github-light', 'github-dark'],
       plugins: [pluginCollapsibleSections(), pluginLineNumbers()],
       useDarkModeMediaQuery: false,
-      themeCssSelector: (theme) => `.${theme.name.split('-')[1]}`,
+      themeCssSelector: (theme) => `[data-theme="${theme.name.split('-')[1]}"]`,
       defaultProps: {
         wrap: true,
         collapseStyle: 'collapsible-auto',
