@@ -32,8 +32,8 @@ Below are some fantastic examples of websites based on this template. If you wis
 | [flocto.github.io](https://flocto.github.io/) | [@flocto](https://github.com/flocto)               | A slightly modified personal blog                                                            | [→](https://github.com/flocto/flocto.github.io)        |
 | [dumbprism.me](https://www.dumbprism.me/)     | [@dumbprism](https://github.com/dumbprism)         | A customized portfolio inspired by enscribe's bento grid style adding my gist of UI          | [→](https://github.com/dumbprism/dumbprism-portfolio)  |
 | [hyuki.dev](https://hyuki.dev/)               | [@snow0406](https://github.com/snow0406)           | A minimalist blog with a blue color scheme, focusing on simplicity!                          | [→](https://github.com/Snow0406/hyuki.dev)             |
-| [ldd.cc](https://ldd.cc/)                     | [@xJoyLu](https://github.com/xjoylu)               | The cream of the idlers.                                                                     | [→](https://ldd.cc/)                    |
-| [rezarezvan.com](https://rezarezvan.com/)     | [@rezaarezvan](https://github.com/rezaarezvan)     | A academic blog with personal touches :).                                                    | [→](https://rezarezvan.com/)            |
+| [ldd.cc](https://ldd.cc/)                     | [@xJoyLu](https://github.com/xjoylu)               | The cream of the idlers.                                                                     | [→](https://ldd.cc/)                                   |
+| [rezarezvan.com](https://rezarezvan.com/)     | [@rezaarezvan](https://github.com/rezaarezvan)     | A academic blog with personal touches :).                                                    | [→](https://rezarezvan.com/)                           |
 | [blog.z0x.ca](https://blog.z0x.ca/)           | [@z0x](https://z0x.ca)                             | _Very_ minimal version of erudite, stripping it down to the bare essentials                  | [→](https://git.z0x.ca/z0x/blog.z0x.ca/)               |
 
 ## Features
@@ -150,7 +150,7 @@ Colors are defined in `src/styles/global.css` in [OKLCH format](https://develope
   --ring: oklch(0.708 0 0);
 }
 
-[data-theme="dark"] {
+[data-theme='dark'] {
   /* ... */
 }
 ```
@@ -194,6 +194,7 @@ The blog post schema is defined as follows:
 | `title`       | `string`        | Should be ≤60 characters.                                                                                                                                                       | Yes      |
 | `description` | `string`        | Should be ≤155 characters.                                                                                                                                                      | Yes      |
 | `date`        | `coerce.date()` | Must be in `YYYY-MM-DD` format.                                                                                                                                                 | Yes      |
+| `order`       | `number`        | Sort order for subposts with the same `date`. Defaults to `0` if not provided.                                                                                                  | Optional |
 | `image`       | `image()`       | Should be exactly 1200px &times; 630px.                                                                                                                                         | Optional |
 | `tags`        | `string[]`      | Preferably use kebab-case for these.                                                                                                                                            | Optional |
 | `authors`     | `string[]`      | If the author has a profile, use the id associated with their Markdown file in `src/content/authors/` (e.g. if their file is named `jane-doe.md`, use `jane-doe` in the array). | Optional |

@@ -18,11 +18,12 @@ const { author } = Astro.props
 const authorPosts = await getPostsByAuthor(author.id)
 ---
 
-<Layout>
+<Layout class="max-w-3xl">
   <PageHead
     slot="head"
     title={`${author.data.name} (Author)`}
     description={author.data.bio || `Profile of ${author.data.name}.`}
+    noindex
   />
   <Breadcrumbs
     items={[

@@ -1,4 +1,4 @@
-import { getCollection, type CollectionEntry } from 'astro:content'
+import { getCollection, render, type CollectionEntry } from 'astro:content'
 import { readingTime, calculateWordCountFromHtml } from '@/lib/utils'
 
 export async function getAllAuthors(): Promise<CollectionEntry<'authors'>[]> {
@@ -60,7 +60,14 @@ export async function getAdjacentPosts(currentId: string): Promise<{
           getParentId(post.id) === parentId &&
           !post.data.draft,
       )
-      .sort((a, b) => a.data.date.valueOf() - b.data.date.valueOf())
+      .sort((a, b) => {
+        const dateDiff = a.data.date.valueOf() - b.data.date.valueOf()
+        if (dateDiff !== 0) return dateDiff
+
+        const orderA = a.data.order ?? 0
+        const orderB = b.data.order ?? 0
+        return orderA - orderB
+      })
 
     const currentIndex = subposts.findIndex((post) => post.id === currentId)
     if (currentIndex === -1) {
@@ -140,7 +147,14 @@ export async function getSubpostsForParent(
         isSubpost(post.id) &&
         getParentId(post.id) === parentId,
     )
-    .sort((a, b) => a.data.date.valueOf() - b.data.date.valueOf())
+    .sort((a, b) => {
+      const dateDiff = a.data.date.valueOf() - b.data.date.valueOf()
+      if (dateDiff !== 0) return dateDiff
+
+      const orderA = a.data.order ?? 0
+      const orderB = b.data.order ?? 0
+      return orderA - orderB
+    })
 }
 
 export function groupPostsByYear(
@@ -228,4 +242,63 @@ export async function getPostReadingTime(postId: string): Promise<string> {
 
   const wordCount = calculateWordCountFromHtml(post.body)
   return readingTime(wordCount)
+}
+
+export type TOCHeading = {
+  slug: string
+  text: string
+  depth: number
+  isSubpostTitle?: boolean
+}
+
+export type TOCSection = {
+  type: 'parent' | 'subpost'
+  title: string
+  headings: TOCHeading[]
+  subpostId?: string
+}
+
+export async function getTOCSections(postId: string): Promise<TOCSection[]> {
+  const post = await getPostById(postId)
+  if (!post) return []
+
+  const parentId = isSubpost(postId) ? getParentId(postId) : postId
+  const parentPost = isSubpost(postId) ? await getPostById(parentId) : post
+
+  if (!parentPost) return []
+
+  const sections: TOCSection[] = []
+
+  const { headings: parentHeadings } = await render(parentPost)
+  if (parentHeadings.length > 0) {
+    sections.push({
+      type: 'parent',
+      title: 'Overview',
+      headings: parentHeadings.map((heading) => ({
+        slug: heading.slug,
+        text: heading.text,
+        depth: heading.depth,
+      })),
+    })
+  }
+
+  const subposts = await getSubpostsForParent(parentId)
+  for (const subpost of subposts) {
+    const { headings: subpostHeadings } = await render(subpost)
+    if (subpostHeadings.length > 0) {
+      sections.push({
+        type: 'subpost',
+        title: subpost.data.title,
+        headings: subpostHeadings.map((heading, index) => ({
+          slug: heading.slug,
+          text: heading.text,
+          depth: heading.depth,
+          isSubpostTitle: index === 0,
+        })),
+        subpostId: subpost.id,
+      })
+    }
+  }
+
+  return sections
 }

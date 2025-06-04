@@ -9,30 +9,23 @@ import { getAllProjects } from '@/lib/data-utils'
 const projects = await getAllProjects()
 ---
 
-<Layout>
+<Layout class="max-w-3xl">
   <PageHead slot="head" title="About" />
   <Breadcrumbs items={[{ label: 'About', icon: 'lucide:info' }]} />
 
   <section>
     <div class="min-w-full">
       <div class="prose mb-8">
-        <p class="mb-4">
+        <p class="mt-0">
           astro-erudite is an opinionated, unstyled static blogging template
           that prioritizes simplicity and performance, built with <Link
             href="https://astro.build"
-            class="text-foreground"
             external
             underline>Astro</Link
-          >, <Link
-            href="https://tailwindcss.com"
-            class="text-foreground"
-            external
-            underline>Tailwind</Link
-          >, and <Link
-            href="https://ui.shadcn.com"
-            class="text-foreground"
-            external
-            underline>shadcn/ui</Link
+          >, <Link href="https://tailwindcss.com" external underline
+            >Tailwind</Link
+          >, and <Link href="https://ui.shadcn.com" external underline
+            >shadcn/ui</Link
           >. It provides a clean foundation for your content while being
           extremely easy to customize.
         </p>
@@ -40,7 +33,6 @@ const projects = await getAllProjects()
           To learn more about the philosophy behind this template, check out the
           following blog post: <Link
             href="/blog/the-state-of-static-blogs"
-            class="text-foreground"
             underline>The State of Static Blogs in 2024</Link
           >.
         </p>

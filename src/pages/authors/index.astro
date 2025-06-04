@@ -8,7 +8,7 @@ import { getAllAuthors } from '@/lib/data-utils'
 const authors = await getAllAuthors()
 ---
 
-<Layout>
+<Layout class="max-w-3xl">
   <PageHead slot="head" title="Authors" />
   <Breadcrumbs items={[{ label: 'Authors', icon: 'lucide:users' }]} />
   {

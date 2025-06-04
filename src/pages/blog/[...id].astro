@@ -9,15 +9,16 @@ import TOCHeader from '@/components/TOCHeader.astro'
 import TOCSidebar from '@/components/TOCSidebar.astro'
 import { badgeVariants } from '@/components/ui/badge'
 import { Button } from '@/components/ui/button'
-import { Separator } from '@/components/ui/separator'
 import Layout from '@/layouts/Layout.astro'
 import {
   getAdjacentPosts,
   getAllPostsAndSubposts,
+  getCombinedReadingTime,
   getParentId,
   getParentPost,
   getPostReadingTime,
   getSubpostCount,
+  getTOCSections,
   hasSubposts,
   isSubpost,
   parseAuthors,
@@ -49,6 +50,12 @@ const subpostCount = !isCurrentSubpost
   ? await getSubpostCount(currentPostId)
   : 0
 const postReadingTime = await getPostReadingTime(currentPostId)
+const combinedReadingTime =
+  hasChildPosts && !isCurrentSubpost
+    ? await getCombinedReadingTime(currentPostId)
+    : null
+
+const tocSections = await getTOCSections(currentPostId)
 ---
 
 <Layout>
@@ -62,13 +69,16 @@ const postReadingTime = await getPostReadingTime(currentPostId)
     )
   }
   {
-    headings?.length > 0 && (
-      <TOCHeader slot="table-of-contents" headings={headings} />
-    )
+    headings?.length > 0 &&
+      !(
+        isCurrentSubpost &&
+        headings.length === 1 &&
+        headings[0].text === post.data.title
+      ) && <TOCHeader slot="table-of-contents" headings={headings} />
   }
 
   <section
-    class="relative left-[calc(50%-50vw)] grid w-screen grid-cols-[minmax(0px,1fr)_min(calc(var(--breakpoint-md)-2rem),100%)_minmax(0px,1fr)] gap-y-6 px-4"
+    class="grid grid-cols-[minmax(0px,1fr)_min(calc(var(--breakpoint-md)-2rem),100%)_minmax(0px,1fr)] gap-y-6"
   >
     <div class="col-start-2">
       <Breadcrumbs
@@ -113,69 +123,80 @@ const postReadingTime = await getPostReadingTime(currentPostId)
     <section class="col-start-2 flex flex-col gap-y-6 text-center">
       <div class="flex flex-col">
         <h1
-          class="mb-2 scroll-mt-31 text-4xl leading-tight font-medium text-pretty"
+          class="mb-2 scroll-mt-31 text-3xl leading-tight font-medium sm:text-4xl"
           id="post-title"
         >
           {post.data.title}
         </h1>
 
         <div
-          class="text-muted-foreground mb-4 flex flex-wrap items-center justify-center gap-2 text-sm"
+          class="text-muted-foreground divide-border mb-4 flex flex-col items-center justify-center divide-y text-xs sm:flex-row sm:flex-wrap sm:divide-x sm:divide-y-0 sm:text-sm"
         >
           {
             authors.length > 0 && (
-              <>
-                <div class="flex items-center gap-x-2">
-                  {authors.map((author) => (
-                    <div class="flex items-center gap-x-1.5">
-                      <Image
-                        src={author.avatar}
-                        alt={author.name}
-                        width={24}
-                        height={24}
-                        class="rounded-full"
-                      />
-                      {author.isRegistered ? (
-                        <Link
-                          href={`/authors/${author.id}`}
-                          underline
-                          class="text-foreground"
-                        >
-                          <span>{author.name}</span>
-                        </Link>
-                      ) : (
+              <div class="flex w-full items-center justify-center gap-x-2 py-2 sm:w-fit sm:px-2 sm:py-0 first:sm:pl-0 last:sm:pr-0">
+                {authors.map((author) => (
+                  <div class="flex items-center gap-x-1.5">
+                    <Image
+                      src={author.avatar}
+                      alt={author.name}
+                      width={20}
+                      height={20}
+                      class="rounded-full"
+                    />
+                    {author.isRegistered ? (
+                      <Link
+                        href={`/authors/${author.id}`}
+                        underline
+                        class="text-foreground"
+                      >
                         <span>{author.name}</span>
-                      )}
-                    </div>
-                  ))}
-                </div>
-                <Separator orientation="vertical" className="h-4!" />
-              </>
+                      </Link>
+                    ) : (
+                      <span>{author.name}</span>
+                    )}
+                  </div>
+                ))}
+              </div>
             )
           }
-          <div class="flex items-center gap-2">
-            <span>{formatDate(post.data.date)}</span>
-            <Separator orientation="vertical" className="h-4!" />
-            <span>{postReadingTime}</span>
-            {
-              subpostCount > 0 && (
-                <>
-                  {' '}
-                  <Separator orientation="vertical" className="h-4!" />{' '}
-                  <span class="flex items-center gap-1">
-                    {' '}
-                    <Icon name="lucide:file-text" class="size-3" />{' '}
-                    {subpostCount} subpost{subpostCount === 1 ? '' : 's'}{' '}
-                  </span>{' '}
-                </>
-              )
-            }
-          </div>
-        </div>
 
+          <div
+            class="flex w-full items-center justify-center gap-2 py-2 sm:w-fit sm:px-2 sm:py-0 first:sm:pl-0 last:sm:pr-0"
+          >
+            <span>{formatDate(post.data.date)}</span>
+          </div>
+
+          <div
+            class="flex w-full items-center justify-center gap-2 py-2 sm:w-fit sm:px-2 sm:py-0 first:sm:pl-0 last:sm:pr-0"
+          >
+            <span>
+              {postReadingTime}
+              {
+                combinedReadingTime &&
+                  combinedReadingTime !== postReadingTime && (
+                    <span class="text-muted-foreground">
+                      {' '}
+                      ({combinedReadingTime} total)
+                    </span>
+                  )
+              }
+            </span>
+          </div>
+
+          {
+            subpostCount > 0 && (
+              <div class="flex w-full items-center justify-center gap-1 py-2 sm:w-fit sm:px-2 sm:py-0 first:sm:pl-0 last:sm:pr-0">
+                <Icon name="lucide:file-text" class="size-3" />
+                {subpostCount} subpost{subpostCount === 1 ? '' : 's'}
+              </div>
+            )
+          }
+        </div>
         <div class="flex flex-wrap justify-center gap-2">
           {
-            post.data.tags && post.data.tags.length > 0 ? (
+            post.data.tags &&
+              post.data.tags.length > 0 &&
               post.data.tags.map((tag) => (
                 <a
                   href={`/tags/${tag}`}
@@ -185,11 +206,6 @@ const postReadingTime = await getPostReadingTime(currentPostId)
                   {tag}
                 </a>
               ))
-            ) : (
-              <span class="text-muted-foreground text-sm">
-                No tags available
-              </span>
-            )
           }
         </div>
       </div>
@@ -201,7 +217,11 @@ const postReadingTime = await getPostReadingTime(currentPostId)
       />
     </section>
 
-    {headings.length > 0 && <TOCSidebar headings={headings} />}
+    {
+      tocSections.length > 0 && (
+        <TOCSidebar sections={tocSections} currentPostId={currentPostId} />
+      )
+    }
 
     <article class="prose col-start-2 max-w-none">
       <Content />

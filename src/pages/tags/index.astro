@@ -10,7 +10,7 @@ import { Icon } from 'astro-icon/components'
 const sortedTags = await getSortedTags()
 ---
 
-<Layout>
+<Layout class="max-w-3xl">
   <PageHead slot="head" title="Tags" />
   <Breadcrumbs items={[{ label: 'Tags', icon: 'lucide:tags' }]} />
 

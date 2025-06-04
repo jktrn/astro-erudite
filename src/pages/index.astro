@@ -10,7 +10,7 @@ import { getRecentPosts } from '@/lib/data-utils'
 const blog = await getRecentPosts(SITE.featuredPostCount)
 ---
 
-<Layout>
+<Layout class="max-w-3xl">
   <PageHead slot="head" title="Home" />
   <section>
     <div class="rounded-lg border">

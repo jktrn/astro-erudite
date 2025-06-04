@@ -6,6 +6,13 @@ import Footer from '@/components/Footer.astro'
 import Head from '@/components/Head.astro'
 import Header from '@/components/Header.astro'
 import { SITE } from '@/consts'
+import { cn } from '@/lib/utils'
+
+interface Props {
+  class?: string
+}
+
+const { class: className } = Astro.props
 ---
 
 <!doctype html>
@@ -13,7 +20,7 @@ import { SITE } from '@/consts'
   <Head>
     <slot name="head" />
   </Head>
-  <body class="overflow-x-hidden">
+  <body>
     <div class="flex h-fit min-h-screen flex-col gap-y-6 font-sans">
       <div
         class="bg-background/50 sticky top-0 z-50 divide-y backdrop-blur-sm xl:divide-none"
@@ -23,7 +30,7 @@ import { SITE } from '@/consts'
         <slot name="table-of-contents" />
       </div>
       <main class="grow">
-        <div class="mx-auto flex max-w-3xl grow flex-col gap-y-6 px-4">
+        <div class={cn('mx-auto flex grow flex-col gap-y-6 px-4', className)}>
           <slot />
         </div>
       </main>
