@@ -7,11 +7,10 @@ import { Image } from 'astro:assets'
 import type { CollectionEntry } from 'astro:content'
 
 interface Props {
-  project: CollectionEntry<'albums'>
+  album: CollectionEntry<'albums'>
 }
 
 const { album } = Astro.props
-const formattedDate = formatDate(album.data.date)
 ---
 
 <div
