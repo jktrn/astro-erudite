@@ -3,53 +3,188 @@ import Breadcrumbs from '@/components/Breadcrumbs.astro'
 import Link from '@/components/Link.astro'
 import PageHead from '@/components/PageHead.astro'
 import ProjectCard from '@/components/ProjectCard.astro'
+import ResumeCard from '@/components/ResumeCard.astro'
 import Layout from '@/layouts/Layout.astro'
 import { getAllProjects } from '@/lib/data-utils'
+import SkillCard from '@/components/SkillCard.astro'
+import TableOfContents from '@/components/TableOfContents.astro'
 
-const projects = await getAllProjects()
+import meinhardt from '../../public/static/meinhardt.png'
+import schneider2 from '../../public/static/schneider2.png'
+
+const headings = 
+    [{"depth": 1, "text": "01 Skills", "slug": "skills"},
+    {"depth": 1, "text": "02 Interests", "slug": "interests"},
+    {"depth": 1, "text": "03 Portfolio", "slug": "portfolio"},
+    ]
 ---
 
 <Layout>
   <PageHead slot="head" title="About" />
   <Breadcrumbs items={[{ label: 'About', icon: 'lucide:info' }]} />
+  <div class="fixed top-30 left-20">
 
-  <section>
+    <TableOfContents headings={headings} />
+  </div>
     <div class="min-w-full">
       <div class="prose mb-8">
+        <h3 class="text-2xl leading-none font-medium">A little bit about me...</h3>
         <p class="mb-4">
-          astro-erudite is an opinionated, unstyled static blogging template
-          that prioritizes simplicity and performance, built with <Link
-            href="https://astro.build"
-            class="text-foreground"
-            external
-            underline>Astro</Link
-          >, <Link
-            href="https://tailwindcss.com"
-            class="text-foreground"
-            external
-            underline>Tailwind</Link
-          >, and <Link
-            href="https://ui.shadcn.com"
-            class="text-foreground"
-            external
-            underline>shadcn/ui</Link
-          >. It provides a clean foundation for your content while being
-          extremely easy to customize.
+          I am a born sports-lover; actively playing basketball as well as skateboarding. When I travel, I love hiking, scuba diving, sitting eating local food in a tiny restaurant. In my free time, I love to cook, bake, and I also dabble in a bit of photography.
         </p>
-        <p>
-          To learn more about the philosophy behind this template, check out the
-          following blog post: <Link
-            href="/blog/the-state-of-static-blogs"
-            class="text-foreground"
-            underline>The State of Static Blogs in 2024</Link
-          >.
+        <p class="mb-4">
+          I am a third-year Mechanical Engineering student at the National University of Singapore (NUS), with a deep interest in product design, factory automation and 3D modeling.
+          
+          </p>
+        <p class="mb-4">
+         
+          I believe that the factories of the future, with the incorporation of industry 4.0 and automation technologies, are what all of society is built on. Yet, many of us still think of factories as magic boxes, where raw material enters from one side and leaves from the other side as a finished product. As an engineer, i know it is not that simple. Hence, to have the chance to get on the ground in a factory would be an amazing opportunity for me to learn about, and hopefully also contribute to the development of what is i believe a cornerstone of our society: the modern factory  
         </p>
       </div>
+      <div class="prose">
 
-      <h2 class="mb-4 text-2xl font-medium">Example Projects Listing</h2>
-      <div class="flex flex-col gap-4">
-        {projects.map((project) => <ProjectCard project={project} />)}
+        <section class="mb-8">
+  
+          <h2 class="mb-4 text-xl font-medium" data-link="skills">01 Skills</h2>
+          <div class="grid grid-cols-2 gap-2">
+            <SkillCard icon="lucide:pencil-ruler">Fusion360</SkillCard>
+            <SkillCard icon="lucide:pencil-ruler">Solidworks</SkillCard>
+            <SkillCard icon="lucide:pencil-ruler">Creo Parametric</SkillCard>
+            <SkillCard icon="lucide:code">Python</SkillCard> 
+            <SkillCard icon="lucide:code">C++/C</SkillCard> 
+            <SkillCard icon="lucide:code">HTML/CSS/JS</SkillCard> 
+            <SkillCard icon="lucide:code">TIA Portal</SkillCard> 
+            <SkillCard icon="lucide:code">Siemens PLC</SkillCard> 
+            <SkillCard icon="lucide:calculator">Microsoft PowerBI</SkillCard> 
+            <SkillCard icon="lucide:calculator">Microsoft Excel</SkillCard> 
+            <SkillCard icon="lucide:calculator">MySQL</SkillCard> 
+            <SkillCard icon="lucide:paintbrush">Photoshop</SkillCard> 
+            <SkillCard icon="lucide:paintbrush">Davinci Resolve</SkillCard> 
+    
+          </div>
+        </section>
+        <section>
+  
+          <h2 class="mb-4 text-xl font-medium">02 Interests</h2>
+          <div class="grid grid-cols-2 gap-2">
+            <SkillCard icon="lucide:camera">Photography</SkillCard>
+            <SkillCard icon="lucide:brush">Sewing</SkillCard>
+            <SkillCard icon="lucide:pencil-ruler">Fashion Design</SkillCard>
+            <SkillCard icon="lucide:flame">Skateboarding</SkillCard> 
+            <SkillCard icon="lucide:flame">Basketball</SkillCard> 
+            <SkillCard icon="lucide:flame">Scuba diving</SkillCard> 
+            <SkillCard icon="lucide:microwave">Cooking</SkillCard> 
+            <SkillCard icon="lucide:microwave">Baking</SkillCard>   
+          </div>
+        </section>
+        <section>
+  
+          <h2 class="mb-4 text-xl font-medium">03 Portfolio</h2>
+          <div class="flex flex-col gap-2">
+            <ResumeCard 
+              title="Engineer" 
+              company="Meinhardt Group" 
+              date="2025" link="https://example.com" 
+              imageURL={meinhardt}
+              >
+              <div slot="desc">
+                <p>
+                  Development of CI/CD PowerBI analytical report pipeline, transforming hundreds of unique data points from development companies in the Architecture, Engineering and Construction (AEC) industry, across multiple technical dimensions, into summarised, informative dashboards, providing directors with key insights into areas of strength and weakness.
+                </p>
+                <p>
+                  Incorporated the use of DAX formulas and Power Query scripts in the project, speeding up effi ciency of Smart city and urban infrastructure planning workfl ows and client interactions.
+                </p>
+                <p>
+                  Developed automated processes to generate static web pages from excel data with Reveal.js, increasing client engagement through beautiful and engaging presentations.
+                  
+                </p>
+                <p>
+                  Created concise technical documentation of AI and analytical products with Docusaurus
+                 
+                </p>
+              </div>
+            </ResumeCard>
+            <ResumeCard 
+              title="Innovation Intern" 
+              company="Schneider Electric" 
+              date="2023" link="https://example.com" 
+              imageURL={schneider2}
+              >
+              <div slot="desc">
+                <p>
+
+                  Conceptualised and led a new discovery into a technological Innovation, who’s main goal was to increase efficiency and expand functionality of our product.
+                </p>
+                <p>
+
+                  Preperation of Data sheets for internal projects and the assembly of a 3-Phase breakout box for internal use.
+                </p>
+                <p>
+
+                  Working in Creo Parametric in parametric modelling and surface modelling.
+                </p>
+              </div>
+            </ResumeCard>
+            <ResumeCard 
+              title="Web dev - UI/UX Design" 
+              company="Resonance Pte Ltd" 
+              date="2021" link="https://example.com" 
+              imageURL={schneider2}
+              >
+              <div slot="desc">
+                <p>
+  In my 6-month stint at Resonance, I worked as the project head for two main projects, namely the redesign of the Ministry of Manpower's (MOM) Intranet, as well as the website for SUSS' open house. As the most experienced developer, I spearheaded the adoption of good coding practices, shifting away from hardcoded “responsive” design to truly responsive websites.
+  </p>
+                <p>
+  
+                 Before leaving, I was also working with my boss to adopt the usage of 11ty for better project management.
+                </p>
+              </div>
+            </ResumeCard>
+            <ResumeCard 
+              title="Web dev - UI/UX Design" 
+              company="Learning Hearts LLC" 
+              date="2021" link="https://www.learning-hearts.com/" 
+              imageURL={schneider2}
+              >
+              <div slot="desc">
+                <p>
+  Website built from scratch with Svelte for Learning Hearts Therapy (LHT), an educational therapy center.
+                 </p>
+                <p>
+  Rebuilt in September 2021 using 11ty for better performance, templating and code reusability using HTML, CSS, JS, Nunjucks, Markdown, and Alpine.js. Complete redesign done with Figma single handedly.
+
+              </p>
+              </div>
+            </ResumeCard>
+            <ResumeCard 
+              title="Chef de Partie" 
+              company="8 Trees Pte Ltd" 
+              date="2025" link="https://www.learning-hearts.com/" 
+              imageURL={schneider2}
+              >
+              <div slot="desc">
+                <p>
+                  Assisted with mise-en-place as well as running the pass during dinner service, setting up of events, daily cooking requirements and recipe creation.
+                 </p>
+              </div>
+            </ResumeCard>
+          </div>
+        </section>
       </div>
     </div>
   </section>
+  <script>
+    const links = document.querySelectorAll('.prose section h2');
+    links.forEach((link) => {
+      const linkMod = link.innerHTML.split(" ").slice(1)[0].toLowerCase();
+      const TOClink = document.querySelector(`#table-of-contents li a[href="#${linkMod}"]`);
+      const rect = link.getBoundingClientRect(); //change to get absolute position in dom
+      const topcoord = rect.top - 100;
+      console.log(topcoord);
+      TOClink?.addEventListener('click', (e) => {
+        window.scrollTo({top: topcoord, behavior: "smooth"});
+      })
+    })
+  </script>
 </Layout>

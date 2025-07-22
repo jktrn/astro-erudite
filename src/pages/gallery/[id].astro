@@ -5,6 +5,7 @@ import PhotoSwipe from "../../components/PhotoSwipe.astro";
 import { getCollection } from "astro:content";
 import { getAlbumImages } from '@/lib/data-utils'
 import { Image } from "astro:assets";
+import { formatDate, readingTime } from '@/lib/utils'
 
 
 
@@ -26,25 +27,28 @@ export async function getStaticPaths() {
   const images = await getAlbumImages(album.id);
 ---
 
-<GalleryLayout
-	title={album.data.title}
-	description="Lorem ipsum dolor sit amet"
-	pubDate={new Date('August 08 2021')}
-	heroImage="/blog-placeholder-about.jpg"
->
-
-<div class="text-center my-16 mb-32">
+<GalleryLayout>
+<div class="text-center">
+  <section class="col-start-2 my-4 flex flex-col gap-y-6 text-center">
+    <div class="flex flex-col">
+  <h1
+          class="text-4xl capitalize leading-tight font-medium text-pretty sm:text-5xl"
+        >
+        {album.data.title} 
+        </h1> 
+        <p class="text-muted-foreground">
+          {album.data.description}
+        </p>
+      </div>
+      </section>
 <PhotoSwipe imageFolder={album.id} />
-  <div>
-  </div>
 
-
-
-  <p class="text-lg my-4 text-center">
-    <a href="/gallery/" class="text-white hover:underline"
-      >Go back →</a
-    >
-  </p>
 </div>
+<p class="text-lg my-4 text-center">
+  <a href="/gallery/" class="text-dark hover:underline"
+    >⇐ Go back
+    </a>
+</p>
 
 </GalleryLayout>
+

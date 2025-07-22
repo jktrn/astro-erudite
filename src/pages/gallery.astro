@@ -2,7 +2,7 @@
 import Breadcrumbs from '@/components/Breadcrumbs.astro'
 import Link from '@/components/Link.astro'
 import PageHead from '@/components/PageHead.astro'
-import ProjectCard from '@/components/ProjectCard.astro'
+import GalleryCard from '@/components/GalleryCard.astro'
 import Layout from '@/layouts/Layout.astro'
 import { getAllProjects } from '@/lib/data-utils'
 import { Picture, Image } from 'astro:assets';
@@ -17,34 +17,16 @@ console.log(albums);
   <Breadcrumbs items={[{ label: 'Gallery', icon: 'lucide:images' }]} />
 
   <section>
-
-    <div class="mx-auto container flex flex-col gap-8 pt-8">
-      {
-        albums.map((album) => (
-          <a
-            href={`/gallery/${album.id}`}
-            class="group transition-all mb-4 block relative max-h-64 flex flex-row border border-gray-200 shadow-sm"
-          >
-            <div class="basis-1/3">
-  
-            <Image
-              src={album.data.cover}
-              alt={album.data.coverAlt}
-              format="avif"
-              quality="mid"
-              class:list={[
-                "h-full w-auto",
-                "group-hover:shadow-lg group-hover:opacity-90"
-              ]}
-            />
-            </div>
-            <div class="p-4 basis-2/3 text-neutral-700">
-              <strong class="text-2xl font-medium">{album.data.title}</strong>
-              <p class="text-xs">{album.data.description}</p>
-            </div>
-          </a>
-        ))
-      }
+    <div class="prose mb-8">
+      <h3 class="text-2xl leading-none font-medium">Life is more fun...</h3>
+      <p class="mb-4">
+        with a camera. At least that's what i've discovered in the past 2 years of photography.
+        I've taken this camera with me to many places, from the blue eye in North Albania to the quaint kitchen of cô (Aunty in Vietnamese) in the rural Vi Xuyen Village, Ha Giang, Vietnam. And with it, I've managed
+        to capture some beautiful experiences that I will recall, years from now, with fondness and great clarity because of the photos I took.  
+      </p>
+    </div>
+    <div class="grid grid-cols-2 gap-4">
+      {albums.map((album) => <GalleryCard album={album} />)}
     </div>
   </section>
 </Layout>

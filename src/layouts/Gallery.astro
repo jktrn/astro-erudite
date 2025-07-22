@@ -25,22 +25,23 @@ const { isWide = false } = Astro.props
             'mx-auto flex grow flex-col gap-y-6 px-4',
             !isWide && 'max-w-3xl',
           )}
-        >
+        >  
           <slot />
         </div>
       </main>
       <Footer />
     </div>
-    <script>
+    <!-- <script>
         import PhotoSwipeLightbox from 'photoswipe/lightbox';
 		import 'photoswipe/style.css';
 
 		const lightbox = new PhotoSwipeLightbox({
 			gallery: '#my-gallery',
 			children: 'a',
-			showHideAnimationType: 'fade',
-			initialZoomLevel: 0.5,
-			showAnimationDuration: 1000,
+			showHideAnimationType: 'zoom',
+			initialZoomLevel: 1,
+      secondaryZoomLevel: 1.2,
+			showAnimationDuration: 300,
 			pswpModule: () => import("photoswipe"),
 		});
 		
@@ -50,6 +51,6 @@ const { isWide = false } = Astro.props
 			{ once: false },
 			)
 
-    </script>
+    </script> -->
   </body>
 </html>

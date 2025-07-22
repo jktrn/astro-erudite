@@ -1,0 +1,33 @@
+---
+import Breadcrumbs from '@/components/Breadcrumbs.astro'
+import Link from '@/components/Link.astro'
+import PageHead from '@/components/PageHead.astro'
+import ProjectCard from '@/components/ProjectCard.astro'
+import Layout from '@/layouts/Layout.astro'
+import { getAllProjects } from '@/lib/data-utils'
+
+const projects = await getAllProjects()
+---
+
+<Layout>
+  <PageHead slot="head" title="Projects" />
+  <Breadcrumbs items={[{ label: 'Projects', icon: 'lucide:clipboard-list' }]} />
+
+  <section>
+    <div class="min-w-full">
+      <div class="prose mb-8">
+        <h3 class="text-2xl leading-none font-medium">I love the feeling...</h3>
+        <p class="mb-4">
+          Of waking up in the morning knowing you have some project to work on, a new gadget to tinker with, a new technology to learn. 
+        <p class="mb-4">
+          I have always been curious about everything around me, and I've never hesitated to quench this thirst for finding out how things work.
+        </p>
+      </div>
+
+      <h2 class="mb-4 text-xl font-medium">Personal Projects</h2>
+      <div class="flex flex-col gap-4">
+        {projects.map((project) => <ProjectCard project={project} />)}
+      </div>
+    </div>
+  </section>
+</Layout>

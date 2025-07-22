@@ -31,23 +31,28 @@ export const NAV_LINKS: SocialLink[] = [
 ]
 
 export const SOCIAL_LINKS: SocialLink[] = [
-  {
+  /* {
     href: 'https://github.com/jktrn',
     label: 'GitHub',
   },
   {
     href: 'https://twitter.com/enscry',
     label: 'Twitter',
-  },
+  }, */
   {
     href: 'mailto:brendanwong24@gmail.com',
     label: 'Email',
   },
   {
-    href: 'instagram.com/uglyf1acko',
+    href: 'https://instagram.com/uglyf1acko',
     label: 'Instagram',
   },
 ]
+
+export const LANGUAGES: String[] = [
+  "English, Native", "Chinese, Professional fluency", "German, B2, Professional fluency", "Korean, limeted working profeciency"
+]
+
 
 export const ICON_MAP: IconMap = {
   Website: 'lucide:globe',
