@@ -5,6 +5,7 @@ import PageHead from '@/components/PageHead.astro'
 import { buttonVariants } from '@/components/ui/button'
 import { SITE } from '@/consts'
 import Layout from '@/layouts/Layout.astro'
+import { Image } from 'astro:assets'
 import { getRecentPosts } from '@/lib/data-utils'
 
 const blog = await getRecentPosts(SITE.featuredPostCount)
@@ -13,8 +14,9 @@ const blog = await getRecentPosts(SITE.featuredPostCount)
 <Layout>
   <PageHead slot="head" title="Home" />
   <section>
-    <div class="rounded-lg border">
+    <div class="card-offset mx-0">
       <div class="flex flex-col space-y-1.5 p-6 pb-4">
+
         <h3 class="text-3xl leading-none font-bold text-accent-foreground">Hi, I'm Brendan</h3>
         <p class="text-muted-foreground text-sm">
           Mechanical Engineer | Process Automation | Textile Engineering
@@ -28,7 +30,7 @@ const blog = await getRecentPosts(SITE.featuredPostCount)
     </div>
   </section>
   <section class="flex flex-col gap-y-4">
-    <h2 class="text-2xl font-medium">Latest posts</h2>
+    <h2 class="text-2xl font-medium ">Latest posts</h2>
     <ul class="flex flex-col gap-y-4">
       {
         blog.map((post) => (

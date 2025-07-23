@@ -1,3 +1,5 @@
+import type { string } from "astro:schema"
+
 export type Site = {
   title: string
   description: string
@@ -16,3 +18,4 @@ export type SocialLink = {
 export type IconMap = {
   [key: string]: string
 }
+

@@ -10,14 +10,14 @@ const {icon} = Astro.props
 ---
 
 <div
-  class="bg-secondary-foreground text-primary-foreground overflow-hidden rounded-xl border p-4 transition-colors duration-300 ease-in-out"
+  class="ring bg text-foreground overflow-hidden border p-2 font-medium"
 >
   <div class="flex flex-wrap gap-4">
-    <div>
-      <Icon name={icon} class="size-6" />
+    <div class="flex items-center">
+      <Icon name={icon} class="size-4 lg:size-6" />
     </div>
-    <div class="">
+    <div class="text-sm lg:text-md font-mono uppercase ">
         <slot>
-        </div>
     </div>
+  </div>
 </div>

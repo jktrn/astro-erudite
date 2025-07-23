@@ -16,24 +16,29 @@ const dateMod = date.slice(0,2).concat("<br>", date.slice(2,))
 ---
 
 <div
-  class="rounded-xl border p-4 transition-colors duration-300 ease-in-out"
+  class="border bg text-foreground border-foreground transition-colors duration-300 ease-in-out mt-2"
 >
-    <div class="flex justify-between mb-4">
-      <div class="flex flex-col flex-3/4">
-        <h3 class="m-0 mb-2 text-xl font-medium">{company}</h3>
-        <h4 class="m-0 text-muted-foreground text-md">{title}</h4>
-      </div>
-      <div class="text-xl flex-1/4 text-right mx-2" set:html={dateMod}>
-        
-      </div>
+<div>
+
+  <div class="flex p-4 justify-between border-b">
+    <div class="flex flex-col flex-3/4">
+      <h3 class="m-0 mb-2 text-xl font-medium">{company}</h3>
+      <h4 class="m-0 text-foreground font-light">{title}</h4>
     </div>
-    <div class="w-full h-auto sm:shrink-0">
-          <Image
-            src={imageURL}
-            alt={title}
-            height={400}
-            class="object-cover m-0"
-          />
+    <div class="text-xl border-l border-foreground text-right font-mono pl-4 w-fit" set:html={dateMod}>
+      
     </div>
-    <slot class="text-muted-foreground mb-2 text-sm" name="desc" />
+  </div>
+  <div class="w-full h-auto sm:shrink-0 border-t border-b border-foreground">
+        <Image
+          src={imageURL}
+          alt={title}
+          height={400}
+          class="object-cover m-0"
+        />
+  </div>
+</div>
+    <div class="text-foreground p-4 prose">
+      <slot name="desc" />
+    </div>
 </div>

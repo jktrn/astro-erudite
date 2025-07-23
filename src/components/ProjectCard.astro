@@ -14,16 +14,16 @@ const { project } = Astro.props
 ---
 
 <div
-  class="hover:bg-secondary/50 rounded-xl border p-4 transition-colors duration-300 ease-in-out"
+  class="hover:bg-secondary/50 transition-colors duration-300 ease-in-out border bg text-foreground border-foreground"
 >
   <Link
     href={project.data.link}
-    class="flex flex-col gap-4 sm:flex-row"
+    class="flex flex-col lg:gap-4 lg:flex-row"
     external
   >
     {
       project.data.image && (
-        <div class="max-w-3xs sm:shrink-0">
+        <div class="lg:max-w-sm sm:shrink-0 border-r border-foreground">
           <Image
             src={project.data.image}
             alt={project.data.name}
@@ -34,7 +34,7 @@ const { project } = Astro.props
         </div>
       )
     }
-    <div class="grow">
+    <div class="grow p-4">
       <h3 class="mb-1 text-lg font-medium">
         {project.data.name}
       </h3>
@@ -58,7 +58,7 @@ const { project } = Astro.props
       }
       {
         project.data.tags && (
-          <div class="flex flex-wrap gap-2">
+          <div class="flex flex-wrap gap-2 mt-4">
             {project.data.tags.map((tag: string) => (
               <Badge variant="secondary">{tag}</Badge>
             ))}

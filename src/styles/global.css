@@ -51,6 +51,14 @@
   font-display: swap;
 }
 
+@font-face {
+  font-family: 'NebulaSans';
+  src: url('/fonts/') format('woff2-variations');
+  font-weight: 100 900;
+  font-style: normal;
+  font-display: swap;
+}
+
 :root {
   --background: oklch(1 0 0);
   --foreground: oklch(0.145 0 0);
@@ -106,5 +114,62 @@
 
   .disable-transitions * {
     @apply transition-none!;
+  }
+}
+
+
+
+.card-offset {
+  --width: 1px;
+  --colour: var(--foreground);
+  --offset: 6px;
+  position: relative;
+  border: var(--width) solid var(--colour);
+  border-left: 0px;
+  border-right: 0px;
+}
+
+.card-offset::after,.card-offset::before {
+  position: absolute;
+  content: "";
+  width: var(--width);
+  height: 120%;
+  background-color: var(--colour);
+}
+.card-offset::after {
+  left:var(--offset);
+  top: -25px;
+}
+.card-offset::before {
+  right:var(--offset);
+  bottom: -30px;
+}
+
+@media screen and (min-width: 1000px) {
+  .card-offset {
+  --width: 1px;
+  --colour: var(--foreground);
+  --offset: 10px;
+  position: relative;
+  border: var(--width) solid var(--colour);
+  border-left: 0px;
+  border-right: 0px;
+}
+
+  .card-offset::after,.card-offset::before {
+  position: absolute;
+  content: "";
+  width: var(--width);
+  height: 120%;
+  background-color: var(--colour);
+}
+
+  .card-offset::after {
+    left:var(--offset);
+    top: -25px;
+  }
+  .card-offset::before {
+    right:var(--offset);
+    bottom: -20px;
   }
 }

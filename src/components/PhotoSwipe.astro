@@ -15,7 +15,7 @@ const imagePaths = Object.keys(images).filter((imagePath) => {
 
 <div
 	id="gallery"
-	class="container mx-auto px-2 pb-2 grid grid-cols-2 md:grid-cols-3 gap-2"
+	class="container mx-auto pb-2 grid grid-cols-2 md:grid-cols-3 gap-2"
 >
 	{
 		imagePaths.map(async (imagePath) => {
@@ -31,7 +31,7 @@ const imagePaths = Object.keys(images).filter((imagePath) => {
 					data-pswp-width={optimizedImage.attributes.width}
 					data-pswp-height={optimizedImage.attributes.height}
 					target="_blank"
-					class="overflow-hidden rounded-md border-[1px] border-primary hover:border-secondary"
+					class="overflow-hidden border-[1px] border-primary hover:border-secondary"
 				>
 					<Image
 						src={image}

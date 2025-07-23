@@ -11,6 +11,9 @@ import TableOfContents from '@/components/TableOfContents.astro'
 
 import meinhardt from '../../public/static/meinhardt.png'
 import schneider2 from '../../public/static/schneider2.png'
+import resonance from '../../public/static/resonance.jpg'
+import cloud from '../../public/static/cl9ud.png'
+import lht from '../../public/static/learninghearts.png'
 
 const headings = 
     [{"depth": 1, "text": "01 Skills", "slug": "skills"},
@@ -22,13 +25,13 @@ const headings =
 <Layout>
   <PageHead slot="head" title="About" />
   <Breadcrumbs items={[{ label: 'About', icon: 'lucide:info' }]} />
-  <div class="fixed top-30 left-20">
+  <div class="fixed top-30 left-20 hidden lg:block">
 
     <TableOfContents headings={headings} />
   </div>
     <div class="min-w-full">
       <div class="prose mb-8">
-        <h3 class="text-2xl leading-none font-medium">A little bit about me...</h3>
+        <h3 class="text-2xl mt-0 lg:mt-4 leading-none font-medium">A little bit about me...</h3>
         <p class="mb-4">
           I am a born sports-lover; actively playing basketball as well as skateboarding. When I travel, I love hiking, scuba diving, sitting eating local food in a tiny restaurant. In my free time, I love to cook, bake, and I also dabble in a bit of photography.
         </p>
@@ -43,10 +46,10 @@ const headings =
       </div>
       <div class="prose">
 
-        <section class="mb-8">
+        <section class="mb-12">
   
-          <h2 class="mb-4 text-xl font-medium" data-link="skills">01 Skills</h2>
-          <div class="grid grid-cols-2 gap-2">
+          <h2 class="mb-4 text-xl font-medium raleway-title" data-link="skills">01 Skills</h2>
+          <div class="grid grid-cols-2 gap-2 lg:gap-4">
             <SkillCard icon="lucide:pencil-ruler">Fusion360</SkillCard>
             <SkillCard icon="lucide:pencil-ruler">Solidworks</SkillCard>
             <SkillCard icon="lucide:pencil-ruler">Creo Parametric</SkillCard>
@@ -55,18 +58,22 @@ const headings =
             <SkillCard icon="lucide:code">HTML/CSS/JS</SkillCard> 
             <SkillCard icon="lucide:code">TIA Portal</SkillCard> 
             <SkillCard icon="lucide:code">Siemens PLC</SkillCard> 
-            <SkillCard icon="lucide:calculator">Microsoft PowerBI</SkillCard> 
-            <SkillCard icon="lucide:calculator">Microsoft Excel</SkillCard> 
+            <SkillCard icon="lucide:calculator">PowerBI</SkillCard> 
+            <SkillCard icon="lucide:calculator">Excel</SkillCard> 
             <SkillCard icon="lucide:calculator">MySQL</SkillCard> 
             <SkillCard icon="lucide:paintbrush">Photoshop</SkillCard> 
+            <SkillCard icon="lucide:paintbrush">English</SkillCard> 
+            <SkillCard icon="lucide:paintbrush">Davinci Resolve</SkillCard> 
+            <SkillCard icon="lucide:paintbrush">Davinci Resolve</SkillCard> 
+            <SkillCard icon="lucide:paintbrush">Davinci Resolve</SkillCard> 
             <SkillCard icon="lucide:paintbrush">Davinci Resolve</SkillCard> 
     
           </div>
         </section>
-        <section>
+        <section class="mb-12">
   
-          <h2 class="mb-4 text-xl font-medium">02 Interests</h2>
-          <div class="grid grid-cols-2 gap-2">
+          <h2 class="mb-4 text-xl font-medium raleway-title">02 Interests</h2>
+          <div class="grid grid-cols-2 gap-2 lg:gap-4">
             <SkillCard icon="lucide:camera">Photography</SkillCard>
             <SkillCard icon="lucide:brush">Sewing</SkillCard>
             <SkillCard icon="lucide:pencil-ruler">Fashion Design</SkillCard>
@@ -79,8 +86,8 @@ const headings =
         </section>
         <section>
   
-          <h2 class="mb-4 text-xl font-medium">03 Portfolio</h2>
-          <div class="flex flex-col gap-2">
+          <h2 class="mb-4 text-xl font-medium raleway-title">03 Portfolio</h2>
+          <div class="grid grid-cols-1 lg:grid-cols-2 gap-2 lg:gap-4">
             <ResumeCard 
               title="Engineer" 
               company="Meinhardt Group" 
@@ -88,7 +95,7 @@ const headings =
               imageURL={meinhardt}
               >
               <div slot="desc">
-                <p>
+                <p class="mt-0">
                   Development of CI/CD PowerBI analytical report pipeline, transforming hundreds of unique data points from development companies in the Architecture, Engineering and Construction (AEC) industry, across multiple technical dimensions, into summarised, informative dashboards, providing directors with key insights into areas of strength and weakness.
                 </p>
                 <p>
@@ -111,7 +118,7 @@ const headings =
               imageURL={schneider2}
               >
               <div slot="desc">
-                <p>
+                <p  class="mt-0">
 
                   Conceptualised and led a new discovery into a technological Innovation, who’s main goal was to increase efficiency and expand functionality of our product.
                 </p>
@@ -129,10 +136,10 @@ const headings =
               title="Web dev - UI/UX Design" 
               company="Resonance Pte Ltd" 
               date="2021" link="https://example.com" 
-              imageURL={schneider2}
+              imageURL={resonance}
               >
               <div slot="desc">
-                <p>
+                <p  class="mt-0">
   In my 6-month stint at Resonance, I worked as the project head for two main projects, namely the redesign of the Ministry of Manpower's (MOM) Intranet, as well as the website for SUSS' open house. As the most experienced developer, I spearheaded the adoption of good coding practices, shifting away from hardcoded “responsive” design to truly responsive websites.
   </p>
                 <p>
@@ -145,10 +152,10 @@ const headings =
               title="Web dev - UI/UX Design" 
               company="Learning Hearts LLC" 
               date="2021" link="https://www.learning-hearts.com/" 
-              imageURL={schneider2}
+              imageURL={lht}
               >
               <div slot="desc">
-                <p>
+                <p  class="mt-0">
   Website built from scratch with Svelte for Learning Hearts Therapy (LHT), an educational therapy center.
                  </p>
                 <p>
@@ -161,10 +168,10 @@ const headings =
               title="Chef de Partie" 
               company="8 Trees Pte Ltd" 
               date="2025" link="https://www.learning-hearts.com/" 
-              imageURL={schneider2}
+              imageURL={cloud}
               >
               <div slot="desc">
-                <p>
+                <p  class="mt-0">
                   Assisted with mise-en-place as well as running the pass during dinner service, setting up of events, daily cooking requirements and recipe creation.
                  </p>
               </div>
