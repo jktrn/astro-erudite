@@ -74,7 +74,8 @@ function getHeadingMargin(depth: number): string {
     const observer = new IntersectionObserver(
       (sections) => {
         sections.forEach((section) => {
-          const heading = section.target.querySelector('h2, h3, h4, h5, h6')
+          const heading = section.target.querySelector('section .raleway-title')
+          console.log(heading)
           if (!heading) return
 
           const id = heading.getAttribute('id')

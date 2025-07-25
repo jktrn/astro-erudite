@@ -14,7 +14,7 @@ const { album } = Astro.props
 ---
 
 <div
-  class="border bg-secondary text-secondar-foreground border-foreground hover:bg-secondary/50 sm:h-auto lg:h-full transition-colors duration-300 ease-in-out"
+  class="border bg-destructive text-secondary-foreground border-foreground hover:bg-secondary/50 sm:h-auto lg:h-full transition-colors duration-300 ease-in-out"
 >
   <Link
     href={`/gallery/${album.id}`}
@@ -36,7 +36,7 @@ const { album } = Astro.props
         </div>
       )
     }
-    <div class="p-4 bg-secondary">
+    <div class="p-4 bg-destructive text-foreground">
       <div
       class="mb-2 flex flex-wrap gap-x-2 items-center justify-between"
     >
@@ -45,7 +45,7 @@ const { album } = Astro.props
       </h3>
       {
         album.data.pubDate && (
-          <p class="text-secondary-foreground px-1 flex gap-x-1.5 text-sm">
+          <p class="px-1 flex gap-x-1.5 text-sm">
             <span class="flex items-center gap-x-1.5">
               <Icon name="lucide:calendar" class="size-3" />
               <span>
@@ -57,7 +57,7 @@ const { album } = Astro.props
         )
       }
       </div>
-      <p class="text-secondary-foreground mt-4 mb-2 text-sm">
+      <p class="mt-4 mb-2 text-sm">
         {album.data.description}
       </p>
     </div>

@@ -190,7 +190,6 @@ const headings =
         const linkMod = link.innerHTML.split(" ").slice(1)[0].toLowerCase();
         var TOClink;
         if (x.matches) {
-          console.log('matched')
           TOClink = document.querySelector(`#table-of-contents li a[href="#${linkMod}"]`);
         } else {
           TOClink = document.querySelector(`#mobile-table-of-contents li a[href="#${linkMod}"]`);
@@ -198,10 +197,32 @@ const headings =
         }
         const rect = link.getBoundingClientRect(); //change to get absolute position in dom
         const topcoord = rect.top - 120 + yOffset;
-        console.log(topcoord);
         TOClink?.addEventListener('click', (e) => {
           window.scrollTo({top: topcoord, behavior: "smooth"});
         })
+        
+        const observer = new IntersectionObserver(
+      (sections) => {
+        sections.forEach((section) => {
+          const heading = section.target.querySelector('section .raleway-title')
+          if (!heading) return
+
+          const id = heading.innerHTML.split(" ").slice(1)[0].toLowerCase();
+          const link = document.querySelector(
+            `#table-of-contents li a[href="#${id}"]`,
+          )
+          if (!link) return
+          console.log(link)
+          const addRemove = section.isIntersecting ? 'add' : 'remove'
+          link.classList[addRemove]('text-foreground')
+        })
+      }
+    )
+
+    const sections = document.querySelectorAll('.prose section')
+    sections.forEach((section) => {
+      observer.observe(section)
+    })
       })
     })
   </script>

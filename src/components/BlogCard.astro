@@ -26,28 +26,28 @@ const subpostCount = !isSubpost(entry.id) ? await getSubpostCount(entry.id) : 0
 ---
 
 <div
-  class="hover:bg-secondary/50 border p-4 transition-colors duration-300 ease-in-out"
+  class="hover:bg-secondary/50 transition-colors duration-300 ease-in-out border text-foreground border-foreground"
 >
   <Link
     href={`/${entry.collection}/${entry.id}`}
-    class="flex flex-col gap-4 sm:flex-row"
+    class="flex flex-col gap-4 lg:flex-row"
   >
     {
       entry.data.image && (
-        <div class="lg:max-w-3xs sm:shrink-0">
+        <div class="lg:max-w-sm sm:shrink-0 border-r border-foreground">
           <Image
             src={entry.data.image}
             alt={entry.data.title}
             width={1200}
             height={630}
-            class="object-cover"
+            class="object-cover h-full w-auto"
           />
         </div>
       )
     }
 
-    <div class="grow">
-      <h3 class="mb-1 text-lg font-medium underline">{entry.data.title}</h3>
+    <div class="grow p-4">
+      <h3 class="mb-1 text-lg font-medium">{entry.data.title}</h3>
       <p class="text-muted-foreground mb-2 text-sm">{entry.data.description}</p>
 
       <div
