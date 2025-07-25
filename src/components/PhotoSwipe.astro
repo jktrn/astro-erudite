@@ -61,6 +61,8 @@ const imagePaths = Object.keys(images).filter((imagePath) => {
 			secondaryZoomLevel: 1,
             children: "a",
 			showAnimationDuration: 300,
+			padding: { top: 16, bottom: 16, left: 16, right: 16 },
+			bgClickAction: 'close',
             pswpModule: () => import("photoswipe"),
         });
 

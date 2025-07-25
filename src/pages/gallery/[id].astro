@@ -5,7 +5,7 @@ import PhotoSwipe from "../../components/PhotoSwipe.astro";
 import { getCollection } from "astro:content";
 import { getAlbumImages } from '@/lib/data-utils'
 import { Image } from "astro:assets";
-import { formatDate, readingTime } from '@/lib/utils'
+import Callout from '@/components/Callout.astro'
 
 
 
@@ -28,6 +28,9 @@ export async function getStaticPaths() {
 ---
 
 <GalleryLayout>
+<Callout title="Interacting with images" variant="note">
+  Swipe up or down to close the image!
+</Callout>
 <div class="text-center">
   <section class="col-start-2 mb-4 flex flex-col gap-y-6 text-left">
     <div class="flex flex-col">
