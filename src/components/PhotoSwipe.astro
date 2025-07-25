@@ -15,7 +15,7 @@ const imagePaths = Object.keys(images).filter((imagePath) => {
 
 <div
 	id="gallery"
-	class="container mx-auto pb-2 grid grid-cols-1 md:grid-cols-2 gap-2 md:gap-4"
+	class="container mx-auto pb-2 grid grid-cols-1 md:grid-cols-2 gap-4 md:gap-6"
 >
 	{
 		imagePaths.map(async (imagePath) => {
@@ -60,6 +60,7 @@ const imagePaths = Object.keys(images).filter((imagePath) => {
 			initialZoomLevel: 'fit',
 			secondaryZoomLevel: 1,
             children: "a",
+			bgOpacity: 0.8,
 			showAnimationDuration: 300,
 			padding: { top: 16, bottom: 16, left: 16, right: 16 },
 			bgClickAction: 'close',
