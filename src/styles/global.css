@@ -117,7 +117,7 @@
   position: absolute;
   content: "";
   width: var(--width);
-  height: 120%;
+  height: 117%;
   background-color: var(--colour);
 }
 .card-offset::after {
@@ -126,7 +126,7 @@
 }
 .card-offset::before {
   right:var(--offset);
-  bottom: -30px;
+  bottom: -26px;
 }
 
 @media screen and (min-width: 1000px) {
