@@ -8,6 +8,7 @@ import Layout from '@/layouts/Layout.astro'
 import { getAllProjects } from '@/lib/data-utils'
 import SkillCard from '@/components/SkillCard.astro'
 import TableOfContents from '@/components/TableOfContents.astro'
+import TOCHeader from '@/components/TOCHeader.astro'
 
 import meinhardt from '../../public/static/meinhardt.png'
 import schneider2 from '../../public/static/schneider2.png'
@@ -22,16 +23,17 @@ const headings =
     ]
 ---
 
-<Layout>
+<Layout class="max-w-3xl">
   <PageHead slot="head" title="About" />
   <Breadcrumbs items={[{ label: 'About', icon: 'lucide:info' }]} />
   <div class="fixed top-30 left-20 hidden lg:block">
 
-    <TableOfContents headings={headings} />
-  </div>
-    <div class="min-w-full">
+  <TableOfContents headings={headings} />
+</div>
+<TOCHeader slot="table-of-contents" headings={headings} />
+<div class="min-w-full">
       <div class="prose mb-8">
-        <h3 class="text-2xl mt-0 lg:mt-4 leading-none font-medium">A little bit about me...</h3>
+        <h3 class="text-2xl title-ignore mt-0 lg:mt-4 leading-none font-medium">A little bit about me...</h3>
         <p class="mb-4">
           I am a born sports-lover; actively playing basketball as well as skateboarding. When I travel, I love hiking, scuba diving, sitting eating local food in a tiny restaurant. In my free time, I love to cook, bake, and I also dabble in a bit of photography.
         </p>
@@ -180,15 +182,26 @@ const headings =
     </div>
   </section>
   <script>
-    const links = document.querySelectorAll('.prose section h2');
-    links.forEach((link) => {
-      const linkMod = link.innerHTML.split(" ").slice(1)[0].toLowerCase();
-      const TOClink = document.querySelector(`#table-of-contents li a[href="#${linkMod}"]`);
-      const rect = link.getBoundingClientRect(); //change to get absolute position in dom
-      const topcoord = rect.top - 100;
-      console.log(topcoord);
-      TOClink?.addEventListener('click', (e) => {
-        window.scrollTo({top: topcoord, behavior: "smooth"});
+    document.addEventListener('astro:page-load', () => {
+      const links = document.querySelectorAll('.prose section h2');
+      const yOffset = window.pageYOffset;
+      const x = window.matchMedia("(min-width: 700px)")
+      links.forEach((link) => {
+        const linkMod = link.innerHTML.split(" ").slice(1)[0].toLowerCase();
+        var TOClink;
+        if (x.matches) {
+          console.log('matched')
+          TOClink = document.querySelector(`#table-of-contents li a[href="#${linkMod}"]`);
+        } else {
+          TOClink = document.querySelector(`#mobile-table-of-contents li a[href="#${linkMod}"]`);
+
+        }
+        const rect = link.getBoundingClientRect(); //change to get absolute position in dom
+        const topcoord = rect.top - 120 + yOffset;
+        console.log(topcoord);
+        TOClink?.addEventListener('click', (e) => {
+          window.scrollTo({top: topcoord, behavior: "smooth"});
+        })
       })
     })
   </script>

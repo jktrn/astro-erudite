@@ -142,9 +142,14 @@ const { headings } = Astro.props
     static build() {
       state.headings = Array.from(
         document.querySelectorAll<HTMLElement>(
-          '.prose h2, .prose h3, .prose h4, .prose h5, .prose h6',
+          '.prose:not(.title-ignore) h2, .prose:not(.title-ignore) h2 h3, .prose h4, .prose h5, .prose h6',
         ),
       )
+
+      if (window.location.pathname == '/about') {
+          state.headings = Array.from(
+          document.querySelectorAll<HTMLElement>('.prose .raleway-title'))
+      }
 
       if (state.headings.length === 0) {
         state.regions = []

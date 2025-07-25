@@ -15,7 +15,7 @@ const imagePaths = Object.keys(images).filter((imagePath) => {
 
 <div
 	id="gallery"
-	class="container mx-auto pb-2 grid grid-cols-2 md:grid-cols-3 gap-2"
+	class="container mx-auto pb-2 grid grid-cols-1 md:grid-cols-2 gap-2 md:gap-4"
 >
 	{
 		imagePaths.map(async (imagePath) => {
@@ -36,7 +36,7 @@ const imagePaths = Object.keys(images).filter((imagePath) => {
 					<Image
 						src={image}
 						alt={"altText"}
-						height={350}
+						height={400}
 						class={
 							"object-cover object-bottom w-full /* grayscale-[0%] hover:grayscale-0 */ transition duration-300 ease-in-out aspect-[3/2]"
 						}

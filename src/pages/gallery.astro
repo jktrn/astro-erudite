@@ -11,7 +11,7 @@ import { getCollection } from "astro:content";
 const albums = await getCollection("albums");
 
 ---
-<Layout>
+<Layout class="max-w-3xl">
   <PageHead slot="head" title="Gallery" />
   <Breadcrumbs items={[{ label: 'Gallery', icon: 'lucide:images' }]} />
 
