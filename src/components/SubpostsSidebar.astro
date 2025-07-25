@@ -1,0 +1,267 @@
+---
+import Link from '@/components/Link.astro'
+import { ScrollArea } from '@/components/ui/scroll-area'
+import {
+  getCombinedReadingTime,
+  getParentId,
+  getParentPost,
+  getPostById,
+  getPostReadingTime,
+  getSubpostsForParent,
+  isSubpost,
+} from '@/lib/data-utils'
+import { Icon } from 'astro-icon/components'
+
+const { parentId } = Astro.props
+const currentPostId = Astro.params.id as string
+const isCurrentSubpost = isSubpost(currentPostId)
+const rootParentId = isCurrentSubpost ? getParentId(currentPostId) : parentId
+
+const currentPost = !isCurrentSubpost ? await getPostById(currentPostId) : null
+const subposts = await getSubpostsForParent(rootParentId)
+const parentPost = isCurrentSubpost ? await getParentPost(currentPostId) : null
+
+const activePost = parentPost || currentPost
+const isActivePost = activePost?.id === currentPostId
+
+const activePostReadingTime = activePost
+  ? await getPostReadingTime(activePost.id)
+  : null
+const activePostCombinedReadingTime =
+  activePost && subposts.length > 0
+    ? await getCombinedReadingTime(activePost.id)
+    : null
+const subpostsWithReadingTime = await Promise.all(
+  subposts.map(async (subpost) => ({
+    ...subpost,
+    readingTime: await getPostReadingTime(subpost.id),
+  })),
+)
+---
+
+<div
+  id="subposts-sidebar-container"
+  class="sticky top-20 col-start-3 row-span-1 mr-auto ml-8 hidden h-[calc(100vh-5rem)] max-w-md xl:block"
+>
+  <ScrollArea
+    client:load
+    className="flex max-h-[calc(100vh-8rem)] flex-col overflow-y-auto"
+    data-subposts-sidebar-scroll
+  >
+    <div class="px-4">
+      <ul class="space-y-1">
+        {
+          activePost && (
+            <li>
+              {isActivePost ? (
+                <div class="text-foreground bg-muted subposts-sidebar-active-item flex items-center gap-2 rounded-md py-1.5 pr-3 pl-2 text-sm font-medium text-pretty">
+                  <Icon
+                    name="lucide:book-open-text"
+                    class="size-4 flex-shrink-0"
+                    aria-hidden="true"
+                  />
+                  <div class="flex flex-col">
+                    <span class="line-clamp-2 text-pretty">
+                      {activePost.data.title}
+                    </span>
+                    {activePostReadingTime && (
+                      <span class="text-muted-foreground/80 text-xs">
+                        {activePostReadingTime}
+                        {activePostCombinedReadingTime &&
+                          activePostCombinedReadingTime !==
+                            activePostReadingTime && (
+                            <span>
+                              {' '}
+                              ({activePostCombinedReadingTime} total)
+                            </span>
+                          )}
+                      </span>
+                    )}
+                  </div>
+                </div>
+              ) : (
+                <Link
+                  href={`/blog/${activePost.id}#post-title`}
+                  class="hover:text-foreground text-muted-foreground hover:bg-muted/50 subposts-sidebar-link flex items-center gap-2 rounded-md px-2 py-1.5 text-sm text-pretty transition-colors"
+                >
+                  <Icon
+                    name="lucide:book-open"
+                    class="size-4 flex-shrink-0"
+                    aria-hidden="true"
+                  />
+                  <div class="flex flex-col">
+                    <span class="line-clamp-2 text-pretty">
+                      {activePost.data.title}
+                    </span>
+                    {activePostReadingTime && (
+                      <span class="text-muted-foreground/80 text-xs">
+                        {activePostReadingTime}
+                        {activePostCombinedReadingTime &&
+                          activePostCombinedReadingTime !==
+                            activePostReadingTime && (
+                            <span>
+                              {' '}
+                              ({activePostCombinedReadingTime} total)
+                            </span>
+                          )}
+                      </span>
+                    )}
+                  </div>
+                </Link>
+              )}
+            </li>
+          )
+        }
+
+        {
+          subpostsWithReadingTime.length > 0 && (
+            <li class="ml-4 space-y-1">
+              {subpostsWithReadingTime.map((subpost) =>
+                currentPostId === subpost.id ? (
+                  <div class="text-foreground bg-muted subposts-sidebar-active-item flex items-center gap-2 rounded-md px-2 py-1.5 text-sm font-medium text-pretty">
+                    <Icon
+                      name="lucide:file-text"
+                      class="size-4 flex-shrink-0"
+                      aria-hidden="true"
+                    />
+                    <div class="flex flex-col">
+                      <span class="line-clamp-2 text-pretty">
+                        {subpost.data.title}
+                      </span>
+                      <span class="text-muted-foreground/80 text-xs">
+                        {subpost.readingTime}
+                      </span>
+                    </div>
+                  </div>
+                ) : (
+                  <Link
+                    href={`/blog/${subpost.id}`}
+                    class="hover:text-foreground text-muted-foreground hover:bg-muted/50 subposts-sidebar-link flex items-center gap-2 rounded-md px-2 py-1.5 text-sm text-pretty transition-colors"
+                  >
+                    <Icon
+                      name="lucide:file"
+                      class="size-4 flex-shrink-0"
+                      aria-hidden="true"
+                    />
+                    <div class="flex flex-col">
+                      <span class="line-clamp-2 text-pretty">
+                        {subpost.data.title}
+                      </span>
+                      <span class="text-muted-foreground/80 text-xs">
+                        {subpost.readingTime}
+                      </span>
+                    </div>
+                  </Link>
+                ),
+              )}
+            </li>
+          )
+        }
+      </ul>
+    </div>
+  </ScrollArea>
+</div>
+
+<script>
+  class SidebarState {
+    scrollArea: HTMLElement | null = null
+    sidebarScrollArea: HTMLElement | null = null
+
+    reset() {
+      this.scrollArea = null
+      this.sidebarScrollArea = null
+    }
+  }
+
+  const state = new SidebarState()
+
+  class SidebarScrollMask {
+    static update() {
+      if (!state.scrollArea || !state.sidebarScrollArea) return
+
+      const { scrollTop, scrollHeight, clientHeight } = state.scrollArea
+      const threshold = 5
+      const isAtTop = scrollTop <= threshold
+      const isAtBottom = scrollTop >= scrollHeight - clientHeight - threshold
+
+      state.sidebarScrollArea.classList.toggle('mask-t-from-90%', !isAtTop)
+      state.sidebarScrollArea.classList.toggle('mask-b-from-90%', !isAtBottom)
+    }
+  }
+
+  class SidebarScroll {
+    static toActive() {
+      if (!state.scrollArea) return
+
+      const activeItem = state.scrollArea.querySelector(
+        '.subposts-sidebar-active-item',
+      )
+      if (!activeItem) {
+        return
+      }
+
+      const { top: areaTop, height: areaHeight } =
+        state.scrollArea.getBoundingClientRect()
+      const { top: itemTop, height: itemHeight } =
+        activeItem.getBoundingClientRect()
+
+      const currentItemTop = itemTop - areaTop + state.scrollArea.scrollTop
+      const targetScroll = Math.max(
+        0,
+        Math.min(
+          currentItemTop - (areaHeight - itemHeight) / 2,
+          state.scrollArea.scrollHeight - state.scrollArea.clientHeight,
+        ),
+      )
+
+      state.scrollArea.scrollTop = targetScroll
+    }
+  }
+
+  class SidebarController {
+    static init() {
+      state.reset()
+
+      const sidebarContainer = document.getElementById(
+        'subposts-sidebar-container',
+      )
+      if (sidebarContainer) {
+        state.scrollArea = sidebarContainer.querySelector(
+          '[data-radix-scroll-area-viewport]',
+        )
+        state.sidebarScrollArea = sidebarContainer.querySelector(
+          '[data-subposts-sidebar-scroll]',
+        )
+
+        if (state.scrollArea) {
+          state.scrollArea.addEventListener(
+            'scroll',
+            SidebarScrollMask.update,
+            { passive: true },
+          )
+        }
+
+        requestAnimationFrame(() => {
+          SidebarScroll.toActive()
+          setTimeout(SidebarScrollMask.update, 100)
+        })
+      }
+    }
+
+    static cleanup() {
+      if (state.scrollArea) {
+        state.scrollArea.removeEventListener('scroll', SidebarScrollMask.update)
+      }
+      state.reset()
+    }
+  }
+
+  document.addEventListener('astro:page-load', () => SidebarController.init())
+  document.addEventListener('astro:after-swap', () => {
+    SidebarController.cleanup()
+    SidebarController.init()
+  })
+  document.addEventListener('astro:before-swap', () =>
+    SidebarController.cleanup(),
+  )
+</script>
