@@ -226,8 +226,8 @@ const headings =
       })
 
       const cards = document.querySelectorAll('.ring.border')
-      function handleIntersection(entries) {
-        entries.map((entry) => {
+      function handleIntersection(entries:any) {
+        entries.map((entry:any) => {
           if (entry.isIntersecting) {
             entry.target.classList.add('translate-x-12')
           } else {
@@ -241,7 +241,6 @@ const headings =
       }
       const observer = new IntersectionObserver(handleIntersection, options);
       cards.forEach((card) => {
-
         observer.observe(card);
       })
     })

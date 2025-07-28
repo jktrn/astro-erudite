@@ -12,7 +12,7 @@ const images = import.meta.glob<{ default: ImageMetadata }>("/src/content/albums
 const imagePaths = Object.keys(images).filter((imagePath) => {
 	return imagePath.startsWith(`/src/content/albums/${imageFolder}/`);
 }); // Returns list of all photos in album
-let masonry = [
+let masonry: string[][] = [
 	[],
 	[],
 	[]
