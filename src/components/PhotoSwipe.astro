@@ -12,26 +12,28 @@ const images = import.meta.glob<{ default: ImageMetadata }>("/src/content/albums
 const imagePaths = Object.keys(images).filter((imagePath) => {
 	return imagePath.startsWith(`/src/content/albums/${imageFolder}/`);
 }); // Returns list of all photos in album
-let masonry = []
-console.log(imagePaths)
+let masonry = [
+	[],
+	[],
+	[]
+]
 for (let i=0;i<imagePaths.length;i++) {
-	const index = i%3;
-	var currSet = [];
-	currSet.push(imagePaths[i]);
-	masonry[index] = currSet;
+	const index = Math.floor(i%3);
+	masonry[index].push(imagePaths[i]);
 }
-console.log(masonry)
+const imagePaths1 = masonry[0]
+const imagePaths2 = masonry[1]
+const imagePaths3 = masonry[2]
 ---
 
 <div
 	id="gallery"
-	class="container mx-auto pb-2 grid grid-cols-1 md:grid-cols-2 gap-4 md:gap-6"
+	class="container mx-auto pb-2 grid grid-cols-1 md:grid-cols-3 gap-4 md:gap-2"
 >
-{console.log(imagePaths.length)
+	<div class="grid grid-cols-1 gap-4 lg:gap-2 h-full">
 
-}
 	{
-		imagePaths.map(async (imagePath) => {
+		imagePaths1.map(async (imagePath) => {
 			let image = images[imagePath](); // Gets specific image
 			let optimizedImage = await getImage({
 				src: image,
@@ -59,6 +61,71 @@ console.log(masonry)
 			);
 		})
 	}
+	</div>
+	<div class="grid grid-cols-1 gap-4 lg:gap-2 h-full">
+
+	{
+		imagePaths2.map(async (imagePath) => {
+			let image = images[imagePath](); // Gets specific image
+			let optimizedImage = await getImage({
+				src: image,
+				width: 800,
+			});
+			return (
+				<a
+					href={imagePath}
+					data-pswp-width={optimizedImage.attributes.width}
+					data-pswp-height={optimizedImage.attributes.height}
+					target="_blank"
+					class="overflow-hidden border-[1px] border-secondary hover:border-secondary"
+				>
+					<Image
+						src={optimizedImage.src}
+						alt={"altText"}
+						width={optimizedImage.attributes.width}
+						height={optimizedImage.attributes.height}
+						layout='fixed'
+						class={
+							"object-bottom w-full lg:h-full lg:w-auto lg:object-cover /* grayscale-[0%] hover:grayscale-0 */ transition duration-300 ease-in-out"
+						}
+					/>
+				</a>
+			);
+		})
+	}
+	</div>
+	<div class="grid grid-cols-1 gap-4 lg:gap-2 h-full">
+
+	{
+		imagePaths3.map(async (imagePath) => {
+			let image = images[imagePath](); // Gets specific image
+			let optimizedImage = await getImage({
+				src: image,
+				width: 800,
+			});
+			return (
+				<a
+					href={imagePath}
+					data-pswp-width={optimizedImage.attributes.width}
+					data-pswp-height={optimizedImage.attributes.height}
+					target="_blank"
+					class="overflow-hidden border-[1px] border-secondary hover:border-secondary"
+				>
+					<Image
+						src={optimizedImage.src}
+						alt={"altText"}
+						width={optimizedImage.attributes.width}
+						height={optimizedImage.attributes.height}
+						layout='fixed'
+						class={
+							"object-bottom w-full lg:h-full lg:w-auto lg:object-cover /* grayscale-[0%] hover:grayscale-0 */ transition duration-300 ease-in-out"
+						}
+					/>
+				</a>
+			);
+		})
+	}
+	</div>
 </div>
 
 <script>
