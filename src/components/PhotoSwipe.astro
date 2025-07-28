@@ -1,6 +1,7 @@
 ---
 import type { ImageMetadata } from "astro";
-import { Image, getImage } from "astro:assets";
+import { Image, Picture, getImage } from "astro:assets";
+import "photoswipe/style.css"
 
 interface Props {
 	imageFolder: string;
@@ -10,35 +11,48 @@ const { imageFolder } = Astro.props;
 const images = import.meta.glob<{ default: ImageMetadata }>("/src/content/albums/**/*.{jpeg,jpg,png}");
 const imagePaths = Object.keys(images).filter((imagePath) => {
 	return imagePath.startsWith(`/src/content/albums/${imageFolder}/`);
-});
+}); // Returns list of all photos in album
+let masonry = []
+console.log(imagePaths)
+for (let i=0;i<imagePaths.length;i++) {
+	const index = i%3;
+	var currSet = [];
+	currSet.push(imagePaths[i]);
+	masonry[index] = currSet;
+}
+console.log(masonry)
 ---
 
 <div
 	id="gallery"
 	class="container mx-auto pb-2 grid grid-cols-1 md:grid-cols-2 gap-4 md:gap-6"
 >
+{console.log(imagePaths.length)
+
+}
 	{
 		imagePaths.map(async (imagePath) => {
-			let image = images[imagePath]();
+			let image = images[imagePath](); // Gets specific image
 			let optimizedImage = await getImage({
 				src: image,
-				width: 1920,
+				width: 800,
 			});
-
 			return (
 				<a
-					href={optimizedImage.src}
+					href={imagePath}
 					data-pswp-width={optimizedImage.attributes.width}
 					data-pswp-height={optimizedImage.attributes.height}
 					target="_blank"
 					class="overflow-hidden border-[1px] border-secondary hover:border-secondary"
 				>
 					<Image
-						src={image}
+						src={optimizedImage.src}
 						alt={"altText"}
-						height={400}
+						width={optimizedImage.attributes.width}
+						height={optimizedImage.attributes.height}
+						layout='fixed'
 						class={
-							"object-cover object-bottom w-full /* grayscale-[0%] hover:grayscale-0 */ transition duration-300 ease-in-out aspect-[3/2]"
+							"object-bottom w-full lg:h-full lg:w-auto lg:object-cover /* grayscale-[0%] hover:grayscale-0 */ transition duration-300 ease-in-out"
 						}
 					/>
 				</a>
@@ -58,7 +72,7 @@ const imagePaths = Object.keys(images).filter((imagePath) => {
             gallery: "#gallery",
 			showHideAnimationType: 'none',
 			initialZoomLevel: 'fit',
-			secondaryZoomLevel: 1,
+			secondaryZoomLevel: 2,
             children: "a",
 			bgOpacity: 0.8,
 			showAnimationDuration: 300,
