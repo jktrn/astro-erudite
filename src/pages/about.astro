@@ -227,11 +227,12 @@ const headings =
 
       const cards = document.querySelectorAll('.ring.border')
       function handleIntersection(entries:any) {
+        const classes = ["translate-x-12", "shadow-md/40", "lg:scale-101", "lg:translate-x-0"]
         entries.map((entry:any) => {
           if (entry.isIntersecting) {
-            entry.target.classList.add('translate-x-12')
+            entry.target.classList.add(...classes)
           } else {
-            entry.target.classList.remove('translate-x-12')
+            entry.target.classList.remove(...classes)
           }
         });
       }
