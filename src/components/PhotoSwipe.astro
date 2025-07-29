@@ -12,6 +12,7 @@ const images = import.meta.glob<{ default: ImageMetadata }>("/src/content/albums
 const imagePaths = Object.keys(images).filter((imagePath) => {
 	return imagePath.startsWith(`/src/content/albums/${imageFolder}/`);
 }); // Returns list of all photos in album
+
 let masonry: string[][] = [
 	[],
 	[],
@@ -37,13 +38,18 @@ const imagePaths3 = masonry[2]
 			let image = images[imagePath](); // Gets specific image
 			let optimizedImage = await getImage({
 				src: image,
-				width: 800,
+				width: 400,
 			});
+			
+			let link = await getImage({
+				src: image,
+				width: 1920,
+			})
 			return (
 				<a
-					href={imagePath}
-					data-pswp-width={optimizedImage.attributes.width}
-					data-pswp-height={optimizedImage.attributes.height}
+					href={link.src}
+					data-pswp-width={link.attributes.width}
+					data-pswp-height={link.attributes.height}
 					target="_blank"
 					class="overflow-hidden border-[1px] border-secondary hover:border-secondary"
 				>
@@ -69,13 +75,18 @@ const imagePaths3 = masonry[2]
 			let image = images[imagePath](); // Gets specific image
 			let optimizedImage = await getImage({
 				src: image,
-				width: 800,
+				width: 400,
 			});
+			
+			let link = await getImage({
+				src: image,
+				width: 1920,
+			})
 			return (
 				<a
-					href={imagePath}
-					data-pswp-width={optimizedImage.attributes.width}
-					data-pswp-height={optimizedImage.attributes.height}
+					href={link.src}
+					data-pswp-width={link.attributes.width}
+					data-pswp-height={link.attributes.height}
 					target="_blank"
 					class="overflow-hidden border-[1px] border-secondary hover:border-secondary"
 				>
@@ -101,13 +112,18 @@ const imagePaths3 = masonry[2]
 			let image = images[imagePath](); // Gets specific image
 			let optimizedImage = await getImage({
 				src: image,
-				width: 800,
+				width: 400,
 			});
+			
+			let link = await getImage({
+				src: image,
+				width: 1920,
+			})
 			return (
 				<a
-					href={imagePath}
-					data-pswp-width={optimizedImage.attributes.width}
-					data-pswp-height={optimizedImage.attributes.height}
+					href={link.src}
+					data-pswp-width={link.attributes.width}
+					data-pswp-height={link.attributes.height}
 					target="_blank"
 					class="overflow-hidden border-[1px] border-secondary hover:border-secondary"
 				>
