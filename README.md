@@ -38,6 +38,7 @@ Below are some fantastic examples of websites based on this template. If you wis
 | [angelaytchan.net](https://angelaytchan.net/)           | [@wispyplant](https://github.com/wispyplant)          | An artist portfolio and activities archive      | [→](https://github.com/wispyplant/wispyplant.github.io)               |
 | [kaezr.xyz](https://kaezr.xyz/)           | [@kaezrr](https://github.com/kaezrr)          | A minimal porfolio and blog website with slight tweaks to the original.      | [→](https://github.com/kaezrr/webfolio)               |
 | [worldwidewong](https://worldwidewong.vercel.app)           | [@brendanwong-web](https://github.com/brendanwong-web)          | A slightly funky portfolio, blog, and resume site with an added photo gallery.      | [→](https://github.com/brendanwong-web/worldwidewong)               |
+| [bgajjala.dev](https://bgajjala.dev)           | [@bgajjala8](https://github.com/bgajjala8)          | A minimal blog featuring a paper-color inspired color scheme      | [→](https://github.com/bgajjala8/bgajjala.dev)               |
 
 ## Features
 
