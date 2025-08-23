@@ -27,16 +27,4 @@ content:
        - name: description
          label: Description
          type: string
-       - name: tags
-         label: Tags
-         type: code
-         list: true
-       - name: date
-         label: Date
-         type: date
-       - name: draft
-         label: Draft
-         type: boolean
-       - name: body
-         label: Body
-         type: rich-text
+   
