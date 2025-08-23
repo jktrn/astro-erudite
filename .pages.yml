@@ -28,4 +28,4 @@ content:
        - { name: img, label: Image, type: image}
        - { name: draft, label: Draft, type: boolean}
        - { name: author, label: Author, type: string}
-       - { name: body, label: Body, type: rich-text}
+       - { name: body, label: Body, type: code, options: {language: html}}
