@@ -35,9 +35,7 @@ content:
          type: date
        - name: tags
          label: Tags
-         type: code
-         options:
-           language: html
+         type: string
        - name: body
          label: Body
          type: rich-text
