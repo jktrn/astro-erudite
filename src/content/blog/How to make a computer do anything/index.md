@@ -71,6 +71,4 @@ When the sun is at its apex, we close all the blinds; Nobody is trying to kill t
 - R0 R1 R2, Blind 1
 - R0 R1 R2, Blind 2
 
-from this we get blind 0 = ___, blind 1 = ___, blind 2 = ____
-
 ## Excitation table
