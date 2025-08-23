@@ -46,6 +46,4 @@ content:
          type: string
        - name: body
          label: Body
-         type: code
-         options:
-           language: markdown
+         type: rich-text
