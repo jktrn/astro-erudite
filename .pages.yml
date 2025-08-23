@@ -27,4 +27,17 @@ content:
        - name: description
          label: Description
          type: string
+       - name: draft
+         label: Draft
+         type: boolean
+       - name: date
+         label: Date
+         type: date
+       - name: tags
+         label: Tags
+         type: string
+         list: true
+
+
+
    
