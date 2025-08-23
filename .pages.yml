@@ -44,9 +44,6 @@ content:
        - name: image
          label: Image
          type: image
-       - name: author
-         label: Author
-         type: string
        - name: body
          label: Body
          type: rich-text
