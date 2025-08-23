@@ -1,0 +1,6 @@
+media:
+  - name: gallery
+    label: Gallery
+    input: src/content/albums
+    output: /src/content/albums
+    extensions: [ png, webp, jpg, jpeg ]
