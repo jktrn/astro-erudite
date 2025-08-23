@@ -28,9 +28,22 @@ content:
        - name: desc
          label: Description
          type: text
+       - name: tags
+         label: Tags
+         type: string
+         list: true
        - name: date
          label: Date
          type: date
+       - name: draft
+         label: Draft
+         type: boolean
+       - name: image
+         label: Image
+         type: image
+       - name: author
+         label: Author
+         type: string
        - name: body
          label: Body
          type: code
