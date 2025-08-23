@@ -40,6 +40,14 @@ content:
        - name: body
          label: Body
          type: rich-text
+       - name: image
+         label: Image
+         type: image
+         default: ''./1200x360.png'
+       - name: authors
+         label: Author
+         type: string
+         default: 'Brendan'
 
 
    
