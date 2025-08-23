@@ -26,7 +26,7 @@ content:
          type: string
        - name: description
          label: Description
-         type: text
+         type: string
        - name: tags
          label: Tags
          type: string
