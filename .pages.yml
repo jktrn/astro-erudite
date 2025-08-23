@@ -14,3 +14,17 @@ media:
     input: src/content/blog
     output: /src/content/blog
     extensions: [ png, webp, jpg, jpeg ]
+
+content:
+  - name: posts
+    label: Posts
+    path: src/content/blog
+    type: collection
+    fields:
+       - { name: title, label: Title, type: string}
+       - { name: desc, label: Description, type: text}
+       - { name: date, label: Date, type: date}
+       - { name: tags, label: Tags, type: string, list: true}
+       - { name: img, label: Image, type: image}
+       - { name: draft, label: Draft, type: boolean}
+       - { name: author, label: Author, type: string}
