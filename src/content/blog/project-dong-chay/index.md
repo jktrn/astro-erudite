@@ -9,7 +9,7 @@ tags:
   - Service learning
   - Project management
   - Vietnam
-image: ./1200x360.png
+image: ./1200x630.png
 authors:
   - Brendan
 ---
