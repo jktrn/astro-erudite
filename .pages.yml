@@ -43,11 +43,11 @@ content:
        - name: image
          label: Image
          type: image
-         default: './1200x360.png'
+         default: ./1200x360.png
        - name: authors
          label: Author
          type: string
-         default: 'Brendan'
+         default: Brendan
 
 
    
