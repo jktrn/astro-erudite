@@ -7,9 +7,6 @@ image: './1200x630.png'
 authors: ['Brendan']
 ---
 
-import Callout from '@/components/Callout.astro'
-import { Icon } from 'astro-icon/components'
-
 ## Service learning in the heart of rural Vietnam
 
 After a 6 hour journey through city roads that turned to dirt roads and eventually rocky mountain trails, our bus finally arrived at the the house of Co, who was to be our homestay host for the next 10 days.
