@@ -5,11 +5,12 @@ draft: false
 date: 2025-06-01
 tags:
   - Engineering
+  - Travel
   - Service learning
   - Project management
   - Vietnam
-  - Travel
-  - Test tag
+image: ./1200x360.png
+authors: Brendan
 ---
 ## Service learning in the heart of rural Vietnam
 
