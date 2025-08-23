@@ -41,6 +41,9 @@ content:
        - name: draft
          label: Draft
          type: boolean
+       - name: image
+         label: Image
+         type: image
        - name: body
          label: Body
          type: rich-text
