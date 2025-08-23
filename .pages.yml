@@ -24,7 +24,7 @@ content:
        - name: title
          label: Title
          type: string
-       - name: desc
+       - name: description
          label: Description
          type: text
        - name: tags
