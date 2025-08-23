@@ -45,6 +45,7 @@ content:
        - name: authors
          label: Author
          type: string
+         list: true
          default: Brendan
        - name: body
          label: Body
