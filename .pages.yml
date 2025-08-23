@@ -27,6 +27,7 @@ content:
        - name: description
          label: Description
          type: string
+         
        - name: draft
          label: Draft
          type: boolean
@@ -37,9 +38,6 @@ content:
          label: Tags
          type: string
          list: true
-       - name: body
-         label: Body
-         type: rich-text
        - name: image
          label: Image
          type: image
@@ -48,6 +46,10 @@ content:
          label: Author
          type: string
          default: Brendan
+       - name: body
+         label: Body
+         type: rich-text
+
 
 
    
