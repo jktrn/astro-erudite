@@ -10,7 +10,8 @@ tags:
   - Project management
   - Vietnam
 image: ./1200x360.png
-authors: Brendan
+authors:
+  - Brendan
 ---
 ## Service learning in the heart of rural Vietnam
 
