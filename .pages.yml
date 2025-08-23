@@ -36,6 +36,8 @@ content:
        - name: tags
          label: Tags
          type: code
+         options:
+          language: html
        - name: body
          label: Body
          type: rich-text
