@@ -20,7 +20,6 @@ content:
     label: Posts
     path: src/content/blog
     type: collection
-    filename: '{year}-{month}-{day}-{primary}.mdx'
     fields:
        - name: title
          label: Title
