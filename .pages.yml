@@ -4,3 +4,13 @@ media:
     input: src/content/albums
     output: /src/content/albums
     extensions: [ png, webp, jpg, jpeg ]
+  - name: static
+    label: Static
+    input: public/static
+    output: /public/static
+    extensions: [ png, webp, jpg, jpeg ]
+  - name: posts
+    label: Blog posts
+    input: src/content/blog
+    output: /src/content/blog
+    extensions: [ png, webp, jpg, jpeg ]
