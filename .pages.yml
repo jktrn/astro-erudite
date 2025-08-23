@@ -29,11 +29,7 @@ content:
          type: string
        - name: tags
          label: Tags
-         type: string
-         list: true
-       - name: authors
-         label: Authors
-         type: string
+         type: code
          list: true
        - name: date
          label: Date
