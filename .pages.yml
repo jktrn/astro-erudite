@@ -40,7 +40,7 @@ content:
          list: true
        - name: image
          label: Image
-         type: image
+         type: string
          default: ./1200x630.png
        - name: authors
          label: Author
