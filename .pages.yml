@@ -35,9 +35,11 @@ content:
          type: date
        - name: tags
          label: Tags
-         type: string
+         type: code
          list: true
-
+       - name: body
+         label: Body
+         type: rich-text
 
 
    
