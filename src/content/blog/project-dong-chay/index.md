@@ -6,6 +6,8 @@ tags:
   - Project management
   - Vietnam
   - Travel
+authors:
+  - James
 date: 2025-06-01
 draft: false
 image: ./1200x630.png
