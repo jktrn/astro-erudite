@@ -34,4 +34,4 @@ content:
          label: Body
          type: code
          options:
-           language: html
+           language: markdown
