@@ -31,6 +31,10 @@ content:
          label: Tags
          type: string
          list: true
+       - name: authors
+         label: Authors
+         type: string
+         list: true
        - name: date
          label: Date
          type: date
