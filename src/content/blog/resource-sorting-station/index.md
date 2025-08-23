@@ -7,9 +7,6 @@ image: './1200x630.png'
 authors: ['Brendan']
 ---
 
-import Callout from '@/components/Callout.astro'
-import { Icon } from 'astro-icon/components'
-
 ## So the school spent $40 000 on a resource sorting station...
 
 With the aim of increasing recycling rates among students in order to achieve its goal of being a zero waste campus by 2030.
