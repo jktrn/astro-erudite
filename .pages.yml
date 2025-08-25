@@ -27,7 +27,6 @@ content:
        - name: description
          label: Description
          type: string
-         
        - name: draft
          label: Draft
          type: boolean
@@ -50,6 +49,15 @@ content:
        - name: body
          label: Body
          type: rich-text
+  - name: about
+    type: file
+    label: About
+    path: src/pages/about.md
+    fields:
+      - {name: tagLine, label: Tag line, type: string}
+      - {name: body, label: Body, type: rich-text}
+
+
 
 
 
