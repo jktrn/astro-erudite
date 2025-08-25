@@ -1,9 +1,10 @@
 ---
-tagLine: 'A little about me...'
+tagLine: A little about me...
 ---
+I am extremely interested in the future of Mankind. As a city-dweller my entire life, I am painfully aware of the many technologies and systems in place that ensure that the daily lives of billions of people continue to run smoothly; Painfully aware because, while I recognize these systems, I cannot say I know how they run, nor can I say that I have contributed to their development in any way. And thus, it would be a dream to be able to contribute to any project, to say that I have adopted and played my part in the development of society.
 
-I am a born sports-lover; actively playing basketball as well as skateboarding. When I travel, I love hiking, scuba diving, sitting eating local food in a tiny restaurant. In my free time, I love to cook, bake, and I also dabble in a bit of photography.
+I have experience working with Siemens TIA portal with both ladder and FBD languages. I took a course on microprocessor applications at NUS where I further improved my C++ and C programming skills, as well as gained a greater appreciation for the fundamentals of hardware engineering and integrated circuits.
 
-I am a third-year Mechanical Engineering student at the National University of Singapore (NUS), with a deep interest in product design, factory automation and 3D modeling.
+I speak English as a mother tongue and Chinese as a second language. Having studied German for 2 years before spending 6 months in the south of Germany as an exchange student, I speak German at an intermediate level.  
 
-I believe that the factories of the future, with the incorporation of industry 4.0 and automation technologies, are what all of society is built on. Yet, many of us still think of factories as magic boxes, where raw material enters from one side and leaves from the other side as a finished product. As an engineer, i know it is not that simple. Hence, to have the chance to get on the ground in a factory would be an amazing opportunity for me to learn about, and hopefully also contribute to the development of what is i believe a cornerstone of our society: the modern factory
+In my free time, I like to sew, cook, bake, play the guitar, and dabble in photography. I also like to keep fit and play sports like basketball and skateboarding. If anything, I hope that my varied skillset and interests ranging the gamut of hobbies shows that I can pick things up quickly and will never back down in the face of hard work, nor pass up any opportunity for learning and personal development.
