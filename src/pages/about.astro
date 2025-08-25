@@ -9,12 +9,14 @@ import { getAllProjects } from '@/lib/data-utils'
 import SkillCard from '@/components/SkillCard.astro'
 import TableOfContents from '@/components/TableOfContents.astro'
 import TOCHeader from '@/components/TOCHeader.astro'
-
 import meinhardt from '../../public/static/meinhardt.png'
 import schneider2 from '../../public/static/schneider2.png'
 import resonance from '../../public/static/resonance.jpg'
 import cloud from '../../public/static/cl9ud.png'
 import lht from '../../public/static/learninghearts.png'
+
+import * as about from './about.md'
+import { Content as AboutContent } from './about.md'
 
 const headings = 
     [{"depth": 1, "text": "01 Skills", "slug": "skills"},
@@ -33,18 +35,10 @@ const headings =
 <!-- <TOCHeader slot="table-of-contents" headings={headings} /> -->
 <div class="min-w-full">
       <div class="prose mb-8">
-        <h3 class="text-2xl title-ignore mt-0 lg:mt-4 leading-none font-medium">A little bit about me...</h3>
-        <p class="mb-4">
-          I am a born sports-lover; actively playing basketball as well as skateboarding. When I travel, I love hiking, scuba diving, sitting eating local food in a tiny restaurant. In my free time, I love to cook, bake, and I also dabble in a bit of photography.
-        </p>
-        <p class="mb-4">
-          I am a third-year Mechanical Engineering student at the National University of Singapore (NUS), with a deep interest in product design, factory automation and 3D modeling.
-          
-          </p>
-        <p class="mb-4">
-         
-          I believe that the factories of the future, with the incorporation of industry 4.0 and automation technologies, are what all of society is built on. Yet, many of us still think of factories as magic boxes, where raw material enters from one side and leaves from the other side as a finished product. As an engineer, i know it is not that simple. Hence, to have the chance to get on the ground in a factory would be an amazing opportunity for me to learn about, and hopefully also contribute to the development of what is i believe a cornerstone of our society: the modern factory  
-        </p>
+        <h3 class="text-2xl title-ignore mt-0 lg:mt-4 leading-none font-medium">{about.frontmatter.tagLine}</h3>
+        <div>
+          <AboutContent />
+        </div>
       </div>
       <div class="prose">
 
