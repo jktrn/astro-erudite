@@ -39,6 +39,7 @@ Below are some fantastic examples of websites based on this template. If you wis
 | [kaezr.xyz](https://kaezr.xyz/)           | [@kaezrr](https://github.com/kaezrr)          | A minimal porfolio and blog website with slight tweaks to the original.      | [→](https://github.com/kaezrr/webfolio)               |
 | [worldwidewong](https://worldwidewong.vercel.app)           | [@brendanwong-web](https://github.com/brendanwong-web)          | A slightly funky portfolio, blog, and resume site with an added photo gallery.      | [→](https://github.com/brendanwong-web/worldwidewong)               |
 | [bgajjala.dev](https://bgajjala.dev)           | [@bgajjala8](https://github.com/bgajjala8)          | A minimal blog featuring a paper-color inspired color scheme      | [→](https://github.com/bgajjala8/bgajjala.dev)               |
+| [ankitz007.vercel.app](https://ankitz007.vercel.app) | [@ankitz007](https://github.com/ankitz007)          | A personal blog with a few modifications and updates to the original.      | [→](https://github.com/ankitz007/webfolio)               |
 
 ## Features
 
