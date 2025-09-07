@@ -38,20 +38,3 @@ const { class: className } = Astro.props
     </div>
   </body>
 </html>
-
-<script>
-  // Why we do this instead of rehype-document:
-  // - rehype-document adds extra <html> and <head> tags
-  // - This approach is lightweight and injects CSS only if needed
-
-  // Only load KaTeX CSS if there is math on this page
-  if (document.querySelector('.katex')) {
-    // Prevent duplicate stylesheet injection
-    if (!document.querySelector('link[href*="katex.min.css"]')) {
-      const link = document.createElement('link')
-      link.rel = 'stylesheet'
-      link.href = 'https://cdn.jsdelivr.net/npm/katex@0.16.22/dist/katex.min.css'
-      document.head.appendChild(link)
-    }
-  }
-</script>
