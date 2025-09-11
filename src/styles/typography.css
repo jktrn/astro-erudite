@@ -28,7 +28,6 @@
 @layer components {
   .prose {
     @apply text-foreground text-base leading-7;
-    @apply [&>link[rel="stylesheet"]+*]:mt-0! [&>link[rel="stylesheet"]+*>*]:mt-0!;
 
     :where(p):not(:where([class~='not-prose'], [class~='not-prose'] *)) {
       @apply text-foreground/80 my-5;
@@ -38,6 +37,12 @@
         :where([class~='not-prose'], [class~='not-prose'] *)
       ) {
       @apply text-foreground scroll-mt-32 font-medium xl:scroll-mt-20;
+    }
+
+    :where(h1, h2, h3, h4, h5, h6):first-child:not(
+        :where([class~='not-prose'], [class~='not-prose'] *)
+      ) {
+      @apply mt-0;
     }
 
     /* Don't use an <h1> in your posts, one is already generated in blog/[...id].astro */
