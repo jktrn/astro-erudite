@@ -12,53 +12,51 @@ const blog = await getRecentPosts(SITE.featuredPostCount)
 
 <Layout class="max-w-3xl">
   <PageHead slot="head" title="Home" />
-  <section>
-    <div class="rounded-lg border">
-      <div class="flex flex-col space-y-1.5 p-6">
-        <h3 class="text-3xl leading-none font-medium">er·u·dite</h3>
-        <p class="text-muted-foreground text-sm">
-          /ˈer(y)əˌdīt/ &bull; <span class="font-medium">adjective</span>
-        </p>
-      </div>
-      <div class="p-6 pt-0">
-        <p class="text-muted-foreground mb-2 text-sm">
-          astro-erudite is an opinionated, unstyled static blogging template
-          built with <Link
-            href="https://astro.build"
-            class="text-foreground"
-            external
-            underline>Astro</Link
-          >, <Link
-            href="https://tailwindcss.com"
-            class="text-foreground"
-            external
-            underline>Tailwind</Link
-          >, and <Link
-            href="https://ui.shadcn.com"
-            class="text-foreground"
-            external
-            underline>shadcn/ui</Link
-          >. Extraordinarily loosely based on the <Link
-            href="https://astro-micro.vercel.app/"
-            class="text-foreground"
-            external
-            underline>Astro Micro</Link
-          > theme.
-        </p>
-        <p class="text-muted-foreground text-sm">
-          To use this template, check out the <Link
-            href="https://github.com/jktrn/astro-erudite"
-            class="text-foreground"
-            underline
-            external>GitHub</Link
-          > repository. To learn more about why this template exists, read this blog
-          post: <Link
-            href="/blog/the-state-of-static-blogs"
-            class="text-foreground"
-            underline>The State of Static Blogs in 2024</Link
-          >.
-        </p>
-      </div>
+  <section class="rounded-lg border">
+    <div class="flex flex-col space-y-1.5 p-6">
+      <h3 class="text-3xl leading-none font-medium">er·u·dite</h3>
+      <p class="text-muted-foreground text-sm">
+        /ˈer(y)əˌdīt/ &bull; <span class="font-medium">adjective</span>
+      </p>
+    </div>
+    <div class="p-6 pt-0">
+      <p class="text-muted-foreground mb-2 text-sm">
+        astro-erudite is an opinionated, unstyled static blogging template built
+        with <Link
+          href="https://astro.build"
+          class="text-foreground"
+          external
+          underline>Astro</Link
+        >, <Link
+          href="https://tailwindcss.com"
+          class="text-foreground"
+          external
+          underline>Tailwind</Link
+        >, and <Link
+          href="https://ui.shadcn.com"
+          class="text-foreground"
+          external
+          underline>shadcn/ui</Link
+        >. Extraordinarily loosely based on the <Link
+          href="https://astro-micro.vercel.app/"
+          class="text-foreground"
+          external
+          underline>Astro Micro</Link
+        > theme.
+      </p>
+      <p class="text-muted-foreground text-sm">
+        To use this template, check out the <Link
+          href="https://github.com/jktrn/astro-erudite"
+          class="text-foreground"
+          underline
+          external>GitHub</Link
+        > repository. To learn more about why this template exists, read this blog
+        post: <Link
+          href="/blog/the-state-of-static-blogs"
+          class="text-foreground"
+          underline>The State of Static Blogs in 2024</Link
+        >.
+      </p>
     </div>
   </section>
   <section class="flex flex-col gap-y-4">

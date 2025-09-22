@@ -1,37 +1,34 @@
 ---
 import Link from '@/components/Link.astro'
 import ThemeToggle from '@/components/ThemeToggle.astro'
-import MobileMenu from '@/components/ui/mobile-menu'
 import { NAV_LINKS, SITE } from '@/consts'
 import { Image } from 'astro:assets'
 import logo from '../../public/static/logo.svg'
 ---
 
-<header transition:persist>
-  <div
-    class="mx-auto flex max-w-3xl items-center justify-between gap-4 px-4 py-3"
-  >
-    <Link href="/" class="flex shrink-0 items-center justify-center gap-3">
-      <Image src={logo} alt="Logo" class="size-5 sm:size-6" />
-      <span class="hidden h-full text-lg font-medium min-[300px]:block"
-        >{SITE.title}</span
-      >
-    </Link>
-    <div class="flex items-center sm:gap-4">
-      <nav class="hidden items-center gap-4 text-sm sm:flex sm:gap-6">
-        {
-          NAV_LINKS.map((item) => (
-            <Link
-              href={item.href}
-              class="text-foreground/60 hover:text-foreground/80 capitalize transition-colors"
-            >
-              {item.label}
-            </Link>
-          ))
-        }
-      </nav>
-      <MobileMenu client:load transition:persist />
-      <ThemeToggle transition:persist />
-    </div>
+<div
+  class="mx-auto flex max-w-3xl items-center justify-between gap-4 px-4 py-3"
+>
+  <Link href="/" class="flex shrink-0 items-center justify-center gap-3">
+    <Image src={logo} alt="Logo" class="size-5 sm:size-6" />
+    <span
+      class="hidden h-full text-lg leading-none font-medium min-[400px]:block"
+      >{SITE.title}</span
+    >
+  </Link>
+  <div class="flex items-center gap-4">
+    <nav class="flex items-center gap-4 text-sm sm:gap-6">
+      {
+        NAV_LINKS.map((item) => (
+          <Link
+            href={item.href}
+            class="text-foreground/60 hover:text-foreground capitalize transition-colors"
+          >
+            {item.label}
+          </Link>
+        ))
+      }
+    </nav>
+    <ThemeToggle transition:persist />
   </div>
-</header>
+</div>

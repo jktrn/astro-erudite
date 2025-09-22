@@ -16,25 +16,26 @@ const { class: className } = Astro.props
 ---
 
 <!doctype html>
-<html class="bg-background text-foreground" lang={SITE.locale}>
+<html
+  class="bg-background text-foreground scheme-light-dark"
+  lang={SITE.locale}
+>
   <Head>
     <slot name="head" />
   </Head>
-  <body>
-    <div class="flex h-fit min-h-screen flex-col gap-y-6 font-sans">
-      <div
-        class="bg-background/50 sticky top-0 z-50 divide-y backdrop-blur-sm xl:divide-none"
-      >
-        <Header />
-        <slot name="subposts-navigation" />
-        <slot name="table-of-contents" />
-      </div>
-      <main class="grow">
-        <div class={cn('mx-auto flex grow flex-col gap-y-6 px-4', className)}>
-          <slot />
-        </div>
-      </main>
-      <Footer />
-    </div>
+  <body class="flex h-fit min-h-screen flex-col gap-y-6 font-sans">
+    <header
+      class="bg-background/50 sticky top-0 z-50 divide-y backdrop-blur-sm xl:divide-none"
+    >
+      <Header />
+      <slot name="subposts-navigation" />
+      <slot name="table-of-contents" />
+    </header>
+    <main
+      class={cn('w-full mx-auto flex grow flex-col gap-y-6 px-4', className)}
+    >
+      <slot />
+    </main>
+    <Footer />
   </body>
 </html>

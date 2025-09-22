@@ -8,35 +8,23 @@ import { Icon } from 'astro-icon/components'
   variant="ghost"
   size="icon"
   title="Toggle theme"
-  className="-me-2 size-8"
+  className="-my-2 -me-2 size-8"
 >
-  <Icon
-    name="lucide:sun"
-    class="size-4 scale-100 rotate-0 transition-all dark:scale-0 dark:-rotate-90"
-  />
-  <Icon
-    name="lucide:moon"
-    class="absolute size-4 scale-0 rotate-90 transition-all dark:scale-100 dark:rotate-0"
-  />
+  <Icon name="lucide:sun" class="size-4 dark:hidden" />
+  <Icon name="lucide:moon" class="absolute hidden size-4 dark:block" />
   <span class="sr-only">Toggle theme</span>
 </Button>
 
 <script is:inline data-astro-rerun>
   const theme = (() => {
-    const localStorageTheme = localStorage?.getItem('theme') ?? ''
-    if (['dark', 'light'].includes(localStorageTheme)) {
-      return localStorageTheme
-    }
-    if (window.matchMedia('(prefers-color-scheme: dark)').matches) {
-      return 'dark'
-    }
-    return 'light'
+    const stored = localStorage?.getItem('theme') ?? ''
+    if (['dark', 'light'].includes(stored)) return stored
+    return window.matchMedia('(prefers-color-scheme: dark)').matches
+      ? 'dark'
+      : 'light'
   })()
 
   document.documentElement.setAttribute('data-theme', theme)
-  document.documentElement.classList.add(
-    theme === 'dark' ? 'scheme-dark' : 'scheme-light',
-  )
   window.localStorage.setItem('theme', theme)
 </script>
 
@@ -48,9 +36,6 @@ import { Icon } from 'astro-icon/components'
 
     element.classList.add('[&_*]:transition-none')
     element.setAttribute('data-theme', newTheme)
-    element.classList.remove('scheme-dark', 'scheme-light')
-    element.classList.add(newTheme === 'dark' ? 'scheme-dark' : 'scheme-light')
-
     window.getComputedStyle(element).getPropertyValue('opacity')
 
     requestAnimationFrame(() => {
@@ -61,10 +46,9 @@ import { Icon } from 'astro-icon/components'
   }
 
   function initThemeToggle() {
-    const themeToggle = document.getElementById('theme-toggle')
-    if (themeToggle) {
-      themeToggle.addEventListener('click', handleToggleClick)
-    }
+    document
+      .getElementById('theme-toggle')
+      ?.addEventListener('click', handleToggleClick)
   }
 
   initThemeToggle()
@@ -74,14 +58,8 @@ import { Icon } from 'astro-icon/components'
     const element = document.documentElement
 
     element.classList.add('[&_*]:transition-none')
-
     window.getComputedStyle(element).getPropertyValue('opacity')
-
     element.setAttribute('data-theme', storedTheme)
-    element.classList.remove('scheme-dark', 'scheme-light')
-    element.classList.add(
-      storedTheme === 'dark' ? 'scheme-dark' : 'scheme-light',
-    )
 
     requestAnimationFrame(() => {
       element.classList.remove('[&_*]:transition-none')
