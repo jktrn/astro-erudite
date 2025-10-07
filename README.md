@@ -41,6 +41,7 @@ Below are some fantastic examples of websites based on this template. If you wis
 | [bgajjala.dev](https://bgajjala.dev)           | [@bgajjala8](https://github.com/bgajjala8)          | A minimal blog featuring a paper-color inspired color scheme      | [→](https://github.com/bgajjala8/bgajjala.dev)               |
 | [ankitz007.vercel.app](https://ankitz007.vercel.app) | [@ankitz007](https://github.com/ankitz007)          | A personal blog with a few modifications and updates to the original.      | [→](https://github.com/ankitz007/webfolio)               |
 | [sadman.ca](https://sadman.ca)                | [@sadmanca](https://github.com/sadmanca)           | A customized personal blog with: Goodreads reading progress tracker, SVG thumbnails, custom heading styles, and dynamic media grids (books, movies, etc.)      | [→](https://github.com/sadmanca/blogv3)               |
+| [marcel-to.vercel.app](https://marcel-to.vercel.app) | [@Marcel-TO](https://github.com/Marcel-TO)   | A content‑driven personal portfolio showcasing software projects, deep–dive blog series and multi-part project documentation. | [→]([https://github.com/jktrn/enscribe.dev](https://github.com/Marcel-TO/marcel-to-website))             |
 
 ## Features
 
