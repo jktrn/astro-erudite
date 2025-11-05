@@ -10,7 +10,9 @@
     "preview": "astro preview",
     "astro": "astro",
     "prettier": "prettier --write **/*.{ts,tsx,css,astro} --ignore-path .gitignore",
-    "postinstall": "patch-package"
+    "postinstall": "patch-package",
+    "prepare": "husky",
+    "lint-staged": "lint-staged"
   },
   "dependencies": {
     "@astrojs/check": "^0.9.4",
@@ -46,6 +48,10 @@
     "typescript": "^5.8.3"
   },
   "devDependencies": {
+    "@antfu/eslint-config": "^6.2.0",
+    "@commitlint/config-conventional": "^20.0.0",
+    "husky": "^9.1.7",
+    "lint-staged": "^16.2.6",
     "prettier": "^3.5.1",
     "prettier-plugin-astro": "^0.14.1",
     "prettier-plugin-astro-organize-imports": "^0.4.11",
@@ -66,6 +72,15 @@
           "parser": "astro"
         }
       }
+    ]
+  },
+  "lint-staged": {
+    "*.{js,jsx,ts,tsx}": [
+      "eslint --fix",
+      "pnpm run prettier"
+    ],
+    "*.{json,md,css,scss,html,yml,yaml}": [
+      "pnpm run prettier"
     ]
   }
 }
