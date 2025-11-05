@@ -1,7 +1,5 @@
 ---
-import { Separator } from '@/components/ui/separator'
 import { SOCIAL_LINKS } from '@/consts'
-import Link from './Link.astro'
 import SocialIcons from './SocialIcons.astro'
 ---
 
@@ -12,15 +10,6 @@ import SocialIcons from './SocialIcons.astro'
     <span class="text-muted-foreground text-sm">
       &copy; {new Date().getFullYear()} All rights reserved.
     </span>
-    <Separator orientation="vertical" className="hidden h-4! sm:block" />
-    <p class="text-muted-foreground text-sm">
-      Made with 🤍 by <Link
-        href="https://github.com/jktrn"
-        class="text-foreground"
-        external
-        underline>enscribe</Link
-      >!
-    </p>
   </div>
   <SocialIcons links={SOCIAL_LINKS} />
 </footer>

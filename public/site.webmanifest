@@ -1,6 +1,6 @@
 {
-  "name": "astro-erudite",
-  "short_name": "astro-erudite",
+  "name": "blog.prdai.dev",
+  "short_name": "blog.prdai.dev",
   "icons": [
     {
       "src": "/web-app-manifest-192x192.png",

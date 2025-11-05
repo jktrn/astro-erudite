@@ -1,5 +1,5 @@
 {
-  "name": "astro-erudite",
+  "name": "blog.prdai.dev",
   "type": "module",
   "version": "1.6.3",
   "private": true,
@@ -40,6 +40,7 @@
     "rehype-pretty-code": "^0.14.1",
     "remark-emoji": "^5.0.1",
     "remark-math": "^6.0.0",
+    "sharp": "^0.34.4",
     "tailwind-merge": "^3.3.0",
     "tailwindcss": "^4.1.7",
     "typescript": "^5.8.3"
