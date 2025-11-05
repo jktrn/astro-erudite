@@ -19,7 +19,7 @@ import { pluginLineNumbers } from '@expressive-code/plugin-line-numbers'
 import tailwindcss from '@tailwindcss/vite'
 
 export default defineConfig({
-  site: 'https://astro-erudite.vercel.app',
+  site: 'https://blog.prdai.dev/',
   integrations: [
     expressiveCode({
       themes: ['github-light', 'github-dark'],
@@ -40,8 +40,7 @@ export default defineConfig({
         codeFontSize: '0.75rem',
         borderColor: 'var(--border)',
         codeFontFamily: 'var(--font-mono)',
-        codeBackground:
-          'color-mix(in oklab, var(--muted) 25%, transparent)',
+        codeBackground: 'color-mix(in oklab, var(--muted) 25%, transparent)',
         frames: {
           editorActiveTabForeground: 'var(--muted-foreground)',
           editorActiveTabBackground:

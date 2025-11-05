@@ -191,23 +191,6 @@ export async function getParentPost(
   return allPosts.find((post) => post.id === parentId) || null
 }
 
-export async function parseAuthors(authorIds: string[] = []) {
-  if (!authorIds.length) return []
-
-  const allAuthors = await getAllAuthors()
-  const authorMap = new Map(allAuthors.map((author) => [author.id, author]))
-
-  return authorIds.map((id) => {
-    const author = authorMap.get(id)
-    return {
-      id,
-      name: author?.data?.name || id,
-      avatar: author?.data?.avatar || '/static/logo.png',
-      isRegistered: !!author,
-    }
-  })
-}
-
 export async function getPostById(
   postId: string,
 ): Promise<CollectionEntry<'blog'> | null> {

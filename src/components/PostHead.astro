@@ -51,10 +51,3 @@ const author =
 <meta name="twitter:image:alt" content={title} />
 <meta name="twitter:card" content="summary_large_image" />
 <meta name="twitter:creator" content={author} />
-
-{
-  post?.data.tags &&
-    post.data.tags.map((tag: string) => {
-      return <meta property="article:tag" content={tag} />
-    })
-}

@@ -1,5 +1,4 @@
 ---
-import Link from '@/components/Link.astro'
 import AvatarComponent from '@/components/ui/avatar'
 import { cn } from '@/lib/utils'
 import type { SocialLink } from '@/types'
@@ -28,22 +27,17 @@ const socialLinks: SocialLink[] = [
   class="has-[a:hover]:bg-muted/50 overflow-hidden rounded-xl border p-4 transition-colors duration-300 ease-in-out"
 >
   <div class="flex flex-wrap gap-4">
-    <Link
-      href={`/authors/${author.id}`}
-      class={cn('block', isAuthorPage && 'pointer-events-none')}
-    >
-      <AvatarComponent
-        client:load
-        src={avatar}
-        alt={`Avatar of ${name}`}
-        fallback={name[0]}
-        className={cn(
-          'size-32 rounded-md [&>[data-slot="avatar-fallback"]]:rounded-md',
-          !isAuthorPage &&
-            'hover:ring-primary transition-shadow duration-300 hover:cursor-pointer hover:ring-2',
-        )}
-      />
-    </Link>
+    <AvatarComponent
+      client:load
+      src={avatar}
+      alt={`Avatar of ${name}`}
+      fallback={name[0]}
+      className={cn(
+        'size-32 rounded-md [&>[data-slot="avatar-fallback"]]:rounded-md',
+        !isAuthorPage &&
+          'hover:ring-primary transition-shadow duration-300 hover:cursor-pointer hover:ring-2',
+      )}
+    />
     <div class="flex grow flex-col justify-between gap-y-4">
       <div>
         <div class="flex flex-wrap items-center gap-x-2">
