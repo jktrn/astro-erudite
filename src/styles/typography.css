@@ -123,8 +123,8 @@
     }
 
     :where(img, video, figure, .expressive-code):not(
-        :where(.not-prose, .not-prose *)
-      ) {
+      :where(.not-prose, .not-prose *)
+    ) {
       @apply mx-auto my-6;
     }
 
