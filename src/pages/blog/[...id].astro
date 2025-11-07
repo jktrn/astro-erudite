@@ -7,6 +7,7 @@ import SubpostsHeader from '@/components/SubpostsHeader.astro'
 import SubpostsSidebar from '@/components/SubpostsSidebar.astro'
 import TOCHeader from '@/components/TOCHeader.astro'
 import TOCSidebar from '@/components/TOCSidebar.astro'
+import EncryptedContent from '@/components/EncryptedContent.astro'
 import { badgeVariants } from '@/components/ui/badge'
 import { Button } from '@/components/ui/button'
 import Layout from '@/layouts/Layout.astro'
@@ -224,7 +225,19 @@ const tocSections = await getTOCSections(currentPostId)
     }
 
     <article class="prose col-start-2 max-w-none">
-      <Content />
+      {
+        post.data.password ? (
+          <EncryptedContent
+            password={post.data.password}
+            postId={currentPostId}
+            protectionMessage={post.data.protectionMessage}
+          >
+            <Content />
+          </EncryptedContent>
+        ) : (
+          <Content />
+        )
+      }
     </article>
 
     {

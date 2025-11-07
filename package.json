@@ -30,6 +30,7 @@
     "astro-icon": "^1.1.5",
     "class-variance-authority": "^0.7.1",
     "clsx": "^2.1.1",
+    "crypto-js": "^4.2.0",
     "lucide-react": "^0.469.0",
     "patch-package": "^8.0.0",
     "radix-ui": "^1.3.4",
@@ -45,6 +46,7 @@
     "typescript": "^5.8.3"
   },
   "devDependencies": {
+    "@types/crypto-js": "^4.2.2",
     "prettier": "^3.5.1",
     "prettier-plugin-astro": "^0.14.1",
     "prettier-plugin-astro-organize-imports": "^0.4.11",

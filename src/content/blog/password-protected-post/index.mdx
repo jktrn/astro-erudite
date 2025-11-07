@@ -1,0 +1,92 @@
+---
+title: 'Password Protected Post'
+description: 'This is an example of a password-protected blog post.'
+date: 2025-11-07
+tags: ['v1.6.1']
+image: './banner.png'
+authors: ['f1rst']
+password: "veRyS3cur3Fl4g!"
+protectionMessage: "The password is `veRyS3cur3Fl4g!`"
+---
+
+import Callout from '@/components/Callout.astro'
+
+This blog now supports **encrypted password-protected posts**. When a post is protected, the content is encrypted using AES-256 encryption at build time, and only users with the correct password can decrypt and view it. 
+
+<Callout variant="important">
+    Table of Contents headings are visible (metadata, not encrypted).
+</Callout>
+
+## How It Works
+
+```txt showLineNumbers=false
+┌─────────────────────────────────────────────────────────────┐
+│ BUILD TIME (Astro SSG)                                      │
+├─────────────────────────────────────────────────────────────┤
+│ 1. MDX file with password in frontmatter                    │
+│ 2. Content rendered to HTML                                 │
+│ 3. HTML encrypted with AES-256 using password               │
+│ 4. Encrypted ciphertext embedded in static HTML             │
+└─────────────────────────────────────────────────────────────┘
+                           ↓
+┌─────────────────────────────────────────────────────────────┐
+│ BROWSER (User visits page)                                  │
+├─────────────────────────────────────────────────────────────┤
+│ 1. Page loads with encrypted content                        │
+│ 2. User sees password prompt                                │
+│ 3. User enters password                                     │
+│ 4. Client-side decryption attempted                         │
+│ 5. Success → Render HTML | Failure → Show error             │
+└─────────────────────────────────────────────────────────────┘
+```
+
+## How to Use
+
+To protect a blog post with a password, simply add a `password` field to the frontmatter of your MDX file:
+
+```mdx
+---
+title: "My Protected Post"
+description: "This post requires a password to view"
+date: 2024-01-01
+password: "mySecretPassword"
+protectionMessage: "This content is exclusive for premium members. Contact us for access."
+tags: ['private', 'protected']
+authors: ['f1rst']
+---
+
+Your secret content goes here...
+
+
+## Customization
+
+### UI Customization
+
+Edit `src/components/PasswordProtection.tsx` to customize:
+- Password prompt text and styling
+- Error messages
+- Lock icon or branding
+- Input field appearance
+- Button text and colors
+
+### Storage Customization
+
+Change session persistence:
+```typescript
+// Current: sessionStorage (clears on browser close)
+sessionStorage.setItem(storageKey, inputPassword)
+
+// Alternative: localStorage (persists across sessions)
+localStorage.setItem(storageKey, inputPassword)
+```
+
+### Encryption Algorithm
+
+To use a different encryption method, edit `src/lib/encryption.ts`:
+```typescript
+// Current: AES-256
+CryptoJS.AES.encrypt(content, password)
+
+// Alternative: Triple DES
+CryptoJS.TripleDES.encrypt(content, password)
+```

@@ -1,0 +1,25 @@
+---
+import { encryptContent } from '@/lib/encryption'
+import PasswordProtection from '@/components/PasswordProtection'
+
+interface Props {
+  password: string
+  postId: string
+  protectionMessage?: string
+}
+
+const { password, postId, protectionMessage } = Astro.props
+
+// Render the slot content to HTML string
+const htmlContent = await Astro.slots.render('default')
+
+// Encrypt the HTML content
+const encryptedContent = encryptContent(htmlContent, password)
+---
+
+<PasswordProtection
+  postId={postId}
+  encryptedContent={encryptedContent}
+  protectionMessage={protectionMessage}
+  client:load
+/>
