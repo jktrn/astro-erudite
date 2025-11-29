@@ -43,6 +43,7 @@ Below are some fantastic examples of websites based on this template. If you wis
 | [sadman.ca](https://sadman.ca)                       | [@sadmanca](https://github.com/sadmanca)               | A customized personal blog with: Goodreads reading progress tracker, SVG thumbnails, custom heading styles, and dynamic media grids (books, movies, etc.) | [→](https://github.com/sadmanca/blogv3)                 |
 | [marcel-to.vercel.app](https://marcel-to.vercel.app) | [@Marcel-TO](https://github.com/Marcel-TO)             | A content‑driven personal portfolio showcasing software projects, deep–dive blog series and multi-part project documentation.                             | [→](https://github.com/Marcel-TO/marcel-to-website)     |
 | [merox.dev](https://merox.dev) | [@meroxdotdev](https://github.com/meroxdotdev) | A technical blog focused on DevOps automation and homelab infrastructure | [→](https://github.com/meroxdotdev/merox) |
+| [Off by One](https://justoffbyone.com) | [@cduruk](https://github.com/cduruk) | A blog focused on engineering management and various tech topics | [→](https://github.com/cduruk/offbyone) |
 
 ## Features
 
