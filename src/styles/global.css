@@ -1,4 +1,5 @@
 @import 'tailwindcss';
+@plugin "tailwindcss-animate";
 
 @custom-variant dark (&:where([data-theme=dark], [data-theme=dark] *));
 
@@ -23,7 +24,31 @@
   --color-destructive-foreground: var(--destructive-foreground);
 
   --color-border: var(--border);
+  /* ... previous theme vars ... */
   --color-ring: var(--ring);
+
+  --animate-border-beam: border-beam 4s linear infinite;
+  --animate-rainbow: rainbow 2s linear infinite;
+}
+
+@keyframes border-beam {
+  from {
+    transform: rotate(0deg);
+  }
+
+  to {
+    transform: rotate(360deg);
+  }
+}
+
+@keyframes rainbow {
+  0% {
+    background-position: 0% 50%;
+  }
+
+  100% {
+    background-position: 100% 50%;
+  }
 }
 
 @font-face {
@@ -67,6 +92,7 @@
 }
 
 @layer base {
+
   *,
   ::after,
   ::before,

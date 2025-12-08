@@ -13,6 +13,9 @@ interface Props {
 }
 
 const { class: className } = Astro.props
+import { ClientRouter } from 'astro:transitions'
+
+const hasSidebar = Astro.slots.has('sidebar')
 ---
 
 <!doctype html>
@@ -22,6 +25,7 @@ const { class: className } = Astro.props
 >
   <Head>
     <slot name="head" />
+    <ClientRouter />
   </Head>
   <body class="flex h-fit min-h-screen flex-col gap-y-6 font-sans">
     <header
@@ -33,18 +37,23 @@ const { class: className } = Astro.props
     </header>
     <main
       class={cn(
-        'w-full mx-auto grid grid-cols-1 lg:grid-cols-12 gap-8 px-4 py-8',
+        'w-full mx-auto px-4 py-8',
+        hasSidebar ? 'grid grid-cols-1 lg:grid-cols-12 gap-8' : '',
         className,
       )}
     >
-      <div class="flex flex-col gap-y-6 lg:col-span-8">
+      <div class={cn('flex flex-col gap-y-6', hasSidebar ? 'lg:col-span-8' : 'w-full')}>
         <slot />
       </div>
-      <aside class="hidden space-y-8 lg:block lg:col-span-4">
-        <div class="sticky top-24 space-y-8">
-          <slot name="sidebar" />
-        </div>
-      </aside>
+      {
+        hasSidebar && (
+          <aside class="hidden space-y-8 lg:block lg:col-span-4">
+            <div class="sticky top-24 space-y-8">
+              <slot name="sidebar" />
+            </div>
+          </aside>
+        )
+      }
     </main>
     <Footer />
   </body>

@@ -4,18 +4,23 @@ import ThemeToggle from '@/components/ThemeToggle.astro'
 import { NAV_LINKS, SITE } from '@/consts'
 import { Image } from 'astro:assets'
 import logo from '../../public/static/logo.svg'
+import { ReadingProgress } from '@/components/magazine/ReadingProgress'
+
+const { pathname } = Astro.url
+const isBlogPost = pathname.startsWith('/blog/') && pathname !== '/blog/'
 ---
 
-<div>
+<div class="relative">
   <div
     class="mx-auto flex max-w-7xl items-center justify-between gap-4 px-4 py-3"
   >
-    <Link href="/" class="flex shrink-0 items-center justify-center gap-3">
-      <Image src={logo} alt="Logo" class="size-5 sm:size-6" />
-      <span
-        class="hidden h-full text-lg leading-none font-medium min-[400px]:block"
-        >{SITE.title}</span
-      >
+    <Link href="/" class="group flex shrink-0 items-center justify-center gap-0.5 font-mono text-2xl font-black tracking-tighter transition-transform hover:scale-105">
+      <span class="bg-linear-to-r from-pink-500 to-rose-600 bg-clip-text text-transparent [text-shadow:0_0_20px_rgba(236,72,153,0.5)]">
+        ASTRO
+      </span>
+      <span class="bg-linear-to-r from-cyan-500 to-blue-600 bg-clip-text text-transparent [text-shadow:0_0_20px_rgba(6,182,212,0.5)]">
+        NOMEER
+      </span>
     </Link>
     <div class="flex items-center gap-4">
       <nav class="flex items-center gap-4 text-sm sm:gap-6">
@@ -33,4 +38,5 @@ import logo from '../../public/static/logo.svg'
       <ThemeToggle transition:persist />
     </div>
   </div>
+  {isBlogPost && <ReadingProgress client:load />}
 </div>

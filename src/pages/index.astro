@@ -20,11 +20,11 @@ const allPosts = await getAllPosts()
 
 <Layout class="max-w-7xl">
   <PageHead slot="head" title="Home" />
-  <div slot="sidebar" class="flex flex-col gap-8">
+  <div slot="sidebar" class="flex flex-col gap-8 animate-in slide-in-from-right-8 fade-in duration-700 delay-300 fill-mode-backwards">
       <Newsletter client:visible />
       <Trending />
   </div>
-  <section class="rounded-lg border">
+  <section class="rounded-lg border animate-in fade-in zoom-in-95 duration-500">
     <div class="flex flex-col space-y-1.5 p-6">
       <h3 class="text-3xl leading-none font-medium">as·tron·o·meer</h3>
       <p class="text-muted-foreground text-sm">

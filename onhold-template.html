@@ -1,0 +1,336 @@
+@import"https://fonts.googleapis.com/css2?family=JetBrains+Mono:wght@400;700&display=swap";[data-astro-cid-j7pv25f6] {
+margin: 0;
+padding: 0;
+box-sizing: border-box
+}
+
+body {
+font-family: JetBrains Mono,monospace;
+background: #0a0a0f;
+background-image: radial-gradient(ellipse at top left,rgba(139,92,246,.15) 0%,transparent 50%),radial-gradient(ellipse
+at bottom right,rgba(14,165,233,.15) 0%,transparent 50%);
+color: #e2e8f0;
+min-height: 100vh;
+display: flex;
+flex-direction: column;
+justify-content: center;
+align-items: center;
+overflow: hidden;
+position: relative
+}
+
+body:before {
+content: "";
+position: absolute;
+inset: 0;
+background-image: linear-gradient(rgba(14,165,233,.03) 1px,transparent 1px),linear-gradient(90deg,rgba(14,165,233,.03)
+1px,transparent 1px);
+background-size: 50px 50px;
+z-index: 0
+}
+
+.container[data-astro-cid-j7pv25f6] {
+position: relative;
+z-index: 1;
+text-align: center;
+padding: 2rem;
+max-width: 800px;
+animation: fadeIn 1s ease-out
+}
+
+.logo[data-astro-cid-j7pv25f6] {
+font-size: clamp(3rem,10vw,6rem);
+font-weight: 700;
+letter-spacing: .1em;
+margin-bottom: 2rem;
+position: relative;
+display: inline-block
+}
+
+.logo[data-astro-cid-j7pv25f6] .vibe[data-astro-cid-j7pv25f6] {
+background: linear-gradient(90deg,#ec4899,#f43f5e);
+-webkit-background-clip: text;
+-webkit-text-fill-color: transparent;
+background-clip: text;
+text-shadow: 0 0 80px rgba(236,72,153,.5)
+}
+
+.logo[data-astro-cid-j7pv25f6] .mode[data-astro-cid-j7pv25f6] {
+background: linear-gradient(90deg,#06b6d4,#3b82f6);
+-webkit-background-clip: text;
+-webkit-text-fill-color: transparent;
+background-clip: text;
+text-shadow: 0 0 80px rgba(6,182,212,.5)
+}
+
+.terminal[data-astro-cid-j7pv25f6] {
+background: #111827cc;
+border: 1px solid rgba(14,165,233,.3);
+border-radius: 12px;
+padding: 1.5rem;
+margin: 2rem 0;
+text-align: left;
+backdrop-filter: blur(10px);
+box-shadow: 0 0 40px #0ea5e91a,inset 0 0 20px #0ea5e90d
+}
+
+.terminal-header[data-astro-cid-j7pv25f6] {
+display: flex;
+align-items: center;
+margin-bottom: 1rem;
+padding-bottom: .5rem;
+border-bottom: 1px solid rgba(14,165,233,.2)
+}
+
+.terminal-dots[data-astro-cid-j7pv25f6] {
+display: flex;
+gap: 8px
+}
+
+.dot[data-astro-cid-j7pv25f6] {
+width: 12px;
+height: 12px;
+border-radius: 50%
+}
+
+.dot[data-astro-cid-j7pv25f6].red {
+background: #ef4444
+}
+
+.dot[data-astro-cid-j7pv25f6].yellow {
+background: #f59e0b
+}
+
+.dot[data-astro-cid-j7pv25f6].green {
+background: #10b981
+}
+
+.terminal-line[data-astro-cid-j7pv25f6] {
+margin: .5rem 0;
+font-size: .9rem;
+color: #94a3b8;
+opacity: 0;
+animation: typeIn .5s ease-out forwards
+}
+
+.terminal-line[data-astro-cid-j7pv25f6]:nth-child(1) {
+animation-delay: .5s
+}
+
+.terminal-line[data-astro-cid-j7pv25f6]:nth-child(2) {
+animation-delay: 1s
+}
+
+.terminal-line[data-astro-cid-j7pv25f6]:nth-child(3) {
+animation-delay: 1.5s
+}
+
+.terminal-line[data-astro-cid-j7pv25f6]:nth-child(4) {
+animation-delay: 2s
+}
+
+.prompt[data-astro-cid-j7pv25f6] {
+color: #06b6d4;
+margin-right: .5rem
+}
+
+.command[data-astro-cid-j7pv25f6] {
+color: #e2e8f0
+}
+
+.path[data-astro-cid-j7pv25f6] {
+color: #ec4899
+}
+
+.status[data-astro-cid-j7pv25f6] {
+color: #10b981;
+font-size: .9rem;
+margin-top: 2rem;
+opacity: .8
+}
+
+.loading[data-astro-cid-j7pv25f6] {
+display: inline-flex;
+align-items: center;
+margin-top: 2rem;
+padding: .75rem 2rem;
+background: linear-gradient(135deg,#ec48991a,#06b6d41a);
+border: 1px solid transparent;
+border-radius: 50px;
+position: relative;
+overflow: hidden
+}
+
+.loading[data-astro-cid-j7pv25f6]:before {
+content: "";
+position: absolute;
+top: 0;
+left: -100%;
+width: 100%;
+height: 100%;
+background: linear-gradient(90deg,transparent,rgba(14,165,233,.3),transparent);
+animation: shimmer 2s infinite
+}
+
+.loading[data-astro-cid-j7pv25f6]:after {
+content: "";
+position: absolute;
+inset: 0;
+border-radius: 50px;
+padding: 1px;
+background: linear-gradient(135deg,#ec4899,#06b6d4);
+-webkit-mask: linear-gradient(#fff 0 0) content-box,linear-gradient(#fff 0 0);
+-webkit-mask-composite: xor;
+mask: linear-gradient(#fff 0 0) content-box,linear-gradient(#fff 0 0);
+mask-composite: exclude
+}
+
+.loading-text[data-astro-cid-j7pv25f6] {
+position: relative;
+z-index: 1;
+background: linear-gradient(90deg,#ec4899,#06b6d4);
+-webkit-background-clip: text;
+-webkit-text-fill-color: transparent;
+background-clip: text
+}
+
+.dots[data-astro-cid-j7pv25f6] {
+display: inline-block;
+position: relative;
+z-index: 1;
+margin-left: .5rem
+}
+
+.dots[data-astro-cid-j7pv25f6]:after {
+content: "...";
+animation: dots 1.5s steps(4,end) infinite
+}
+
+@keyframes fadeIn {
+0% {
+opacity: 0;
+transform: translateY(20px)
+}
+
+to {
+opacity: 1;
+transform: translateY(0)
+}
+}
+
+@keyframes typeIn {
+0% {
+opacity: 0;
+transform: translate(-20px)
+}
+
+to {
+opacity: 1;
+transform: translate(0)
+}
+}
+
+@keyframes shimmer {
+to {
+left: 100%
+}
+}
+
+@keyframes dots {
+0%,20% {
+content: "."
+}
+
+40% {
+content: ".."
+}
+
+60%,to {
+content: "..."
+}
+}
+
+.tagline[data-astro-cid-j7pv25f6] {
+font-size: 1.2rem;
+color: #64748b;
+margin-bottom: 2rem;
+letter-spacing: .05em
+}
+
+.footer[data-astro-cid-j7pv25f6] {
+position: absolute;
+bottom: 2rem;
+font-size: .8rem;
+color: #475569;
+opacity: .8
+}
+
+.loading[data-astro-cid-j7pv25f6]:hover {
+box-shadow: 0 0 30px #ec48994d,0 0 60px #06b6d433
+}
+
+
+<!DOCTYPE html>
+<html lang="en" data-astro-cid-j7pv25f6>
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>VIBE MODE - Coming Soon</title>
+    <link rel="stylesheet" href="/_astro/index.BdZA1V2n.css">
+    <script>
+        window.va = window.va || function () {
+            (window.vaq = window.vaq || []).push(arguments);
+        }
+            ;
+        var script = document.createElement('script');
+        script.defer = true;
+        script.src = '/_vercel/insights/script.js';
+        var head = document.querySelector('head');
+        head.appendChild(script);
+    </script>
+</head>
+
+<body data-astro-cid-j7pv25f6>
+    <div class="container" data-astro-cid-j7pv25f6>
+        <h1 class="logo" data-astro-cid-j7pv25f6>
+            <span class="vibe" data-astro-cid-j7pv25f6>VIBE</span>
+            <span class="mode" data-astro-cid-j7pv25f6>MODE</span>
+        </h1>
+        <div class="tagline" data-astro-cid-j7pv25f6>Build, Iterate, Build, Repeat</div>
+        <div class="terminal" data-astro-cid-j7pv25f6>
+            <div class="terminal-header" data-astro-cid-j7pv25f6>
+                <div class="terminal-dots" data-astro-cid-j7pv25f6>
+                    <div class="dot red" data-astro-cid-j7pv25f6></div>
+                    <div class="dot yellow" data-astro-cid-j7pv25f6></div>
+                    <div class="dot green" data-astro-cid-j7pv25f6></div>
+                </div>
+            </div>
+            <div class="terminal-content" data-astro-cid-j7pv25f6>
+                <div class="terminal-line" data-astro-cid-j7pv25f6>
+                    <span class="prompt" data-astro-cid-j7pv25f6>></span>
+                    <span class="command" data-astro-cid-j7pv25f6>
+                        cd <span class="path" data-astro-cid-j7pv25f6>./gimmevibes</span>
+                    </span>
+                </div>
+                <div class="terminal-line" data-astro-cid-j7pv25f6>
+                    <span class="prompt" data-astro-cid-j7pv25f6>></span>
+                    <span class="command" data-astro-cid-j7pv25f6>npm run build</span>
+                </div>
+                <div class="terminal-line" data-astro-cid-j7pv25f6>
+                    <span class="status" data-astro-cid-j7pv25f6>✓ Building vibe engine...</span>
+                </div>
+                <div class="terminal-line" data-astro-cid-j7pv25f6>
+                    <span class="status" data-astro-cid-j7pv25f6>✓ Optimizing experience...</span>
+                </div>
+            </div>
+        </div>
+        <div class="loading" data-astro-cid-j7pv25f6>
+            <span class="loading-text" data-astro-cid-j7pv25f6>Initializing Vibe Mode</span>
+            <span class="dots" data-astro-cid-j7pv25f6></span>
+        </div>
+    </div>
+    <div class="footer" data-astro-cid-j7pv25f6>gimmevibes • Coming Soon</div>
+</body>
+
+</html>

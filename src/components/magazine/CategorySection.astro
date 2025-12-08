@@ -22,7 +22,7 @@ if (sortedPosts.length === 0) {
 }
 ---
 
-<section class="py-12 border-t">
+<section class="py-12 border-t animate-in fade-in slide-in-from-bottom-8 duration-700 delay-300 fill-mode-backwards">
   <div class="flex items-center justify-between mb-8">
     <h2 class="text-3xl font-bold tracking-tight">{title}</h2>
     <a
@@ -35,8 +35,11 @@ if (sortedPosts.length === 0) {
 
   <div class="grid grid-cols-1 gap-8 md:grid-cols-2 lg:grid-cols-4">
     {
-      sortedPosts.map((post) => (
-        <article class="flex flex-col group">
+      sortedPosts.map((post, index) => (
+        <article 
+          class="flex flex-col group animate-in fade-in slide-in-from-bottom-4 duration-500 fill-mode-backwards"
+          style={`animation-delay: ${(index + 1) * 100 + 300}ms`}
+        >
           <a
             href={`/blog/${post.slug}`}
             class="overflow-hidden border rounded-lg aspect-video bg-muted mb-4"

@@ -1,4 +1,4 @@
-import { Button } from '@/components/ui/button'
+import { GlowingBorderButton } from '@/components/ui/glowing-border-button'
 import { Card, CardContent, CardHeader, CardTitle, CardDescription } from '@/components/ui/card'
 import { Input } from '@/components/ui/input'
 import { Mail } from 'lucide-react'
@@ -22,9 +22,9 @@ export function Newsletter() {
                         placeholder="you@example.com"
                         className="w-full"
                     />
-                    <Button className="w-full font-bold">
+                    <GlowingBorderButton className="w-full font-bold">
                         Subscribe
-                    </Button>
+                    </GlowingBorderButton>
                 </form>
             </CardContent>
         </Card>

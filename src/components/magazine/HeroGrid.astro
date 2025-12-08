@@ -13,7 +13,7 @@ const [featured, ...side] = posts.slice(0, 3)
 <section class="grid grid-cols-1 gap-6 mb-12 md:grid-cols-12">
   <!-- Main Feature (Left, spans 8 cols) -->
   <article
-    class="relative overflow-hidden border group rounded-xl bg-card md:col-span-8"
+    class="relative overflow-hidden border group rounded-xl bg-card md:col-span-8 animate-in fade-in slide-in-from-bottom-8 duration-700 underline-offset-4"
   >
     <a href={`/blog/${featured.slug}`} class="block h-full">
       {
@@ -21,6 +21,7 @@ const [featured, ...side] = posts.slice(0, 3)
           <Image
             src={featured.data.image}
             alt={featured.data.title}
+            transition:name={`image-${featured.id}`}
             class="object-cover w-full h-64 duration-500 transition-transform md:h-96 group-hover:scale-105"
           />
         )
@@ -48,13 +49,17 @@ const [featured, ...side] = posts.slice(0, 3)
   <!-- Side Stack (Right, spans 4 cols) -->
   <div class="flex flex-col gap-6 md:col-span-4">
     {
-      side.map((post) => (
-        <article class="relative flex-1 overflow-hidden border group rounded-xl bg-card">
+      side.map((post, index) => (
+        <article 
+          class="relative flex-1 overflow-hidden border group rounded-xl bg-card animate-in fade-in slide-in-from-bottom-8 duration-700" 
+          style={`animation-delay: ${(index + 1) * 150}ms`}
+        >
           <a href={`/blog/${post.slug}`} class="flex flex-col h-full">
             {post.data.image && (
               <Image
                 src={post.data.image}
                 alt={post.data.title}
+                transition:name={`image-${post.id}`}
                 class="object-cover w-full h-32"
               />
             )}
