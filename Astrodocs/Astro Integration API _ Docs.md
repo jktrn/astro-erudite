@@ -1,0 +1,5467 @@
+- Start
+- Guides and recipes
+- Reference
+- Integrations
+- Third-party services
+- Getting started
+- Welcome, world!
+								
+							
+							
+	
+
+
+
+						
+						
+	
+				
+						Why Astro?
+						
+					
+			
+				
+						Islands architecture
+						
+					
+			
+				
+						Tutorial: Build a blog
+						
+					
+			
+				
+						Courses
+- Why Astro?
+- Islands architecture
+- Tutorial: Build a blog
+- Courses
+- Start a new project
+								
+							
+							
+	
+
+
+
+						
+						
+	
+				
+						Installation
+						
+					
+			
+				
+						Project structure
+						
+					
+			
+				
+						Develop and build
+- Installation
+- Project structure
+- Develop and build
+- Configuration
+								
+							
+							
+	
+
+
+
+						
+						
+	
+				
+						Configuration overview
+						
+					
+			
+				
+						Editor setup
+						
+					
+			
+				
+						TypeScript
+						
+					
+			
+				
+						Environment variables
+						
+					
+			
+				
+						Build with AI
+						
+					
+			
+				
+						Dev toolbar
+- Configuration overview
+- Editor setup
+- TypeScript
+- Environment variables
+- Build with AI
+- Dev toolbar
+- Migrate to Astro
+								
+							
+							
+	
+
+
+
+						
+						
+	
+				
+						Site migration overview
+						
+					
+			
+				
+						Create React App
+						
+					
+			
+				
+						Docusaurus
+						
+					
+			
+				
+						Eleventy
+						
+					
+			
+				
+						Gatsby
+						
+					
+			
+				
+						GitBook
+						
+					
+			
+				
+						Gridsome
+						
+					
+			
+				
+						Hugo
+						
+					
+			
+				
+						Jekyll
+						
+					
+			
+				
+						Next.js
+						
+					
+			
+				
+						NuxtJS
+						
+					
+			
+				
+						Pelican
+						
+					
+			
+				
+						SvelteKit
+						
+					
+			
+				
+						VuePress
+						
+					
+			
+				
+						WordPress
+- Site migration overview
+- Create React App
+- Docusaurus
+- Eleventy
+- Gatsby
+- GitBook
+- Gridsome
+- Hugo
+- Jekyll
+- Next.js
+- NuxtJS
+- Pelican
+- SvelteKit
+- VuePress
+- WordPress
+- Routing and navigation
+								
+							
+							
+	
+
+
+
+						
+						
+	
+				
+						Pages
+						
+					
+			
+				
+						Routing
+						
+					
+			
+				
+						Endpoints
+						
+					
+			
+				
+						Middleware
+						
+					
+			
+				
+						Internationalization (i18n)
+						
+					
+			
+				
+						Prefetch
+						
+					
+			
+				
+						View transitions
+- Pages
+- Routing
+- Endpoints
+- Middleware
+- Internationalization (i18n)
+- Prefetch
+- View transitions
+- Build your UI
+								
+							
+							
+	
+
+
+
+						
+						
+	
+				
+						Components
+						
+					
+			
+				
+						Layouts
+						
+					
+			
+				
+						Styles and CSS
+						
+					
+			
+				
+						Fonts
+						
+					
+			
+				
+						Syntax Highlighting
+						
+					
+			
+				
+						Scripts and event handling
+						
+					
+			
+				
+						Front-end frameworks
+- Components
+- Layouts
+- Styles and CSS
+- Fonts
+- Syntax Highlighting
+- Scripts and event handling
+- Front-end frameworks
+- Add content to your site
+								
+							
+							
+	
+
+
+
+						
+						
+	
+				
+						Markdown
+						
+					
+			
+				
+						Content collections
+						
+					
+			
+				
+						Images
+						
+					
+			
+				
+						Data fetching
+						
+					
+			
+				
+						Astro DB
+- Markdown
+- Content collections
+- Images
+- Data fetching
+- Astro DB
+- Server rendering
+								
+							
+							
+	
+
+
+
+						
+						
+	
+				
+						On-demand rendering
+						
+					
+			
+				
+						Server islands
+						
+					
+			
+				
+						Actions
+						
+					
+			
+				
+						Sessions
+- On-demand rendering
+- Server islands
+- Actions
+- Sessions
+- Upgrade
+								
+							
+							
+	
+
+
+
+						
+						
+	
+				
+						Upgrade Astro
+						
+					
+			
+				
+						
+						
+							
+								Major upgrade guides
+								
+							
+							
+	
+
+
+
+						
+						
+	
+				
+						v5.0
+						
+					
+			
+				
+						v4.0
+						
+					
+			
+				
+						v3.0
+						
+					
+			
+				
+						v2.0
+						
+					
+			
+				
+						v1.0
+- Upgrade Astro
+- Major upgrade guides
+								
+							
+							
+	
+
+
+
+						
+						
+	
+				
+						v5.0
+						
+					
+			
+				
+						v4.0
+						
+					
+			
+				
+						v3.0
+						
+					
+			
+				
+						v2.0
+						
+					
+			
+				
+						v1.0
+- v5.0
+- v4.0
+- v3.0
+- v2.0
+- v1.0
+- Troubleshooting
+- How-to recipes
+								
+							
+							
+	
+
+
+
+						
+						
+	
+				
+						Recipes overview
+						
+					
+			
+				
+						Installing a Vite or Rollup plugin
+						
+					
+			
+				
+						Analyze bundle size
+						
+					
+			
+				
+						Build a custom image component
+						
+					
+			
+				
+						Build HTML forms in Astro pages
+						
+					
+			
+				
+						Build forms with API routes
+						
+					
+			
+				
+						Use Bun with Astro
+						
+					
+			
+				
+						Call endpoints from the server
+						
+					
+			
+				
+						Verify a Captcha
+						
+					
+			
+				
+						Customize file names in the build output
+						
+					
+			
+				
+						Build your Astro site with Docker
+						
+					
+			
+				
+						Dynamically import images
+						
+					
+			
+				
+						Add icons to external links
+						
+					
+			
+				
+						Add i18n features
+						
+					
+			
+				
+						Create a dev toolbar app
+						
+					
+			
+				
+						Add last modified time
+						
+					
+			
+				
+						Add reading time
+						
+					
+			
+				
+						Add an RSS feed
+						
+					
+			
+				
+						Share state between Astro components
+						
+					
+			
+				
+						Share state between islands
+						
+					
+			
+				
+						Using streaming to improve page performance
+						
+					
+			
+				
+						Style rendered Markdown with Tailwind Typography
+- Recipes overview
+- Installing a Vite or Rollup plugin
+- Analyze bundle size
+- Build a custom image component
+- Build HTML forms in Astro pages
+- Build forms with API routes
+- Use Bun with Astro
+- Call endpoints from the server
+- Verify a Captcha
+- Customize file names in the build output
+- Build your Astro site with Docker
+- Dynamically import images
+- Add icons to external links
+- Add i18n features
+- Create a dev toolbar app
+- Add last modified time
+- Add reading time
+- Add an RSS feed
+- Share state between Astro components
+- Share state between islands
+- Using streaming to improve page performance
+- Style rendered Markdown with Tailwind Typography
+- Contribute to Astro
+- Astro Template Syntax
+- Configuration Reference
+- CLI Commands
+- Imports reference
+- Routing Reference
+- Runtime API
+Render context
+astro:actions
+astro:assets
+astro:config
+astro:content
+astro:env
+astro:i18n
+astro:middleware
+astro:transitions
+- Render context
+- astro:actions
+- astro:assets
+- astro:config
+- astro:content
+- astro:env
+- astro:i18n
+- astro:middleware
+- astro:transitions
+- Other development APIs
+Integration API
+Adapter API
+Content Loader API
+Image Service API
+Dev Toolbar App API
+Container API (experimental)
+Programmatic Astro API (experimental)
+- Integration API
+- Adapter API
+- Content Loader API
+- Image Service API
+- Dev Toolbar App API
+- Container API (experimental)
+- Programmatic Astro API (experimental)
+- Experimental features
+Configuring experimental flags
+Content Security Policy
+Fonts
+Live content collections
+Client prerendering
+Intellisense for collections
+Preserve scripts order
+Markdown heading ID compatibility
+Private meta environment variables inlining
+Chrome DevTools workspace
+Prerender conflict error
+SVG optimization
+- Configuring experimental flags
+- Content Security Policy
+- Fonts
+- Live content collections
+- Client prerendering
+- Intellisense for collections
+- Preserve scripts order
+- Markdown heading ID compatibility
+- Private meta environment variables inlining
+- Chrome DevTools workspace
+- Prerender conflict error
+- SVG optimization
+- Legacy flags
+- Error reference
+- Integrations overview
+- UI frameworks
+								
+							
+							
+	
+
+
+
+						
+						
+	
+				
+						Alpine.js
+						
+					
+			
+				
+						Preact
+						
+					
+			
+				
+						React
+						
+					
+			
+				
+						SolidJS
+						
+					
+			
+				
+						Svelte
+						
+					
+			
+				
+						Vue
+- Alpine.js
+- Preact
+- React
+- SolidJS
+- Svelte
+- Vue
+- Adapters
+								
+							
+							
+	
+
+
+
+						
+						
+	
+				
+						Cloudflare
+						
+					
+			
+				
+						Netlify
+						
+					
+			
+				
+						Node
+						
+					
+			
+				
+						Vercel
+- Cloudflare
+- Netlify
+- Node
+- Vercel
+- Other official integrations
+								
+							
+							
+	
+
+
+
+						
+						
+	
+				
+						DB
+						
+					
+			
+				
+						Markdoc
+						
+					
+			
+				
+						MDX
+						
+					
+			
+				
+						Partytown
+						
+					
+			
+				
+						Sitemap
+- DB
+- Markdoc
+- MDX
+- Partytown
+- Sitemap
+- Publish to npm
+- Deployment guides
+								
+							
+							
+	
+
+
+
+						
+						
+	
+				
+						Deployment overview
+						
+					
+			
+				
+						AWS
+						
+					
+			
+				
+						AWS via Flightcontrol
+						
+					
+			
+				
+						AWS via SST
+						
+					
+			
+				
+						Azion
+						
+					
+			
+				
+						Buddy
+						
+					
+			
+				
+						Cleavr
+						
+					
+			
+				
+						Clever Cloud
+						
+					
+			
+				
+						Cloudflare
+						
+					
+			
+				
+						CloudRay
+						
+					
+			
+				
+						Deno Deploy
+						
+					
+			
+				
+						DeployHQ
+						
+					
+			
+				
+						Firebase
+						
+					
+			
+				
+						Fleek
+						
+					
+			
+				
+						Fly.io
+						
+					
+			
+				
+						GitHub Pages
+						
+					
+			
+				
+						GitLab Pages
+						
+					
+			
+				
+						Google Cloud
+						
+					
+			
+				
+						Heroku
+						
+					
+			
+				
+						Juno
+						
+					
+			
+				
+						Kinsta
+						
+					
+			
+				
+						Microsoft Azure
+						
+					
+			
+				
+						Netlify
+						
+					
+			
+				
+						Railway
+						
+					
+			
+				
+						Render
+						
+					
+			
+				
+						Seenode
+						
+					
+			
+				
+						Stormkit
+						
+					
+			
+				
+						Surge
+						
+					
+			
+				
+						Vercel
+						
+					
+			
+				
+						Zeabur
+						
+					
+			
+				
+						Zephyr Cloud
+						
+					
+			
+				
+						Zerops
+- Deployment overview
+- AWS
+- AWS via Flightcontrol
+- AWS via SST
+- Azion
+- Buddy
+- Cleavr
+- Clever Cloud
+- Cloudflare
+- CloudRay
+- Deno Deploy
+- DeployHQ
+- Firebase
+- Fleek
+- Fly.io
+- GitHub Pages
+- GitLab Pages
+- Google Cloud
+- Heroku
+- Juno
+- Kinsta
+- Microsoft Azure
+- Netlify
+- Railway
+- Render
+- Seenode
+- Stormkit
+- Surge
+- Vercel
+- Zeabur
+- Zephyr Cloud
+- Zerops
+- Content management systems
+								
+							
+							
+	
+
+
+
+						
+						
+	
+				
+						CMS overview
+						
+					
+			
+				
+						ApostropheCMS
+						
+					
+			
+				
+						Builder.io
+						
+					
+			
+				
+						ButterCMS
+						
+					
+			
+				
+						Caisy
+						
+					
+			
+				
+						CloudCannon
+						
+					
+			
+				
+						Contentful
+						
+					
+			
+				
+						Cosmic
+						
+					
+			
+				
+						Craft CMS
+						
+					
+			
+				
+						Craft Cross CMS
+						
+					
+			
+				
+						Crystallize
+						
+					
+			
+				
+						DatoCMS
+						
+					
+			
+				
+						Decap CMS
+						
+					
+			
+				
+						Directus
+						
+					
+			
+				
+						Drupal
+						
+					
+			
+				
+						Flotiq
+						
+					
+			
+				
+						Front Matter CMS
+						
+					
+			
+				
+						Ghost
+						
+					
+			
+				
+						GitCMS
+						
+					
+			
+				
+						Hashnode
+						
+					
+			
+				
+						Hygraph
+						
+					
+			
+				
+						JekyllPad
+						
+					
+			
+				
+						Keystatic
+						
+					
+			
+				
+						KeystoneJS
+						
+					
+			
+				
+						Kontent.ai
+						
+					
+			
+				
+						microCMS
+						
+					
+			
+				
+						Optimizely CMS
+						
+					
+			
+				
+						Payload CMS
+						
+					
+			
+				
+						Prepr CMS
+						
+					
+			
+				
+						Prismic
+						
+					
+			
+				
+						Sanity
+						
+					
+			
+				
+						Sitecore XM
+						
+					
+			
+				
+						Sitepins
+						
+					
+			
+				
+						Spinal
+						
+					
+			
+				
+						Statamic
+						
+					
+			
+				
+						Storyblok
+						
+					
+			
+				
+						Strapi
+						
+					
+			
+				
+						StudioCMS
+						
+					
+			
+				
+						Tina CMS
+						
+					
+			
+				
+						Umbraco
+						
+					
+			
+				
+						Wordpress
+- CMS overview
+- ApostropheCMS
+- Builder.io
+- ButterCMS
+- Caisy
+- CloudCannon
+- Contentful
+- Cosmic
+- Craft CMS
+- Craft Cross CMS
+- Crystallize
+- DatoCMS
+- Decap CMS
+- Directus
+- Drupal
+- Flotiq
+- Front Matter CMS
+- Ghost
+- GitCMS
+- Hashnode
+- Hygraph
+- JekyllPad
+- Keystatic
+- KeystoneJS
+- Kontent.ai
+- microCMS
+- Optimizely CMS
+- Payload CMS
+- Prepr CMS
+- Prismic
+- Sanity
+- Sitecore XM
+- Sitepins
+- Spinal
+- Statamic
+- Storyblok
+- Strapi
+- StudioCMS
+- Tina CMS
+- Umbraco
+- Wordpress
+- Backend services
+								
+							
+							
+	
+
+
+
+						
+						
+	
+				
+						Backend services overview
+						
+					
+			
+				
+						Appwrite
+						
+					
+			
+				
+						Firebase
+						
+					
+			
+				
+						Neon
+						
+					
+			
+				
+						Prisma Postgres
+						
+					
+			
+				
+						Sentry
+						
+					
+			
+				
+						Supabase
+						
+					
+			
+				
+						Turso
+						
+					
+			
+				
+						Xata
+- Backend services overview
+- Appwrite
+- Firebase
+- Neon
+- Prisma Postgres
+- Sentry
+- Supabase
+- Turso
+- Xata
+- Image and video hosting
+								
+							
+							
+	
+
+
+
+						
+						
+	
+				
+						Media hosting overview
+						
+					
+			
+				
+						Cloudinary
+						
+					
+			
+				
+						Mux
+- Media hosting overview
+- Cloudinary
+- Mux
+- E-commerce
+- Authentication
+- Testing
+## Sponsored by
+
+## Sponsored by
+
+- Overview
+- Examples
+- Quick API Reference
+- Hooks
+				
+				
+	
+				
+					astro:config:setup
+				
+				
+			
+				
+					astro:route:setup
+				
+				
+			
+				
+					astro:routes:resolved
+				
+				
+			
+				
+					astro:config:done
+				
+				
+			
+				
+					astro:server:setup
+				
+				
+			
+				
+					astro:server:start
+				
+				
+			
+				
+					astro:server:done
+				
+				
+			
+				
+					astro:build:start
+				
+				
+			
+				
+					astro:build:setup
+				
+				
+			
+				
+					astro:build:ssr
+				
+				
+			
+				
+					astro:build:generated
+				
+				
+			
+				
+					astro:build:done
+				
+				
+			
+				
+					Custom hooks
+- astro:config:setup
+- astro:route:setup
+- astro:routes:resolved
+- astro:config:done
+- astro:server:setup
+- astro:server:start
+- astro:server:done
+- astro:build:start
+- astro:build:setup
+- astro:build:ssr
+- astro:build:generated
+- astro:build:done
+- Custom hooks
+- Integration types reference
+				
+				
+	
+				
+					AstroIntegrationLogger
+				
+				
+			
+				
+					HookParameters
+				
+				
+			
+				
+					IntegrationResolvedRoute type reference
+				
+				
+			
+				
+					IntegrationRouteData type reference
+- AstroIntegrationLogger
+- HookParameters
+- IntegrationResolvedRoute type reference
+- IntegrationRouteData type reference
+- Allow installation with astro add
+- Integration Ordering
+- Combine integrations into presets
+- Community Resources
+## On this page
+
+- Overview
+- Examples
+- Quick API Reference
+- Hooks
+astro:config:setup
+astro:route:setup
+astro:routes:resolved
+astro:config:done
+astro:server:setup
+astro:server:start
+astro:server:done
+astro:build:start
+astro:build:setup
+astro:build:ssr
+astro:build:generated
+astro:build:done
+Custom hooks
+- astro:config:setup
+- astro:route:setup
+- astro:routes:resolved
+- astro:config:done
+- astro:server:setup
+- astro:server:start
+- astro:server:done
+- astro:build:start
+- astro:build:setup
+- astro:build:ssr
+- astro:build:generated
+- astro:build:done
+- Custom hooks
+- Integration types reference
+AstroIntegrationLogger
+HookParameters
+IntegrationResolvedRoute type reference
+IntegrationRouteData type reference
+- AstroIntegrationLogger
+- HookParameters
+- IntegrationResolvedRoute type reference
+- IntegrationRouteData type reference
+- Allow installation with astro add
+- Integration Ordering
+- Combine integrations into presets
+- Community Resources
+## Learn Astro with Coding in Public
+
+150+ video lessons
+•
+Astro v5 ready
+
+# Astro Integration API
+
+Astro Integrations add new functionality and behaviors for your project with only a few lines of code.
+
+This reference page is for anyone writing their own integration. To learn how to use an integration in your project, check out our Using Integrations guide instead.
+
+## Examples
+
+The official Astro integrations can act as reference for you as you go to build your own integrations.
+
+- Renderers: svelte, react, preact, vue, solid
+```
+svelte
+```
+
+```
+react
+```
+
+```
+preact
+```
+
+```
+vue
+```
+
+```
+solid
+```
+
+- Libraries: partytown
+```
+partytown
+```
+
+- Features: sitemap
+```
+sitemap
+```
+
+## Quick API Reference
+
+```
+interface AstroIntegration {
+  name: string;
+  hooks: {
+    'astro:config:setup'?: (options: {
+      config: AstroConfig;
+      command: 'dev' | 'build' | 'preview' | 'sync';
+      isRestart: boolean;
+      updateConfig: (newConfig: DeepPartial<AstroConfig>) => AstroConfig;
+      addRenderer: (renderer: AstroRenderer) => void;
+      addWatchFile: (path: URL | string) => void;
+      addClientDirective: (directive: ClientDirectiveConfig) => void;
+      addMiddleware: (middleware: AstroIntegrationMiddleware) => void;
+      addDevToolbarApp: (entrypoint: DevToolbarAppEntry) => void;
+      injectScript: (stage: InjectedScriptStage, content: string) => void;
+      injectRoute: (injectedRoute: InjectedRoute) => void;
+      createCodegenDir: () => URL;
+      logger: AstroIntegrationLogger;
+    }) => void | Promise<void>;
+    'astro:route:setup'?: (options: {
+      route: RouteOptions;
+      logger: AstroIntegrationLogger;
+    }) => void | Promise<void>;
+    'astro:routes:resolved'?: (options: {
+      routes: IntegrationResolvedRoute[];
+      logger: AstroIntegrationLogger;
+    }) => void | Promise<void>;
+    'astro:config:done'?: (options: {
+      config: AstroConfig;
+      setAdapter: (adapter: AstroAdapter) => void;
+      injectTypes: (injectedType: InjectedType) => URL;
+      logger: AstroIntegrationLogger;
+      buildOutput: 'static' | 'server';
+    }) => void | Promise<void>;
+    'astro:server:setup'?: (options: {
+      server: vite.ViteDevServer;
+      logger: AstroIntegrationLogger;
+      toolbar: ReturnType<typeof getToolbarServerCommunicationHelpers>;
+      refreshContent?: (options: RefreshContentOptions) => Promise<void>;
+    }) => void | Promise<void>;
+    'astro:server:start'?: (options: {
+      address: AddressInfo;
+      logger: AstroIntegrationLogger;
+    }) => void | Promise<void>;
+    'astro:server:done'?: (options: {
+      logger: AstroIntegrationLogger;
+    }) => void | Promise<void>;
+    'astro:build:start'?: (options: {
+      logger: AstroIntegrationLogger;
+    }) => void | Promise<void>;
+    'astro:build:setup'?: (options: {
+      vite: vite.InlineConfig;
+      pages: Map<string, PageBuildData>;
+      target: 'client' | 'server';
+      updateConfig: (newConfig: vite.InlineConfig) => void;
+      logger: AstroIntegrationLogger;
+    }) => void | Promise<void>;
+    'astro:build:ssr'?: (options: {
+      manifest: SerializedSSRManifest;
+      entryPoints: Map<IntegrationRouteData, URL>;
+      middlewareEntryPoint: URL | undefined;
+      logger: AstroIntegrationLogger;
+    }) => void | Promise<void>;
+    'astro:build:generated'?: (options: {
+      dir: URL;
+      logger: AstroIntegrationLogger;
+    }) => void | Promise<void>;
+    'astro:build:done'?: (options: {
+      pages: { pathname: string }[];
+      dir: URL;
+      assets: Map<string, URL[]>;
+      logger: AstroIntegrationLogger;
+    }) => void | Promise<void>;
+
+
+    // ... any custom hooks from integrations
+  };
+}
+```
+
+```
+interface AstroIntegration {
+  name: string;
+  hooks: {
+    'astro:config:setup'?: (options: {
+      config: AstroConfig;
+      command: 'dev' | 'build' | 'preview' | 'sync';
+      isRestart: boolean;
+      updateConfig: (newConfig: DeepPartial<AstroConfig>) => AstroConfig;
+      addRenderer: (renderer: AstroRenderer) => void;
+      addWatchFile: (path: URL | string) => void;
+      addClientDirective: (directive: ClientDirectiveConfig) => void;
+      addMiddleware: (middleware: AstroIntegrationMiddleware) => void;
+      addDevToolbarApp: (entrypoint: DevToolbarAppEntry) => void;
+      injectScript: (stage: InjectedScriptStage, content: string) => void;
+      injectRoute: (injectedRoute: InjectedRoute) => void;
+      createCodegenDir: () => URL;
+      logger: AstroIntegrationLogger;
+    }) => void | Promise<void>;
+    'astro:route:setup'?: (options: {
+      route: RouteOptions;
+      logger: AstroIntegrationLogger;
+    }) => void | Promise<void>;
+    'astro:routes:resolved'?: (options: {
+      routes: IntegrationResolvedRoute[];
+      logger: AstroIntegrationLogger;
+    }) => void | Promise<void>;
+    'astro:config:done'?: (options: {
+      config: AstroConfig;
+      setAdapter: (adapter: AstroAdapter) => void;
+      injectTypes: (injectedType: InjectedType) => URL;
+      logger: AstroIntegrationLogger;
+      buildOutput: 'static' | 'server';
+    }) => void | Promise<void>;
+    'astro:server:setup'?: (options: {
+      server: vite.ViteDevServer;
+      logger: AstroIntegrationLogger;
+      toolbar: ReturnType<typeof getToolbarServerCommunicationHelpers>;
+      refreshContent?: (options: RefreshContentOptions) => Promise<void>;
+    }) => void | Promise<void>;
+    'astro:server:start'?: (options: {
+      address: AddressInfo;
+      logger: AstroIntegrationLogger;
+    }) => void | Promise<void>;
+    'astro:server:done'?: (options: {
+      logger: AstroIntegrationLogger;
+    }) => void | Promise<void>;
+    'astro:build:start'?: (options: {
+      logger: AstroIntegrationLogger;
+    }) => void | Promise<void>;
+    'astro:build:setup'?: (options: {
+      vite: vite.InlineConfig;
+      pages: Map<string, PageBuildData>;
+      target: 'client' | 'server';
+      updateConfig: (newConfig: vite.InlineConfig) => void;
+      logger: AstroIntegrationLogger;
+    }) => void | Promise<void>;
+    'astro:build:ssr'?: (options: {
+      manifest: SerializedSSRManifest;
+      entryPoints: Map<IntegrationRouteData, URL>;
+      middlewareEntryPoint: URL | undefined;
+      logger: AstroIntegrationLogger;
+    }) => void | Promise<void>;
+    'astro:build:generated'?: (options: {
+      dir: URL;
+      logger: AstroIntegrationLogger;
+    }) => void | Promise<void>;
+    'astro:build:done'?: (options: {
+      pages: { pathname: string }[];
+      dir: URL;
+      assets: Map<string, URL[]>;
+      logger: AstroIntegrationLogger;
+    }) => void | Promise<void>;
+
+
+    // ... any custom hooks from integrations
+  };
+}
+```
+
+## Hooks
+
+Astro provides hooks that integrations can implement to execute during certain parts of Astro’s lifecycle. Astro hooks are defined in the IntegrationHooks interface, which is part of the global Astro namespace. Each hook has a logger option that allows you to use the Astro logger to write logs.
+
+```
+IntegrationHooks
+```
+
+```
+Astro
+```
+
+```
+logger
+```
+
+The following hooks are built in to Astro:
+
+### astro:config:setup
+
+```
+astro:config:setup
+```
+
+Next hook: astro:route:setup
+
+```
+astro:route:setup
+```
+
+When: On initialization, before either the Vite or Astro config have resolved.
+
+Why: To extend the project config. This includes updating the Astro config, applying Vite plugins, adding component renderers, and injecting scripts onto the page.
+
+```
+'astro:config:setup'?: (options: {
+  config: AstroConfig;
+  command: 'dev' | 'build' | 'preview' | 'sync';
+  isRestart: boolean;
+  updateConfig: (newConfig: DeepPartial<AstroConfig>) => AstroConfig;
+  addRenderer: (renderer: AstroRenderer) => void;
+  addClientDirective: (directive: ClientDirectiveConfig) => void;
+  addMiddleware: (middleware: AstroIntegrationMiddleware) => void;
+  addDevToolbarApp: (entrypoint: DevToolbarAppEntry) => void;
+  addWatchFile: (path: URL | string) => void;
+  injectScript: (stage: InjectedScriptStage, content: string) => void;
+  injectRoute: (injectedRoute: InjectedRoute) => void;
+  createCodegenDir: () => URL;
+  logger: AstroIntegrationLogger;
+}) => void | Promise<void>;
+```
+
+```
+'astro:config:setup'?: (options: {
+  config: AstroConfig;
+  command: 'dev' | 'build' | 'preview' | 'sync';
+  isRestart: boolean;
+  updateConfig: (newConfig: DeepPartial<AstroConfig>) => AstroConfig;
+  addRenderer: (renderer: AstroRenderer) => void;
+  addClientDirective: (directive: ClientDirectiveConfig) => void;
+  addMiddleware: (middleware: AstroIntegrationMiddleware) => void;
+  addDevToolbarApp: (entrypoint: DevToolbarAppEntry) => void;
+  addWatchFile: (path: URL | string) => void;
+  injectScript: (stage: InjectedScriptStage, content: string) => void;
+  injectRoute: (injectedRoute: InjectedRoute) => void;
+  createCodegenDir: () => URL;
+  logger: AstroIntegrationLogger;
+}) => void | Promise<void>;
+```
+
+#### config option
+
+```
+config
+```
+
+Type: AstroConfig
+
+```
+AstroConfig
+```
+
+A read-only copy of the user-supplied Astro config. This is resolved before any other integrations have run. If you need a copy of the config after all integrations have completed their config updates, see the astro:config:done hook.
+
+```
+astro:config:done
+```
+
+#### command option
+
+```
+command
+```
+
+Type: 'dev' | 'build' | 'preview' | 'sync'
+
+```
+'dev' | 'build' | 'preview' | 'sync'
+```
+
+- dev - Project is executed with astro dev
+```
+dev
+```
+
+```
+astro dev
+```
+
+- build - Project is executed with astro build
+```
+build
+```
+
+```
+astro build
+```
+
+- preview - Project is executed with astro preview
+```
+preview
+```
+
+```
+astro preview
+```
+
+- sync - Project is executed with astro sync
+```
+sync
+```
+
+```
+astro sync
+```
+
+#### isRestart option
+
+```
+isRestart
+```
+
+Type: boolean
+
+```
+boolean
+```
+
+```
+astro@1.5.0
+```
+
+false when the dev server starts, true when a reload is triggered. Useful to detect when this function is called more than once.
+
+```
+false
+```
+
+```
+true
+```
+
+#### updateConfig() option
+
+```
+updateConfig()
+```
+
+Type: (newConfig: DeepPartial<AstroConfig>) => AstroConfig;
+
+```
+(newConfig: DeepPartial<AstroConfig>) => AstroConfig;
+```
+
+A callback function to update the user-supplied Astro config. Any config you provide will be merged with the user config + other integration config updates, so you are free to omit keys!
+
+For example, say you need to supply a Vite plugin to the user’s project:
+
+```
+import bananaCSS from '@vitejs/official-banana-css-plugin';
+
+
+export default {
+  name: 'banana-css-integration',
+  hooks: {
+    'astro:config:setup': ({ updateConfig }) => {
+      updateConfig({
+        vite: {
+          plugins: [bananaCSS()],
+        }
+      })
+    }
+  }
+}
+```
+
+```
+import bananaCSS from '@vitejs/official-banana-css-plugin';
+
+
+export default {
+  name: 'banana-css-integration',
+  hooks: {
+    'astro:config:setup': ({ updateConfig }) => {
+      updateConfig({
+        vite: {
+          plugins: [bananaCSS()],
+        }
+      })
+    }
+  }
+}
+```
+
+#### addRenderer() option
+
+```
+addRenderer()
+```
+
+Type: (renderer: AstroRenderer ) => void;
+Examples: svelte, react, preact, vue, solid
+
+```
+(renderer:
+```
+
+```
+AstroRenderer
+```
+
+```
+) => void;
+```
+
+```
+svelte
+```
+
+```
+react
+```
+
+```
+preact
+```
+
+```
+vue
+```
+
+```
+solid
+```
+
+A callback function to add a component framework renderer (i.e. React, Vue, Svelte, etc). You can browse the examples and type definition above for more advanced options, but here are the 2 main options to be aware of:
+
+- clientEntrypoint - path to a file that executes on the client whenever your component is used. This is mainly for rendering or hydrating your component with JS.
+```
+clientEntrypoint
+```
+
+- serverEntrypoint - path to a file that executes during server-side requests or static builds whenever your component is used. These should render components to static markup, with hooks for hydration where applicable. React’s renderToString callback is a classic example.
+```
+serverEntrypoint
+```
+
+```
+renderToString
+```
+
+Added in: astro@5.0.0
+
+```
+astro@5.0.0
+```
+
+The functions clientEntrypoint and serverEntrypoint accept a URL.
+
+```
+clientEntrypoint
+```
+
+```
+serverEntrypoint
+```
+
+```
+URL
+```
+
+#### addWatchFile() option
+
+```
+addWatchFile()
+```
+
+Type: (path: URL | string) => void
+
+```
+(path: URL | string) => void
+```
+
+```
+astro@1.5.0
+```
+
+If your integration depends on some configuration file that Vite doesn’t watch and/or needs a full dev server restart to take effect, add it with addWatchFile. Whenever that file changes, the Astro dev server will be reloaded (you can check when a reload happens with isRestart).
+
+```
+addWatchFile
+```
+
+```
+isRestart
+```
+
+Example usage:
+
+```
+// Must be an absolute path!
+addWatchFile('/home/user/.../my-config.json');
+addWatchFile(new URL('./ec.config.mjs', config.root));
+```
+
+```
+// Must be an absolute path!
+addWatchFile('/home/user/.../my-config.json');
+addWatchFile(new URL('./ec.config.mjs', config.root));
+```
+
+#### addClientDirective() option
+
+```
+addClientDirective()
+```
+
+Type: (directive: ClientDirectiveConfig ) => void;
+
+```
+(directive:
+```
+
+```
+ClientDirectiveConfig
+```
+
+```
+) => void;
+```
+
+```
+astro@2.6.0
+```
+
+Adds a custom client directive to be used in .astro files.
+
+```
+.astro
+```
+
+Note that directive entrypoints are only bundled through esbuild and should be kept small so they don’t slow down component hydration.
+
+Example usage:
+
+```
+import { defineConfig } from 'astro/config';
+import clickDirective from './astro-click-directive/register.js'
+
+
+// https://astro.build/config
+export default defineConfig({
+  integrations: [
+    clickDirective()
+  ],
+});
+```
+
+```
+import { defineConfig } from 'astro/config';
+import clickDirective from './astro-click-directive/register.js'
+
+
+// https://astro.build/config
+export default defineConfig({
+  integrations: [
+    clickDirective()
+  ],
+});
+```
+
+```
+/**
+ * @type {() => import('astro').AstroIntegration}
+ */
+export default () => ({
+  name: "client:click",
+  hooks: {
+    "astro:config:setup": ({ addClientDirective }) => {
+      addClientDirective({
+        name: "click",
+        entrypoint: "./astro-click-directive/click.js",
+      });
+    },
+  },
+});
+```
+
+```
+/**
+ * @type {() => import('astro').AstroIntegration}
+ */
+export default () => ({
+  name: "client:click",
+  hooks: {
+    "astro:config:setup": ({ addClientDirective }) => {
+      addClientDirective({
+        name: "click",
+        entrypoint: "./astro-click-directive/click.js",
+      });
+    },
+  },
+});
+```
+
+```
+/**
+ * Hydrate on first click on the window
+ * @type {import('astro').ClientDirective}
+ */
+export default (load, opts, el) => {
+  window.addEventListener('click', async () => {
+    const hydrate = await load()
+    await hydrate()
+  }, { once: true })
+}
+```
+
+```
+/**
+ * Hydrate on first click on the window
+ * @type {import('astro').ClientDirective}
+ */
+export default (load, opts, el) => {
+  window.addEventListener('click', async () => {
+    const hydrate = await load()
+    await hydrate()
+  }, { once: true })
+}
+```
+
+You can also add types for the directives in your library’s type definition file:
+
+```
+import 'astro'
+declare module 'astro' {
+  interface AstroClientDirectives {
+    'client:click'?: boolean
+  }
+}
+```
+
+```
+import 'astro'
+declare module 'astro' {
+  interface AstroClientDirectives {
+    'client:click'?: boolean
+  }
+}
+```
+
+#### addDevToolbarApp() option
+
+```
+addDevToolbarApp()
+```
+
+Type: (entrypoint: DevToolbarAppEntry) => void;
+
+```
+(entrypoint: DevToolbarAppEntry) => void;
+```
+
+```
+astro@3.4.0
+```
+
+Adds a custom dev toolbar app.
+
+Example usage:
+
+```
+import { defineConfig } from 'astro/config';
+import devToolbarIntegration from './astro-dev-toolbar-app/integration.js'
+
+
+// https://astro.build/config
+export default defineConfig({
+  integrations: [
+    devToolbarIntegration()
+  ],
+});
+```
+
+```
+import { defineConfig } from 'astro/config';
+import devToolbarIntegration from './astro-dev-toolbar-app/integration.js'
+
+
+// https://astro.build/config
+export default defineConfig({
+  integrations: [
+    devToolbarIntegration()
+  ],
+});
+```
+
+```
+/**
+ * @type {() => import('astro').AstroIntegration}
+ */
+export default () => ({
+  name: "dev-toolbar-app",
+  hooks: {
+    "astro:config:setup": ({ addDevToolbarApp }) => {
+      addDevToolbarApp({
+        entrypoint: "./astro-dev-toolbar-app/plugin.js",
+        id: "my-plugin",
+        name: "My Plugin"
+      });
+    },
+  },
+});
+```
+
+```
+/**
+ * @type {() => import('astro').AstroIntegration}
+ */
+export default () => ({
+  name: "dev-toolbar-app",
+  hooks: {
+    "astro:config:setup": ({ addDevToolbarApp }) => {
+      addDevToolbarApp({
+        entrypoint: "./astro-dev-toolbar-app/plugin.js",
+        id: "my-plugin",
+        name: "My Plugin"
+      });
+    },
+  },
+});
+```
+
+```
+/**
+ * @type {import('astro').DevToolbarApp}
+ */
+export default {
+  id: "my-plugin",
+  name: "My Plugin",
+  icon: "<svg>...</svg>",
+  init() {
+    console.log("I'm a dev toolbar app!")
+  },
+};
+```
+
+```
+/**
+ * @type {import('astro').DevToolbarApp}
+ */
+export default {
+  id: "my-plugin",
+  name: "My Plugin",
+  icon: "<svg>...</svg>",
+  init() {
+    console.log("I'm a dev toolbar app!")
+  },
+};
+```
+
+#### addMiddleware() option
+
+```
+addMiddleware()
+```
+
+Type: (middleware: AstroIntegrationMiddleware ) => void;
+
+```
+(middleware:
+```
+
+```
+AstroIntegrationMiddleware
+```
+
+```
+) => void;
+```
+
+```
+astro@3.5.0
+```
+
+Adds middleware to run on each request. Takes the entrypoint module that contains the middleware, and an order to specify whether it should run before (pre) other middleware or after (post).
+
+```
+entrypoint
+```
+
+```
+order
+```
+
+```
+pre
+```
+
+```
+post
+```
+
+```
+/**
+ * @type {() => import('astro').AstroIntegration}
+ */
+export default () => ({
+  name: "my-middleware-package",
+  hooks: {
+    "astro:config:setup": ({ addMiddleware }) => {
+      addMiddleware({
+        entrypoint: '@my-package/middleware',
+        order: 'pre'
+      });
+    },
+  },
+});
+```
+
+```
+/**
+ * @type {() => import('astro').AstroIntegration}
+ */
+export default () => ({
+  name: "my-middleware-package",
+  hooks: {
+    "astro:config:setup": ({ addMiddleware }) => {
+      addMiddleware({
+        entrypoint: '@my-package/middleware',
+        order: 'pre'
+      });
+    },
+  },
+});
+```
+
+Middleware is defined in a package with an onRequest function, as with user-defined middleware.
+
+```
+onRequest
+```
+
+```
+import { defineMiddleware } from 'astro:middleware';
+
+
+export const onRequest = defineMiddleware(async (context, next) => {
+  if(context.url.pathname === '/some-test-path') {
+    return Response.json({
+      ok: true
+    });
+  }
+
+
+  return next();
+});
+```
+
+```
+import { defineMiddleware } from 'astro:middleware';
+
+
+export const onRequest = defineMiddleware(async (context, next) => {
+  if(context.url.pathname === '/some-test-path') {
+    return Response.json({
+      ok: true
+    });
+  }
+
+
+  return next();
+});
+```
+
+Added in: astro@5.0.0
+
+```
+astro@5.0.0
+```
+
+The function also accepts a URL for entrypoint:
+
+```
+URL
+```
+
+```
+entrypoint
+```
+
+```
+/**
+ * @type {() => import('astro').AstroIntegration}
+ */
+export default () => ({
+  name: "my-middleware-package",
+  hooks: {
+    "astro:config:setup": ({ addMiddleware }) => {
+      addMiddleware({
+        entrypoint: new URL('./middleware.js', import.meta.url),
+        order: 'pre'
+      });
+    },
+  },
+});
+```
+
+```
+/**
+ * @type {() => import('astro').AstroIntegration}
+ */
+export default () => ({
+  name: "my-middleware-package",
+  hooks: {
+    "astro:config:setup": ({ addMiddleware }) => {
+      addMiddleware({
+        entrypoint: new URL('./middleware.js', import.meta.url),
+        order: 'pre'
+      });
+    },
+  },
+});
+```
+
+#### injectRoute() option
+
+```
+injectRoute()
+```
+
+Type: ({ pattern: string; entrypoint: string | URL; prerender?: boolean }) => void;
+
+```
+({ pattern: string; entrypoint: string | URL; prerender?: boolean }) => void;
+```
+
+A callback function to inject routes into an Astro project. Injected routes can be .astro pages or .js and .ts route handlers.
+
+```
+.astro
+```
+
+```
+.js
+```
+
+```
+.ts
+```
+
+injectRoute takes an object with a pattern and an entrypoint.
+
+```
+injectRoute
+```
+
+```
+pattern
+```
+
+```
+entrypoint
+```
+
+- pattern - where the route should be output in the browser, for example /foo/bar. A pattern can use Astro’s filepath syntax for denoting dynamic routes, for example /foo/[bar] or /foo/[...bar]. Note that a file extension is not needed in the pattern.
+```
+pattern
+```
+
+```
+/foo/bar
+```
+
+```
+pattern
+```
+
+```
+/foo/[bar]
+```
+
+```
+/foo/[...bar]
+```
+
+```
+pattern
+```
+
+- entrypoint - a bare module specifier pointing towards the .astro page or .js/.ts route handler that handles the route denoted in the pattern.
+```
+entrypoint
+```
+
+```
+.astro
+```
+
+```
+.js
+```
+
+```
+.ts
+```
+
+```
+pattern
+```
+
+- prerender - a boolean to set if Astro can’t detect your prerender export.
+```
+prerender
+```
+
+```
+prerender
+```
+
+##### Example usage
+
+```
+injectRoute({
+  // Use Astro’s pattern syntax for dynamic routes.
+  pattern: '/subfolder/[dynamic]',
+  // Use relative path syntax for a local route.
+  entrypoint: './src/dynamic-page.astro',
+  // Use only if Astro can't detect your prerender export
+  prerender: false
+});
+```
+
+```
+injectRoute({
+  // Use Astro’s pattern syntax for dynamic routes.
+  pattern: '/subfolder/[dynamic]',
+  // Use relative path syntax for a local route.
+  entrypoint: './src/dynamic-page.astro',
+  // Use only if Astro can't detect your prerender export
+  prerender: false
+});
+```
+
+For an integration designed to be installed in other projects, use its package name to refer to the route entrypoint. The following example shows a package published to npm as @fancy/dashboard injecting a dashboard route:
+
+```
+@fancy/dashboard
+```
+
+```
+injectRoute({
+  pattern: '/fancy-dashboard',
+  entrypoint: '@fancy/dashboard/dashboard.astro'
+});
+```
+
+```
+injectRoute({
+  pattern: '/fancy-dashboard',
+  entrypoint: '@fancy/dashboard/dashboard.astro'
+});
+```
+
+When publishing your package (@fancy/dashboard, in this case) to npm, you must export dashboard.astro in your package.json:
+
+```
+@fancy/dashboard
+```
+
+```
+dashboard.astro
+```
+
+```
+package.json
+```
+
+```
+{
+  "name": "@fancy/dashboard",
+  // ...
+  "exports": { "./dashboard.astro": "./dashboard.astro" }
+}
+```
+
+```
+{
+  "name": "@fancy/dashboard",
+  // ...
+  "exports": { "./dashboard.astro": "./dashboard.astro" }
+}
+```
+
+Added in: astro@5.0.0
+
+```
+astro@5.0.0
+```
+
+The function also accepts a URL for entrypoint:
+
+```
+URL
+```
+
+```
+entrypoint
+```
+
+```
+injectRoute({
+  pattern: '/fancy-dashboard',
+  entrypoint: new URL('./dashboard.astro', import.meta.url)
+});
+```
+
+```
+injectRoute({
+  pattern: '/fancy-dashboard',
+  entrypoint: new URL('./dashboard.astro', import.meta.url)
+});
+```
+
+#### injectScript() option
+
+```
+injectScript()
+```
+
+Type: (stage: InjectedScriptStage, content: string) => void;
+
+```
+(stage: InjectedScriptStage, content: string) => void;
+```
+
+A callback function to inject a string of JavaScript content onto every page.
+
+The stage denotes how this script (the content) should be inserted. Some stages allow inserting scripts without modification, while others allow optimization during Vite’s bundling step:
+
+```
+stage
+```
+
+```
+content
+```
+
+- "head-inline": Injected into a script tag in the <head> of every page. Not optimized or resolved by Vite.
+"head-inline": Injected into a script tag in the <head> of every page. Not optimized or resolved by Vite.
+
+```
+"head-inline"
+```
+
+```
+<head>
+```
+
+- "before-hydration": Imported client-side, before the hydration script runs. Optimized and resolved by Vite.
+"before-hydration": Imported client-side, before the hydration script runs. Optimized and resolved by Vite.
+
+```
+"before-hydration"
+```
+
+- "page": Similar to head-inline, except that the injected snippet is handled by Vite and bundled with any other <script> tags defined inside of Astro components on the page. The script will be loaded with a <script type="module"> in the final page output, optimized and resolved by Vite.
+"page": Similar to head-inline, except that the injected snippet is handled by Vite and bundled with any other <script> tags defined inside of Astro components on the page. The script will be loaded with a <script type="module"> in the final page output, optimized and resolved by Vite.
+
+```
+"page"
+```
+
+```
+head-inline
+```
+
+```
+<script>
+```
+
+```
+<script type="module">
+```
+
+- "page-ssr": Imported as a separate module in the frontmatter of every Astro page component. Because this stage imports your script, the Astro global is not available and your script will only be run once when the import is first evaluated.
+
+The main use for the page-ssr stage is injecting a CSS import into every page to be optimized and resolved by Vite:
+
+injectScript('page-ssr', 'import "global-styles.css";');
+"page-ssr": Imported as a separate module in the frontmatter of every Astro page component. Because this stage imports your script, the Astro global is not available and your script will only be run once when the import is first evaluated.
+
+```
+"page-ssr"
+```
+
+```
+Astro
+```
+
+```
+import
+```
+
+The main use for the page-ssr stage is injecting a CSS import into every page to be optimized and resolved by Vite:
+
+```
+page-ssr
+```
+
+```
+import
+```
+
+```
+injectScript('page-ssr', 'import "global-styles.css";');
+```
+
+```
+injectScript('page-ssr', 'import "global-styles.css";');
+```
+
+#### createCodegenDir
+
+```
+createCodegenDir
+```
+
+Type: () => URL;
+
+```
+() => URL;
+```
+
+```
+astro@5.0.0
+```
+
+A function that creates the <root>/.astro/integrations/<normalized_integration_name> folder and returns its path.
+
+```
+<root>/.astro/integrations/<normalized_integration_name>
+```
+
+It allows you to have a dedicated folder, avoiding conflicts with another integration or Astro itself. This directory is created by calling this function so it’s safe to write files to it directly:
+
+```
+import { writeFileSync } from 'node:fs'
+
+
+const integration = {
+  name: 'my-integration',
+  hooks: {
+    'astro:config:setup': ({ createCodegenDir }) => {
+      const codegenDir = createCodegenDir()
+      writeFileSync(new URL('cache.json', codegenDir), '{}', 'utf-8')
+    }
+  }
+}
+```
+
+```
+import { writeFileSync } from 'node:fs'
+
+
+const integration = {
+  name: 'my-integration',
+  hooks: {
+    'astro:config:setup': ({ createCodegenDir }) => {
+      const codegenDir = createCodegenDir()
+      writeFileSync(new URL('cache.json', codegenDir), '{}', 'utf-8')
+    }
+  }
+}
+```
+
+### astro:route:setup
+
+```
+astro:route:setup
+```
+
+Added in: astro@4.14.0
+
+```
+astro@4.14.0
+```
+
+Previous hook: astro:config:setup
+
+```
+astro:config:setup
+```
+
+Next hook: astro:routes:resolved
+
+```
+astro:routes:resolved
+```
+
+When: In astro build, before bundling starts. In astro dev, while building the module graph and on every change to a file based route (added/removed/updated).
+
+```
+astro build
+```
+
+```
+astro dev
+```
+
+Why: To set options for a route at build or request time, such as enabling on-demand server rendering.
+
+```
+'astro:route:setup'?: (options: {
+  route: RouteOptions;
+  logger: AstroIntegrationLogger;
+}) => void | Promise<void>;
+```
+
+```
+'astro:route:setup'?: (options: {
+  route: RouteOptions;
+  logger: AstroIntegrationLogger;
+}) => void | Promise<void>;
+```
+
+#### route option
+
+```
+route
+```
+
+Type: RouteOptions
+
+```
+RouteOptions
+```
+
+An object with a component property to identify the route and the following additional values to allow you to configure the generated route: prerender.
+
+```
+component
+```
+
+```
+prerender
+```
+
+##### route.component
+
+```
+route.component
+```
+
+Type: string
+
+```
+string
+```
+
+```
+astro@4.14.0
+```
+
+The component property indicates the entrypoint that will be rendered on the route. You can access this value before the routes are built to configure on-demand server rendering for that page.
+
+```
+component
+```
+
+##### route.prerender
+
+```
+route.prerender
+```
+
+Type: boolean
+Default: undefined
+
+```
+boolean
+```
+
+```
+undefined
+```
+
+```
+astro@4.14.0
+```
+
+The prerender property is used to configure on-demand server rendering for a route. If the route file contains an explicit export const prerender value, the value will be used as the default instead of undefined.
+
+```
+prerender
+```
+
+```
+export const prerender
+```
+
+```
+undefined
+```
+
+```
+import { defineConfig } from 'astro/config';
+
+
+export default defineConfig({
+  integrations: [setPrerender()],
+});
+
+
+function setPrerender() {
+  return {
+    name: 'set-prerender',
+    hooks: {
+      'astro:route:setup': ({ route }) => {
+        if (route.component.endsWith('/blog/[slug].astro')) {
+          route.prerender = true;
+        }
+      },
+    },
+  };
+}
+```
+
+```
+import { defineConfig } from 'astro/config';
+
+
+export default defineConfig({
+  integrations: [setPrerender()],
+});
+
+
+function setPrerender() {
+  return {
+    name: 'set-prerender',
+    hooks: {
+      'astro:route:setup': ({ route }) => {
+        if (route.component.endsWith('/blog/[slug].astro')) {
+          route.prerender = true;
+        }
+      },
+    },
+  };
+}
+```
+
+If the final value after running all the hooks is undefined, the route will fall back to a prerender default based on the output option: prerendered for static mode, and on-demand rendered for server mode.
+
+```
+undefined
+```
+
+```
+output
+```
+
+```
+static
+```
+
+```
+server
+```
+
+### astro:routes:resolved
+
+```
+astro:routes:resolved
+```
+
+Added in: astro@5.0.0
+
+```
+astro@5.0.0
+```
+
+Previous hook: astro:route:setup
+
+```
+astro:route:setup
+```
+
+Next hook: astro:config:done (only during setup)
+
+```
+astro:config:done
+```
+
+When: In astro dev, it also runs on every change to a file based route (added/removed/updated).
+
+```
+astro dev
+```
+
+Why: To access routes and their metadata
+
+```
+'astro:routes:resolved'?: (options: {
+  routes: IntegrationResolvedRoute[];
+  logger: AstroIntegrationLogger;
+}) => void | Promise<void>;
+```
+
+```
+'astro:routes:resolved'?: (options: {
+  routes: IntegrationResolvedRoute[];
+  logger: AstroIntegrationLogger;
+}) => void | Promise<void>;
+```
+
+#### routes option
+
+```
+routes
+```
+
+Type: IntegrationResolvedRoute[]
+
+```
+IntegrationResolvedRoute[]
+```
+
+A list of all routes with their associated metadata.
+
+Example use:
+
+```
+const integration = () => {
+  return {
+    name: 'my-integration',
+    hooks: {
+      'astro:routes:resolved': ({ routes }) => {
+        const projectRoutes = routes.filter(r => r.origin === 'project').map(r => r.pattern)
+
+
+        console.log(projectRoutes)
+      },
+    }
+  }
+}
+```
+
+```
+const integration = () => {
+  return {
+    name: 'my-integration',
+    hooks: {
+      'astro:routes:resolved': ({ routes }) => {
+        const projectRoutes = routes.filter(r => r.origin === 'project').map(r => r.pattern)
+
+
+        console.log(projectRoutes)
+      },
+    }
+  }
+}
+```
+
+### astro:config:done
+
+```
+astro:config:done
+```
+
+Previous hook: astro:routes:resolved
+
+```
+astro:routes:resolved
+```
+
+Next hook: astro:server:setup when running in “dev” mode, or astro:build:start during production builds
+
+```
+astro:server:setup
+```
+
+```
+astro:build:start
+```
+
+When: After the Astro config has resolved and other integrations have run their astro:config:setup hooks.
+
+```
+astro:config:setup
+```
+
+Why: To retrieve the final config for use in other hooks.
+
+```
+'astro:config:done'?: (options: {
+  config: AstroConfig;
+  setAdapter: (adapter: AstroAdapter) => void;
+  injectTypes: (injectedType: InjectedType) => URL;
+  logger: AstroIntegrationLogger;
+  buildOutput: 'static' | 'server';
+}) => void | Promise<void>;
+```
+
+```
+'astro:config:done'?: (options: {
+  config: AstroConfig;
+  setAdapter: (adapter: AstroAdapter) => void;
+  injectTypes: (injectedType: InjectedType) => URL;
+  logger: AstroIntegrationLogger;
+  buildOutput: 'static' | 'server';
+}) => void | Promise<void>;
+```
+
+#### config option
+
+```
+config
+```
+
+Type: AstroConfig
+
+```
+AstroConfig
+```
+
+A read-only copy of the user-supplied Astro config. This is resolved after other integrations have run.
+
+#### setAdapter() option
+
+```
+setAdapter()
+```
+
+Type: (adapter: AstroAdapter) => void;
+
+```
+(adapter: AstroAdapter) => void;
+```
+
+Makes the integration an adapter. Read more in the adapter API.
+
+#### injectTypes() option
+
+```
+injectTypes()
+```
+
+Type: (injectedType: { filename: string; content: string }) => URL
+
+```
+(injectedType: { filename: string; content: string }) => URL
+```
+
+```
+astro@4.14.0
+```
+
+Allows you to inject types into your user’s project by adding a new *.d.ts file.
+
+```
+*.d.ts
+```
+
+The filename property will be used to generate a file at /.astro/integrations/<normalized_integration_name>/<normalized_filename>.d.ts and must end with ".d.ts".
+
+```
+filename
+```
+
+```
+/.astro/integrations/<normalized_integration_name>/<normalized_filename>.d.ts
+```
+
+```
+".d.ts"
+```
+
+The content property will create the body of the file and must be valid TypeScript.
+
+```
+content
+```
+
+Additionally, injectTypes() returns a URL to the normalized path so you can overwrite its content later on, or manipulate it in any way you want.
+
+```
+injectTypes()
+```
+
+```
+const path = injectTypes({
+  filename: "types.d.ts",
+  content: "declare module 'virtual:integration' {}"
+})
+console.log(path) // URL
+```
+
+```
+const path = injectTypes({
+  filename: "types.d.ts",
+  content: "declare module 'virtual:integration' {}"
+})
+console.log(path) // URL
+```
+
+#### buildOutput option
+
+```
+buildOutput
+```
+
+Type: 'static' | 'server'
+
+```
+'static' | 'server'
+```
+
+```
+astro@5.0.0
+```
+
+Allows you to adapt the logic of your integration depending on the user’s project output.
+
+### astro:server:setup
+
+```
+astro:server:setup
+```
+
+Previous hook: astro:config:done
+
+```
+astro:config:done
+```
+
+Next hook: astro:server:start
+
+```
+astro:server:start
+```
+
+When: Just after the Vite server is created in “dev” mode, but before the listen() event is fired. See Vite’s createServer API for more.
+
+```
+listen()
+```
+
+Why: To update Vite server options and middleware, or enable support for refreshing the content layer.
+
+```
+'astro:server:setup'?: (options: {
+  server: vite.ViteDevServer;
+  logger: AstroIntegrationLogger;
+  toolbar: ReturnType<typeof getToolbarServerCommunicationHelpers>;
+  refreshContent: (options: {
+    loaders?: Array<string>;
+    context?: Record<string, any>;
+  }) => Promise<void>;
+}) => void | Promise<void>;
+```
+
+```
+'astro:server:setup'?: (options: {
+  server: vite.ViteDevServer;
+  logger: AstroIntegrationLogger;
+  toolbar: ReturnType<typeof getToolbarServerCommunicationHelpers>;
+  refreshContent: (options: {
+    loaders?: Array<string>;
+    context?: Record<string, any>;
+  }) => Promise<void>;
+}) => void | Promise<void>;
+```
+
+#### server option
+
+```
+server
+```
+
+Type: ViteDevServer
+
+```
+ViteDevServer
+```
+
+A mutable instance of the Vite server used in “dev” mode. For instance, this is used by our Partytown integration to inject the Partytown server as middleware:
+
+```
+export default {
+  name: 'partytown',
+  hooks: {
+    'astro:server:setup': ({ server }) => {
+      server.middlewares.use(
+        function middleware(req, res, next) {
+          // handle requests
+        }
+      );
+    }
+  }
+}
+```
+
+```
+export default {
+  name: 'partytown',
+  hooks: {
+    'astro:server:setup': ({ server }) => {
+      server.middlewares.use(
+        function middleware(req, res, next) {
+          // handle requests
+        }
+      );
+    }
+  }
+}
+```
+
+#### toolbar option
+
+```
+toolbar
+```
+
+Type: ReturnType<typeof getToolbarServerCommunicationHelpers>
+
+```
+ReturnType<typeof getToolbarServerCommunicationHelpers>
+```
+
+```
+astro@4.7.0
+```
+
+An object providing callback functions to interact with the dev toolbar:
+
+##### on()
+
+```
+on()
+```
+
+Type: <T>(event: string, callback: (data: T) => void) => void
+
+```
+<T>(event: string, callback: (data: T) => void) => void
+```
+
+A function that takes an event name as first argument and a callback function as second argument. This allows you to receive a message from a dev toolbar app with data associated to that event.
+
+##### onAppInitialized()
+
+```
+onAppInitialized()
+```
+
+Type: (appId: string, callback: (data: Record<string, never>) => void) => void
+
+```
+(appId: string, callback: (data: Record<string, never>) => void) => void
+```
+
+A function fired when a dev toolbar app is initialized. The first argument is the id of the app that was initialized. The second argument is a callback function to run when the app is initialized.
+
+##### onAppToggled()
+
+```
+onAppToggled()
+```
+
+Type: (appId: string, callback: (data: { state: boolean; }) => void) => void
+
+```
+(appId: string, callback: (data: { state: boolean; }) => void) => void
+```
+
+A function fired when a dev toolbar app is toggled on or off. The first argument is the id of the app that was toggled. The second argument is a callback function providing the state to execute when the application is toggled.
+
+##### send()
+
+```
+send()
+```
+
+Type: <T>(event: string, payload: T) => void
+
+```
+<T>(event: string, payload: T) => void
+```
+
+A function that sends a message to the dev toolbar that an app can listen for. This takes an event name as the first argument and a payload as the second argument which can be any serializable data.
+
+#### refreshContent() option
+
+```
+refreshContent()
+```
+
+Type: (options: { loaders?: Array<string>; context?: Record<string, any>; }) => Promise<void>
+
+```
+(options: { loaders?: Array<string>; context?: Record<string, any>; }) => Promise<void>
+```
+
+```
+astro@5.0.0
+```
+
+A function for integrations to trigger an update to the content layer during astro dev. This can be used, for example, to register a webhook endpoint during dev, or to open a socket to a CMS to listen for changes.
+
+```
+astro dev
+```
+
+By default, refreshContent will refresh all collections. You can optionally pass a loaders property, which is an array of loader names. If provided, only collections that use those loaders will be refreshed. For example, A CMS integration could use this property to only refresh its own collections.
+
+```
+refreshContent
+```
+
+```
+loaders
+```
+
+You can also pass a context object to the loaders. This can be used to pass arbitrary data such as the webhook body, or an event from the websocket.
+
+```
+context
+```
+
+```
+{
+  name: 'my-integration',
+  hooks: {
+    'astro:server:setup': async ({ server, refreshContent }) => {
+      // Register a dev server webhook endpoint
+      server.middlewares.use('/_refresh', async (req, res) => {
+        if(req.method !== 'POST') {
+          res.statusCode = 405
+          res.end('Method Not Allowed');
+          return
+        }
+        let body = '';
+        req.on('data', chunk => {
+          body += chunk.toString();
+        });
+        req.on('end', async () => {
+          try {
+            const webhookBody = JSON.parse(body);
+            await refreshContent({
+              context: { webhookBody },
+              loaders: ['my-loader']
+            });
+            res.writeHead(200, { 'Content-Type': 'application/json' });
+            res.end(JSON.stringify({ message: 'Content refreshed successfully' }));
+          } catch (error) {
+            res.writeHead(500, { 'Content-Type': 'application/json' });
+            res.end(JSON.stringify({ error: 'Failed to refresh content: ' + error.message }));
+          }
+        });
+      });
+    }
+  }
+}
+```
+
+```
+{
+  name: 'my-integration',
+  hooks: {
+    'astro:server:setup': async ({ server, refreshContent }) => {
+      // Register a dev server webhook endpoint
+      server.middlewares.use('/_refresh', async (req, res) => {
+        if(req.method !== 'POST') {
+          res.statusCode = 405
+          res.end('Method Not Allowed');
+          return
+        }
+        let body = '';
+        req.on('data', chunk => {
+          body += chunk.toString();
+        });
+        req.on('end', async () => {
+          try {
+            const webhookBody = JSON.parse(body);
+            await refreshContent({
+              context: { webhookBody },
+              loaders: ['my-loader']
+            });
+            res.writeHead(200, { 'Content-Type': 'application/json' });
+            res.end(JSON.stringify({ message: 'Content refreshed successfully' }));
+          } catch (error) {
+            res.writeHead(500, { 'Content-Type': 'application/json' });
+            res.end(JSON.stringify({ error: 'Failed to refresh content: ' + error.message }));
+          }
+        });
+      });
+    }
+  }
+}
+```
+
+The loader can then access the refreshContextData property to get the webhook body. See the refreshContextData property for more information.
+
+```
+refreshContextData
+```
+
+```
+refreshContextData
+```
+
+### astro:server:start
+
+```
+astro:server:start
+```
+
+Previous hook: astro:server:setup
+
+```
+astro:server:setup
+```
+
+Next hook: astro:server:done
+
+```
+astro:server:done
+```
+
+When: Just after the server’s listen() event has fired.
+
+```
+listen()
+```
+
+Why: To intercept network requests at the specified address. If you intend to use this address for middleware, consider using astro:server:setup instead.
+
+```
+astro:server:setup
+```
+
+```
+'astro:server:start'?: (options: {
+  address: AddressInfo;
+  logger: AstroIntegrationLogger;
+}) => void | Promise<void>;
+```
+
+```
+'astro:server:start'?: (options: {
+  address: AddressInfo;
+  logger: AstroIntegrationLogger;
+}) => void | Promise<void>;
+```
+
+#### address option
+
+```
+address
+```
+
+Type: AddressInfo
+
+```
+AddressInfo
+```
+
+The address, family and port number supplied by the Node.js Net module.
+
+### astro:server:done
+
+```
+astro:server:done
+```
+
+Previous hook: astro:server:start
+
+```
+astro:server:start
+```
+
+When: Just after the dev server is closed.
+
+Why: To run any cleanup events you may trigger during the astro:server:setup or astro:server:start hooks.
+
+```
+astro:server:setup
+```
+
+```
+astro:server:start
+```
+
+```
+'astro:server:done'?: (options: {
+  logger: AstroIntegrationLogger;
+}) => void | Promise<void>;
+```
+
+```
+'astro:server:done'?: (options: {
+  logger: AstroIntegrationLogger;
+}) => void | Promise<void>;
+```
+
+### astro:build:start
+
+```
+astro:build:start
+```
+
+Previous hook: astro:config:done
+
+```
+astro:config:done
+```
+
+Next hook: astro:build:setup
+
+```
+astro:build:setup
+```
+
+When: After the astro:config:done event, but before the production build begins.
+
+```
+astro:config:done
+```
+
+Why: To set up any global objects or clients needed during a production build. This can also extend the build configuration options in the adapter API.
+
+```
+'astro:build:start'?: (options: {
+  logger: AstroIntegrationLogger;
+}) => void | Promise<void>;
+```
+
+```
+'astro:build:start'?: (options: {
+  logger: AstroIntegrationLogger;
+}) => void | Promise<void>;
+```
+
+### astro:build:setup
+
+```
+astro:build:setup
+```
+
+Previous hook: astro:build:start
+
+```
+astro:build:start
+```
+
+Next hook: astro:build:ssr
+
+```
+astro:build:ssr
+```
+
+When: After the astro:build:start hook, runs immediately before the build.
+
+```
+astro:build:start
+```
+
+Why: At this point, the Vite config for the build has been completely constructed, this is your final chance to modify it. This can be useful for example to overwrite some defaults. If you’re not sure whether you should use this hook or astro:build:start, use astro:build:start instead.
+
+```
+astro:build:start
+```
+
+```
+astro:build:start
+```
+
+```
+'astro:build:setup'?: (options: {
+  vite: vite.InlineConfig;
+  pages: Map<string, PageBuildData>;
+  target: 'client' | 'server';
+  updateConfig: (newConfig: vite.InlineConfig) => void;
+  logger: AstroIntegrationLogger;
+}) => void | Promise<void>;
+```
+
+```
+'astro:build:setup'?: (options: {
+  vite: vite.InlineConfig;
+  pages: Map<string, PageBuildData>;
+  target: 'client' | 'server';
+  updateConfig: (newConfig: vite.InlineConfig) => void;
+  logger: AstroIntegrationLogger;
+}) => void | Promise<void>;
+```
+
+#### vite option
+
+```
+vite
+```
+
+Type: InlineConfig
+
+```
+InlineConfig
+```
+
+An object that allows you to access the Vite configuration used in the build.
+
+This can be useful if you need to access configuration options in your integration:
+
+```
+export default {
+  name: 'my-integration',
+  hooks: {
+    'astro:build:setup': ({ vite }) => {
+      const { publicDir, root } = vite;
+    },
+  }
+}
+```
+
+```
+export default {
+  name: 'my-integration',
+  hooks: {
+    'astro:build:setup': ({ vite }) => {
+      const { publicDir, root } = vite;
+    },
+  }
+}
+```
+
+#### pages option
+
+```
+pages
+```
+
+Type: Map<string, PageBuildData>
+
+```
+Map<string, PageBuildData>
+```
+
+A Map with a list of pages as key and their build data as value.
+
+```
+Map
+```
+
+This can be used to perform an action if a route matches a criteria:
+
+```
+export default {
+  name: 'my-integration',
+  hooks: {
+    'astro:build:setup': ({ pages }) => {
+      pages.forEach((data) => {
+        if (data.route.pattern.test("/blog")) {
+          console.log(data.route.type);
+        }
+      });
+    },
+  }
+}
+```
+
+```
+export default {
+  name: 'my-integration',
+  hooks: {
+    'astro:build:setup': ({ pages }) => {
+      pages.forEach((data) => {
+        if (data.route.pattern.test("/blog")) {
+          console.log(data.route.type);
+        }
+      });
+    },
+  }
+}
+```
+
+#### target option
+
+```
+target
+```
+
+Type: 'client' | 'server'
+
+```
+'client' | 'server'
+```
+
+Builds are separated in two distinct phases: client and server. This option allow you to determine the current build phase.
+
+```
+client
+```
+
+```
+server
+```
+
+This can be used to perform an action only in a specific phase:
+
+```
+export default {
+  name: 'my-integration',
+  hooks: {
+    'astro:build:setup': ({ target }) => {
+      if (target === "server") {
+        // do something in server build phase
+      }
+    },
+  }
+}
+```
+
+```
+export default {
+  name: 'my-integration',
+  hooks: {
+    'astro:build:setup': ({ target }) => {
+      if (target === "server") {
+        // do something in server build phase
+      }
+    },
+  }
+}
+```
+
+#### updateConfig() option
+
+```
+updateConfig()
+```
+
+Type: (newConfig: InlineConfig) => void
+
+```
+(newConfig: InlineConfig) => void
+```
+
+A callback function to update the Vite options used in the build. Any config you provide will be merged with the user config + other integration config updates, so you are free to omit keys!
+
+For example, this can be used to supply a plugin to the user’s project:
+
+```
+import awesomeCssPlugin from 'awesome-css-vite-plugin';
+
+
+export default {
+  name: 'my-integration',
+  hooks: {
+    'astro:build:setup': ({ updateConfig }) => {
+      updateConfig({
+        plugins: [awesomeCssPlugin()],
+      })
+    }
+  }
+}
+```
+
+```
+import awesomeCssPlugin from 'awesome-css-vite-plugin';
+
+
+export default {
+  name: 'my-integration',
+  hooks: {
+    'astro:build:setup': ({ updateConfig }) => {
+      updateConfig({
+        plugins: [awesomeCssPlugin()],
+      })
+    }
+  }
+}
+```
+
+### astro:build:ssr
+
+```
+astro:build:ssr
+```
+
+Previous hook: astro:build:setup
+
+```
+astro:build:setup
+```
+
+Next hook: astro:build:generated
+
+```
+astro:build:generated
+```
+
+When: After a production SSR build has completed.
+
+Why: To access the SSR manifest and map of the emitted entry points. This is useful when creating custom SSR builds in plugins or integrations.
+
+- entryPoints maps a page route to the physical file emitted after the build;
+```
+entryPoints
+```
+
+- middlewareEntryPoint is the file system path of the middleware file;
+```
+middlewareEntryPoint
+```
+
+```
+'astro:build:ssr'?: (options: {
+  manifest: SerializedSSRManifest;
+  entryPoints: Map<IntegrationRouteData, URL>;
+  middlewareEntryPoint: URL | undefined;
+  logger: AstroIntegrationLogger;
+}) => void | Promise<void>;
+```
+
+```
+'astro:build:ssr'?: (options: {
+  manifest: SerializedSSRManifest;
+  entryPoints: Map<IntegrationRouteData, URL>;
+  middlewareEntryPoint: URL | undefined;
+  logger: AstroIntegrationLogger;
+}) => void | Promise<void>;
+```
+
+#### manifest option
+
+```
+manifest
+```
+
+Type: SerializedSSRManifest
+
+```
+SerializedSSRManifest
+```
+
+Allows you to create a custom build by accessing the SSR manifest.
+
+```
+export default {
+  name: 'my-integration',
+  hooks: {
+    'astro:build:ssr': ({ manifest }) => {
+      const { i18n } = manifest;
+      if (i18n?.strategy === "domains-prefix-always") {
+        // do something
+      }
+    },
+  },
+}
+```
+
+```
+export default {
+  name: 'my-integration',
+  hooks: {
+    'astro:build:ssr': ({ manifest }) => {
+      const { i18n } = manifest;
+      if (i18n?.strategy === "domains-prefix-always") {
+        // do something
+      }
+    },
+  },
+}
+```
+
+#### entryPoints option
+
+```
+entryPoints
+```
+
+Type: Map<IntegrationRouteData, URL>
+
+```
+Map<IntegrationRouteData, URL>
+```
+
+```
+astro@2.7.0
+```
+
+A Map of the emitted entry points with the IntegrationRouteData as key and the physical file URL as value.
+
+```
+Map
+```
+
+```
+IntegrationRouteData
+```
+
+```
+export default {
+  name: 'my-integration',
+  hooks: {
+    'astro:build:ssr': ({ entryPoints }) => {
+      entryPoints.forEach((url) => {
+        console.log(url.href);
+      });
+    },
+  },
+}
+```
+
+```
+export default {
+  name: 'my-integration',
+  hooks: {
+    'astro:build:ssr': ({ entryPoints }) => {
+      entryPoints.forEach((url) => {
+        console.log(url.href);
+      });
+    },
+  },
+}
+```
+
+#### middlewareEntryPoint option
+
+```
+middlewareEntryPoint
+```
+
+Type: URL | undefined
+
+```
+URL | undefined
+```
+
+```
+astro@2.8.0
+```
+
+Exposes the middleware file path.
+
+```
+export default {
+  name: 'my-integration',
+  hooks: {
+    'astro:build:ssr': ({ middlewareEntryPoint }) => {
+      if (middlewareEntryPoint) {
+        // do some operations if a middleware exist
+      }
+    },
+  },
+}
+```
+
+```
+export default {
+  name: 'my-integration',
+  hooks: {
+    'astro:build:ssr': ({ middlewareEntryPoint }) => {
+      if (middlewareEntryPoint) {
+        // do some operations if a middleware exist
+      }
+    },
+  },
+}
+```
+
+### astro:build:generated
+
+```
+astro:build:generated
+```
+
+Added in: astro@1.3.0
+
+```
+astro@1.3.0
+```
+
+Previous hook: astro:build:ssr
+
+```
+astro:build:ssr
+```
+
+Next hook: astro:build:done
+
+```
+astro:build:done
+```
+
+When: After a static production build has finished generating routes and assets.
+
+Why: To access generated routes and assets before build artifacts are cleaned up. This is a very uncommon use case. We recommend using astro:build:done unless you really need to access the generated files before cleanup.
+
+```
+astro:build:done
+```
+
+```
+'astro:build:generated'?: (options: {
+  dir: URL;
+  logger: AstroIntegrationLogger;
+}) => void | Promise<void>;
+```
+
+```
+'astro:build:generated'?: (options: {
+  dir: URL;
+  logger: AstroIntegrationLogger;
+}) => void | Promise<void>;
+```
+
+#### dir option
+
+```
+dir
+```
+
+Type: URL
+
+```
+URL
+```
+
+A URL path to the build output directory. Note that if you need a valid absolute path string, you should use Node’s built-in fileURLToPath utility.
+
+```
+fileURLToPath
+```
+
+```
+import { fileURLToPath } from 'node:url';
+
+
+export default {
+  name: 'my-integration',
+  hooks: {
+    'astro:build:generated': ({ dir }) => {
+      const outFile = fileURLToPath(new URL('./my-integration.json', dir));
+    }
+  }
+}
+```
+
+```
+import { fileURLToPath } from 'node:url';
+
+
+export default {
+  name: 'my-integration',
+  hooks: {
+    'astro:build:generated': ({ dir }) => {
+      const outFile = fileURLToPath(new URL('./my-integration.json', dir));
+    }
+  }
+}
+```
+
+### astro:build:done
+
+```
+astro:build:done
+```
+
+Previous hook: astro:build:generated
+
+```
+astro:build:generated
+```
+
+When: After a production build (SSG or SSR) has completed.
+
+Why: To access generated routes and assets for extension (ex. copy content into the generated /assets directory). If you plan to transform generated assets, we recommend exploring the Vite Plugin API and configuring via astro:config:setup instead.
+
+```
+/assets
+```
+
+```
+astro:config:setup
+```
+
+```
+'astro:build:done'?: (options: {
+  pages: { pathname: string }[];
+  dir: URL;
+  /** @deprecated Use the `assets` map and the new `astro:routes:resolved` hook */
+  routes: IntegrationRouteData[];
+  assets: Map<string, URL[]>;
+  logger: AstroIntegrationLogger;
+}) => void | Promise<void>;
+```
+
+```
+'astro:build:done'?: (options: {
+  pages: { pathname: string }[];
+  dir: URL;
+  /** @deprecated Use the `assets` map and the new `astro:routes:resolved` hook */
+  routes: IntegrationRouteData[];
+  assets: Map<string, URL[]>;
+  logger: AstroIntegrationLogger;
+}) => void | Promise<void>;
+```
+
+#### dir option
+
+```
+dir
+```
+
+Type: URL
+
+```
+URL
+```
+
+A URL path to the build output directory. Note that if you need a valid absolute path string, you should use Node’s built-in fileURLToPath utility.
+
+```
+fileURLToPath
+```
+
+```
+import { writeFile } from 'node:fs/promises';
+import { fileURLToPath } from 'node:url';
+
+
+export default function myIntegration() {
+  return {
+    hooks: {
+      'astro:build:done': async ({ dir }) => {
+        const metadata = await getIntegrationMetadata();
+        // Use fileURLToPath to get a valid, cross-platform absolute path string
+        const outFile = fileURLToPath(new URL('./my-integration.json', dir));
+        await writeFile(outFile, JSON.stringify(metadata));
+      }
+    }
+  }
+}
+```
+
+```
+import { writeFile } from 'node:fs/promises';
+import { fileURLToPath } from 'node:url';
+
+
+export default function myIntegration() {
+  return {
+    hooks: {
+      'astro:build:done': async ({ dir }) => {
+        const metadata = await getIntegrationMetadata();
+        // Use fileURLToPath to get a valid, cross-platform absolute path string
+        const outFile = fileURLToPath(new URL('./my-integration.json', dir));
+        await writeFile(outFile, JSON.stringify(metadata));
+      }
+    }
+  }
+}
+```
+
+#### routes option
+
+```
+routes
+```
+
+Caution
+
+This property is deprecated since v5.0. Check the migration guide.
+
+Type: IntegrationRouteData[]
+
+```
+IntegrationRouteData[]
+```
+
+A list of all generated routes alongside their associated metadata.
+
+You can reference the full IntegrationRouteData type below, but the most common properties are:
+
+```
+IntegrationRouteData
+```
+
+- component - the input file path relative to the project root
+```
+component
+```
+
+- pathname - the output file URL (undefined for routes using [dynamic] and [...spread] params)
+```
+pathname
+```
+
+```
+[dynamic]
+```
+
+```
+[...spread]
+```
+
+#### assets option
+
+```
+assets
+```
+
+Type: Map<string, URL[]>
+
+```
+Map<string, URL[]>
+```
+
+```
+astro@5.0.0
+```
+
+Contains URLs to output files paths, grouped by IntegrationResolvedRoute pattern property.
+
+```
+IntegrationResolvedRoute
+```
+
+```
+pattern
+```
+
+#### pages option
+
+```
+pages
+```
+
+Type: { pathname: string }[]
+
+```
+{ pathname: string }[]
+```
+
+A list of all generated pages. It is an object with one property.
+
+- pathname - the finalized path of the page.
+```
+pathname
+```
+
+### Custom hooks
+
+Custom hooks can be added to integrations by extending the IntegrationHooks interface through global augmentation.
+
+```
+IntegrationHooks
+```
+
+```
+declare global {
+  namespace Astro {
+    export interface IntegrationHook {
+      'your:hook': (params: YourHookParameters) => Promise<void>
+    }
+  }
+}
+```
+
+```
+declare global {
+  namespace Astro {
+    export interface IntegrationHook {
+      'your:hook': (params: YourHookParameters) => Promise<void>
+    }
+  }
+}
+```
+
+Astro reserves the astro: prefix for future built-in hooks. Please choose a different prefix when naming your custom hook.
+
+```
+astro:
+```
+
+## Integration types reference
+
+### AstroIntegrationLogger
+
+```
+AstroIntegrationLogger
+```
+
+An instance of the Astro logger, useful to write logs. This logger uses the same log level configured via CLI.
+
+Methods available to write to terminal:
+
+- logger.info("Message");
+```
+logger.info("Message")
+```
+
+- logger.warn("Message");
+```
+logger.warn("Message")
+```
+
+- logger.error("Message");
+```
+logger.error("Message")
+```
+
+- logger.debug("Message");
+```
+logger.debug("Message")
+```
+
+All the messages are prepended with a label that has the same value as the name of the integration.
+
+```
+import type { AstroIntegration } from "astro";
+export function formatIntegration(): AstroIntegration {
+  return {
+    name: "astro-format",
+    hooks: {
+      "astro:build:done": ({ logger }) => {
+        // do something
+        logger.info("Integration ready.");
+      }
+    }
+  }
+}
+```
+
+```
+import type { AstroIntegration } from "astro";
+export function formatIntegration(): AstroIntegration {
+  return {
+    name: "astro-format",
+    hooks: {
+      "astro:build:done": ({ logger }) => {
+        // do something
+        logger.info("Integration ready.");
+      }
+    }
+  }
+}
+```
+
+The example above will log a message that includes the provided info message:
+
+```
+info
+```
+
+```
+[astro-format] Integration ready.
+```
+
+```
+[astro-format] Integration ready.
+```
+
+To log some messages with a different label, use the .fork method to specify an alternative to the default name:
+
+```
+.fork
+```
+
+```
+name
+```
+
+```
+import type { AstroIntegration } from "astro";
+export function formatIntegration(): AstroIntegration {
+  return {
+    name: "astro-format",
+    hooks: {
+      "astro:config:done": ({ logger }) => {
+        // do something
+        logger.info("Integration ready.");
+      },
+      "astro:build:done": ({ logger }) => {
+        const buildLogger = logger.fork("astro-format/build");
+        // do something
+        buildLogger.info("Build finished.")
+      }
+    }
+  }
+}
+```
+
+```
+import type { AstroIntegration } from "astro";
+export function formatIntegration(): AstroIntegration {
+  return {
+    name: "astro-format",
+    hooks: {
+      "astro:config:done": ({ logger }) => {
+        // do something
+        logger.info("Integration ready.");
+      },
+      "astro:build:done": ({ logger }) => {
+        const buildLogger = logger.fork("astro-format/build");
+        // do something
+        buildLogger.info("Build finished.")
+      }
+    }
+  }
+}
+```
+
+The example above will produce logs with [astro-format] by default, and [astro-format/build] when specified:
+
+```
+[astro-format]
+```
+
+```
+[astro-format/build]
+```
+
+```
+[astro-format] Integration ready.
+[astro-format/build] Build finished.
+```
+
+```
+[astro-format] Integration ready.
+[astro-format/build] Build finished.
+```
+
+### HookParameters
+
+```
+HookParameters
+```
+
+You can get the type of a hook’s arguments by passing the hook’s name to the HookParameters utility type. In the following example, a function’s options argument is typed to match the parameters of the astro:config:setup hook:
+
+```
+HookParameters
+```
+
+```
+options
+```
+
+```
+astro:config:setup
+```
+
+```
+import type { HookParameters } from 'astro';
+
+
+function mySetup(options: HookParameters<'astro:config:setup'>) {
+  options.updateConfig({ /* ... */ });
+}
+```
+
+```
+import type { HookParameters } from 'astro';
+
+
+function mySetup(options: HookParameters<'astro:config:setup'>) {
+  options.updateConfig({ /* ... */ });
+}
+```
+
+### IntegrationResolvedRoute type reference
+
+```
+IntegrationResolvedRoute
+```
+
+```
+interface IntegrationResolvedRoute {
+  pattern: RouteData['route'];
+  patternRegex: RouteData['pattern'];
+  entrypoint: RouteData['component'];
+  isPrerendered: RouteData['prerender'];
+  redirectRoute?: IntegrationResolvedRoute;
+  generate: (data?: any) => string;
+  params: string[];
+  pathname?: string;
+  segments: RoutePart[][];
+  type: RouteType;
+  redirect?: RedirectConfig;
+  origin: 'internal' | 'external' | 'project';
+}
+```
+
+```
+interface IntegrationResolvedRoute {
+  pattern: RouteData['route'];
+  patternRegex: RouteData['pattern'];
+  entrypoint: RouteData['component'];
+  isPrerendered: RouteData['prerender'];
+  redirectRoute?: IntegrationResolvedRoute;
+  generate: (data?: any) => string;
+  params: string[];
+  pathname?: string;
+  segments: RoutePart[][];
+  type: RouteType;
+  redirect?: RedirectConfig;
+  origin: 'internal' | 'external' | 'project';
+}
+```
+
+#### pattern
+
+```
+pattern
+```
+
+Type: string
+
+```
+string
+```
+
+Allows you to identify the type of route based on its path. Here are some examples of paths associated with their pattern:
+
+- src/pages/index.astro will be /
+```
+src/pages/index.astro
+```
+
+```
+/
+```
+
+- src/pages/blog/[...slug].astro will be /blog/[...slug]
+```
+src/pages/blog/[...slug].astro
+```
+
+```
+/blog/[...slug]
+```
+
+- src/pages/site/[blog]/[...slug].astro will be /site/[blog]/[...slug]
+```
+src/pages/site/[blog]/[...slug].astro
+```
+
+```
+/site/[blog]/[...slug]
+```
+
+#### patternRegex
+
+```
+patternRegex
+```
+
+Type: RegExp
+
+```
+RegExp
+```
+
+Allows you to access a regex used for matching an input URL against a requested route.
+
+For example, given a [fruit]/about.astro path, the regex will be /^\/([^/]+?)\/about\/?$/. Using pattern.test("banana/about") will return true.
+
+```
+[fruit]/about.astro
+```
+
+```
+/^\/([^/]+?)\/about\/?$/
+```
+
+```
+pattern.test("banana/about")
+```
+
+```
+true
+```
+
+#### entrypoint
+
+```
+entrypoint
+```
+
+Type: string
+
+```
+string
+```
+
+The URL pathname of the source component.
+
+#### isPrerendered
+
+```
+isPrerendered
+```
+
+Type: boolean
+
+```
+boolean
+```
+
+Determines whether the route use on demand rendering. The value will be true for projects configured with:
+
+```
+true
+```
+
+- output: 'static' when the route does not export const prerender = true
+```
+output: 'static'
+```
+
+```
+const prerender = true
+```
+
+- output: 'server' when the route exports const prerender = false
+```
+output: 'server'
+```
+
+```
+const prerender = false
+```
+
+#### redirectRoute
+
+```
+redirectRoute
+```
+
+Type: IntegrationResolvedRoute | undefined
+
+```
+IntegrationResolvedRoute | undefined
+```
+
+When the value of IntegrationResolvedRoute.type is redirect, the value will be the IntegrationResolvedRoute to redirect to. Otherwise, the value will be undefined.
+
+```
+IntegrationResolvedRoute.type
+```
+
+```
+redirect
+```
+
+```
+IntegrationResolvedRoute
+```
+
+#### generate()
+
+```
+generate()
+```
+
+Type: (data?: any) => string
+
+```
+(data?: any) => string
+```
+
+A function that provides the optional parameters of the route, interpolates them with the route pattern, and returns the path name of the route.
+
+For example, with a route such as /blog/[...id].astro, the generate function could return:
+
+```
+/blog/[...id].astro
+```
+
+```
+generate
+```
+
+```
+console.log(generate({ id: 'presentation' })) // will log `/blog/presentation`
+```
+
+```
+console.log(generate({ id: 'presentation' })) // will log `/blog/presentation`
+```
+
+#### params
+
+```
+params
+```
+
+Type: string[]
+
+```
+string[]
+```
+
+Allows you to access the route params. For example, when a project uses the following dynamic routes /pages/[lang]/[...slug].astro, the value will be ['lang', '...slug'].
+
+```
+params
+```
+
+```
+/pages/[lang]/[...slug].astro
+```
+
+```
+['lang', '...slug']
+```
+
+#### pathname
+
+```
+pathname
+```
+
+Type: string | undefined
+
+```
+string | undefined
+```
+
+For regular routes, the value will be the URL pathname where this route will be served. When the project uses dynamic routes (ie. [dynamic] or [...spread]), the pathname will be undefined.
+
+```
+[dynamic]
+```
+
+```
+[...spread]
+```
+
+#### segments
+
+```
+segments
+```
+
+Type: RoutePart[][]
+
+```
+RoutePart[][]
+```
+
+Allows you to access the route params with additional metadata. Each object contains the following properties:
+
+```
+params
+```
+
+- content: the param name,
+```
+content
+```
+
+```
+param
+```
+
+- dynamic: whether the route is dynamic or not,
+```
+dynamic
+```
+
+- spread: whether the dynamic route uses the spread syntax or not.
+```
+spread
+```
+
+For example, the following route /pages/[blog]/[...slug].astro will output the segments:
+
+```
+/pages/[blog]/[...slug].astro
+```
+
+```
+[
+  [ { content: 'pages', dynamic: false, spread: false } ],
+  [ { content: 'blog', dynamic: true, spread: false } ],
+  [ { content: '...slug', dynamic: true, spread: true } ]
+]
+```
+
+```
+[
+  [ { content: 'pages', dynamic: false, spread: false } ],
+  [ { content: 'blog', dynamic: true, spread: false } ],
+  [ { content: '...slug', dynamic: true, spread: true } ]
+]
+```
+
+#### type
+
+```
+type
+```
+
+Type: RouteType
+
+```
+RouteType
+```
+
+Allows you to identify the type of route. Possible values are:
+
+- page: a route that lives in the file system, usually an Astro component
+```
+page
+```
+
+- endpoint: a route that lives in the file system, usually a JS file that exposes endpoints methods
+```
+endpoint
+```
+
+- redirect: a route points to another route that lives in the file system
+```
+redirect
+```
+
+- fallback: a route that doesn’t exist in the file system that needs to be handled with other means, usually the middleware
+```
+fallback
+```
+
+#### redirect
+
+```
+redirect
+```
+
+Type: RedirectConfig | undefined
+
+```
+RedirectConfig | undefined
+```
+
+Allows you to access the route to redirect to. This can be a string or an object containing information about the status code and its destination.
+
+#### origin
+
+```
+origin
+```
+
+Type: 'internal' | 'external' | 'project'
+
+```
+'internal' | 'external' | 'project'
+```
+
+Determines if a route comes from Astro core (internal), an integration (external) or the user’s project (project).
+
+```
+internal
+```
+
+```
+external
+```
+
+```
+project
+```
+
+### IntegrationRouteData type reference
+
+```
+IntegrationRouteData
+```
+
+Caution
+
+This type is deprecated since v5.0. Use IntegrationResolvedRoute instead.
+
+```
+IntegrationResolvedRoute
+```
+
+A smaller version of the RouteData that is used in the integrations.
+
+```
+RouteData
+```
+
+```
+interface IntegrationRouteData {
+  type: RouteType;
+  component: string;
+  pathname?: string;
+  pattern: RegExp;
+  params: string[];
+  segments: { content: string; dynamic: boolean; spread: boolean; }[][];
+  generate: (data?: any) => string;
+  prerender: boolean;
+  distURL?: URL[];
+  redirect?: RedirectConfig;
+  redirectRoute?: IntegrationRouteData;
+}
+```
+
+```
+interface IntegrationRouteData {
+  type: RouteType;
+  component: string;
+  pathname?: string;
+  pattern: RegExp;
+  params: string[];
+  segments: { content: string; dynamic: boolean; spread: boolean; }[][];
+  generate: (data?: any) => string;
+  prerender: boolean;
+  distURL?: URL[];
+  redirect?: RedirectConfig;
+  redirectRoute?: IntegrationRouteData;
+}
+```
+
+#### type
+
+```
+type
+```
+
+Type: RouteType
+
+```
+RouteType
+```
+
+Allows you to identify the type of the route. The value can be:
+
+- page: a route that lives in the file system, usually an Astro component
+```
+page
+```
+
+- endpoint: a route that lives in the file system, usually a JS file that exposes endpoints methods
+```
+endpoint
+```
+
+- redirect: a route that points to another route that lives in the file system
+```
+redirect
+```
+
+- fallback: a route that doesn’t exist in the file system and needs to be handled with other means, usually middleware
+```
+fallback
+```
+
+#### component
+
+```
+component
+```
+
+Type: string
+
+```
+string
+```
+
+Allows you to access the source component URL pathname.
+
+#### pathname
+
+```
+pathname
+```
+
+Type: string | undefined
+
+```
+string | undefined
+```
+
+For regular routes, the value will be the URL pathname where this route will be served. When the project uses dynamic routes (ie. [dynamic] or [...spread]), the pathname will be undefined.
+
+```
+[dynamic]
+```
+
+```
+[...spread]
+```
+
+#### pattern
+
+```
+pattern
+```
+
+Type: RegExp
+
+```
+RegExp
+```
+
+Allows you to access a regex used for matching an input URL against a requested route.
+
+For example, given a [fruit]/about.astro path, the regex will be /^\/([^/]+?)\/about\/?$/. Using pattern.test("banana/about") will return true.
+
+```
+[fruit]/about.astro
+```
+
+```
+/^\/([^/]+?)\/about\/?$/
+```
+
+```
+pattern.test("banana/about")
+```
+
+```
+true
+```
+
+#### params
+
+```
+params
+```
+
+Type: string[]
+
+```
+string[]
+```
+
+Allows you to access the route params. For example, when a project uses the following dynamic routes /pages/[lang]/[...slug].astro, the value will be ['lang', '...slug'].
+
+```
+params
+```
+
+```
+/pages/[lang]/[...slug].astro
+```
+
+```
+['lang', '...slug']
+```
+
+#### segments
+
+```
+segments
+```
+
+Type: { content: string; dynamic: boolean; spread: boolean; }[][]
+
+```
+{ content: string; dynamic: boolean; spread: boolean; }[][]
+```
+
+Allows you to access the route params with additional metadata. Each object contains the following properties:
+
+```
+params
+```
+
+- content: the param,
+```
+content
+```
+
+```
+param
+```
+
+- dynamic: whether the route is dynamic or not,
+```
+dynamic
+```
+
+- spread: whether the dynamic route uses the spread syntax or not.
+```
+spread
+```
+
+For example, the following route /pages/[lang]/index.astro will output the segments [[ { content: 'lang', dynamic: true, spread: false } ]].
+
+```
+/pages/[lang]/index.astro
+```
+
+```
+[[ { content: 'lang', dynamic: true, spread: false } ]]
+```
+
+#### generate()
+
+```
+generate()
+```
+
+Type: (data?: any) => string
+
+```
+(data?: any) => string
+```
+
+A function that provides the optional parameters of the route, interpolates them with the route pattern, and returns the path name of the route.
+
+For example, with a route such as /blog/[...id].astro, the generate function could return:
+
+```
+/blog/[...id].astro
+```
+
+```
+generate
+```
+
+```
+console.log(generate({ id: 'presentation' })) // will log `/blog/presentation`
+```
+
+```
+console.log(generate({ id: 'presentation' })) // will log `/blog/presentation`
+```
+
+#### prerender
+
+```
+prerender
+```
+
+Type: boolean
+
+```
+boolean
+```
+
+Determines whether the route is prerendered or not.
+
+#### distURL
+
+```
+distURL
+```
+
+Type: URL[] | undefined
+
+```
+URL[] | undefined
+```
+
+The paths of the physical files emitted by this route. When a route isn’t prerendered, the value is either undefined or an empty array.
+
+```
+undefined
+```
+
+#### redirect
+
+```
+redirect
+```
+
+Type: RedirectConfig | undefined
+
+```
+RedirectConfig | undefined
+```
+
+Allows you to access the route to redirect to. This can be a string or an object containing information about the status code and its destination.
+
+#### redirectRoute
+
+```
+redirectRoute
+```
+
+Type: IntegrationRouteData | undefined
+
+```
+IntegrationRouteData | undefined
+```
+
+When the value of RouteData.type is redirect, the value will contains the IntegrationRouteData of the route to redirect to. Otherwise, the value will be undefined.
+
+```
+RouteData.type
+```
+
+```
+redirect
+```
+
+```
+IntegrationRouteData
+```
+
+## Allow installation with astro add
+
+```
+astro add
+```
+
+The astro add command allows users to easily add integrations and adapters to their project. If you want your integration to be installable with this tool, add astro-integration to the keywords field in your package.json:
+
+```
+astro add
+```
+
+```
+astro-integration
+```
+
+```
+keywords
+```
+
+```
+package.json
+```
+
+```
+{
+  "name": "example",
+  "keywords": ["astro-integration"],
+}
+```
+
+```
+{
+  "name": "example",
+  "keywords": ["astro-integration"],
+}
+```
+
+Once you publish your integration to npm, running astro add example will install your package with any peer dependencies specified in your package.json. This will also apply your integration to the user’s astro.config.* like so:
+
+```
+astro add example
+```
+
+```
+package.json
+```
+
+```
+astro.config.*
+```
+
+```
+import { defineConfig } from 'astro/config';
+import example from 'example';
+
+
+export default defineConfig({
+  integrations: [example()],
+})
+```
+
+```
+import { defineConfig } from 'astro/config';
+import example from 'example';
+
+
+export default defineConfig({
+  integrations: [example()],
+})
+```
+
+Caution
+
+This assumes your integration definition is 1) a default export and 2) a function. Ensure this is true before adding the astro-integration keyword!
+
+```
+default
+```
+
+```
+astro-integration
+```
+
+## Integration Ordering
+
+All integrations are run in the order that they are configured. For instance, for the array [react(), svelte()] in a user’s astro.config.*, react will run before svelte.
+
+```
+[react(), svelte()]
+```
+
+```
+astro.config.*
+```
+
+```
+react
+```
+
+```
+svelte
+```
+
+Your integration should ideally run in any order. If this isn’t possible, we recommend documenting that your integration needs to come first or last in your user’s integrations configuration array.
+
+```
+integrations
+```
+
+## Combine integrations into presets
+
+An integration can also be written as a collection of multiple, smaller integrations. We call these collections presets. Instead of creating a factory function that returns a single integration object, a preset returns an array of integration objects. This is useful for building complex features out of multiple integrations.
+
+```
+integrations: [
+  // Example: where examplePreset() returns: [integrationOne, integrationTwo, ...etc]
+  examplePreset()
+]
+```
+
+```
+integrations: [
+  // Example: where examplePreset() returns: [integrationOne, integrationTwo, ...etc]
+  examplePreset()
+]
+```
+
+## Community Resources
+
+- Build your own Astro Integrations - by Emmanuel Ohans on FreeCodeCamp
+- Astro Integration Template - by Florian Lefebvre on GitHub
+## Learn Astro with James Q Quick
+
+Build your first site with 35 interactive Scrimba lessons
+

@@ -9,9 +9,9 @@ authors: ['enscribe']
 
 ## A problem (about dead maintainers)
 
-This post talks about changes I've made to astro-erudite in v1.3.0!
+This post talks about changes I've made to Astronomeer in v1.3.0!
 
-I recently found myself caught between two syntax highlighting packages that I absolutely needed for astro-erudite. On one hand, the current template uses [rehype-pretty-code](https://rehype-pretty.pages.dev/) as its main syntax highlighting solution, but due to issues with its inherent implementation and missing features that I needed, I had created a bunch of custom transformers to make it do what I wanted, and the whole setup was getting unwieldy. I then discovered [Expressive Code](https://expressive-code.com/), which had everything I wanted out of the box—collapsible code sections, terminal and editor frames, gutter comments—it was perfect! Well, almost perfect.
+I recently found myself caught between two syntax highlighting packages that I absolutely needed for Astronomeer. On one hand, the current template uses [rehype-pretty-code](https://rehype-pretty.pages.dev/) as its main syntax highlighting solution, but due to issues with its inherent implementation and missing features that I needed, I had created a bunch of custom transformers to make it do what I wanted, and the whole setup was getting unwieldy. I then discovered [Expressive Code](https://expressive-code.com/), which had everything I wanted out of the box—collapsible code sections, terminal and editor frames, gutter comments—it was perfect! Well, almost perfect.
 
 The primary issue was that Expressive Code doesn't support inline syntax highlighting, which is non-negotiable for me since I need my inline code snippets to look as good as my code blocks (so I could do stuff like `console.log("Hello, world!".split('').reverse().join('')){:js}`). So I opened a feature request at [expressive-code/expressive-code#250](https://github.com/expressive-code/expressive-code/issues/250) and the maintainer seemed interested, saying they'd get around to it eventually. Implementing this feature is a lot easier said than done though, and I summarized it well in another thread:
 
@@ -86,4 +86,4 @@ Absolutely do not do this for production sites (your personal blog does not coun
 
 But sometimes, when you're working at the bleeding edge of web development, temporary solutions like this become necessary. The better approach would be to just wait for Expressive Code to implement inline syntax highlighting. But, since it'll take a while for reasons aforementioned, I'll stick with my janky solution. This patch buys me time until either rehype-pretty-code gets maintained again and implements the feature properly, or Expressive Code adds inline code support.
 
-In the meantime, astro-erudite now has both beautiful code blocks and inline syntax highlighting. And now it's available for all of you to use!
+In the meantime, Astronomeer now has both beautiful code blocks and inline syntax highlighting. And now it's available for all of you to use!

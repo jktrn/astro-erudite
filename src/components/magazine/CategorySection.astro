@@ -1,0 +1,73 @@
+---
+import type { CollectionEntry } from 'astro:content'
+import { Image } from 'astro:assets'
+
+interface Props {
+  tag: string
+  title: string
+  posts: CollectionEntry<'blog'>[]
+}
+
+const { title, tag, posts } = Astro.props
+
+const sortedPosts = posts
+  .filter((post) => {
+    return post.data.tags?.includes(tag) && !post.data.draft
+  })
+  .sort((a, b) => b.data.date.valueOf() - a.data.date.valueOf())
+  .slice(0, 4)
+
+if (sortedPosts.length === 0) {
+  return null
+}
+---
+
+<section class="py-12 border-t">
+  <div class="flex items-center justify-between mb-8">
+    <h2 class="text-3xl font-bold tracking-tight">{title}</h2>
+    <a
+      href={`/tags/${tag}`}
+      class="text-sm font-medium transition-colors text-muted-foreground hover:text-primary"
+    >
+      View All {title} &rarr;
+    </a>
+  </div>
+
+  <div class="grid grid-cols-1 gap-8 md:grid-cols-2 lg:grid-cols-4">
+    {
+      sortedPosts.map((post) => (
+        <article class="flex flex-col group">
+          <a
+            href={`/blog/${post.slug}`}
+            class="overflow-hidden border rounded-lg aspect-video bg-muted mb-4"
+          >
+            {post.data.image ? (
+              <Image
+                src={post.data.image}
+                alt={post.data.title}
+                class="object-cover w-full h-full duration-300 transition-transform group-hover:scale-105"
+              />
+            ) : (
+              <div class="flex items-center justify-center w-full h-full text-muted-foreground bg-secondary">
+                <span class="text-sm">No Image</span>
+              </div>
+            )}
+          </a>
+          <div class="flex flex-col justify-between flex-1">
+            <div>
+              <span class="mb-2 block text-xs font-medium text-muted-foreground uppercase tracking-wider">
+                {post.data.tags?.[0]}
+              </span>
+              <h3 class="mb-2 text-lg font-bold leading-tight transition-colors group-hover:text-primary">
+                <a href={`/blog/${post.slug}`}>{post.data.title}</a>
+              </h3>
+            </div>
+            <span class="text-xs text-muted-foreground mt-2">
+              {post.data.date.toLocaleDateString()}
+            </span>
+          </div>
+        </article>
+      ))
+    }
+  </div>
+</section>

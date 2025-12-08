@@ -19,7 +19,7 @@ import { pluginLineNumbers } from '@expressive-code/plugin-line-numbers'
 import tailwindcss from '@tailwindcss/vite'
 
 export default defineConfig({
-  site: 'https://astro-erudite.vercel.app',
+  site: 'https://astronomeer.vercel.app',
   integrations: [
     expressiveCode({
       themes: ['github-light', 'github-dark'],
@@ -31,9 +31,9 @@ export default defineConfig({
         collapseStyle: 'collapsible-auto',
         overridesByLang: {
           'ansi,bat,bash,batch,cmd,console,powershell,ps,ps1,psd1,psm1,sh,shell,shellscript,shellsession,text,zsh':
-            {
-              showLineNumbers: false,
-            },
+          {
+            showLineNumbers: false,
+          },
         },
       },
       styleOverrides: {

@@ -1,0 +1,74 @@
+---
+import type { CollectionEntry } from 'astro:content'
+import { Image } from 'astro:assets'
+
+interface Props {
+  posts: CollectionEntry<'blog'>[]
+}
+
+const { posts } = Astro.props
+const [featured, ...side] = posts.slice(0, 3)
+---
+
+<section class="grid grid-cols-1 gap-6 mb-12 md:grid-cols-12">
+  <!-- Main Feature (Left, spans 8 cols) -->
+  <article
+    class="relative overflow-hidden border group rounded-xl bg-card md:col-span-8"
+  >
+    <a href={`/blog/${featured.slug}`} class="block h-full">
+      {
+        featured.data.image && (
+          <Image
+            src={featured.data.image}
+            alt={featured.data.title}
+            class="object-cover w-full h-64 duration-500 transition-transform md:h-96 group-hover:scale-105"
+          />
+        )
+      }
+      <div
+        class="absolute bottom-0 left-0 w-full p-6 bg-gradient-to-t from-black/90 to-transparent"
+      >
+        <span
+          class="inline-block px-2 py-1 mb-2 text-xs font-bold tracking-wider text-white uppercase rounded-sm bg-primary"
+        >
+          {featured.data.tags?.[0] || 'Featured'}
+        </span>
+        <h2
+          class="mb-2 text-2xl font-bold leading-tight text-white md:text-4xl"
+        >
+          {featured.data.title}
+        </h2>
+        <p class="text-gray-200 line-clamp-2 md:line-clamp-3">
+          {featured.data.description}
+        </p>
+      </div>
+    </a>
+  </article>
+
+  <!-- Side Stack (Right, spans 4 cols) -->
+  <div class="flex flex-col gap-6 md:col-span-4">
+    {
+      side.map((post) => (
+        <article class="relative flex-1 overflow-hidden border group rounded-xl bg-card">
+          <a href={`/blog/${post.slug}`} class="flex flex-col h-full">
+            {post.data.image && (
+              <Image
+                src={post.data.image}
+                alt={post.data.title}
+                class="object-cover w-full h-32"
+              />
+            )}
+            <div class="flex flex-col justify-center p-4">
+              <span class="mb-1 text-xs font-semibold text-muted-foreground">
+                {post.data.date.toLocaleDateString()}
+              </span>
+              <h3 class="text-lg font-bold leading-tight transition-colors group-hover:text-primary">
+                {post.data.title}
+              </h3>
+            </div>
+          </a>
+        </article>
+      ))
+    }
+  </div>
+</section>

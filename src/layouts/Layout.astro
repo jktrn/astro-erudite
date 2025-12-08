@@ -32,9 +32,19 @@ const { class: className } = Astro.props
       <slot name="table-of-contents" />
     </header>
     <main
-      class={cn('w-full mx-auto flex grow flex-col gap-y-6 px-4', className)}
+      class={cn(
+        'w-full mx-auto grid grid-cols-1 lg:grid-cols-12 gap-8 px-4 py-8',
+        className,
+      )}
     >
-      <slot />
+      <div class="flex flex-col gap-y-6 lg:col-span-8">
+        <slot />
+      </div>
+      <aside class="hidden space-y-8 lg:block lg:col-span-4">
+        <div class="sticky top-24 space-y-8">
+          <slot name="sidebar" />
+        </div>
+      </aside>
     </main>
     <Footer />
   </body>

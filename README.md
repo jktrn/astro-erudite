@@ -2,27 +2,27 @@
 
 <div align="center">
 
-## astro-erudite
+## Astronomeer
 
 ![Stargazers]
 [![License]](LICENSE)
 
 </div>
 
-astro-erudite is an opinionated, unstyled static blogging template built with [Astro](https://astro.build/), [Tailwind](https://tailwindcss.com/), and [shadcn/ui](https://ui.shadcn.com/). Extraordinarily loosely based off the [Astro Micro](https://astro-micro.vercel.app/) theme by [trevortylerlee](https://github.com/trevortylerlee).
+Astronomeer is a non-minimal, blazingly fast, lightweight and gorgeous magazine-like theme built with [Astro](https://astro.build/), [Tailwind](https://tailwindcss.com/), and [shadcn/ui](https://ui.shadcn.com/). Extraordinarily loosely based off the [Astro Micro](https://astro-micro.vercel.app/) theme by [trevortylerlee](https://github.com/trevortylerlee).
 
 | ![Preview 1](/public/static/preview-1.png) | ![Preview 2](/public/static/preview-2.png) |
 | ------------------------------------------ | ------------------------------------------ |
 | ![Preview 3](/public/static/preview-3.png) | ![Preview 4](/public/static/preview-4.png) |
 
 > [!NOTE]
-> To learn more about why this template exists, read [The State of Static Blogs in 2024](https://astro-erudite.vercel.app/blog/the-state-of-static-blogs), where I share my take on what constitutes a great blogging template and my goals while developing this one.
+> To learn more about why this template exists, read [The State of Static Blogs in 2024](https://astronomeer.vercel.app/blog/the-state-of-static-blogs), where I share my take on what constitutes a great blogging template and my goals while developing this one.
 
 ---
 
 ## Community examples
 
-Below are some fantastic examples of websites based on this template. If you wish to add your site to this list, open a [pull request](https://github.com/jktrn/astro-erudite/pulls)!
+Below are some fantastic examples of websites based on this template. If you wish to add your site to this list, open a [pull request](https://github.com/jktrn/astronomeer/pulls)!
 
 | Site | Author | Tags | Source |
 |-|-|-|-|
@@ -112,9 +112,9 @@ Edit the `src/consts.ts` file to update your site's metadata, navigation links, 
 
 ```ts
 export const SITE: Site = {
-  title: 'astro-erudite',
+  title: 'Astronomeer',
   description: // ...
-  href: 'https://astro-erudite.vercel.app',
+  href: 'https://astronomeer.vercel.app',
   featuredPostCount: 2,
   postsPerPage: 3,
 }
@@ -172,7 +172,7 @@ Favicons are generated using [RealFaviconGenerator](https://realfavicongenerator
 <link rel="icon" type="image/svg+xml" href="/favicon.svg" />
 <link rel="shortcut icon" href="/favicon.ico" />
 <link rel="apple-touch-icon" sizes="180x180" href="/apple-touch-icon.png" />
-<meta name="apple-mobile-web-app-title" content="astro-erudite" />
+<meta name="apple-mobile-web-app-title" content="Astronomeer" />
 <link rel="manifest" href="/site.webmanifest" />
 ```
 
@@ -278,11 +278,11 @@ This project is open source and available under the [MIT License](LICENSE).
 
 ### Star history
 
-<a href="https://star-history.com/#jktrn/astro-erudite&Date">
+<a href="https://star-history.com/#jktrn/astronomeer&Date">
  <picture>
-   <source media="(prefers-color-scheme: dark)" srcset="https://api.star-history.com/svg?repos=jktrn/astro-erudite&type=Date&theme=dark" />
-   <source media="(prefers-color-scheme: light)" srcset="https://api.star-history.com/svg?repos=jktrn/astro-erudite&type=Date" />
-   <img alt="Star History Chart" src="https://api.star-history.com/svg?repos=jktrn/astro-erudite&type=Date" />
+   <source media="(prefers-color-scheme: dark)" srcset="https://api.star-history.com/svg?repos=jktrn/astronomeer&type=Date&theme=dark" />
+   <source media="(prefers-color-scheme: light)" srcset="https://api.star-history.com/svg?repos=jktrn/astronomeer&type=Date" />
+   <img alt="Star History Chart" src="https://api.star-history.com/svg?repos=jktrn/astronomeer&type=Date" />
  </picture>
 </a>
 
@@ -290,5 +290,5 @@ This project is open source and available under the [MIT License](LICENSE).
 
 Built with &hearts; by [enscribe](https://enscribe.dev)!
 
-[Stargazers]: https://img.shields.io/github/stars/jktrn/astro-erudite?color=fafafa&logo=github&logoColor=fff&style=for-the-badge
-[License]: https://img.shields.io/github/license/jktrn/astro-erudite?color=0a0a0a&logo=github&logoColor=fff&style=for-the-badge
+[Stargazers]: https://img.shields.io/github/stars/jktrn/astronomeer?color=fafafa&logo=github&logoColor=fff&style=for-the-badge
+[License]: https://img.shields.io/github/license/jktrn/astronomeer?color=0a0a0a&logo=github&logoColor=fff&style=for-the-badge
