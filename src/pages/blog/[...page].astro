@@ -21,7 +21,7 @@ const { page } = Astro.props
 ---
 
 <Layout class="max-w-3xl">
-  <PageHead slot="head" title="Blog" />
+  <PageHead slot="head" title={page.lastPage === 1 ? 'Blog' : `Blog - Page ${page.currentPage}`} />
   <Breadcrumbs
     items={[
       { label: 'Blog', href: '/blog', icon: 'lucide:library-big' },
