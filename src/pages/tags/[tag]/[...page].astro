@@ -1,0 +1,116 @@
+---
+import Breadcrumbs from '@/components/Breadcrumbs.astro'
+import PageHead from '@/components/PageHead.astro'
+import WorkCard from '@/components/WorkCard.astro'
+import BlogCard from '@/components/BlogCard.astro'
+import PaginationComponent from '@/components/ui/pagination'
+import { SITE } from '@/consts'
+import Layout from '@/layouts/Layout.astro'
+import { getAllTags, getPostsByTag, getWorksByTag } from '@/lib/data-utils'
+import type { PaginateFunction } from 'astro'
+
+export async function getStaticPaths({
+  paginate,
+}: {
+  paginate: PaginateFunction
+}) {
+  const tagMap = await getAllTags()
+  const uniqueTags = Array.from(tagMap.keys())
+
+  return (
+    await Promise.all(
+      uniqueTags.map(async (tag) => {
+        const posts = await getPostsByTag(tag)
+        const works = await getWorksByTag(tag)
+        return paginate(works, {
+          params: { tag },
+          pageSize: SITE.postsPerPage,
+          props: {
+            tag,
+            posts,
+            works,
+          },
+        })
+      }),
+    )
+  ).flat()
+}
+
+const { page, posts, works } = Astro.props
+const { tag } = Astro.params
+---
+
+<Layout class="max-w-3xl">
+  <PageHead
+    slot="head"
+    title={`Works in tag "${tag}" - Page ${page.currentPage}`}
+    description={`A collection of works in tag ${tag}.`}
+    noindex
+  />
+  <Breadcrumbs
+    items={[
+      { href: '/tags', label: 'Tags', icon: 'lucide:tags' },
+      { label: tag, icon: 'lucide:tag' },
+      { label: `Page ${page.currentPage}`, icon: 'lucide:book-copy' },
+    ]}
+  />
+
+  <div class="flex min-h-[calc(100vh-18rem)] flex-col">
+    {
+    posts.length > 0 && (
+      <section class="mt-8">
+        <h2 class="mb-4 text-3xl font-semibold">
+          {posts.length} blog post{posts.length === 1 ? '' : 's'} in {tag}
+        </h2>
+        <ul class="flex flex-col gap-y-6">
+          {posts.map((post) => (
+            <li>
+              <BlogCard entry={post} />
+            </li>
+          ))}
+        </ul>
+      </section>
+    )
+  }
+    {
+      page.data.length > 0 && (
+        <section class="mt-8">
+          <h2 class="mb-4 text-3xl font-semibold">
+            {page.lastPage === 1 ? (
+              <>
+                {page.total} work{page.total === 1 ? '' : 's'} in {tag}
+              </>
+            ) : (
+              <>
+                {(page.currentPage - 1) * SITE.postsPerPage + 1} -{' '}
+                {Math.min(page.currentPage * SITE.postsPerPage, page.total)} of{' '}
+                {page.total} work{page.total === 1 ? '' : 's'} in {tag}
+              </>
+            )}
+          </h2>
+          <ul class="flex flex-col gap-y-6">
+            {page.data.map((work, index) => (
+              <li>
+                <WorkCard work={work} />
+                {index < page.data.length - 1 && (
+                  <div class="mb-8 flex items-center justify-center gap-4">
+                    <div class="bg-muted-foreground/25 dark:bg-muted/100 h-px w-16" />
+                    <div class="bg-muted-foreground/25 dark:bg-muted/100 h-1 w-1 rotate-45" />
+                    <div class="bg-muted-foreground/25 dark:bg-muted/100 h-px w-16" />
+                  </div>
+                )}
+              </li>
+            ))}
+          </ul>
+        </section>
+      )
+    }
+  </div>
+
+  <PaginationComponent
+    currentPage={page.currentPage}
+    totalPages={page.lastPage}
+    baseUrl={`/tags/${tag}/`}
+    client:load
+  />
+</Layout>

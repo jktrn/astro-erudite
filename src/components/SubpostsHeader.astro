@@ -2,40 +2,61 @@
 import { ScrollArea } from '@/components/ui/scroll-area'
 import {
   getCombinedReadingTime,
-  getParentId,
+  getCombinedWorkReadingTime,
+  getParentItemId,
   getParentPost,
+  getParentWork,
   getPostById,
   getPostReadingTime,
   getSubpostsForParent,
-  isSubpost,
+  getSubworksForParent,
+  getWorkById,
+  getWorkReadingTime,
+  isSubitem,
 } from '@/lib/data-utils'
 import { Icon } from 'astro-icon/components'
 
-const { parentId } = Astro.props
+const { parentId, collection = 'blog' } = Astro.props
 const currentPostId = Astro.params.id as string
-const isCurrentSubpost = isSubpost(currentPostId)
-const rootParentId = isCurrentSubpost ? getParentId(currentPostId) : parentId
+const isCurrentSubpost = isSubitem(currentPostId)
+const rootParentId = isCurrentSubpost
+  ? getParentItemId(currentPostId)
+  : parentId
 
-const currentPost = !isCurrentSubpost ? await getPostById(currentPostId) : null
-const subposts = await getSubpostsForParent(rootParentId)
-const parentPost = isCurrentSubpost ? await getParentPost(currentPostId) : null
+// Collection-specific functions
+const getItemById = collection === 'works' ? getWorkById : getPostById
+const getSubitemsForParent =
+  collection === 'works' ? getSubworksForParent : getSubpostsForParent
+const getParentItem = collection === 'works' ? getParentWork : getParentPost
+const getItemReadingTime =
+  collection === 'works' ? getWorkReadingTime : getPostReadingTime
+const getCombinedItemReadingTime =
+  collection === 'works' ? getCombinedWorkReadingTime : getCombinedReadingTime
+
+const currentPost = !isCurrentSubpost ? await getItemById(currentPostId) : null
+const subposts = await getSubitemsForParent(rootParentId)
+const parentPost = isCurrentSubpost ? await getParentItem(currentPostId) : null
 
 const activePost = parentPost || currentPost
 const isActivePost = activePost?.id === currentPostId
 
 const activePostReadingTime = activePost
-  ? await getPostReadingTime(activePost.id)
+  ? await getItemReadingTime(activePost.id)
   : null
 const activePostCombinedReadingTime =
   activePost && subposts.length > 0
-    ? await getCombinedReadingTime(activePost.id)
+    ? await getCombinedItemReadingTime(activePost.id)
     : null
 const subpostsWithReadingTime = await Promise.all(
   subposts.map(async (subpost) => ({
     ...subpost,
-    readingTime: await getPostReadingTime(subpost.id),
+    readingTime: await getItemReadingTime(subpost.id),
   })),
 )
+
+// When viewing parent work with chapters, highlight the first chapter
+const firstChapter = subposts.length > 0 ? subposts[0] : null
+const shouldHighlightFirstChapter = !isCurrentSubpost && firstChapter && subposts.length > 0
 
 const currentSubpostDetails = isCurrentSubpost
   ? subpostsWithReadingTime.find((subpost) => subpost.id === currentPostId)
@@ -64,7 +85,7 @@ const currentSubpostDetails = isCurrentSubpost
             <div class="flex flex-grow flex-col truncate text-sm">
               <span class="text-muted-foreground truncate">
                 {currentSubpostDetails
-                  ? currentSubpostDetails.data.title
+                  ? (currentSubpostDetails.data.title || `Chapter ${(currentSubpostDetails.data.order ?? 0)}`)
                   : activePost?.data.title}
               </span>
             </div>
@@ -86,7 +107,7 @@ const currentSubpostDetails = isCurrentSubpost
             <ul class="flex list-none flex-col gap-y-1 px-4 pb-4">
               {activePost && (
                 <li>
-                  {isActivePost ? (
+                  {(isActivePost && !shouldHighlightFirstChapter) ? (
                     <div class="text-foreground bg-muted mobile-subposts-active-item flex items-center gap-2 rounded-md px-2 py-1.5 text-sm font-medium">
                       <Icon
                         name="lucide:book-open-text"
@@ -97,24 +118,20 @@ const currentSubpostDetails = isCurrentSubpost
                         <span class="line-clamp-2">
                           {activePost.data.title}
                         </span>
-                        {activePostReadingTime && (
-                          <span class="text-muted-foreground/80 text-xs">
-                            {activePostReadingTime}
-                            {activePostCombinedReadingTime &&
-                              activePostCombinedReadingTime !==
-                                activePostReadingTime && (
-                                <span>
-                                  {' '}
-                                  ({activePostCombinedReadingTime} total)
-                                </span>
-                              )}
-                          </span>
-                        )}
+                        <span class="text-muted-foreground/80 text-xs">
+                          {activePostCombinedReadingTime &&
+                          activePostCombinedReadingTime !==
+                            activePostReadingTime ? (
+                            <>{activePostCombinedReadingTime}</>
+                          ) : (
+                            <>{activePostReadingTime}</>
+                          )}
+                        </span>
                       </div>
                     </div>
                   ) : (
                     <a
-                      href={`/blog/${activePost.id}`}
+                      href={`/${collection}/${activePost.id}`}
                       class="mobile-subposts-link hover:text-foreground text-muted-foreground hover:bg-muted/50 flex items-center gap-2 rounded-md px-2 py-1.5 text-sm transition-colors"
                     >
                       <Icon
@@ -128,15 +145,13 @@ const currentSubpostDetails = isCurrentSubpost
                         </span>
                         {activePostReadingTime && (
                           <span class="text-muted-foreground/80 hover:text-foreground/80 text-xs">
-                            {activePostReadingTime}
                             {activePostCombinedReadingTime &&
-                              activePostCombinedReadingTime !==
-                                activePostReadingTime && (
-                                <span>
-                                  {' '}
-                                  ({activePostCombinedReadingTime} total)
-                                </span>
-                              )}
+                            activePostCombinedReadingTime !==
+                              activePostReadingTime ? (
+                              <>{activePostCombinedReadingTime}</>
+                            ) : (
+                              <>{activePostReadingTime}</>
+                            )}
                           </span>
                         )}
                       </div>
@@ -148,7 +163,7 @@ const currentSubpostDetails = isCurrentSubpost
               {subpostsWithReadingTime.length > 0 && (
                 <div class="ml-4 space-y-1">
                   {subpostsWithReadingTime.map((subpost) =>
-                    currentPostId === subpost.id ? (
+                    currentPostId === subpost.id || (shouldHighlightFirstChapter && subpost.id === firstChapter?.id) ? (
                       <div class="text-foreground bg-muted mobile-subposts-active-item flex items-center gap-2 rounded-md px-2 py-1.5 text-sm font-medium">
                         <Icon
                           name="lucide:file-text"
@@ -156,7 +171,7 @@ const currentSubpostDetails = isCurrentSubpost
                           aria-hidden="true"
                         />
                         <div class="flex flex-col">
-                          <span class="line-clamp-2">{subpost.data.title}</span>
+                          <span class="line-clamp-2">{subpost.data.title || `Chapter ${(subpost.data.order ?? 0)}`}</span>
                           <span class="text-muted-foreground/80 text-xs">
                             {subpost.readingTime}
                           </span>
@@ -164,7 +179,7 @@ const currentSubpostDetails = isCurrentSubpost
                       </div>
                     ) : (
                       <a
-                        href={`/blog/${subpost.id}`}
+                        href={`/${collection}/${subpost.id}`}
                         class="mobile-subposts-link hover:text-foreground text-muted-foreground hover:bg-muted/50 flex items-center gap-2 rounded-md px-2 py-1.5 text-sm transition-colors"
                       >
                         <Icon
@@ -173,7 +188,7 @@ const currentSubpostDetails = isCurrentSubpost
                           aria-hidden="true"
                         />
                         <div class="flex flex-col">
-                          <span class="line-clamp-2">{subpost.data.title}</span>
+                          <span class="line-clamp-2">{subpost.data.title || `Chapter ${(subpost.data.order ?? 0) }`}</span>
                           <span class="text-muted-foreground/80 hover:text-foreground/80 text-xs">
                             {subpost.readingTime}
                           </span>

@@ -4,26 +4,26 @@ import Link from '@/components/Link.astro'
 import PageHead from '@/components/PageHead.astro'
 import { badgeVariants } from '@/components/ui/badge'
 import Layout from '@/layouts/Layout.astro'
-import { getSortedTags } from '@/lib/data-utils'
+import { getSortedFandoms } from '@/lib/data-utils'
 import { Icon } from 'astro-icon/components'
 
-const sortedTags = await getSortedTags()
+const sortedFandoms = await getSortedFandoms()
 ---
 
 <Layout class="max-w-3xl">
-  <PageHead slot="head" title="Tags" />
-  <Breadcrumbs items={[{ label: 'Tags', icon: 'lucide:tags' }]} />
+  <PageHead slot="head" title="Fandoms" />
+  <Breadcrumbs items={[{ label: 'Fandoms', icon: 'lucide:star' }]} />
 
   <div class="flex flex-col gap-4">
     <div class="flex flex-wrap gap-2">
       {
-        sortedTags.map(({ tag, count }) => (
+        sortedFandoms.map(({ fandom, count }) => (
           <Link
-            href={`/tags/${encodeURI(tag)}`}
+            href={`/fandoms/${fandom}`}
             class={badgeVariants({ variant: 'muted' })}
           >
             <Icon name="lucide:hash" class="size-3" />
-            {tag}
+            {fandom}
             <span class="text-muted-foreground ml-1.5">({count})</span>
           </Link>
         ))

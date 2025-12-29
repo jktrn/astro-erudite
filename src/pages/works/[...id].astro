@@ -1,0 +1,463 @@
+---
+import Breadcrumbs from '@/components/Breadcrumbs.astro'
+import Link from '@/components/Link.astro'
+import PostHead from '@/components/PostHead.astro'
+import PostNavigation from '@/components/PostNavigation.astro'
+import SubpostsHeader from '@/components/SubpostsHeader.astro'
+import SubpostsSidebar from '@/components/SubpostsSidebar.astro'
+import TOCHeader from '@/components/TOCHeader.astro'
+import TOCSidebar from '@/components/TOCSidebar.astro'
+import { badgeVariants } from '@/components/ui/badge'
+import { Button } from '@/components/ui/button'
+import Layout from '@/layouts/Layout.astro'
+import {
+  getAdjacentWorks,
+  getAllWorksAndSubworks,
+  getCombinedWorkReadingTime,
+  getParentWork,
+  getParentWorkId,
+  getSubworkCount,
+  getSubworksForParent,
+  getWorkReadingTime,
+  hasSubworks,
+  isSubwork,
+  parseAuthors,
+} from '@/lib/data-utils'
+import {
+  categoryConfig,
+  formatDate,
+  ratingIcons,
+  ratingVariants,
+  statusConfig,
+} from '@/lib/utils'
+import { Icon } from 'astro-icon/components'
+import { Image } from 'astro:assets'
+import { render } from 'astro:content'
+
+export async function getStaticPaths() {
+  const works = await getAllWorksAndSubworks()
+  return works.map((work) => ({
+    params: { id: work.id },
+    props: work,
+  }))
+}
+
+const work = Astro.props
+const currentWorkId = Astro.params.id
+const { Content, headings } = await render(work)
+const authors = await parseAuthors(work.data.authors ?? [])
+
+const isCurrentSubwork = isSubwork(currentWorkId)
+const navigation = await getAdjacentWorks(currentWorkId)
+const parentWork = isCurrentSubwork ? await getParentWork(currentWorkId) : null
+
+const hasChapters = await hasSubworks(currentWorkId)
+const subworkCount = !isCurrentSubwork
+  ? await getSubworkCount(currentWorkId)
+  : 0
+const workReadingTime = await getWorkReadingTime(currentWorkId)
+const combinedReadingTime =
+  hasChapters && !isCurrentSubwork
+    ? await getCombinedWorkReadingTime(currentWorkId)
+    : null
+
+// For parent works with chapters, render the first chapter's content
+const subworks = hasChapters && !isCurrentSubwork ? await getSubworksForParent(currentWorkId) : []
+const firstChapter = subworks.length > 0 ? subworks[0] : null
+const firstChapterContent = firstChapter ? await render(firstChapter) : null
+const secondChapter = subworks.length > 1 ? subworks[1] : null
+---
+
+<Layout>
+  <PostHead slot="head" post={work} />
+  {
+    (hasChapters || isCurrentSubwork) && (
+      <SubpostsHeader
+        slot="subposts-navigation"
+        collection="works"
+        parentId={
+          isCurrentSubwork ? getParentWorkId(currentWorkId) : currentWorkId
+        }
+      />
+    )
+  }
+  {
+    headings?.length > 0 &&
+      !(
+        isCurrentSubwork &&
+        headings.length === 1 &&
+        headings[0].text === work.data.title
+      ) && <TOCHeader slot="table-of-contents" headings={headings} />
+  }
+
+  <section
+    class="grid grid-cols-[minmax(0px,1fr)_min(calc(var(--breakpoint-md)-2rem),100%)_minmax(0px,1fr)] gap-y-6"
+  >
+    <div class="col-start-2">
+      <Breadcrumbs
+        items={[
+          { href: '/works', label: 'Works', icon: 'lucide:library-big' },
+          ...(isCurrentSubwork && parentWork
+            ? [
+                {
+                  href: `/works/${parentWork.id}`,
+                  label: parentWork.data.title,
+                  icon: 'lucide:book-open',
+                },
+                {
+                  href: `/works/${currentWorkId}`,
+                  label: work.data.title || `Chapter ${(work.data.order ?? 0)}`,
+                  icon: 'lucide:file-text',
+                },
+              ]
+            : [
+                {
+                  href: `/works/${currentWorkId}`,
+                  label: work.data.title,
+                  icon: 'lucide:book-open-text',
+                },
+              ]),
+        ]}
+      />
+    </div>
+
+    {
+      work.data.image && (
+        <Image
+          src={work.data.image}
+          alt={work.data.title}
+          width={1200}
+          height={630}
+          class="col-span-full mx-auto w-full max-w-5xl object-cover"
+        />
+      )
+    }
+
+    <section class="col-start-2 flex flex-col gap-y-6 text-center">
+      <div class="flex flex-col">
+        <h1
+          class="mb-2 scroll-mt-31 font-serif text-3xl leading-tight font-medium sm:text-4xl"
+          id="work-title"
+        >
+          {
+            isCurrentSubwork && work.data.order !== undefined
+              ? `Chapter ${work.data.order}${work.data.title.length > 0 ? `: ${work.data.title}` : ''}`
+              : work.data.title
+          }
+        </h1>
+
+        <div
+          class="text-muted-foreground divide-border mb-4 flex flex-col items-center justify-center divide-y text-xs sm:flex-row sm:flex-wrap sm:divide-x sm:divide-y-0 sm:text-sm"
+        >
+          {
+            authors.length > 0 && (
+              <div class="flex w-full items-center justify-center gap-x-2 py-2 sm:w-fit sm:px-2 sm:py-0 first:sm:pl-0 last:sm:pr-0">
+                {authors.map((author) => (
+                  <div class="flex items-center gap-x-1.5">
+                    <Image
+                      src={author.avatar}
+                      alt={author.name}
+                      width={20}
+                      height={20}
+                      class="rounded-full"
+                    />
+                    {author.isRegistered ? (
+                      <Link
+                        href={`/authors/${author.id}`}
+                        underline
+                        class="text-foreground"
+                      >
+                        <span>{author.name}</span>
+                      </Link>
+                    ) : (
+                      <span>{author.name}</span>
+                    )}
+                  </div>
+                ))}
+              </div>
+            )
+          }
+
+          <div
+            class="flex w-full items-center justify-center gap-2 py-2 sm:w-fit sm:px-2 sm:py-0 first:sm:pl-0 last:sm:pr-0"
+          >
+            <span class="flex items-center gap-1"
+          ><Icon name="lucide:calendar" class="size-3" />
+              {formatDate(work.data.datePublished)}{
+                work.data.dateUpdated &&
+                  ` → ${formatDate(work.data.dateUpdated)}`
+              }
+            </span>
+          </div>
+
+          <div
+            class="flex w-full items-center justify-center gap-2 py-2 sm:w-fit sm:px-2 sm:py-0 first:sm:pl-0 last:sm:pr-0"
+          >
+            <span class="flex items-center gap-1"><Icon name="lucide:clock" class="size-3" />
+              {
+                combinedReadingTime &&
+                  combinedReadingTime !== workReadingTime ? 
+                     <>{combinedReadingTime}</>
+                   : <>{workReadingTime}</>
+              }
+            </span>
+          </div>
+          {work.data.status &&
+          <div
+            class="flex w-full items-center justify-center gap-2 py-2 sm:w-fit sm:px-2 sm:py-0 first:sm:pl-0 last:sm:pr-0"
+          >
+            {work.data.status && (() => {
+          const config = statusConfig[work.data.status] || { variant: 'default-outline', icon: 'lucide:circle' }
+          return (
+            <span class="flex items-center gap-1">
+              <Icon name={config.icon} class="size-3" />
+              {work.data.status}
+            </span>
+          )
+        })()}
+          </div>
+          }
+
+          {
+            subworkCount > 0 && (
+              <div class="flex w-full items-center justify-center gap-1 py-2 sm:w-fit sm:px-2 sm:py-0 first:sm:pl-0 last:sm:pr-0">
+                <Icon name="lucide:file-text" class="size-3" />
+                {subworkCount} chapter{subworkCount === 1 ? '' : 's'}
+              </div>
+            )
+          }
+        </div>
+
+        {work.data.rating && work.data.category && work.data.fandoms && work.data.relationships && 
+        <div class="mb-2 flex flex-wrap justify-center gap-2">
+          {
+            work.data.rating && (
+              <span
+                class={badgeVariants({
+                  variant:
+                    ratingVariants[work.data.rating] || 'default-outline',
+                })}
+              >
+                <Icon
+                  name={ratingIcons[work.data.rating] || 'lucide:info'}
+                  class="size-3"
+                />
+                {work.data.rating}
+              </span>
+            )
+          }
+          {
+            work.data.category &&
+              work.data.category.map((category: string) => {
+                const config = categoryConfig[category] || {
+                  variant: 'secondary-outline',
+                  icon: 'lucide:circle',
+                }
+                return (
+                  <span class={badgeVariants({ variant: config.variant })}>
+                    <Icon name={config.icon} class="size-3" />
+                    {category}
+                  </span>
+                )
+              })
+          }
+          <!-- {
+            (() => {
+              const config = statusConfig[work.data.status] || {
+                variant: 'default-outline',
+                icon: 'lucide:circle',
+              }
+              return (
+                <span class={badgeVariants({ variant: config.variant })}>
+                  <Icon name={config.icon} class="size-3" />
+                  {work.data.status}
+                </span>
+              )
+            })()
+          } -->
+
+          {
+          work.data.fandoms &&
+            work.data.fandoms.length > 0 &&
+            work.data.fandoms.map((fandom: string) => (
+              <a
+                href={`/fandoms/${fandom}`}
+                class={badgeVariants({ variant: 'default-outline' })}
+              >
+                <Icon name="lucide:star" class="size-3" />
+                {fandom}
+              </a>
+            ))
+        }
+          {
+          work.data.relationships &&
+            work.data.relationships.length > 0 &&
+            work.data.relationships.map((relationship: string) => (
+              <a
+                href={`/ships/${encodeURI(relationship)}`}
+                class={badgeVariants({ variant: 'secondary-outline' })}
+              >
+                <Icon
+                  name={
+                    relationship.includes('&')
+                      ? 'lucide:handshake'
+                      : 'lucide:heart'
+                  }
+                  class="size-3"
+                />
+                {relationship}
+              </a>
+            ))
+        }
+        </div>
+        }
+        <!-- <div class="mb-2 flex flex-wrap justify-center gap-2">
+          
+        </div> -->
+        {
+          work.data.warnings && work.data.warnings.length > 0 && (
+            <div class="mb-2 flex flex-wrap justify-center gap-2">
+              {work.data.warnings.map((warning: string) => (
+                <span class={badgeVariants({ variant: 'destructive-outline' })}>
+                  <Icon name="lucide:alert-triangle" class="size-3" />
+                  {warning}
+                </span>
+              ))}
+            </div>
+          )
+        }
+        {work.data.tags &&
+        <div class="flex flex-wrap justify-center gap-2">
+          
+              {work.data.tags.length > 0 &&
+              work.data.tags.map((tag) => (
+                <a
+                  href={`/tags/${encodeURI(tag)}`}
+                  class={badgeVariants({ variant: 'outline' })}
+                >
+                  <Icon name="lucide:hash" class="size-3" />
+                  {tag}
+                </a>
+              ))}
+          
+        </div>
+        }
+      </div>
+
+      
+      <div class={!isCurrentSubwork && !hasChapters ? `xl:hidden` : ''}>
+        {(isCurrentSubwork || hasChapters) && (
+          <PostNavigation
+            collection="works"
+            newerPost={
+              isCurrentSubwork 
+                ? navigation.newer 
+                : hasChapters && secondChapter 
+                  ? secondChapter 
+                  : undefined
+            }
+            olderPost={isCurrentSubwork || hasChapters ? navigation.older : undefined}
+            parentPost={isCurrentSubwork || hasChapters ? navigation.parent : undefined}
+          />
+        )}
+      </div>
+    </section>
+
+    {
+      headings?.length > 0 &&
+        !(
+          isCurrentSubwork &&
+          headings.length === 1 &&
+          headings[0].text === work.data.title
+        ) && (
+          <TOCSidebar
+            sections={[
+              {
+                type: 'parent',
+                title: work.data.title,
+                headings: headings.map((heading) => ({
+                  slug: heading.slug,
+                  text: heading.text,
+                  depth: heading.depth,
+                })),
+              },
+            ]}
+            currentPostId={currentWorkId}
+          />
+        )
+    }
+
+    <article
+      class="prose col-start-2 max-w-none font-serif text-base/relaxed sm:text-[0.9em]/relaxed mt-2"
+    >
+      {firstChapterContent ? <firstChapterContent.Content /> : <Content />}
+      <p class="font-sans text-sm/relaxed sm:text-xs/relaxed mt-14">If you liked this work, consider leaving kudos or a comment on <Link href={`https://archiveofourown.org/works/${isCurrentSubwork ? parentWork?.data.ao3Id : work.data.ao3Id}${isCurrentSubwork && work.data.ao3Id ? `/chapters/${work.data.ao3Id}` : ''}`} external>AO3</Link>.</p>
+    </article>
+
+    {
+      (hasChapters || isCurrentSubwork) && (
+        <SubpostsSidebar
+          collection="works"
+          parentId={
+            isCurrentSubwork ? getParentWorkId(currentWorkId) : currentWorkId
+          }
+          className="w-64"
+        />
+      )
+    }
+
+    <div class={!isCurrentSubwork && !hasChapters ? `col-start-2 xl:hidden` : 'col-start-2'}>
+        {(isCurrentSubwork || hasChapters) && (
+          <PostNavigation
+            collection="works"
+            newerPost={
+              isCurrentSubwork 
+                ? navigation.newer 
+                : hasChapters && secondChapter 
+                  ? secondChapter 
+                  : undefined
+            }
+            olderPost={isCurrentSubwork || hasChapters ? navigation.older : undefined}
+            parentPost={isCurrentSubwork || hasChapters ? navigation.parent : undefined}
+          />
+        )}
+      </div>
+  </section>
+
+  <Button
+    variant="outline"
+    size="icon"
+    className="group fixed right-8 bottom-8 z-50 hidden"
+    id="scroll-to-top"
+    title="Scroll to top"
+    aria-label="Scroll to top"
+  >
+    <Icon
+      name="lucide:arrow-up"
+      class="mx-auto size-4 transition-all group-hover:-translate-y-0.5"
+    />
+  </Button>
+
+  <script>
+    document.addEventListener('astro:page-load', () => {
+      const scrollToTopButton = document.getElementById('scroll-to-top')
+      const footer = document.querySelector('footer')
+
+      if (scrollToTopButton && footer) {
+        scrollToTopButton.addEventListener('click', () => {
+          window.scrollTo({ top: 0, behavior: 'smooth' })
+        })
+
+        window.addEventListener('scroll', () => {
+          const footerRect = footer.getBoundingClientRect()
+          const isFooterVisible = footerRect.top <= window.innerHeight
+
+          scrollToTopButton.classList.toggle(
+            'hidden',
+            window.scrollY <= 300 || isFooterVisible,
+          )
+        })
+      }
+    })
+  </script>
+</Layout>

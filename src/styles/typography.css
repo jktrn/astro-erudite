@@ -30,11 +30,15 @@
     @apply text-foreground text-base leading-7;
 
     :where(p):not(:where(.not-prose, .not-prose *)) {
-      @apply text-foreground/80 my-5;
+      @apply text-foreground/80 my-5 tracking-normal;
+    }
+
+    :where(span.newthought):not(:where(.not-prose, .not-prose *)) {
+      @apply [font-variant:small-caps] text-[1.1em] leading-none;
     }
 
     :where(h1, h2, h3, h4, h5, h6):not(:where(.not-prose, .not-prose *)) {
-      @apply text-foreground scroll-mt-32 font-medium xl:scroll-mt-20;
+      @apply text-foreground scroll-mt-32 font-medium xl:scroll-mt-20 tracking-normal;
     }
 
     :first-child:not(:where(.not-prose, .not-prose *)) {
@@ -63,11 +67,11 @@
     }
 
     :where(a):not(:where(.not-prose, .not-prose *)) {
-      @apply text-foreground decoration-muted-foreground hover:decoration-foreground font-medium break-words underline underline-offset-[3px] transition-colors;
+      @apply text-foreground decoration-muted-foreground hover:decoration-foreground font-medium break-words underline underline-offset-[3px] transition-colors tracking-normal;
     }
 
     :where(strong):not(:where(.not-prose, .not-prose *)) {
-      @apply text-foreground font-medium;
+      @apply text-foreground font-medium tracking-normal;
     }
 
     :where(ul):not(:where(.not-prose, .not-prose *)) {
@@ -80,7 +84,7 @@
     }
 
     :where(li):not(:where(.not-prose, .not-prose *)) {
-      @apply text-foreground/80 pl-2 [&>p]:my-0;
+      @apply text-foreground/80 pl-2 [&>p]:my-0 tracking-normal;
     }
 
     :where(ul ul, ol ol, ul ol, ol ul):not(:where(.not-prose, .not-prose *)) {
@@ -96,8 +100,16 @@
       @apply [&_*]:text-muted-foreground small my-6 border-l-2 pl-6;
     }
 
-    :where(hr):not(:where(.not-prose, .not-prose *)) {
+    :where(hr):not(:where(.not-prose, .not-prose *, .summary *, details *)) {
       @apply my-8 border-t;
+    }
+
+    :where(details hr) {
+      @apply my-4 border-t;
+    }
+
+    :where(details *) {
+      @apply text-base/relaxed sm:text-sm/relaxed;
     }
 
     :where(table):not(:where(.not-prose, .not-prose *)) {

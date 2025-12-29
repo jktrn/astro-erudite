@@ -1,11 +1,15 @@
+@import url('https://fonts.googleapis.com/css2?family=Crimson+Text:ital,wght@0,400;0,600;0,700;1,400;1,600;1,700&family=EB+Garamond:ital,wght@0,400..800;1,400..800&family=Roboto+Serif:ital,opsz,wght@0,8..144,100..900;1,8..144,100..900&display=swap');
 @import 'tailwindcss';
 
 @custom-variant dark (&:where([data-theme=dark], [data-theme=dark] *));
+
 
 @theme inline {
   --font-sans:
     Geist, ui-sans-serif, system-ui, sans-serif, 'Apple Color Emoji',
     'Segoe UI Emoji', 'Segoe UI Symbol', 'Noto Color Emoji';
+  --font-serif:
+    'Roboto Serif', 'Junicode', 'Crimson Text', 'EB Garamond', serif;
   --font-mono:
     Geist Mono, ui-monospace, SFMono-Regular, Menlo, Monaco, Consolas,
     'Liberation Mono', 'Courier New', monospace;
@@ -28,9 +32,17 @@
 
 @font-face {
   font-family: 'Geist';
-  src: url('/fonts/GeistVF.woff2') format('woff2-variations');
+  src: url('/fonts/Geist[wght].woff2') format('woff2-variations');
   font-weight: 100 900;
   font-style: normal;
+  font-display: swap;
+}
+
+@font-face {
+  font-family: 'Geist';
+  src: url('/fonts/Geist-Italic[wght].woff2') format('woff2-variations');
+  font-weight: 100 900;
+  font-style: italic;
   font-display: swap;
 }
 
@@ -42,28 +54,45 @@
   font-display: swap;
 }
 
+@font-face {
+  font-family: Junicode;
+  src: url('/fonts/JunicodeVF-Roman.woff2') format("woff2-variations");
+  font-weight: 300 700;
+  font-stretch: 75% 125%;
+  font-style: normal;
+}
+@font-face {
+  font-family: Junicode;
+  src: url('/fonts/JunicodeVF-Italic.woff2') format("woff2-variations");
+  font-weight: 300 700;
+  font-stretch: 75% 125%;
+  font-style: italic;
+}
+
 :root {
-  --background: oklch(1 0 0);
-  --foreground: oklch(0.145 0 0);
-  --primary: oklch(0.205 0 0);
-  --primary-foreground: oklch(0.985 0 0);
-  --muted: oklch(0.97 0 0);
-  --muted-foreground: oklch(0.556 0 0);
-  --destructive: oklch(0.577 0.245 27.325);
-  --border: oklch(0.922 0 0);
-  --ring: oklch(0.708 0 0);
+  --background: oklch(0.9232 0.0026 48.7171);
+  --foreground: oklch(0 0 0);
+  --primary: oklch(0.5854 0.2041 277.1173);
+  --primary-foreground: oklch(1.0000 0 0);
+  --muted: oklch(0.9702 0 0);
+  --muted-foreground: oklch(0.4386 0 0);
+  --destructive: oklch(0.6368 0.2078 25.3313);
+  --destructive-foreground: oklch(1.0000 0 0);
+  --border: oklch(0.8687 0.0043 56.3660);
+  --ring: oklch(0.5854 0.2041 277.1173);
 }
 
 [data-theme='dark'] {
-  --background: oklch(0.145 0 0);
-  --foreground: oklch(0.985 0 0);
-  --primary: oklch(0.922 0 0);
-  --primary-foreground: oklch(0.205 0 0);
-  --muted: oklch(0.269 0 0);
-  --muted-foreground: oklch(0.708 0 0);
-  --destructive: oklch(0.704 0.191 22.216);
-  --border: oklch(1 0 0 / 10%);
-  --ring: oklch(0.556 0 0);
+  --background: oklch(0.1450 0 0);
+  --foreground: oklch(0.9850 0 0);
+  --primary: oklch(0.6801 0.1583 276.9349);
+  --primary-foreground: oklch(0.2244 0.0074 67.4370);
+  --muted: oklch(0.2940 0.0130 272.9312);
+  --muted-foreground: oklch(0.7058 0 0);
+  --destructive: oklch(0.6368 0.2078 25.3313);
+  --destructive-foreground: oklch(0.2244 0.0074 67.4370);
+  --border: oklch(0.3289 0.0092 268.3843);
+  --ring: oklch(0.6801 0.1583 276.9349);
 }
 
 @layer base {

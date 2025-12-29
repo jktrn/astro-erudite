@@ -1,0 +1,234 @@
+---
+import Link from '@/components/Link.astro'
+import AvatarComponent from '@/components/ui/avatar'
+import { Badge, badgeVariants } from '@/components/ui/badge'
+import { Separator } from '@/components/ui/separator'
+import {
+  getCombinedWorkReadingTime,
+  getSubworkCount,
+  isSubwork,
+  parseAuthors,
+} from '@/lib/data-utils'
+import {
+  categoryConfig,
+  formatDate,
+  ratingIcons,
+  ratingVariants,
+  statusConfig,
+} from '@/lib/utils'
+import { Icon } from 'astro-icon/components'
+import { Image } from 'astro:assets'
+import type { CollectionEntry } from 'astro:content'
+import { marked } from 'marked'
+
+interface Props {
+  work: CollectionEntry<'works'>
+}
+
+const { work } = Astro.props
+const summaryHtml = await marked.parse(work.data.summary)
+const authors = await parseAuthors(work.data.authors ?? [])
+const readTime = await getCombinedWorkReadingTime(work.id)
+const subworkCount = !isSubwork(work.id) ? await getSubworkCount(work.id) : 0
+---
+
+<article class="group mb-12 transition-colors duration-300 ease-in-out">
+  <div class="flex flex-col gap-4 sm:flex-row">
+    {
+      work.data.image && (
+        <div class="w-full sm:max-w-3xs sm:shrink-0">
+          <Image
+            src={work.data.image}
+            alt={work.data.title}
+            width={1200}
+            height={630}
+            class="object-cover"
+          />
+        </div>
+      )
+    }
+    <div class="grow">
+      <h3
+        class="mb-2 flex items-center font-serif text-2xl/tight font-medium tracking-[-0.01em] hover:underline hover:decoration-1"
+      >
+        <Link href={`/${work.collection}/${work.id}`}>{work.data.title}</Link>
+        <Icon
+          name="lucide:arrow-right"
+          class="ml-2 size-4 -rotate-45 transform align-bottom text-sm opacity-50 transition-transform group-hover:rotate-0"
+        />
+      </h3>
+      <div
+        class="text-muted-foreground mb-2 flex flex-wrap items-center gap-2 text-xs"
+      >
+        {
+          authors.length > 0 && (
+            <>
+              {authors.map((author) => (
+                <div class="flex items-center gap-x-1.5">
+                  <AvatarComponent
+                    client:load
+                    src={author.avatar}
+                    alt={author.name}
+                    fallback={author.name[0]}
+                    className="size-5 rounded-full"
+                  />
+                  <span>{author.name}</span>
+                </div>
+              ))}
+              <Separator orientation="vertical" className="h-4!" />
+            </>
+          )
+        }
+        <!-- <span>{work.data.rating}</span>
+        <span>&bull;</span>
+        <span>{work.data.category.join(', ')}</span>
+        <span>&bull;</span>
+        <span>{work.data.status}</span>
+        <Separator orientation="vertical" className="h-4!" /> -->
+        <span class="flex items-center gap-1"
+          ><Icon name="lucide:calendar" class="size-3" />{
+            formatDate(work.data.datePublished)
+          }{
+            work.data.dateUpdated && ` → ${formatDate(work.data.dateUpdated)}`
+          }</span
+        ><Separator orientation="vertical" className="h-4!" />
+        <!-- <span>{wordCount.toLocaleString()} words</span>
+        <span>&bull;</span> -->
+        <span class="flex items-center gap-1"
+          ><Icon name="lucide:clock" class="size-3" />{readTime}</span
+        >
+        {
+          subworkCount > 0 && (
+            <>
+              <Separator orientation="vertical" className="h-4!" />
+              <span class="flex items-center gap-1">
+                <Icon name="lucide:file-text" class="size-3" />
+                {subworkCount} chapter{subworkCount === 1 ? '' : 's'}
+              </span>
+            </>
+          )
+        }
+        <Separator orientation="vertical" className="h-4!" />
+        {
+          work.data.status &&
+            (() => {
+              const config = statusConfig[work.data.status] || {
+                variant: 'default-outline',
+                icon: 'lucide:circle',
+              }
+              return (
+                <span class="flex items-center gap-1">
+                  <Icon name={config.icon} class="size-3" />
+                  {work.data.status}
+                </span>
+              )
+            })()
+        }
+      </div>
+      <div
+        class="prose summary pt-2 font-serif text-sm/normal"
+        set:html={summaryHtml}
+      />
+      <div class="flex flex-wrap gap-2">
+        {
+          work.data.rating && (
+            <Badge
+              variant={ratingVariants[work.data.rating] || 'default-outline'}
+            >
+              <Icon
+                name={ratingIcons[work.data.rating] || 'lucide:info'}
+                class="size-3"
+              />
+              {work.data.rating}
+            </Badge>
+          )
+        }
+        {
+          work.data.warnings !== undefined && work.data.warnings.length > 0 && (
+            <Badge variant="destructive-outline">
+              <Icon name="lucide:alert-triangle" class="size-3" />
+              Content Warning{work.data.warnings.length > 1 ? 's' : ''}
+            </Badge>
+          )
+        }
+        {
+          work.data.category &&
+            work.data.category.map((category: string) => {
+              const config = categoryConfig[category] || {
+                variant: 'secondary-outline',
+                icon: 'lucide:circle',
+              }
+              return (
+                <Badge variant={config.variant}>
+                  <Icon name={config.icon} class="size-3" />
+                  {category}
+                </Badge>
+              )
+            })
+        }
+        <!-- {(() => {
+          const config = statusConfig[work.data.status] || { variant: 'default-outline', icon: 'lucide:circle' }
+          return (
+            <Badge variant={config.variant}>
+              <Icon name={config.icon} class="size-3" />
+              {work.data.status}
+            </Badge>
+          )
+        })()} -->
+        {
+          work.data.fandoms &&
+            work.data.fandoms.length > 0 &&
+            work.data.fandoms.map((fandom: string) => (
+              <a
+                href={`/fandoms/${fandom}`}
+                class={badgeVariants({ variant: 'default-outline' })}
+              >
+                <Icon name="lucide:star" class="size-3" />
+                {fandom}
+              </a>
+            ))
+        }
+        {
+          work.data.relationships &&
+            work.data.relationships.length > 0 &&
+            work.data.relationships.map((relationship: string) => (
+              <a
+                href={`/ships/${encodeURI(relationship)}`}
+                class={badgeVariants({ variant: 'secondary-outline' })}
+              >
+                <Icon
+                  name={
+                    relationship.includes('&')
+                      ? 'lucide:handshake'
+                      : 'lucide:heart'
+                  }
+                  class="size-3"
+                />
+                {relationship}
+              </a>
+            ))
+        }
+      </div>
+
+      <!-- <div class="mb-2 flex flex-wrap gap-2">
+        
+      </div> -->
+
+      {
+        work.data.tags && (
+          <div class="mt-2 flex flex-wrap gap-2">
+            {work.data.tags.map((tag: string) => (
+              <a
+                href={`/tags/${encodeURI(tag)}`}
+                class={badgeVariants({ variant: 'outline' })}
+              >
+                <Icon name="lucide:hash" class="size-3" />
+                {tag}
+              </a>
+            ))}
+          </div>
+        )
+      }
+    </div>
+  </div>
+</article>

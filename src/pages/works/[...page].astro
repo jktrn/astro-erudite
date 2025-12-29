@@ -1,0 +1,60 @@
+---
+import Breadcrumbs from '@/components/Breadcrumbs.astro'
+import PageHead from '@/components/PageHead.astro'
+import WorkCard from '@/components/WorkCard.astro'
+import PaginationComponent from '@/components/ui/pagination'
+import { SITE } from '@/consts'
+import Layout from '@/layouts/Layout.astro'
+import { getAllWorks } from '@/lib/data-utils'
+import type { PaginateFunction } from 'astro'
+
+export async function getStaticPaths({
+  paginate,
+}: {
+  paginate: PaginateFunction
+}) {
+  const allWorks = await getAllWorks()
+  return paginate(allWorks, { pageSize: SITE.postsPerPage })
+}
+
+const { page } = Astro.props
+---
+
+<Layout class="max-w-3xl">
+  <PageHead slot="head" title="Works" />
+  <Breadcrumbs
+    items={[
+      { label: 'Works', href: '/works', icon: 'lucide:library-big' },
+      { label: `Page ${page.currentPage}`, icon: 'lucide:book-copy' },
+    ]}
+  />
+
+  <div class="flex min-h-[calc(100vh-18rem)] flex-col">
+    <section class="mt-8">
+    <h2 class="mb-4 text-3xl font-semibold">{(page.currentPage - 1) * SITE.postsPerPage + 1} - {Math.min(page.currentPage * SITE.postsPerPage, page.total)} of {page.total} work{page.total === 1 ? '' : 's'}</h2>
+    <ul class="flex flex-col gap-4">
+      {
+        page.data.map((work, index) => (
+          <li>
+            <WorkCard work={work} />
+            {index < page.data.length - 1 && (
+              <div class="mb-8 flex items-center justify-center gap-4">
+                <div class="bg-muted-foreground/25 dark:bg-muted/100 h-px w-16" />
+                <div class="bg-muted-foreground/25 dark:bg-muted/100 h-1 w-1 rotate-45" />
+                <div class="bg-muted-foreground/25 dark:bg-muted/100 h-px w-16" />
+              </div>
+            )}
+          </li>
+        ))
+      }
+    </ul>
+    </section>
+  </div>
+
+  <PaginationComponent
+    currentPage={page.currentPage}
+    totalPages={page.lastPage}
+    baseUrl="/works/"
+    client:load
+  />
+</Layout>

@@ -123,10 +123,14 @@ const tocSections = await getTOCSections(currentPostId)
     <section class="col-start-2 flex flex-col gap-y-6 text-center">
       <div class="flex flex-col">
         <h1
-          class="mb-2 scroll-mt-31 text-3xl leading-tight font-medium sm:text-4xl"
+          class="mb-2 scroll-mt-31 font-sans text-3xl leading-tight font-medium sm:text-4xl"
           id="post-title"
         >
-          {post.data.title}
+          {
+            isCurrentSubpost && post.data.order !== undefined
+              ? `Chapter ${post.data.order + 1}: ${post.data.title}`
+              : post.data.title
+          }
         </h1>
 
         <div
@@ -164,13 +168,18 @@ const tocSections = await getTOCSections(currentPostId)
           <div
             class="flex w-full items-center justify-center gap-2 py-2 sm:w-fit sm:px-2 sm:py-0 first:sm:pl-0 last:sm:pr-0"
           >
-            <span>{formatDate(post.data.date)}</span>
+            <span class="flex items-center gap-1"
+              ><Icon name="lucide:calendar" class="size-3" />{
+                formatDate(post.data.date)
+              }</span
+            >
           </div>
 
           <div
             class="flex w-full items-center justify-center gap-2 py-2 sm:w-fit sm:px-2 sm:py-0 first:sm:pl-0 last:sm:pr-0"
           >
-            <span>
+            <span class="flex items-center gap-1">
+              <Icon name="lucide:clock" class="size-3" />
               {postReadingTime}
               {
                 combinedReadingTime &&
@@ -188,7 +197,7 @@ const tocSections = await getTOCSections(currentPostId)
             subpostCount > 0 && (
               <div class="flex w-full items-center justify-center gap-1 py-2 sm:w-fit sm:px-2 sm:py-0 first:sm:pl-0 last:sm:pr-0">
                 <Icon name="lucide:file-text" class="size-3" />
-                {subpostCount} subpost{subpostCount === 1 ? '' : 's'}
+                {subpostCount} chapter{subpostCount === 1 ? '' : 's'}
               </div>
             )
           }
@@ -200,7 +209,7 @@ const tocSections = await getTOCSections(currentPostId)
               post.data.tags.map((tag) => (
                 <a
                   href={`/tags/${tag}`}
-                  class={badgeVariants({ variant: 'muted' })}
+                  class={badgeVariants({ variant: 'outline' })}
                 >
                   <Icon name="lucide:hash" class="size-3" />
                   {tag}
@@ -223,7 +232,9 @@ const tocSections = await getTOCSections(currentPostId)
       )
     }
 
-    <article class="prose col-start-2 max-w-none">
+    <article
+      class="prose col-start-2 max-w-none font-sans text-base/relaxed sm:text-sm/relaxed blog"
+    >
       <Content />
     </article>
 

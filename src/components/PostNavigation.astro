@@ -4,7 +4,7 @@ import { buttonVariants } from '@/components/ui/button'
 import { cn } from '@/lib/utils'
 import { Icon } from 'astro-icon/components'
 
-const { newerPost, olderPost, parentPost } = Astro.props
+const { newerPost, olderPost, parentPost, collection = 'blog' } = Astro.props
 const isSubpost = !!parentPost
 ---
 
@@ -15,7 +15,7 @@ const isSubpost = !!parentPost
   )}
 >
   <Link
-    href={olderPost ? `/blog/${olderPost.id}#post-title` : '#'}
+    href={olderPost ? `/${collection}/${olderPost.id}#post-title` : '#'}
     class={cn(
       buttonVariants({ variant: 'outline' }),
       'rounded-lg group flex items-center justify-start size-full',
@@ -29,12 +29,13 @@ const isSubpost = !!parentPost
     />
     <div class="flex flex-col items-start overflow-hidden text-wrap">
       <span class="text-muted-foreground text-left text-xs">
-        {isSubpost ? 'Previous Subpost' : 'Previous Post'}
+        {isSubpost ? 'Previous Chapter' : 'Previous Post'}
       </span>
       <span class="w-full text-left text-sm text-balance text-ellipsis">
         {
-          olderPost?.data.title ||
-            (isSubpost ? 'No older subpost' : "You're at the oldest post!")
+          olderPost
+            ? (olderPost.data.title || `Chapter ${(olderPost.data.order ?? 0)}`)
+            : (isSubpost ? 'No older chapter' : "You're at the oldest post!")
         }
       </span>
     </div>
@@ -43,7 +44,7 @@ const isSubpost = !!parentPost
   {
     isSubpost && (
       <Link
-        href={parentPost ? `/blog/${parentPost.id}#post-title` : '#'}
+        href={parentPost ? `/${collection}/${parentPost.id}#post-title` : '#'}
         class={cn(
           buttonVariants({ variant: 'outline' }),
           'group flex size-full items-center justify-center rounded-lg',
@@ -67,7 +68,7 @@ const isSubpost = !!parentPost
   }
 
   <Link
-    href={newerPost ? `/blog/${newerPost.id}#post-title` : '#'}
+    href={newerPost ? `/${collection}/${newerPost.id}#post-title` : '#'}
     class={cn(
       buttonVariants({ variant: 'outline' }),
       'rounded-lg group flex items-center justify-end size-full',
@@ -77,12 +78,13 @@ const isSubpost = !!parentPost
   >
     <div class="flex flex-col items-end overflow-hidden text-wrap">
       <span class="text-muted-foreground text-right text-xs">
-        {isSubpost ? 'Next Subpost' : 'Next Post'}
+        {isSubpost ? 'Next Chapter' : 'Next Post'}
       </span>
       <span class="w-full text-right text-sm text-balance text-ellipsis">
         {
-          newerPost?.data.title ||
-            (isSubpost ? 'No newer subpost' : "You're at the newest post!")
+          newerPost
+            ? (newerPost.data.title || `Chapter ${(newerPost.data.order ?? 0)}`)
+            : (isSubpost ? 'No newer chapter' : "You're at the newest post!")
         }
       </span>
     </div>

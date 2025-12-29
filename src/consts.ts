@@ -1,43 +1,35 @@
 import type { IconMap, SocialLink, Site } from '@/types'
 
 export const SITE: Site = {
-  title: 'astro-erudite',
+  title: 'serendure',
   description:
-    'astro-erudite is a opinionated, unstyled blogging template—built with Astro, Tailwind, and shadcn/ui.',
-  href: 'https://astro-erudite.vercel.app',
-  author: 'jktrn',
+    'A personal fan fiction archive by AO3 user serendure',
+  href: 'https://serendure.neocities.org',
+  author: 'serendure',
   locale: 'en-US',
   featuredPostCount: 2,
-  postsPerPage: 3,
+  postsPerPage: 10,
 }
 
 export const NAV_LINKS: SocialLink[] = [
   {
-    href: '/blog',
-    label: 'blog',
-  },
-  {
-    href: '/authors',
-    label: 'authors',
+    href: '/works',
+    label: 'works',
   },
   {
     href: '/about',
     label: 'about',
   },
+  {
+    href: '/blog',
+    label: 'blog',
+  }
 ]
 
 export const SOCIAL_LINKS: SocialLink[] = [
   {
-    href: 'https://github.com/jktrn',
-    label: 'GitHub',
-  },
-  {
-    href: 'https://twitter.com/enscry',
-    label: 'Twitter',
-  },
-  {
-    href: 'mailto:jason@enscribe.dev',
-    label: 'Email',
+    href: 'https://archiveofourown.org/users/serendure',
+    label: 'AO3',
   },
   {
     href: '/rss.xml',
@@ -52,4 +44,5 @@ export const ICON_MAP: IconMap = {
   Twitter: 'lucide:twitter',
   Email: 'lucide:mail',
   RSS: 'lucide:rss',
+  AO3: 'lucide:archive'
 }
