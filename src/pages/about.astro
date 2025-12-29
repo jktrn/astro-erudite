@@ -1,7 +1,6 @@
 ---
 import AuthorCard from '@/components/AuthorCard.astro'
 import Breadcrumbs from '@/components/Breadcrumbs.astro'
-import Link from '@/components/Link.astro'
 import PageHead from '@/components/PageHead.astro'
 import Layout from '@/layouts/Layout.astro'
 import { getAllAuthors } from '@/lib/data-utils'
@@ -29,7 +28,10 @@ const authors = await getAllAuthors()
     <div class="min-w-full">
       <div class="prose mb-8 text-base/relaxed sm:text-sm/relaxed">
         <p>
-          Lorem ipsum dolor sit amet consectetur adipisicing elit. Aperiam facere ipsum ipsam laborum corrupti eaque quisquam, non voluptas modi in fuga eos eligendi officia placeat quod doloremque perferendis saepe tenetur.
+          Lorem ipsum dolor sit amet consectetur adipisicing elit. Aperiam
+          facere ipsum ipsam laborum corrupti eaque quisquam, non voluptas modi
+          in fuga eos eligendi officia placeat quod doloremque perferendis saepe
+          tenetur.
         </p>
       </div>
     </div>
