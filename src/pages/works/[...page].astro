@@ -31,7 +31,19 @@ const { page } = Astro.props
 
   <div class="flex min-h-[calc(100vh-18rem)] flex-col">
     <section class="mt-8">
-    <h2 class="mb-4 text-3xl font-semibold">{(page.currentPage - 1) * SITE.postsPerPage + 1} - {Math.min(page.currentPage * SITE.postsPerPage, page.total)} of {page.total} work{page.total === 1 ? '' : 's'}</h2>
+    <h2 class="mb-4 text-3xl font-semibold">{
+        page.lastPage === 1 ? (
+          <>
+            {page.total} work{page.total === 1 ? '' : 's'}
+          </>
+        ) : (
+          <>
+            {(page.currentPage - 1) * SITE.postsPerPage + 1} -{' '}
+            {Math.min(page.currentPage * SITE.postsPerPage, page.total)} of{' '}
+            {page.total} work{page.total === 1 ? '' : 's'}
+          </>
+        )
+      }</h2>
     <ul class="flex flex-col gap-4">
       {
         page.data.map((work, index) => (
