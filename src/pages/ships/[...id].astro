@@ -1,0 +1,66 @@
+---
+import Breadcrumbs from '@/components/Breadcrumbs.astro'
+import PageHead from '@/components/PageHead.astro'
+import WorkCard from '@/components/WorkCard.astro'
+import Layout from '@/layouts/Layout.astro'
+import { getAllShips, getWorksByShip } from '@/lib/data-utils'
+
+export async function getStaticPaths() {
+  const shipMap = await getAllShips()
+  const uniqueShips = Array.from(shipMap.keys())
+
+  return Promise.all(
+    uniqueShips.map(async (ship) => {
+      const works = await getWorksByShip(ship)
+      return {
+        params: { id: ship },
+        props: {
+          ship,
+          works,
+        },
+      }
+    }),
+  )
+}
+
+const { ship, works } = Astro.props
+---
+
+<Layout class="max-w-3xl">
+  <PageHead
+    slot="head"
+    title={`Test Works in ship "${ship}"`}
+    description={`A collection of works in ship ${ship}.`}
+    noindex
+  />
+  <Breadcrumbs
+    items={[
+      { href: '/ships', label: 'Ships', icon: 'lucide:heart' },
+      { label: ship, icon: 'lucide:heart' },
+    ]}
+  />
+
+  {
+    works.length > 0 && (
+      <section class:list={[works.length > 0 && 'mt-8']}>
+        <h2 class="mb-4 text-3xl font-semibold">
+          {works.length} work{works.length === 1 ? '' : 's'} in {ship}
+        </h2>
+        <ul class="flex flex-col gap-y-6">
+          {works.map((work, index) => (
+            <li>
+              <WorkCard work={work} />
+              {index < works.length - 1 && (
+                <div class="mb-8 flex items-center justify-center gap-4">
+                  <div class="bg-muted-foreground/25 dark:bg-muted/100 h-px w-16" />
+                  <div class="bg-muted-foreground/25 dark:bg-muted/100 h-1 w-1 rotate-45" />
+                  <div class="bg-muted-foreground/25 dark:bg-muted/100 h-px w-16" />
+                </div>
+              )}
+            </li>
+          ))}
+        </ul>
+      </section>
+    )
+  }
+</Layout>

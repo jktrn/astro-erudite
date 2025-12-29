@@ -16,6 +16,7 @@ const currentPath = Astro.url.pathname
 const isAuthorPage = currentPath === `/authors/${author.id}`
 
 const socialLinks: SocialLink[] = [
+  author.data.ao3 && { href: author.data.ao3, label: 'AO3' },
   author.data.website && { href: author.data.website, label: 'Website' },
   author.data.github && { href: author.data.github, label: 'GitHub' },
   author.data.twitter && { href: author.data.twitter, label: 'Twitter' },
@@ -25,12 +26,11 @@ const socialLinks: SocialLink[] = [
 ---
 
 <div
-  class="has-[a:hover]:bg-muted/50 overflow-hidden rounded-xl border p-4 transition-colors duration-300 ease-in-out"
+  class="overflow-hidden rounded-sm transition-colors duration-300 ease-in-out"
 >
   <div class="flex flex-wrap gap-4">
-    <Link
-      href={`/authors/${author.id}`}
-      class={cn('block', isAuthorPage && 'pointer-events-none')}
+    <div
+      class='block rounded-none'}
     >
       <AvatarComponent
         client:load
@@ -38,16 +38,14 @@ const socialLinks: SocialLink[] = [
         alt={`Avatar of ${name}`}
         fallback={name[0]}
         className={cn(
-          'size-32 rounded-md [&>[data-slot="avatar-fallback"]]:rounded-md',
-          !isAuthorPage &&
-            'hover:ring-primary transition-shadow duration-300 hover:cursor-pointer hover:ring-2',
+          'size-32 rounded-sm [&>[data-slot="avatar-fallback"]]:rounded-sm',
         )}
       />
-    </Link>
+    </div>
     <div class="flex grow flex-col justify-between gap-y-4">
       <div>
         <div class="flex flex-wrap items-center gap-x-2">
-          <h3 class="text-lg font-medium">{name}</h3>
+          <h3 class="text-xl font-medium mb-0.5 font-serif">{name}</h3>
           {
             pronouns && (
               <span class="text-muted-foreground text-sm">({pronouns})</span>

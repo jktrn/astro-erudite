@@ -1,0 +1,33 @@
+---
+import Breadcrumbs from '@/components/Breadcrumbs.astro'
+import Link from '@/components/Link.astro'
+import PageHead from '@/components/PageHead.astro'
+import { badgeVariants } from '@/components/ui/badge'
+import Layout from '@/layouts/Layout.astro'
+import { getSortedShips } from '@/lib/data-utils'
+import { Icon } from 'astro-icon/components'
+
+const sortedShips = await getSortedShips()
+---
+
+<Layout class="max-w-3xl">
+  <PageHead slot="head" title="Ships" />
+  <Breadcrumbs items={[{ label: 'Ships', icon: 'lucide:heart' }]} />
+
+  <div class="flex flex-col gap-4">
+    <div class="flex flex-wrap gap-2">
+      {
+        sortedShips.map(({ ship, count }) => (
+          <Link
+            href={`/ships/${encodeURI(ship)}`}
+            class={badgeVariants({ variant: 'muted' })}
+          >
+            <Icon name="lucide:hash" class="size-3" />
+            {ship}
+            <span class="text-muted-foreground ml-1.5">({count})</span>
+          </Link>
+        ))
+      }
+    </div>
+  </div>
+</Layout>

@@ -1,47 +1,133 @@
 ---
+import AuthorCard from '@/components/AuthorCard.astro'
 import Breadcrumbs from '@/components/Breadcrumbs.astro'
 import Link from '@/components/Link.astro'
 import PageHead from '@/components/PageHead.astro'
-import ProjectCard from '@/components/ProjectCard.astro'
 import Layout from '@/layouts/Layout.astro'
-import { getAllProjects } from '@/lib/data-utils'
+import { getAllAuthors } from '@/lib/data-utils'
 
-const projects = await getAllProjects()
+const authors = await getAllAuthors()
 ---
 
 <Layout class="max-w-3xl">
   <PageHead slot="head" title="About" />
   <Breadcrumbs items={[{ label: 'About', icon: 'lucide:info' }]} />
-
-  <section>
+  {
+    authors.length > 0 ? (
+      <ul class="flex flex-col gap-4">
+        {authors.map((author) => (
+          <li>
+            <AuthorCard author={author} />
+          </li>
+        ))}
+      </ul>
+    ) : (
+      <p class="text-muted-foreground text-center">No authors found.</p>
+    )
+  }
+  <!-- <section>
     <div class="min-w-full">
       <div class="prose mb-8">
         <p class="mt-0">
-          astro-erudite is an opinionated, unstyled static blogging template
-          that prioritizes simplicity and performance, built with <Link
-            href="https://astro.build"
-            external
-            underline>Astro</Link
-          >, <Link href="https://tailwindcss.com" external underline
-            >Tailwind</Link
-          >, and <Link href="https://ui.shadcn.com" external underline
-            >shadcn/ui</Link
-          >. It provides a clean foundation for your content while being
-          extremely easy to customize.
+          Sup? Lorem ipsum dolor sit amet consectetur adipisicing elit. Aperiam facere ipsum ipsam laborum corrupti eaque quisquam, non voluptas modi in fuga eos eligendi officia placeat quod doloremque perferendis saepe tenetur.
         </p>
-        <p>
-          To learn more about the philosophy behind this template, check out the
-          following blog post: <Link
-            href="/blog/the-state-of-static-blogs"
-            underline>The State of Static Blogs in 2024</Link
-          >.
-        </p>
-      </div>
-
-      <h2 class="mb-4 text-2xl font-medium">Example Projects Listing</h2>
-      <div class="flex flex-col gap-4">
-        {projects.map((project) => <ProjectCard project={project} />)}
       </div>
     </div>
+  </section> -->
+  <section>
+    <div class="min-w-full">
+      <div class="prose mb-8 text-base/relaxed sm:text-sm/relaxed">
+        <p>
+          You may also know me as <Link
+            href="https://archiveofourown.org/users/serendure"
+            external>serendure</Link
+          > on AO3, though I don’t really go by that name on other sites. I built
+          this website to host my fanfiction both as a design exercise and as a way
+          to preserve my work on a different platform.
+        </p>
+      </div>
+      <h2 class="mb-2 text-3xl font-medium">contact</h2>
+      <div class="prose mb-8 text-base/relaxed sm:text-sm/relaxed">
+        <p>
+          If you have any questions, comments, or feedback about my work, please
+          direct them to the work’s comment section on AO3, or contact me at the
+          links above.
+        </p>
+      </div>
+    </div>
+    <section>
+      <div class="min-w-full">
+        <h2 class="mb-2 text-3xl font-medium">colophon</h2>
+        <div class="prose mb-8 text-base/relaxed sm:text-sm/relaxed">
+          <p>
+            This website was built with <Link
+              href="https://astro.build"
+              external>Astro</Link
+            > using the <Link
+              href="https://github.com/jktrn/astro-erudite"
+              external>astro-erudite</Link
+            >
+            template, wrangled at 3 AM by yours truly. 💖
+          </p>
+          <p>
+            The code is closed source, but I’m planning to create a fork of the
+            template for fanfiction archival purposes like this one. Let me know
+            if you’re interested so I can get off my ass and do it. (I promise
+            it’ll be better than the <Link
+              href="https://github.com/tencurse/ao3-11ty-starter"
+              external>11ty one</Link
+            > I made lmao)
+          </p>
+          <p>Here are resources I used in development:</p>
+          <ul>
+            <li>
+              <Link href="https://tailwindcss.com" external>Tailwind CSS</Link>
+            </li>
+            <li>
+              <Link href="https://lucide.dev" external>Lucide icons</Link>
+            </li>
+            <li>
+              <Link href="https://tweakcn.com/" external>tweakcn</Link>
+            </li>
+            <li>
+              <Link href="https://www.flaticon.com/authors/freepik" external
+                >Freepik icons</Link
+              > - for the favicon
+            </li>
+          </ul>
+          <p>Fonts used are:</p>
+          <ul>
+            <li>
+              <Link
+                href="https://fonts.google.com/specimen/Roboto+Serif"
+                external>Roboto Serif</Link
+              >
+            </li>
+            <li><Link href="https://vercel.com/font" external>Geist</Link></li>
+          </ul>
+          <p>
+            No copyright infringement intended. None of these characters or IP
+            belong to me.
+          </p>
+        </div>
+      </div>
+    </section>
+    <section>
+      <div class="min-w-full">
+        <h2 class="mb-2 text-3xl font-medium">previous site versions</h2>
+        <div class="prose mb-8 text-base/relaxed sm:text-sm/relaxed">
+          <p>
+            Previous iterations of the website are saved through <Link
+              href="https://archive.org"
+              external>archive.org</Link
+            >. Current iteration is <strong>v3</strong>, updated on December 28, 2025. Uses <Link href="https://pridever.org/" external>Pride versioning</Link>.
+          </p>
+          <ul>
+            <li><Link href="https://web.archive.org/web/20231218201037/https://symmetras.neocities.org/" external>v1</Link> - December 18, 2023; the URL used to be <code>symmetras.neocities.org</code> which refers to my former AO3 pseudonym, <em>symmetra</em> (<code>symmetra</code> was already taken on Neocities). Site design was built on top of <Link href="https://edwardtufte.github.io/tufte-css/" external>Tufte CSS</Link>.</li>
+            <li><Link href="https://web.archive.org/web/20240828051816/https://serendure.neocities.org/" external>v2</Link> - August 9, 2024; the URL had been changed to <code>serendure.neocities.org</code> to match the new AO3 username.</li>
+          </ul>
+        </div>
+      </div>
+    </section>
   </section>
 </Layout>

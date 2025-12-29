@@ -1,0 +1,35 @@
+{
+	"Fic template": {
+		"prefix": "fic-oneshot",
+		"description": "YML frontmatter for one-shot fics",
+		"body": [
+			"---",
+			"ao3Id: '$1'",
+			"title: '${TM_DIRECTORY/^.+[\\/\\\\]([^\\/\\\\]+)$/$1/}'",
+			"fandoms: ['$2'] # comma separated",
+			"relationships: ['$3'] # comma separated",
+			"category: ['$4'] # comma separated: F/F, M/M, F/M, Multi, Other, Gen",
+			"tags: ['$5'] # comma separated",
+			"summary: '$7' # use pipe symbol (|) for markdown formatting",
+			"rating: '$10' # use full names",
+			"# warnings: ['${11}'] # uncomment if there are warnings",
+			"status: '${12:Completed}' # In Progress, Completed, Abandoned",
+			"datePublished: ${13:$CURRENT_YEAR-$CURRENT_MONTH-$CURRENT_DATE}",
+			"# dateUpdated: ${13:$CURRENT_YEAR-$CURRENT_MONTH-$CURRENT_DATE} # uncomment if multi-chapter fic",
+			"---"
+		]
+	},
+	"Individual chapter template": {
+		"prefix": "fic-chapter",
+		"description": "YML frontmatter for individual chapters",
+		"body": [
+			"---",
+			"ao3Id: '$1'",
+			"title: '$2'",
+			"datePublished: ${3:$CURRENT_YEAR-$CURRENT_MONTH-$CURRENT_DATE}",
+			"order: ${TM_FILENAME_BASE/.*[^\\d](\\d+)$/$1/}",
+			"summary: '$5' # use pipe symbol (|) for markdown formatting",
+			"---"
+		]
+	},
+}
