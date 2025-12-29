@@ -1,11 +1,11 @@
 import type { IconMap, SocialLink, Site } from '@/types'
 
 export const SITE: Site = {
-  title: 'serendure',
+  title: 'astro-kismet',
   description:
-    'A personal fan fiction archive by AO3 user serendure',
-  href: 'https://serendure.neocities.org',
-  author: 'serendure',
+    `A personal fan fiction archive`,
+  href: 'https://astro-kismet.neocities.org',
+  author: 'tencurse',
   locale: 'en-US',
   featuredPostCount: 2,
   postsPerPage: 10,
