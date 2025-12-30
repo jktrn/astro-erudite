@@ -49,12 +49,12 @@ const subworkCount = !isSubwork(work.id) ? await getSubworkCount(work.id) : 0
     }
     <div class="grow">
       <h3
-        class="mb-2 flex items-center font-serif text-2xl/tight font-medium tracking-[-0.01em] hover:underline hover:decoration-1"
+        class="mb-2 font-serif text-2xl/tight font-medium tracking-[-0.01em] hover:underline hover:decoration-1"
       >
-        <Link href={`/${work.collection}/${work.id}`}>{work.data.title}</Link>
+        <Link href={`/${work.collection}/${work.id}`} class="inline">{work.data.title}</Link>
         <Icon
           name="lucide:arrow-right"
-          class="ml-2 size-4 -rotate-45 transform align-bottom text-sm opacity-50 transition-transform group-hover:rotate-0"
+          class="ml-1 size-4 -rotate-45 transform align-middle text-sm opacity-50 transition-transform group-hover:rotate-0 inline"
         />
       </h3>
       <div
