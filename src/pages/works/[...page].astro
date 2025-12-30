@@ -51,9 +51,9 @@ const { page } = Astro.props
             <WorkCard work={work} />
             {index < page.data.length - 1 && (
               <div class="mb-8 flex items-center justify-center gap-4">
-                <div class="bg-muted-foreground/25 dark:bg-muted/100 h-px w-16" />
-                <div class="bg-muted-foreground/25 dark:bg-muted/100 h-1 w-1 rotate-45" />
-                <div class="bg-muted-foreground/25 dark:bg-muted/100 h-px w-16" />
+                <div class="bg-muted-foreground/25 dark:bg-muted h-px w-16" />
+                <div class="bg-muted-foreground/25 dark:bg-muted h-1 w-1 rotate-45" />
+                <div class="bg-muted-foreground/25 dark:bg-muted h-px w-16" />
               </div>
             )}
           </li>
