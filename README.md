@@ -44,7 +44,7 @@ Below are some fantastic examples of websites based on this template. If you wis
 | [marcel-to.vercel.app](https://marcel-to.vercel.app) | [@Marcel-TO](https://github.com/Marcel-TO) | portfolio, docs | [→](https://github.com/Marcel-TO/marcel-to-website) |
 | [merox.dev](https://merox.dev) | [@meroxdotdev](https://github.com/meroxdotdev) | blog, devops, homelab | [→](https://github.com/meroxdotdev/merox) |
 | [Off by One](https://justoffbyone.com) | [@cduruk](https://github.com/cduruk) | engineering, blog | [→](https://github.com/cduruk/offbyone) |
-
+| [holywater.dev](https://holywater.dev) | [@holywater2372](https://github.com/holywater2372) | cybersecurity, blog | [→](https://github.com/holywater2372/holywater.dev) |
 ## Features
 
 - [Astro](https://astro.build/)'s [Islands](https://docs.astro.build/en/concepts/islands/) architecture for selective hydration and client-side interactivity while maintaining fast static site rendering.
