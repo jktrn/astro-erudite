@@ -128,7 +128,7 @@ const calloutConfig = {
 
 const capitalize = (str: string) => str.charAt(0).toUpperCase() + str.slice(1)
 
-const calloutVariants = cva('relative px-4 py-3 my-6 border-l-4 text-sm', {
+const calloutVariants = cva('relative px-4 py-3 my-6 border-s-4 text-sm', {
   variants: {
     variant: Object.fromEntries(
       Object.entries(calloutConfig).map(([key, config]) => [key, config.style]),
@@ -153,7 +153,7 @@ const { title, variant = 'note', defaultOpen = true, ...rest } = Astro.props
   class={cn(
     calloutVariants({ variant }),
     rest.class,
-    '[&[open]>summary_svg:last-child]:rotate-180 [&[open]>summary]:mb-3',
+    'details [&[open]>summary_svg:last-child]:rotate-180',
   )}
   {...rest}
   open={defaultOpen}
@@ -163,16 +163,16 @@ const { title, variant = 'note', defaultOpen = true, ...rest } = Astro.props
   >
     <Icon
       name={calloutConfig[variant].icon}
-      class={cn('mr-2 size-4 shrink-0', calloutConfig[variant].textColor)}
+      class={cn('me-2 size-4 shrink-0', calloutConfig[variant].textColor)}
     />
-    <span class={cn('font-medium mr-2', calloutConfig[variant].textColor)}>
+    <span class={cn('font-medium me-2', calloutConfig[variant].textColor)}>
       {capitalize(variant)}
       {title && <span class="font-normal opacity-70"> ({title})</span>}
     </span>
     <Icon
       name="lucide:chevron-down"
       class={cn(
-        'ml-auto h-4 w-4 shrink-0 transition-transform duration-200',
+        'ms-auto h-4 w-4 shrink-0 transition-transform duration-200',
         calloutConfig[variant].textColor,
       )}
     />
@@ -181,3 +181,23 @@ const { title, variant = 'note', defaultOpen = true, ...rest } = Astro.props
     <slot />
   </div>
 </details>
+
+<style>
+  .details::details-content {
+    display: block;
+    block-size: 0;
+    overflow: hidden;
+    transition-property: block-size, content-visibility;
+    transition-duration: 200ms;
+    transition-behavior: allow-discrete;
+    transition-timing-function: ease-out;
+  }
+
+  .details[open]::details-content {
+    /* Fallback for browsers that don't support calc-size() function */
+    block-size: auto;
+
+    /* calc-size() function allows transition to height: auto; */
+    block-size: calc-size(auto, size);
+  }
+</style>
