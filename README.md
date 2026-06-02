@@ -48,6 +48,7 @@ Below are some fantastic examples of websites based on this template. If you wis
 | [theinfinull.com](https://theinfinull.com) | [@theinfinull](https://github.com/theinfinull) | dev, portfolio, blog | [→](https://github.com/theinfinull/portfolio) |
 | [chai-pin-zheng.xyz](https://www.chai-pin-zheng.xyz/) | [@Ducksss](https://github.com/Ducksss) | portfolio, interactive, blog, ascii | [→](https://github.com/Ducksss/ascii-astro-erudite) |
 | [nightxade.dev](https://nightxade.dev) | [@nightxade](https://github.com/nightxade) | blog, portfolio | [→](https://github.com/nightxade/nightsite)
+| [xingpingcn.top](https://xingpingcn.top) | [@xingpingcn](https://github.com/xingpingcn) | blog, chinese | [→](https://github.com/xingpingcn/newblog) |
 
 ## Features
 
