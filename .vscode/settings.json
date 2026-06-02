@@ -1,0 +1,12 @@
+{
+  "[markdown]": {
+    "editor.snippetSuggestions": "top",
+    "editor.suggestSelection": "first",
+    "editor.tabCompletion": "on"
+  },
+  "[mdx]": {
+    "editor.snippetSuggestions": "top",
+    "editor.suggestSelection": "first",
+    "editor.tabCompletion": "on"
+  }
+}

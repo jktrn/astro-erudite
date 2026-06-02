@@ -105,7 +105,7 @@ This is a list of the various technologies used to build this template:
    | Command            | Description                                                     |
    | ------------------ | --------------------------------------------------------------- |
    | `npm run start`    | Alias for `npm run dev`                                         |
-   | `npm run build`    | Run type checking and build the project                         |
+   | `npm run build`    | Sync image metadata, run type checking, and build the project   |
    | `npm run preview`  | Previews the built project                                      |
    | `npm run astro`    | Run Astro CLI commands                                          |
    | `npm run prettier` | Blanket format all files using [Prettier](https://prettier.io/) |
@@ -210,6 +210,37 @@ The blog post schema is defined as follows:
 | `tags`        | `string[]`      | Preferably use kebab-case for these.                                                                                                                                            | Optional |
 | `authors`     | `string[]`      | If the author has a profile, use the id associated with their Markdown file in `src/content/authors/` (e.g. if their file is named `jane-doe.md`, use `jane-doe` in the array). | Optional |
 | `draft`       | `boolean`       | Defaults to `false` if not provided.                                                                                                                                            | Optional |
+
+### MDX image components
+
+Use `Figure` for a single captioned image and `ImageGrid` for a responsive image group. Both components support lazy loading, stable aspect-ratio placeholders, captions, and PhotoSwipe lightbox previews.
+
+```mdx
+import Figure from '@/components/figure.astro'
+import ImageGrid from '@/components/image-grid.astro'
+
+<Figure
+  src="https://example.com/image.webp"
+  caption="A captioned image"
+/>
+
+<ImageGrid
+  images={[
+    {
+      src: 'https://example.com/image-a.webp',
+      caption: 'First image',
+    },
+    {
+      src: 'https://example.com/image-b.webp',
+      caption: 'Second image',
+    },
+  ]}
+/>
+```
+
+Remote image dimensions are synced by `npm run sync:image-metadata`, which stores a local SQLite cache at `data/image-metadata.sqlite` and writes `src/generated/image-metadata.ts` for the components to read during rendering. `npm run dev` and `npm run build` run the sync automatically, so MDX authors usually only need to provide `src` and `caption`. If an image cannot be measured, the components fall back to a default placeholder size.
+
+VS Code users can use the included MDX snippets: type `fig` for `Figure`, `imggrid` for `ImageGrid`, `import-figure` for the single-image import, or `import-imggrid` for the grid import.
 
 ### Authors
 

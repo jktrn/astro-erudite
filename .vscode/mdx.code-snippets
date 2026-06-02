@@ -1,0 +1,60 @@
+{
+  "Import Writing Components": {
+    "scope": "mdx,markdown",
+    "prefix": ["imports", "import-writing"],
+    "body": [
+      "import Callout from '@/components/callout.astro'",
+      "import Figure from '@/components/figure.astro'",
+      "import ImageGrid from '@/components/image-grid.astro'"
+    ],
+    "description": "Import common MDX writing components"
+  },
+  "Import Callout": {
+    "scope": "mdx,markdown",
+    "prefix": "import-callout",
+    "body": ["import Callout from '@/components/callout.astro'"],
+    "description": "Import Callout component"
+  },
+  "Import Figure": {
+    "scope": "mdx,markdown",
+    "prefix": "import-figure",
+    "body": ["import Figure from '@/components/figure.astro'"],
+    "description": "Import Figure component"
+  },
+  "Import ImageGrid": {
+    "scope": "mdx,markdown",
+    "prefix": "import-imggrid",
+    "body": ["import ImageGrid from '@/components/image-grid.astro'"],
+    "description": "Import ImageGrid component"
+  },
+  "Figure": {
+    "scope": "mdx,markdown",
+    "prefix": "fig",
+    "body": [
+      "<Figure",
+      "  src=\"${1:https://example.com/image.webp}\"",
+      "  caption=\"${2:Image caption}\"",
+      "/>"
+    ],
+    "description": "Insert a Figure block"
+  },
+  "ImageGrid": {
+    "scope": "mdx,markdown",
+    "prefix": ["image", "imggrid"],
+    "body": [
+      "<ImageGrid",
+      "  images={[",
+      "    {",
+      "      src: '${1:https://example.com/image-a.webp}',",
+      "      caption: '${2:First image}',",
+      "    },",
+      "    {",
+      "      src: '${3:https://example.com/image-b.webp}',",
+      "      caption: '${4:Second image}',",
+      "    },",
+      "  ]}",
+      "/>"
+    ],
+    "description": "Insert an ImageGrid block"
+  }
+}
