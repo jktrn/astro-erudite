@@ -1,6 +1,7 @@
 ---
 import Breadcrumbs from '@/components/breadcrumbs.astro'
 import Link from '@/components/link.astro'
+import PhotoSwipe from '@/components/photo-swipe.astro'
 import PostHead from '@/components/post-head.astro'
 import PostNavigation from '@/components/post-navigation.astro'
 import SubpostsHeader from '@/components/subposts-header.astro'
@@ -60,6 +61,7 @@ const tocSections = await getTOCSections(currentPostId)
 
 <Layout>
   <PostHead slot="head" post={post} />
+  <PhotoSwipe />
   {
     (hasChildPosts || isCurrentSubpost) && (
       <SubpostsHeader

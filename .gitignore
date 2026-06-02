@@ -1,6 +1,7 @@
 dist/
 .astro/
 node_modules/
+data/image-metadata.sqlite
 npm-debug.log*
 yarn-debug.log*
 yarn-error.log*

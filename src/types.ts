@@ -13,6 +13,14 @@ export type SocialLink = {
   label: string
 }
 
+export type FigureImage = {
+  src: string
+  alt?: string
+  caption?: string
+  width?: number
+  height?: number
+}
+
 export type IconMap = {
   [key: string]: string
 }

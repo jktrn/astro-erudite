@@ -1,0 +1,75 @@
+---
+import { getImageSize } from '@/lib/image-metadata'
+import type { FigureImage } from '@/types'
+
+interface Props {
+  images: FigureImage[]
+}
+
+const { images } = Astro.props
+const columnClass =
+  images.length === 1
+    ? 'md:grid-cols-1'
+    : images.length === 2
+      ? 'md:grid-cols-2'
+      : 'md:grid-cols-2 xl:grid-cols-3'
+const imagesWithSize = images.map((image) => ({
+  ...image,
+  ...getImageSize(image.src, image.width, image.height),
+}))
+const frameImage = imagesWithSize.reduce(
+  (tallestImage, image) => {
+    return image.height / image.width > tallestImage.height / tallestImage.width
+      ? image
+      : tallestImage
+  },
+  imagesWithSize[0] || { src: '', width: 1600, height: 1000 },
+)
+const frameAspectStyle = `aspect-ratio: ${frameImage.width || 1600} / ${
+  frameImage.height || 1000
+}`
+---
+
+<div class={`not-prose my-7 grid gap-4 ${columnClass}`}>
+  {
+    imagesWithSize.map((image) => {
+      const { width, height } = image
+      const imageAlt = image.alt || image.caption || ''
+
+      return (
+        <figure class="min-w-0">
+          <a
+            href={image.src}
+            target="_blank"
+            rel="noopener noreferrer"
+            data-pswp-width={width}
+            data-pswp-height={height}
+            data-pswp-caption={image.caption || imageAlt || undefined}
+            class="bg-muted/30 relative block w-full overflow-hidden rounded-md border"
+            style={frameAspectStyle}
+          >
+            <div
+              aria-hidden="true"
+              class="bg-muted absolute inset-0 size-full animate-pulse transition-opacity duration-300 has-[+img[data-loaded=true]]:animate-none has-[+img[data-loaded=true]]:opacity-0"
+            />
+            <img
+              src={image.src}
+              alt={imageAlt}
+              width={width}
+              height={height}
+              loading="lazy"
+              decoding="async"
+              class="absolute inset-0 size-full object-cover opacity-0 transition-opacity duration-300 data-[loaded=true]:opacity-100"
+              onload="this.dataset.loaded = 'true'"
+            />
+          </a>
+          {image.caption && (
+            <figcaption class="text-muted-foreground mt-2 text-center text-sm leading-6">
+              {image.caption}
+            </figcaption>
+          )}
+        </figure>
+      )
+    })
+  }
+</div>

@@ -1,0 +1,51 @@
+---
+import { getImageSize } from '@/lib/image-metadata'
+
+interface Props {
+  src: string
+  alt?: string
+  caption?: string
+  width?: number
+  height?: number
+}
+
+const { src, alt, caption, width: propWidth, height: propHeight } = Astro.props
+const { width, height } = getImageSize(src, propWidth, propHeight)
+const imageAlt = alt || caption || ''
+const aspectStyle = `aspect-ratio: ${width} / ${height}`
+---
+
+<figure class="not-prose my-7">
+  <a
+    href={src}
+    target="_blank"
+    rel="noopener noreferrer"
+    data-pswp-width={width}
+    data-pswp-height={height}
+    data-pswp-caption={caption || imageAlt || undefined}
+    class="bg-muted/30 relative mx-auto block w-full overflow-hidden rounded-md border"
+    style={aspectStyle}
+  >
+    <div
+      aria-hidden="true"
+      class="bg-muted absolute inset-0 size-full animate-pulse transition-opacity duration-300 has-[+img[data-loaded=true]]:animate-none has-[+img[data-loaded=true]]:opacity-0"
+    />
+    <img
+      src={src}
+      alt={imageAlt}
+      width={width}
+      height={height}
+      loading="lazy"
+      decoding="async"
+      class="absolute inset-0 size-full object-contain opacity-0 transition-opacity duration-300 data-[loaded=true]:opacity-100"
+      onload="this.dataset.loaded = 'true'"
+    />
+  </a>
+  {
+    caption && (
+      <figcaption class="text-muted-foreground mt-2 text-center text-sm leading-6">
+        {caption}
+      </figcaption>
+    )
+  }
+</figure>
