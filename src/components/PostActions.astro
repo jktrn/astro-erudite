@@ -35,6 +35,10 @@ const { prev, next } = Astro.props
 <style>
   post-actions {
     display: contents;
+
+    @media (width < 64rem) {
+      display: none;
+    }
   }
 
   a {
@@ -59,12 +63,6 @@ const { prev, next } = Astro.props
       color: var(--muted-foreground);
       opacity: 0.5;
       pointer-events: none;
-    }
-  }
-
-  @media (width < 64rem) {
-    post-actions {
-      display: none;
     }
   }
 </style>

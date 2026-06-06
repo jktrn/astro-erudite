@@ -48,10 +48,8 @@
 
 html {
   scrollbar-gutter: stable;
-}
 
-@media (width < 64rem) {
-  html {
+  @media (width < 64rem) {
     --bar-nav-height: calc(2rem + 2 * var(--space-2xs) + 2px);
     --bar-toc-height: 0px;
     scroll-padding-block-start: calc(
