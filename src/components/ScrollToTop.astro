@@ -1,0 +1,71 @@
+---
+import ArrowUp from "@/assets/icons/arrow-up.svg"
+
+type Props = { floating?: boolean }
+
+const { floating } = Astro.props
+---
+
+<button
+  data-scroll-top
+  data-floating={floating || undefined}
+  aria-label="Scroll to top"
+>
+  <ArrowUp />
+</button>
+
+<style>
+  button {
+    display: inline-flex;
+    align-items: center;
+    justify-content: center;
+    width: 2rem;
+    height: 2rem;
+    border-radius: var(--radius-md);
+    color: var(--foreground);
+    visibility: hidden;
+
+    &:hover {
+      background-color: color-mix(in oklab, var(--muted) 50%, transparent);
+    }
+
+    svg {
+      width: 1rem;
+      height: 1rem;
+    }
+  }
+
+  :global(body[data-past-title]) button {
+    visibility: visible;
+  }
+
+  button:not([data-floating]) {
+    @media (width < 64rem) {
+      display: none;
+    }
+  }
+
+  button[data-floating] {
+    position: fixed;
+    inset-block-end: var(--grid-gutter);
+    inset-inline-end: var(--grid-gutter);
+    z-index: 10;
+    width: 2.5rem;
+    height: 2.5rem;
+    background-color: color-mix(in oklab, var(--background) 90%, transparent);
+    backdrop-filter: blur(var(--blur-sm));
+    border: 1.5px solid var(--border);
+    border-radius: var(--radius-md);
+
+    @media (width >= 64rem) {
+      display: none;
+    }
+  }
+</style>
+
+<script>
+  document.addEventListener("click", (event) => {
+    if ((event.target as Element).closest("[data-scroll-top]"))
+      window.scrollTo({ top: 0 })
+  })
+</script>

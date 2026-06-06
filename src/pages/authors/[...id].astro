@@ -1,58 +1,72 @@
 ---
-import AuthorCard from '@/components/author-card.astro'
-import BlogCard from '@/components/blog-card.astro'
-import Breadcrumbs from '@/components/breadcrumbs.astro'
-import PageHead from '@/components/page-head.astro'
-import Layout from '@/layouts/layout.astro'
-import { getAllAuthors, getPostsByAuthor } from '@/lib/data-utils'
+import AuthorCard from "@/components/AuthorCard.astro"
+import BlogCard from "@/components/BlogCard.astro"
+import MetaPage from "@/components/MetaPage.astro"
+import Layout from "@/layouts/Layout.astro"
+import { getPosts } from "@/lib/content"
+import { getCollection, type CollectionEntry } from "astro:content"
 
 export async function getStaticPaths() {
-  const authors = await getAllAuthors()
+  const authors = await getCollection("authors")
   return authors.map((author) => ({
     params: { id: author.id },
     props: { author },
   }))
 }
 
+type Props = { author: CollectionEntry<"authors"> }
+
 const { author } = Astro.props
-const authorPosts = await getPostsByAuthor(author.id)
+const { name, bio } = author.data
+
+const posts = (await getPosts()).filter((post) =>
+  post.data.authors.some((ref) => ref.id === author.id),
+)
 ---
 
-<Layout class="max-w-3xl">
-  <PageHead
-    slot="head"
-    title={`${author.data.name} (Author)`}
-    description={author.data.bio || `Profile of ${author.data.name}.`}
-    noindex
-  />
-  <Breadcrumbs
-    items={[
-      { href: '/authors', label: 'Authors', icon: 'lucide:users' },
-      { label: author.data.name, icon: 'lucide:user' },
-    ]}
-  />
+<Layout crumbs={[{ label: name, href: `/authors/${author.id}` }]}>
+  <MetaPage slot="head" title={`${name} (Author)`} description={bio} noindex />
+  <header>
+    <ul>
+      <AuthorCard author={author} />
+    </ul>
+  </header>
 
   <section>
-    <AuthorCard author={author} />
-  </section>
-  <section class="flex flex-col gap-y-4">
-    <h2 class="text-2xl font-medium">Posts by {author.data.name}</h2>
-    {
-      authorPosts.length > 0 ? (
-        <ul class="flex flex-col gap-4">
-          {authorPosts
-            .filter((post) => !post.data.draft)
-            .map((post) => (
-              <li>
-                <BlogCard entry={post} />
-              </li>
-            ))}
+    <h2>Posts</h2>
+    {posts.length > 0 ? (
+        <ul>
+          {posts.map((post) => (
+            <BlogCard post={post} />
+          ))}
         </ul>
       ) : (
-        <p class="text-muted-foreground">
-          No posts available from this author.
-        </p>
-      )
-    }
+        <p>No posts yet.</p>
+      )}
   </section>
 </Layout>
+
+<style>
+  header {
+    margin-block-end: var(--space-l);
+  }
+
+  section {
+    h2 {
+      margin-block-end: var(--space-s);
+      font-size: var(--step-1);
+      line-height: calc(var(--leading-offset) + 1em);
+      font-weight: var(--font-weight-medium);
+    }
+
+    ul {
+      display: flex;
+      flex-direction: column;
+      gap: var(--space-m);
+    }
+
+    > p {
+      color: var(--muted-foreground);
+    }
+  }
+</style>

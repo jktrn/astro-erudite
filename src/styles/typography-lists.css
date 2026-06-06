@@ -1,0 +1,65 @@
+prose-content {
+  :is(ul, ol) {
+    padding-inline-start: 1.5rem;
+
+    :is(ul, ol) {
+      margin-block: 0.5em 0;
+    }
+  }
+
+  ul {
+    list-style-type: disc;
+
+    &.contains-task-list {
+      list-style-type: none;
+      padding-inline-start: 0;
+    }
+  }
+
+  ol {
+    list-style-type: decimal;
+
+    &[type="A"] {
+      list-style-type: upper-alpha;
+    }
+
+    &[type="a"] {
+      list-style-type: lower-alpha;
+    }
+
+    &[type="I"] {
+      list-style-type: upper-roman;
+    }
+
+    &[type="i"] {
+      list-style-type: lower-roman;
+    }
+  }
+
+  li {
+    margin-block-start: 0.5em;
+    padding-inline-start: 0.5rem;
+
+    &::marker {
+      color: var(--prose-marker);
+    }
+
+    > blockquote, .expressive-code {
+      margin-block-start: 1em;
+    }
+
+    > p {
+      margin-block: 0;
+    }
+
+    &.task-list-item {
+      padding-inline-start: 0;
+
+      input[type="checkbox"] {
+        margin-inline-end: 0.5em;
+        vertical-align: middle;
+        accent-color: var(--foreground);
+      }
+    }
+  }
+}

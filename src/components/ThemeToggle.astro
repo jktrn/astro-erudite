@@ -1,0 +1,84 @@
+---
+import MoonIcon from "@/assets/icons/moon.svg"
+import SunIcon from "@/assets/icons/sun.svg"
+---
+
+<button id="theme-toggle" aria-label="Toggle theme">
+  <light-icon><SunIcon /></light-icon>
+  <dark-icon><MoonIcon /></dark-icon>
+</button>
+
+<style is:global>
+  :root[data-theme="light"] {
+    color-scheme: light;
+  }
+
+  :root[data-theme="dark"] {
+    color-scheme: dark;
+  }
+
+  dark-icon {
+    display: none;
+  }
+
+  :root[data-theme="dark"] {
+    light-icon {
+      display: none;
+    }
+
+    dark-icon {
+      display: inline;
+    }
+  }
+
+  @media (prefers-color-scheme: dark) {
+    :root:not([data-theme]) {
+      light-icon {
+        display: none;
+      }
+
+      dark-icon {
+        display: inline;
+      }
+    }
+  }
+</style>
+
+<style>
+  button {
+    display: inline-flex;
+    align-items: center;
+    justify-content: center;
+    width: 2rem;
+    height: 2rem;
+    border-radius: var(--radius-md);
+    cursor: pointer;
+
+    &:hover {
+      background-color: color-mix(in oklab, var(--muted) 50%, transparent);
+    }
+
+    svg {
+      width: 1rem;
+      height: 1rem;
+    }
+  }
+</style>
+
+<script>
+  const toggleTheme = () => {
+    const root = document.documentElement
+    const dark =
+      root.dataset.theme === "dark" ||
+      (!root.dataset.theme &&
+        matchMedia("(prefers-color-scheme: dark)").matches)
+    const theme = dark ? "light" : "dark"
+    root.dataset.theme = theme
+    localStorage.theme = theme
+  }
+
+  document.addEventListener("astro:page-load", () => {
+    const button = document.getElementById("theme-toggle")
+    if (button) button.onclick = toggleTheme
+  })
+</script>

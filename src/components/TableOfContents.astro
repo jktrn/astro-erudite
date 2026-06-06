@@ -1,0 +1,460 @@
+---
+import ChevronIcon from "@/assets/icons/callouts/alt-arrow-down.svg"
+import type { MarkdownHeading } from "astro"
+
+type Section = {
+  id?: string
+  label: string
+  open?: boolean
+  headings: MarkdownHeading[]
+}
+type Props = { title: string; sections: Section[] }
+
+const { title, sections } = Astro.props
+---
+
+<nav aria-label="Table of contents">
+  <toc-title aria-hidden="true"><span>{title}</span></toc-title>
+  <label>
+    <input type="checkbox" aria-label="Toggle table of contents">
+    <svg viewBox="0 0 16 16" aria-hidden="true">
+      <circle cx="8" cy="8" r="6.5" />
+      <circle cx="8" cy="8" r="6.5" transform="rotate(-90 8 8)" />
+    </svg>
+    <toc-current>{title}</toc-current>
+    <ChevronIcon aria-hidden="true" />
+  </label>
+  <ul>
+    {sections.map(({ id, label, open, headings }) =>
+        id ? (
+          <li data-group>
+            {headings.length > 0 ? (
+              <>
+                <toc-group>
+                  <a href={`#${id}`}>{label}</a>
+                  <button
+                    aria-expanded={open ? "true" : "false"}
+                    aria-label={`Toggle ${label} headings`}
+                  >
+                    <ChevronIcon aria-hidden="true" />
+                  </button>
+                </toc-group>
+                <ul>
+                  {headings.map(({ depth, slug, text }) => (
+                    <li data-depth={depth}>
+                      <a href={`#${slug}`}>{text}</a>
+                    </li>
+                  ))}
+                </ul>
+              </>
+            ) : (
+              <a href={`#${id}`}>{label}</a>
+            )}
+          </li>
+        ) : (
+          headings.map(({ depth, slug, text }) => (
+            <li data-depth={depth}>
+              <a href={`#${slug}`}>{text}</a>
+            </li>
+          ))
+        ),
+      )}
+  </ul>
+</nav>
+
+<style>
+  nav {
+    position: sticky;
+    top: var(--page-offset-top);
+    display: flex;
+    flex-direction: column;
+    max-height: calc(
+      100svh -
+      var(--page-offset-top) -
+      var(--page-offset-bottom)
+    );
+    font-size: var(--step--1);
+  }
+
+  toc-title {
+    display: grid;
+    grid-template-rows: 0fr;
+    flex-shrink: 0;
+    font-weight: var(--font-weight-medium);
+
+    > span {
+      min-height: 0;
+      overflow: hidden;
+    }
+
+    &[data-visible] {
+      grid-template-rows: 1fr;
+      margin-block-end: var(--space-2xs);
+    }
+  }
+
+  label {
+    display: none;
+  }
+
+  nav > ul {
+    min-height: 0;
+    overflow-x: hidden;
+    overflow-y: auto;
+    overscroll-behavior: contain;
+    scrollbar-width: none;
+
+    &::-webkit-scrollbar {
+      display: none;
+    }
+  }
+
+  ul {
+    display: flex;
+    flex-direction: column;
+    gap: var(--space-3xs);
+
+    a {
+      color: var(--muted-foreground);
+
+      &:hover,
+      &[data-active] {
+        color: var(--foreground);
+      }
+    }
+
+    li[data-group] {
+      font-weight: var(--font-weight-medium);
+
+      &:not(:first-child) {
+        margin-block-start: var(--space-2xs);
+      }
+
+      toc-group {
+        position: relative;
+        display: block;
+        padding-inline-end: 1.5em;
+
+        a {
+          position: relative;
+          z-index: 1;
+        }
+
+        button {
+          position: absolute;
+          inset: 0;
+          display: flex;
+          align-items: center;
+          justify-content: flex-end;
+          cursor: pointer;
+
+          svg {
+            flex-shrink: 0;
+            inline-size: 1em;
+            block-size: 1em;
+            color: var(--muted-foreground);
+          }
+
+          &:hover svg {
+            color: var(--foreground);
+          }
+
+          &[aria-expanded="true"] svg {
+            rotate: 180deg;
+          }
+        }
+      }
+
+      > ul {
+        --shift: 1;
+
+        display: none;
+        font-weight: var(--font-weight-normal);
+      }
+
+      &:has(button[aria-expanded="true"]) > ul {
+        display: flex;
+        margin-block-start: var(--space-3xs);
+      }
+
+      &:has(button[aria-expanded="false"]):has(> ul a[data-active])
+        toc-group
+        a {
+        color: var(--foreground);
+      }
+    }
+
+    li[data-depth] {
+      padding-inline-start: calc(
+        (var(--shift, 0) + var(--indent, 0)) *
+        var(--space-xs)
+      );
+    }
+
+    li[data-depth="3"] {
+      --indent: 1;
+    }
+
+    li[data-depth="4"] {
+      --indent: 2;
+    }
+  }
+
+  @media (width < 64rem) {
+    nav {
+      position: relative;
+      top: auto;
+      max-height: none;
+    }
+
+    toc-title {
+      display: none;
+    }
+
+    label {
+      display: flex;
+      align-items: center;
+      gap: var(--space-2xs);
+      padding-block: var(--space-2xs);
+      padding-inline: var(--bar-gutter);
+      background-color: color-mix(in oklab, var(--background) 90%, transparent);
+      backdrop-filter: blur(var(--blur-sm));
+      border-block-end: 2px solid var(--border);
+      border-image: var(--bar-border-image);
+      cursor: pointer;
+
+      input {
+        position: absolute;
+        opacity: 0;
+        pointer-events: none;
+      }
+
+      > svg:first-of-type {
+        flex-shrink: 0;
+        inline-size: 1em;
+        block-size: 1em;
+
+        circle {
+          fill: none;
+          stroke: var(--border);
+          stroke-width: 2;
+
+          &:last-child {
+            stroke: var(--muted-foreground);
+            stroke-dasharray: 40.84px;
+            stroke-dashoffset: calc(40.84px * (1 - var(--progress, 0)));
+          }
+        }
+      }
+
+      toc-current {
+        flex: 1;
+        min-width: 0;
+        overflow: hidden;
+        text-overflow: ellipsis;
+        white-space: nowrap;
+        color: var(--muted-foreground);
+      }
+
+      > svg:last-of-type {
+        flex-shrink: 0;
+        inline-size: 1em;
+        block-size: 1em;
+        color: var(--muted-foreground);
+      }
+    }
+
+    nav:has(input:focus-visible) label {
+      outline: 2px solid var(--ring);
+      outline-offset: -2px;
+    }
+
+    nav:has(input:checked) label > svg:last-of-type {
+      rotate: 180deg;
+    }
+
+    nav > ul {
+      display: none;
+      position: absolute;
+      inset-block-start: 100%;
+      inset-inline: 0;
+      max-block-size: 30svh;
+      padding-block: var(--space-2xs);
+      padding-inline: var(--bar-gutter);
+      background-color: color-mix(in oklab, var(--background) 90%, transparent);
+      backdrop-filter: blur(var(--blur-sm));
+      border-block-end: 2px solid var(--border);
+      border-image: var(--bar-border-image);
+    }
+
+    nav:has(input:checked) > ul {
+      display: flex;
+    }
+  }
+</style>
+
+<script>
+  import { hashId } from "@/lib/utils"
+
+  let observer: IntersectionObserver | undefined
+  let nav: HTMLElement | null = null
+
+  const progress = () => {
+    const max = document.documentElement.scrollHeight - innerHeight
+    nav?.style.setProperty(
+      "--progress",
+      String(max > 0 ? Math.min(scrollY / max, 1) : 0),
+    )
+  }
+  addEventListener("scroll", progress, { passive: true })
+
+  document.addEventListener("astro:page-load", () => {
+    observer?.disconnect()
+    observer = undefined
+    nav = document.querySelector("page-toc nav")
+    progress()
+
+    const links = new Map(
+      [
+        ...document.querySelectorAll<HTMLAnchorElement>(
+          "page-toc nav a[href^='#']",
+        ),
+      ].map((a) => [hashId(a.hash), a]),
+    )
+    const articles = document.querySelectorAll("main article")
+    const list = document.querySelector("page-toc nav > ul")
+    const title = document.querySelector("page-toc nav toc-title")
+    const currentLabel = document.querySelector("page-toc nav toc-current")
+    const toggle =
+      document.querySelector<HTMLInputElement>("page-toc nav input")
+    const heading = document.querySelector("article > header h1")
+    if (articles.length === 0 || !list || links.size === 0) return
+    if (list.hasAttribute("data-spy")) return
+    list.setAttribute("data-spy", "")
+
+    const fallback = currentLabel?.textContent ?? ""
+
+    const groups = [
+      ...document.querySelectorAll<HTMLButtonElement>(
+        "page-toc nav li[data-group] button",
+      ),
+    ].map((button) => ({
+      button,
+      open: button.getAttribute("aria-expanded") === "true",
+      ids: [
+        ...(button
+          .closest("li[data-group]")
+          ?.querySelectorAll<HTMLAnchorElement>("a[href^='#']") ?? []),
+      ].map((a) => hashId(a.hash)),
+    }))
+
+    const sectionOf = new Map<Element, string>()
+    for (const article of articles) {
+      let current = links.has(article.id) ? article.id : undefined
+      for (const child of article.children) {
+        if (child.tagName === "PROSE-CONTENT") {
+          for (const block of child.children) {
+            const anchor = [block, ...block.querySelectorAll("[id]")].find(
+              (el) => links.has(el.id),
+            )
+            if (anchor) current = anchor.id
+            if (current) sectionOf.set(block, current)
+          }
+        } else if (current) sectionOf.set(child, current)
+      }
+    }
+
+    const visible = new Set<Element>()
+    let prevActive = new Set<string>()
+
+    const center = () => {
+      const run = [
+        ...list.querySelectorAll<HTMLAnchorElement>("a[data-active]"),
+      ]
+      const first = run[0]
+      const last = run[run.length - 1]
+      if (!first || !run.every((a) => a.checkVisibility())) return
+      const area = list.getBoundingClientRect()
+      const runCenter =
+        (first.getBoundingClientRect().top +
+          last.getBoundingClientRect().bottom) /
+        2
+      list.scrollTo({
+        top: list.scrollTop + runCenter - (area.top + area.height / 2),
+      })
+    }
+
+    toggle?.addEventListener("change", () => {
+      if (toggle.checked) center()
+    })
+    list.addEventListener("click", (event) => {
+      const button = (event.target as Element).closest?.("button")
+      if (button) {
+        button.setAttribute(
+          "aria-expanded",
+          button.getAttribute("aria-expanded") === "true" ? "false" : "true",
+        )
+        return
+      }
+      if (toggle && (event.target as Element).closest?.("a")) {
+        toggle.checked = false
+      }
+    })
+
+    observer = new IntersectionObserver((entries) => {
+      for (const entry of entries) {
+        if (entry.target === heading) {
+          const past = !entry.isIntersecting
+          title?.toggleAttribute("data-visible", past)
+          document.body.toggleAttribute("data-past-title", past)
+        } else if (entry.isIntersecting) visible.add(entry.target)
+        else visible.delete(entry.target)
+      }
+
+      const active = new Set<string>()
+      for (const block of visible) {
+        const id = sectionOf.get(block)
+        if (id) active.add(id)
+      }
+
+      let firstActive: HTMLAnchorElement | undefined
+      for (const [id, link] of links) {
+        const on = active.has(id)
+        link.toggleAttribute("data-active", on)
+        link.removeAttribute("aria-current")
+        if (on) firstActive ??= link
+      }
+      firstActive?.setAttribute("aria-current", "location")
+
+      if (currentLabel) {
+        currentLabel.textContent = firstActive?.textContent?.trim() || fallback
+      }
+
+      for (const group of groups) {
+        const open = group.ids.some((id) => active.has(id))
+        if (open !== group.open) {
+          group.open = open
+          if (open) group.button.setAttribute("aria-expanded", "true")
+        }
+      }
+
+      let grew = false
+      for (const id of active) {
+        if (!prevActive.has(id)) {
+          grew = true
+          break
+        }
+      }
+      prevActive = active
+      if (grew) center()
+    })
+
+    for (const block of sectionOf.keys()) observer.observe(block)
+    if (heading) {
+      observer.observe(heading)
+    } else {
+      title?.toggleAttribute("data-visible", true)
+      document.body.toggleAttribute("data-past-title", true)
+    }
+  })
+</script>

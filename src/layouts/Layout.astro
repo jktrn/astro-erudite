@@ -1,0 +1,129 @@
+---
+import "@/styles/reset.css"
+import "@/styles/fonts.css"
+import "@/styles/color.css"
+import "@/styles/typography.css"
+import "@/styles/typography-headings.css"
+import "@/styles/typography-inline.css"
+import "@/styles/typography-lists.css"
+import "@/styles/typography-block.css"
+import "@/styles/typography-tables.css"
+import "@/styles/callout.css"
+import "@/styles/layout.css"
+import "@/styles/shape.css"
+
+import Footer from "@/components/Footer.astro"
+import MetaHead from "@/components/MetaHead.astro"
+import Sidebar from "@/components/Sidebar.astro"
+import { SITE } from "@/consts"
+
+type Props = { crumbs?: { label: string; href: string }[] }
+
+const { crumbs } = Astro.props
+---
+
+<html lang={SITE.locale} dir={SITE.dir}>
+  <MetaHead>
+    <slot name="head" />
+  </MetaHead>
+  <body>
+    <page-grid>
+      <page-header>
+        <page-nav>
+          <Sidebar crumbs={crumbs}
+            ><slot name="actions" slot="actions" /></Sidebar
+          >
+        </page-nav>
+        {Astro.slots.has("toc") && (
+            <page-toc><slot name="toc" /></page-toc>
+          )}
+      </page-header>
+      <page-content>
+        <main><slot /></main>
+        <page-footer><Footer /></page-footer>
+      </page-content>
+    </page-grid>
+  </body>
+</html>
+
+<style>
+  page-grid {
+    position: relative;
+    isolation: isolate;
+    display: grid;
+    grid-template-columns: repeat(var(--grid-columns), minmax(0, 1fr));
+    gap: calc(var(--grid-gutter));
+    max-width: var(--grid-max-width);
+    min-height: 100svh;
+    margin-inline: auto;
+    padding-inline: var(--grid-gutter);
+    padding-block-start: var(--page-offset-top);
+  }
+
+  page-header {
+    display: contents;
+  }
+  page-nav {
+    grid-column: 1 / 3;
+    grid-row: 1;
+  }
+  page-content {
+    grid-column: 3 / 10;
+    grid-row: 1;
+  }
+  page-toc {
+    grid-column: 10 / 13;
+    grid-row: 1;
+  }
+
+  page-nav,
+  page-toc {
+    display: block;
+    min-width: 0;
+  }
+
+  page-content {
+    display: flex;
+    flex-direction: column;
+    min-width: 0;
+    margin-block-start: -0.1em;
+
+    main {
+      flex: 1;
+    }
+
+    page-footer {
+      display: block;
+      margin-block-start: var(--space-xl);
+    }
+  }
+
+  @media (width < 64rem) {
+    page-grid {
+      grid-template-columns: 1fr;
+      grid-template-rows: auto 1fr;
+      padding-block-start: 0;
+    }
+
+    page-header,
+    page-content {
+      grid-column: 1 / -1;
+    }
+
+    page-content {
+      grid-row: auto;
+      inline-size: 100%;
+      max-inline-size: var(--measure);
+      margin-inline: auto;
+    }
+
+    page-header {
+      display: block;
+      position: sticky;
+      top: 0;
+      z-index: 10;
+      min-width: 0;
+      margin-inline: calc(-1 * var(--grid-gutter));
+    }
+  }
+</style>

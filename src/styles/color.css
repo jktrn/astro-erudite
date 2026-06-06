@@ -1,0 +1,47 @@
+:root {
+  --color-red-400: oklch(70.4% 0.191 22.216);
+  --color-red-600: oklch(57.7% 0.245 27.325);
+
+  --color-neutral-50:  oklch(98.5% 0 0);
+  --color-neutral-100: oklch(97% 0 0);
+  --color-neutral-200: oklch(92.2% 0 0);
+  --color-neutral-300: oklch(87% 0 0);
+  --color-neutral-400: oklch(70.8% 0 0);
+  --color-neutral-500: oklch(55.6% 0 0);
+  --color-neutral-600: oklch(43.9% 0 0);
+  --color-neutral-700: oklch(37.1% 0 0);
+  --color-neutral-800: oklch(26.9% 0 0);
+  --color-neutral-900: oklch(20.5% 0 0);
+  --color-neutral-950: oklch(14.5% 0 0);
+
+  --background:         light-dark(var(--color-neutral-50),  var(--color-neutral-950));
+  --foreground:         light-dark(var(--color-neutral-950), var(--color-neutral-50));
+  --primary:            light-dark(var(--color-neutral-900), var(--color-neutral-200));
+  --primary-foreground: light-dark(var(--color-neutral-50),  var(--color-neutral-900));
+  --muted:              light-dark(var(--color-neutral-200), var(--color-neutral-800));
+  --muted-foreground:   light-dark(var(--color-neutral-500), var(--color-neutral-400));
+  --destructive:        light-dark(var(--color-red-600),     var(--color-red-400));
+  --border:             light-dark(var(--color-neutral-200), var(--color-neutral-800));
+  --ring:               light-dark(var(--color-neutral-400), var(--color-neutral-500));
+
+  color-scheme: light dark;
+}
+
+*,
+::before,
+::after,
+::backdrop,
+::file-selector-button {
+  border-color: var(--border);
+
+  &:focus-visible {
+    outline: 2px solid var(--ring);
+    outline-offset: 0.25rem;
+    border-radius: var(--radius-sm);
+  }
+}
+
+body {
+  background-color: var(--background);
+  color: var(--foreground);
+}

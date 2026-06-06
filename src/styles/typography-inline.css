@@ -1,0 +1,48 @@
+prose-content {
+  a {
+    --underline: var(--muted-foreground);
+    color: var(--foreground);
+  }
+
+  :is(strong, b) {
+    color: var(--foreground);
+    font-weight: var(--font-weight-medium);
+  }
+
+  :is(em, i) {
+    font-style: italic;
+  }
+
+  :where(code) {
+    font-family: var(--font-mono);
+    font-size: 0.9em;
+    padding: 0.1em 0.3em;
+    border-radius: var(--radius-sm);
+    background-color: color-mix(in oklab, var(--muted) 60%, transparent);
+
+    &[data-ec] :where(span[style^="--"]:not([class])) {
+      color: light-dark(var(--0, inherit), var(--1, inherit));
+      background-color: light-dark(
+        var(--0bg, transparent),
+        var(--1bg, transparent)
+      );
+      font-style: light-dark(var(--0fs, inherit), var(--1fs, inherit));
+      font-weight: light-dark(var(--0fw, inherit), var(--1fw, inherit));
+      text-decoration: light-dark(var(--0td, inherit), var(--1td, inherit));
+    }
+  }
+
+  kbd {
+    display: inline-block;
+    font-family: var(--font-mono);
+    font-size: var(--step--1);
+    line-height: 1;
+    vertical-align: middle;
+    padding: 0.25em 0.4em;
+    margin-block-end: 0.2em;
+    color: var(--foreground);
+    border: 1px solid var(--border);
+    border-radius: var(--radius-md);
+    box-shadow: inset 0 -1px 0 var(--border);
+  }
+}

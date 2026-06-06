@@ -1,0 +1,26 @@
+---
+import MetaPage from "@/components/MetaPage.astro"
+import ProjectCard from "@/components/ProjectCard.astro"
+import Layout from "@/layouts/Layout.astro"
+import { getCollection } from "astro:content"
+
+const projects = (await getCollection("projects")).sort(
+  (a, b) =>
+    (b.data.startDate?.getTime() ?? 0) - (a.data.startDate?.getTime() ?? 0),
+)
+---
+
+<Layout>
+  <MetaPage slot="head" title="Projects" />
+  <ul>
+    {projects.map((project) => <ProjectCard project={project} />)}
+  </ul>
+</Layout>
+
+<style>
+  ul {
+    display: flex;
+    flex-direction: column;
+    gap: var(--space-m);
+  }
+</style>

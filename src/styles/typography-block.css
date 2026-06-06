@@ -1,0 +1,82 @@
+prose-content {
+  blockquote {
+    border-inline-start: 2px solid var(--border);
+    padding-inline-start: 1.25em;
+    color: var(--muted-foreground);
+
+    :is(p, li) {
+      color: inherit;
+    }
+  }
+
+  hr {
+    margin-block: var(--space-l);
+    border-block-start: 1.5px solid var(--border);
+  }
+
+  :is(img, video) {
+    margin-inline: auto;
+  }
+
+  summary {
+    cursor: pointer;
+    font-weight: var(--font-weight-medium);
+  }
+
+  details[open] summary {
+    margin-block-end: 0.5em;
+  }
+
+  .footnotes {
+    margin-block-start: var(--space-l);
+    padding-block-start: var(--space-s);
+    border-block-start: 1.5px solid var(--border);
+  }
+
+  :is(math, math *) {
+    letter-spacing: normal;
+  }
+
+  math {
+    font-family: var(--font-math);
+  }
+
+  math-display {
+    display: flex;
+    justify-content: safe center;
+    overflow-x: auto;
+    overflow-y: hidden;
+  }
+
+  .expressive-code {
+    pre {
+      max-block-size: min(68vh, 1000px);
+      overflow-y: auto;
+
+      &::-webkit-scrollbar-corner {
+        display: none;
+      }
+    }
+
+    .tm-label .code::before {
+      font-family: var(--font-sans);
+    }
+
+    .frame.is-terminal .header {
+      font-weight: var(--font-weight-normal);
+      letter-spacing: var(--tracking-tight);
+    }
+
+    .frame.has-title:not(.is-terminal) .header {
+      border-block-end: var(--ec-brdWd) solid var(--border);
+    }
+
+    .expand {
+      margin-block-end: 0.1em;
+    }
+
+    .collapsible-start summary {
+      margin-block: var(--space-3xs);
+    }
+  }
+}

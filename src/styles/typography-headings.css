@@ -1,0 +1,30 @@
+prose-content {
+  :is(h1, h2, h3, h4, h5, h6) {
+    margin-block: 1.5em 0.5em;
+    font-weight: var(--font-weight-medium);
+    line-height: calc(var(--leading-offset) + 1em);
+    color: var(--foreground);
+    text-wrap: balance;
+    scroll-margin-block-start: calc(var(--page-offset-top) - 0.2em);
+  }
+
+  h1 {
+    font-size: var(--step-3);
+  }
+
+  h2 {
+    font-size: var(--step-2);
+  }
+
+  h3 {
+    font-size: var(--step-1);
+  }
+
+  h4 {
+    font-size: var(--step-0);
+  }
+
+  :is(h5, h6) {
+    font-size: var(--step--1);
+  }
+}

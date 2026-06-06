@@ -1,0 +1,188 @@
+---
+import Logo from "@/assets/logo.svg"
+import ThemeToggle from "@/components/ThemeToggle.astro"
+import { NAVIGATION, SITE } from "@/consts"
+import { trimSlash } from "@/lib/utils"
+
+type Props = { crumbs?: { label: string; href: string }[] }
+
+const { crumbs = [] } = Astro.props
+const pathname = trimSlash(Astro.url.pathname) || "/"
+const section = NAVIGATION.find(
+  ({ href }) => pathname === href || pathname.startsWith(`${href}/`),
+)
+---
+
+<aside>
+  <sidebar-inner>
+    <a href="/" aria-label={SITE.title}>
+      <Logo />
+      <span>{SITE.title}</span>
+    </a>
+    <nav>
+      <ul>
+        {NAVIGATION.map((item) => (
+            <li>
+              <a
+                href={item.href}
+                aria-current={pathname === item.href ? "page" : undefined}
+              >
+                {item.label}
+              </a>
+              {item === section && crumbs.length > 0 && pathname !== item.href && (
+                <ul>
+                  {crumbs.map((crumb, i) => (
+                    <li data-depth={i ? 1 : undefined}>
+                      <a
+                        href={crumb.href}
+                        aria-current={
+                          i === crumbs.length - 1 ? "page" : undefined
+                        }
+                      >
+                        {crumb.label}
+                      </a>
+                    </li>
+                  ))}
+                </ul>
+              )}
+            </li>
+          ))}
+        {!section &&
+            crumbs.map((crumb, i) => (
+              <li data-depth={i ? 1 : undefined}>
+                <a
+                  href={crumb.href}
+                  aria-current={i === crumbs.length - 1 ? "page" : undefined}
+                >
+                  {crumb.label}
+                </a>
+              </li>
+            ))}
+      </ul>
+    </nav>
+  </sidebar-inner>
+  <sidebar-toggle>
+    <ThemeToggle />
+    <slot name="actions" />
+  </sidebar-toggle>
+</aside>
+
+<style>
+  aside {
+    position: sticky;
+    top: var(--page-offset-top);
+    display: flex;
+    flex-direction: column;
+    justify-content: space-between;
+    height: calc(100svh - var(--page-offset-top) - var(--page-offset-bottom));
+  }
+
+  sidebar-inner {
+    display: flex;
+    flex-direction: column;
+    gap: var(--space-2xs);
+
+    > a {
+      display: inline-flex;
+      align-items: center;
+      gap: 0.5rem;
+      width: fit-content;
+      font-weight: var(--font-weight-medium);
+      font-size: var(--step-0);
+      color: var(--foreground);
+      text-decoration-line: none;
+
+      svg {
+        inline-size: 1.125rem;
+        block-size: 1.125rem;
+        flex-shrink: 0;
+      }
+    }
+  }
+
+  nav ul {
+    display: flex;
+    flex-direction: column;
+    gap: var(--space-3xs);
+
+    a {
+      display: block;
+      color: var(--muted-foreground);
+
+      &:hover,
+      &[aria-current="page"] {
+        color: var(--foreground);
+      }
+    }
+
+    li[data-depth="1"] a {
+      margin-inline-start: var(--space-xs);
+    }
+
+    ul {
+      margin-block-start: var(--space-3xs);
+
+      a {
+        margin-inline-start: var(--space-xs);
+      }
+
+      li[data-depth="1"] a {
+        margin-inline-start: calc(2 * var(--space-xs));
+      }
+    }
+  }
+
+  sidebar-toggle {
+    display: flex;
+    align-items: center;
+    margin-inline-start: -0.5rem;
+  }
+
+  @media (width < 64rem) {
+    aside {
+      position: static;
+      height: auto;
+      flex-direction: row;
+      align-items: center;
+      gap: var(--space-s);
+      padding-block: var(--space-2xs);
+      padding-inline: var(--bar-gutter);
+      background-color: color-mix(in oklab, var(--background) 90%, transparent);
+      backdrop-filter: blur(var(--blur-sm));
+      border-block-end: 2px solid var(--border);
+      border-image: var(--bar-border-image);
+    }
+
+    sidebar-inner {
+      flex: 1;
+      flex-direction: row;
+      align-items: center;
+      justify-content: space-between;
+    }
+
+    nav ul {
+      flex-direction: row;
+      align-items: center;
+      gap: var(--space-s);
+
+      ul {
+        display: none;
+      }
+    }
+
+    nav li:has(> ul) > a {
+      color: var(--foreground);
+    }
+
+    sidebar-toggle {
+      margin-inline-start: 0;
+      margin-inline-end: -0.5rem;
+    }
+
+    @media (width < 26rem) {
+      sidebar-inner > a span {
+        display: none;
+      }
+    }
+  }
+</style>

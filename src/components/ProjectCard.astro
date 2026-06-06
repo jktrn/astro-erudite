@@ -1,0 +1,148 @@
+---
+import ExternalIcon from "@/assets/icons/external.svg"
+import { formatDate } from "@/lib/utils"
+import { Image } from "astro:assets"
+import type { CollectionEntry } from "astro:content"
+
+type Props = { project: CollectionEntry<"projects"> }
+
+const { project } = Astro.props
+const { name, description, link, tags, image, startDate, endDate } =
+  project.data
+---
+
+<li>
+  {image && (
+      <a
+        href={link}
+        target="_blank"
+        rel="noopener noreferrer"
+        tabindex="-1"
+        aria-hidden="true"
+      >
+        <Image src={image} alt="" width={640} height={336} />
+      </a>
+    )}
+  <entry-info>
+    <a href={link} target="_blank" rel="noopener noreferrer">{name}</a>
+    <entry-meta>
+      {startDate && (
+          <project-dates>
+            <time datetime={startDate.toISOString()}>
+              {formatDate(startDate)}
+            </time>
+            {" → "}
+            {endDate ? (
+              <time datetime={endDate.toISOString()}>
+                {formatDate(endDate)}
+              </time>
+            ) : (
+              "Present"
+            )}
+          </project-dates>
+        )}
+      <project-link>
+        <ExternalIcon aria-hidden="true" />
+        {new URL(link).hostname}
+      </project-link>
+    </entry-meta>
+    <p>{description}</p>
+    {tags && tags.length > 0 && (
+        <project-tags>
+          {tags.map((tag) => (
+            <span>{tag}</span>
+          ))}
+        </project-tags>
+      )}
+  </entry-info>
+</li>
+
+<style>
+  li {
+    display: flex;
+    align-items: flex-start;
+    gap: var(--space-s);
+
+    > a {
+      flex-shrink: 0;
+      inline-size: 14rem;
+
+      :global(img) {
+        inline-size: 100%;
+        block-size: auto;
+      }
+    }
+
+    entry-info {
+      display: flex;
+      flex-direction: column;
+
+      > a {
+        font-size: var(--step-1);
+        line-height: calc(var(--leading-offset) + 1em);
+        font-weight: var(--font-weight-medium);
+      }
+
+      entry-meta {
+        display: flex;
+        flex-wrap: wrap;
+        align-items: center;
+        gap: var(--space-3xs);
+        margin-block-end: var(--space-3xs);
+        font-size: var(--step--1);
+        color: var(--muted-foreground);
+
+        project-dates {
+          display: flex;
+          align-items: center;
+          gap: var(--space-3xs);
+        }
+
+        project-link {
+          display: flex;
+          align-items: center;
+          gap: var(--space-3xs);
+          color: color-mix(in oklab, var(--muted-foreground) 50%, transparent);
+
+          svg {
+            inline-size: 1em;
+            block-size: 1em;
+          }
+        }
+
+        project-dates ~ project-link::before {
+          content: "·";
+          color: var(--muted-foreground);
+        }
+      }
+
+      p {
+        color: var(--muted-foreground);
+      }
+
+      project-tags {
+        display: flex;
+        flex-wrap: wrap;
+        gap: var(--space-3xs);
+        margin-block-start: var(--space-2xs);
+        font-size: var(--step--1);
+
+        span {
+          padding-inline: var(--space-2xs);
+          color: var(--muted-foreground);
+          background-color: color-mix(in oklab, var(--muted) 50%, transparent);
+          border-radius: var(--radius-full);
+        }
+      }
+    }
+
+    @media (width < 40rem) {
+      flex-direction: column;
+
+      > a {
+        inline-size: 100%;
+        max-inline-size: 32rem;
+      }
+    }
+  }
+</style>

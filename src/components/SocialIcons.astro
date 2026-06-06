@@ -1,0 +1,51 @@
+---
+import type { SvgComponent } from "astro/types"
+
+type Props = { links: { href: string; label: string; icon: SvgComponent }[] }
+
+const { links } = Astro.props
+---
+
+<ul>
+  {links.map(({ href, label, icon: Icon }) => (
+      <li>
+        <a
+          href={href}
+          target="_blank"
+          rel="noopener noreferrer"
+          aria-label={label}
+          title={label}
+        >
+          <Icon aria-hidden="true" />
+        </a>
+      </li>
+    ))}
+</ul>
+
+<style>
+  ul {
+    display: flex;
+    margin-inline: -0.5rem;
+
+    li a {
+      display: inline-flex;
+      align-items: center;
+      justify-content: center;
+      width: 2rem;
+      height: 2rem;
+      color: var(--muted-foreground);
+      border-radius: var(--radius-md);
+      text-decoration: none;
+
+      &:hover {
+        color: var(--foreground);
+        background-color: color-mix(in oklab, var(--muted) 50%, transparent);
+      }
+
+      svg {
+        width: 1.125rem;
+        height: 1.125rem;
+      }
+    }
+  }
+</style>
