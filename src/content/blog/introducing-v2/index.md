@@ -584,11 +584,18 @@ import Callout from '@/components/callout.astro'
 ```
 
 v2 ships with the [Sätteri](https://satteri.bruits.org/) Markdown processor, which supports [directives](https://satteri.bruits.org/docs/features/#directives) with the same specification as [remark-directive](https://github.com/remarkjs/remark-directive). We now can add callouts to our Markdown content like this, without any imports:
+
 ```markdown showLineNumbers=false
 :::note[Testing]
 Hello, world!
 :::
 ```
+This renders as:
+
+:::note[Testing]
+Hello, world!
+:::
+
 We do this with a custom MDAST plugin that hooks into Sätteri, rather than an Astro component. Do note that this is one of the breaking changes from v1 to v2.
 
 ### Regarding unified and Sätteri
