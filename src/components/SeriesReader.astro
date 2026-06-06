@@ -1,31 +1,22 @@
 <script is:inline>
   ;(() => {
-    const position = () => {
-      if (location.hash) return
-      const pathname = location.pathname.replace(/\/+$/, "")
-      const articles = document.querySelectorAll("article[data-url]")
-      for (let i = 1; i < articles.length; i++) {
-        if (articles[i].dataset.url === pathname) {
-          articles[i].scrollIntoView({ behavior: "instant" })
-          return
-        }
+    const type = performance.getEntriesByType("navigation")[0]?.type
+    if (type && type !== "navigate") return
+    if (location.hash) return
+    const pathname = location.pathname.replace(/\/+$/, "")
+    const articles = document.querySelectorAll("article[data-url]")
+    for (let i = 1; i < articles.length; i++) {
+      if (articles[i].dataset.url === pathname) {
+        articles[i].scrollIntoView({ behavior: "instant" })
+        return
       }
     }
-    let traverse = false
-    if (!history.state) position()
-    document.addEventListener("astro:before-swap", (event) => {
-      traverse = event.navigationType === "traverse"
-    })
-    document.addEventListener("astro:after-swap", () => {
-      if (!traverse) position()
-    })
   })()
 </script>
 
 <script>
   import { hashId, trimSlash } from "@/lib/utils"
 
-  let observer: IntersectionObserver | undefined
   let series = false
   let pendingHash = ""
 
@@ -53,8 +44,7 @@
       if (
         !(link instanceof HTMLAnchorElement) ||
         link.target ||
-        link.hasAttribute("download") ||
-        link.hasAttribute("data-astro-reload")
+        link.hasAttribute("download")
       )
         return
       let target: Element | null = null
@@ -91,18 +81,12 @@
     true,
   )
 
-  document.addEventListener("astro:page-load", () => {
-    observer?.disconnect()
-    observer = undefined
-    pendingHash = ""
-
+  ;(() => {
     const articles = [
       ...document.querySelectorAll<HTMLElement>("article[data-url]"),
     ]
     series = articles.length > 1
     if (!series) return
-    if (articles[0].hasAttribute("data-reader")) return
-    articles[0].setAttribute("data-reader", "")
 
     const list = document.querySelector("page-nav nav ul ul")
     const parentLink = list?.querySelector("a")
@@ -132,7 +116,7 @@
     }
 
     const inBand = new Set<Element>()
-    observer = new IntersectionObserver(
+    const observer = new IntersectionObserver(
       (entries) => {
         for (const entry of entries) {
           if (entry.isIntersecting) inBand.add(entry.target)
@@ -158,5 +142,5 @@
       { rootMargin: "-20% 0px -79% 0px" },
     )
     for (const article of articles) observer.observe(article)
-  })
+  })()
 </script>

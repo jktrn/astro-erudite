@@ -75,6 +75,20 @@ const section = NAVIGATION.find(
     flex-direction: column;
     justify-content: space-between;
     height: calc(100svh - var(--page-offset-top) - var(--page-offset-bottom));
+
+    @media (width < 64rem) {
+      position: static;
+      height: auto;
+      flex-direction: row;
+      align-items: center;
+      gap: var(--space-s);
+      padding-block: var(--space-2xs);
+      padding-inline: var(--bar-gutter);
+      background-color: color-mix(in oklab, var(--background) 90%, transparent);
+      backdrop-filter: blur(var(--blur-sm));
+      border-block-end: 2px solid var(--border);
+      border-image: var(--bar-border-image);
+    }
   }
 
   sidebar-inner {
@@ -97,6 +111,19 @@ const section = NAVIGATION.find(
         block-size: 1.125rem;
         flex-shrink: 0;
       }
+
+      @media (width < 26rem) {
+        span {
+          display: none;
+        }
+      }
+    }
+
+    @media (width < 64rem) {
+      flex: 1;
+      flex-direction: row;
+      align-items: center;
+      justify-content: space-between;
     }
   }
 
@@ -130,37 +157,8 @@ const section = NAVIGATION.find(
         margin-inline-start: calc(2 * var(--space-xs));
       }
     }
-  }
 
-  sidebar-toggle {
-    display: flex;
-    align-items: center;
-    margin-inline-start: -0.5rem;
-  }
-
-  @media (width < 64rem) {
-    aside {
-      position: static;
-      height: auto;
-      flex-direction: row;
-      align-items: center;
-      gap: var(--space-s);
-      padding-block: var(--space-2xs);
-      padding-inline: var(--bar-gutter);
-      background-color: color-mix(in oklab, var(--background) 90%, transparent);
-      backdrop-filter: blur(var(--blur-sm));
-      border-block-end: 2px solid var(--border);
-      border-image: var(--bar-border-image);
-    }
-
-    sidebar-inner {
-      flex: 1;
-      flex-direction: row;
-      align-items: center;
-      justify-content: space-between;
-    }
-
-    nav ul {
+    @media (width < 64rem) {
       flex-direction: row;
       align-items: center;
       gap: var(--space-s);
@@ -169,20 +167,22 @@ const section = NAVIGATION.find(
         display: none;
       }
     }
+  }
 
-    nav li:has(> ul) > a {
+  nav li:has(> ul) > a {
+    @media (width < 64rem) {
       color: var(--foreground);
     }
+  }
 
-    sidebar-toggle {
+  sidebar-toggle {
+    display: flex;
+    align-items: center;
+    margin-inline-start: -0.5rem;
+
+    @media (width < 64rem) {
       margin-inline-start: 0;
       margin-inline-end: -0.5rem;
-    }
-
-    @media (width < 26rem) {
-      sidebar-inner > a span {
-        display: none;
-      }
     }
   }
 </style>

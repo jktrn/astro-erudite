@@ -77,8 +77,6 @@ import SunIcon from "@/assets/icons/sun.svg"
     localStorage.theme = theme
   }
 
-  document.addEventListener("astro:page-load", () => {
-    const button = document.getElementById("theme-toggle")
-    if (button) button.onclick = toggleTheme
-  })
+  const button = document.getElementById("theme-toggle")
+  if (button) button.onclick = toggleTheme
 </script>

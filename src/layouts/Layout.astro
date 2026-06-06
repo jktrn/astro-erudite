@@ -52,39 +52,67 @@ const { crumbs } = Astro.props
     isolation: isolate;
     display: grid;
     grid-template-columns: repeat(var(--grid-columns), minmax(0, 1fr));
-    gap: calc(var(--grid-gutter));
+    gap: var(--grid-gutter);
     max-width: var(--grid-max-width);
     min-height: 100svh;
     margin-inline: auto;
     padding-inline: var(--grid-gutter);
     padding-block-start: var(--page-offset-top);
+
+    @media (width < 64rem) {
+      grid-template-columns: 1fr;
+      grid-template-rows: auto 1fr;
+      padding-block-start: 0;
+    }
   }
 
   page-header {
     display: contents;
-  }
-  page-nav {
-    grid-column: 1 / 3;
-    grid-row: 1;
-  }
-  page-content {
-    grid-column: 3 / 10;
-    grid-row: 1;
-  }
-  page-toc {
-    grid-column: 10 / 13;
-    grid-row: 1;
+
+    @media (width < 64rem) {
+      display: block;
+      grid-column: 1 / -1;
+      position: sticky;
+      top: 0;
+      z-index: 10;
+      min-width: 0;
+      margin-inline: calc(-1 * var(--grid-gutter));
+    }
   }
 
-  page-nav,
+  page-nav {
+    display: block;
+    min-width: 0;
+    grid-column: 1 / 3;
+    grid-row: 1;
+
+    @media screen and (width >= 64rem) {
+      position: fixed;
+      inset-block: var(--page-offset-top) var(--page-offset-bottom);
+      inset-inline-start: var(--grid-edge);
+      width: calc(2 * var(--grid-column-width) + var(--grid-gutter));
+    }
+  }
+
   page-toc {
     display: block;
     min-width: 0;
+    grid-column: 10 / 13;
+    grid-row: 1;
+
+    @media screen and (width >= 64rem) {
+      position: fixed;
+      inset-block: var(--page-offset-top) var(--page-offset-bottom);
+      inset-inline-end: var(--grid-edge);
+      width: calc(3 * var(--grid-column-width) + 2 * var(--grid-gutter));
+    }
   }
 
   page-content {
     display: flex;
     flex-direction: column;
+    grid-column: 3 / 10;
+    grid-row: 1;
     min-width: 0;
     margin-block-start: -0.1em;
 
@@ -96,34 +124,13 @@ const { crumbs } = Astro.props
       display: block;
       margin-block-start: var(--space-xl);
     }
-  }
 
-  @media (width < 64rem) {
-    page-grid {
-      grid-template-columns: 1fr;
-      grid-template-rows: auto 1fr;
-      padding-block-start: 0;
-    }
-
-    page-header,
-    page-content {
+    @media (width < 64rem) {
       grid-column: 1 / -1;
-    }
-
-    page-content {
       grid-row: auto;
       inline-size: 100%;
       max-inline-size: var(--measure);
       margin-inline: auto;
-    }
-
-    page-header {
-      display: block;
-      position: sticky;
-      top: 0;
-      z-index: 10;
-      min-width: 0;
-      margin-inline: calc(-1 * var(--grid-gutter));
     }
   }
 </style>

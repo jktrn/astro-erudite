@@ -49,6 +49,9 @@ prose-content {
   }
 
   .expressive-code {
+    content-visibility: auto;
+    contain-intrinsic-block-size: auto 20rem;
+
     pre {
       max-block-size: min(68vh, 1000px);
       overflow-y: auto;

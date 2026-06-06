@@ -74,6 +74,12 @@ const { title, sections } = Astro.props
       var(--page-offset-bottom)
     );
     font-size: var(--step--1);
+
+    @media (width < 64rem) {
+      position: relative;
+      top: auto;
+      max-height: none;
+    }
   }
 
   toc-title {
@@ -91,10 +97,80 @@ const { title, sections } = Astro.props
       grid-template-rows: 1fr;
       margin-block-end: var(--space-2xs);
     }
+
+    @media (width < 64rem) {
+      display: none;
+    }
   }
 
   label {
     display: none;
+
+    @media (width < 64rem) {
+      display: flex;
+      align-items: center;
+      gap: var(--space-2xs);
+      padding-block: var(--space-2xs);
+      padding-inline: var(--bar-gutter);
+      background-color: color-mix(in oklab, var(--background) 90%, transparent);
+      backdrop-filter: blur(var(--blur-sm));
+      border-block-end: 2px solid var(--border);
+      border-image: var(--bar-border-image);
+      cursor: pointer;
+
+      input {
+        position: absolute;
+        opacity: 0;
+        pointer-events: none;
+      }
+
+      > svg:first-of-type {
+        flex-shrink: 0;
+        inline-size: 1em;
+        block-size: 1em;
+
+        circle {
+          fill: none;
+          stroke: var(--border);
+          stroke-width: 2;
+
+          &:last-child {
+            stroke: var(--muted-foreground);
+            stroke-dasharray: 40.84px;
+            stroke-dashoffset: calc(40.84px * (1 - var(--progress, 0)));
+          }
+        }
+      }
+
+      toc-current {
+        flex: 1;
+        min-width: 0;
+        overflow: hidden;
+        text-overflow: ellipsis;
+        white-space: nowrap;
+        color: var(--muted-foreground);
+      }
+
+      > svg:last-of-type {
+        flex-shrink: 0;
+        inline-size: 1em;
+        block-size: 1em;
+        color: var(--muted-foreground);
+      }
+    }
+  }
+
+  nav:has(input:focus-visible) label {
+    @media (width < 64rem) {
+      outline: 2px solid var(--ring);
+      outline-offset: -2px;
+    }
+  }
+
+  nav:has(input:checked) label > svg:last-of-type {
+    @media (width < 64rem) {
+      rotate: 180deg;
+    }
   }
 
   nav > ul {
@@ -106,6 +182,26 @@ const { title, sections } = Astro.props
 
     &::-webkit-scrollbar {
       display: none;
+    }
+
+    @media (width < 64rem) {
+      display: none;
+      position: absolute;
+      inset-block-start: 100%;
+      inset-inline: 0;
+      max-block-size: 30svh;
+      padding-block: var(--space-2xs);
+      padding-inline: var(--bar-gutter);
+      background-color: color-mix(in oklab, var(--background) 90%, transparent);
+      backdrop-filter: blur(var(--blur-sm));
+      border-block-end: 2px solid var(--border);
+      border-image: var(--bar-border-image);
+    }
+  }
+
+  nav:has(input:checked) > ul {
+    @media (width < 64rem) {
+      display: flex;
     }
   }
 
@@ -199,105 +295,12 @@ const { title, sections } = Astro.props
       --indent: 2;
     }
   }
-
-  @media (width < 64rem) {
-    nav {
-      position: relative;
-      top: auto;
-      max-height: none;
-    }
-
-    toc-title {
-      display: none;
-    }
-
-    label {
-      display: flex;
-      align-items: center;
-      gap: var(--space-2xs);
-      padding-block: var(--space-2xs);
-      padding-inline: var(--bar-gutter);
-      background-color: color-mix(in oklab, var(--background) 90%, transparent);
-      backdrop-filter: blur(var(--blur-sm));
-      border-block-end: 2px solid var(--border);
-      border-image: var(--bar-border-image);
-      cursor: pointer;
-
-      input {
-        position: absolute;
-        opacity: 0;
-        pointer-events: none;
-      }
-
-      > svg:first-of-type {
-        flex-shrink: 0;
-        inline-size: 1em;
-        block-size: 1em;
-
-        circle {
-          fill: none;
-          stroke: var(--border);
-          stroke-width: 2;
-
-          &:last-child {
-            stroke: var(--muted-foreground);
-            stroke-dasharray: 40.84px;
-            stroke-dashoffset: calc(40.84px * (1 - var(--progress, 0)));
-          }
-        }
-      }
-
-      toc-current {
-        flex: 1;
-        min-width: 0;
-        overflow: hidden;
-        text-overflow: ellipsis;
-        white-space: nowrap;
-        color: var(--muted-foreground);
-      }
-
-      > svg:last-of-type {
-        flex-shrink: 0;
-        inline-size: 1em;
-        block-size: 1em;
-        color: var(--muted-foreground);
-      }
-    }
-
-    nav:has(input:focus-visible) label {
-      outline: 2px solid var(--ring);
-      outline-offset: -2px;
-    }
-
-    nav:has(input:checked) label > svg:last-of-type {
-      rotate: 180deg;
-    }
-
-    nav > ul {
-      display: none;
-      position: absolute;
-      inset-block-start: 100%;
-      inset-inline: 0;
-      max-block-size: 30svh;
-      padding-block: var(--space-2xs);
-      padding-inline: var(--bar-gutter);
-      background-color: color-mix(in oklab, var(--background) 90%, transparent);
-      backdrop-filter: blur(var(--blur-sm));
-      border-block-end: 2px solid var(--border);
-      border-image: var(--bar-border-image);
-    }
-
-    nav:has(input:checked) > ul {
-      display: flex;
-    }
-  }
 </style>
 
 <script>
   import { hashId } from "@/lib/utils"
 
-  let observer: IntersectionObserver | undefined
-  let nav: HTMLElement | null = null
+  const nav = document.querySelector<HTMLElement>("page-toc nav")
 
   const progress = () => {
     const max = document.documentElement.scrollHeight - innerHeight
@@ -307,13 +310,9 @@ const { title, sections } = Astro.props
     )
   }
   addEventListener("scroll", progress, { passive: true })
+  progress()
 
-  document.addEventListener("astro:page-load", () => {
-    observer?.disconnect()
-    observer = undefined
-    nav = document.querySelector("page-toc nav")
-    progress()
-
+  ;(() => {
     const links = new Map(
       [
         ...document.querySelectorAll<HTMLAnchorElement>(
@@ -329,8 +328,6 @@ const { title, sections } = Astro.props
       document.querySelector<HTMLInputElement>("page-toc nav input")
     const heading = document.querySelector("article > header h1")
     if (articles.length === 0 || !list || links.size === 0) return
-    if (list.hasAttribute("data-spy")) return
-    list.setAttribute("data-spy", "")
 
     const fallback = currentLabel?.textContent ?? ""
 
@@ -401,7 +398,7 @@ const { title, sections } = Astro.props
       }
     })
 
-    observer = new IntersectionObserver((entries) => {
+    const observer = new IntersectionObserver((entries) => {
       for (const entry of entries) {
         if (entry.target === heading) {
           const past = !entry.isIntersecting
@@ -456,5 +453,5 @@ const { title, sections } = Astro.props
       title?.toggleAttribute("data-visible", true)
       document.body.toggleAttribute("data-past-title", true)
     }
-  })
+  })()
 </script>

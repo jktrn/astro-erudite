@@ -22,6 +22,17 @@
   --grid-max-width: 75.94rem;
   --grid-gutter: var(--space-s-m);
   --grid-columns: 12;
+  --grid-edge: max(
+    var(--grid-gutter),
+    (100% - var(--grid-max-width)) / 2 + var(--grid-gutter)
+  );
+  --grid-column-width: calc(
+    (
+        min(100%, var(--grid-max-width)) -
+          (var(--grid-columns) + 1) * var(--grid-gutter)
+      ) /
+      var(--grid-columns)
+  );
   --bar-gutter: max(var(--grid-gutter), (100% - var(--measure)) / 2);
   --bar-border-image: linear-gradient(
       to right,
@@ -37,4 +48,20 @@
 
 html {
   scrollbar-gutter: stable;
+}
+
+@media (width < 64rem) {
+  html {
+    --bar-nav-height: calc(2rem + 2 * var(--space-2xs) + 2px);
+    --bar-toc-height: 0px;
+    scroll-padding-block-start: calc(
+      var(--bar-nav-height) +
+      var(--bar-toc-height) +
+      var(--space-2xs)
+    );
+
+    &:has(page-toc) {
+      --bar-toc-height: calc(1.5 * var(--step--1) + 2 * var(--space-2xs) + 2px);
+    }
+  }
 }

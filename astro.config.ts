@@ -12,6 +12,7 @@ import { headingNamespace } from "./src/lib/heading-namespace"
 
 export default defineConfig({
   site: "https://astro-erudite.vercel.app",
+  prefetch: { prefetchAll: true },
   integrations: [
     sitemap({
       filter: (page) =>

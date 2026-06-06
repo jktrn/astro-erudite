@@ -60,7 +60,6 @@ Below are some fantastic examples of websites based on this template. If you wis
 - $\LaTeX$ math rendered to browser-native and lightweight [MathML](https://developer.mozilla.org/en-US/docs/Web/MathML) via [Temml](https://temml.org/).
 - Subposts for organizing series, rendered as one continuous scrollable document.
 - A fully responsive table of contents with active scrollspy highlighting.
-- Astro [View Transitions](https://docs.astro.build/en/guides/view-transitions/) in <abbr title="Single Page Application">SPA</abbr> mode for smooth route animations.
 - GitHub-style callouts/alerts via `:::` directives.
 - SEO optimization with granular metadata and [Open Graph](https://ogp.me/) tag control for each post.
 - [RSS](https://en.wikipedia.org/wiki/RSS) feed and sitemap generation.

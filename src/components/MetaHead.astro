@@ -2,7 +2,6 @@
 import sansWoff2 from "@/assets/fonts/IBMPlexSans-VariableFont_wdth,wght.woff2?url"
 import sansItalicWoff2 from "@/assets/fonts/IBMPlexSans-Italic-VariableFont_wdth,wght.woff2?url"
 import { SITE } from "@/consts"
-import { ClientRouter } from "astro:transitions"
 ---
 
 <head>
@@ -58,16 +57,10 @@ import { ClientRouter } from "astro:transitions"
   >
 
   <script is:inline>
-    function applyTheme() {
-      const theme = localStorage.theme
-      if (theme === "light" || theme === "dark")
-        document.documentElement.dataset.theme = theme
-    }
-    applyTheme()
-    document.addEventListener("astro:after-swap", applyTheme)
+    const theme = localStorage.theme
+    if (theme === "light" || theme === "dark")
+      document.documentElement.dataset.theme = theme
   </script>
-
-  <ClientRouter />
 
   <slot />
 </head>

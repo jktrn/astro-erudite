@@ -5,7 +5,10 @@ prose-content {
     line-height: calc(var(--leading-offset) + 1em);
     color: var(--foreground);
     text-wrap: balance;
-    scroll-margin-block-start: calc(var(--page-offset-top) - 0.2em);
+
+    @media (width >= 64rem) {
+      scroll-margin-block-start: calc(var(--page-offset-top) - 0.2em);
+    }
   }
 
   h1 {
