@@ -75,6 +75,10 @@ prose-content {
       margin-block-end: 0.1em;
     }
 
+    .ec-section summary {
+      list-style: none;
+    }
+
     .collapsible-start summary {
       margin-block: var(--space-3xs);
     }
