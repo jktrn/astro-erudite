@@ -1,37 +1,16 @@
-import { type ClassValue, clsx } from 'clsx'
-import { twMerge } from 'tailwind-merge'
-
-export function cn(...inputs: ClassValue[]) {
-  return twMerge(clsx(inputs))
-}
-
-export function formatDate(date: Date) {
-  return Intl.DateTimeFormat('en-US', {
-    year: 'numeric',
-    month: 'long',
-    day: 'numeric',
+export function formatDate(date: Date): string {
+  return new Intl.DateTimeFormat("en-US", {
+    year: "numeric",
+    month: "short",
+    day: "numeric",
+    timeZone: "UTC",
   }).format(date)
 }
 
-export function calculateWordCountFromHtml(
-  html: string | null | undefined,
-): number {
-  if (!html) return 0
-  const textOnly = html.replace(/<[^>]+>/g, '')
-  return textOnly.split(/\s+/).filter(Boolean).length
-}
+export const isSubpost = (id: string) => id.includes("/")
 
-export function readingTime(wordCount: number): string {
-  const readingTimeMinutes = Math.max(1, Math.round(wordCount / 200))
-  return `${readingTimeMinutes} min read`
-}
+export const subpostSlug = (id: string) => id.split("/")[1]
 
-export function getHeadingMargin(depth: number): string {
-  const margins: Record<number, string> = {
-    3: 'ml-4',
-    4: 'ml-8',
-    5: 'ml-12',
-    6: 'ml-16',
-  }
-  return margins[depth] || ''
-}
+export const trimSlash = (pathname: string) => pathname.replace(/\/+$/, "")
+
+export const hashId = (hash: string) => decodeURIComponent(hash.slice(1))

@@ -1,299 +1,233 @@
 ---
-import Breadcrumbs from '@/components/breadcrumbs.astro'
-import Link from '@/components/link.astro'
-import PostHead from '@/components/post-head.astro'
-import PostNavigation from '@/components/post-navigation.astro'
-import SubpostsHeader from '@/components/subposts-header.astro'
-import SubpostsSidebar from '@/components/subposts-sidebar.astro'
-import TOCHeader from '@/components/toc-header.astro'
-import TOCSidebar from '@/components/toc-sidebar.astro'
-import { badgeVariants } from '@/components/ui/badge'
-import { Button } from '@/components/ui/button'
-import Layout from '@/layouts/layout.astro'
-import {
-  getAdjacentPosts,
-  getAllPostsAndSubposts,
-  getCombinedReadingTime,
-  getParentId,
-  getParentPost,
-  getPostReadingTime,
-  getSubpostCount,
-  getTOCSections,
-  hasSubposts,
-  isSubpost,
-  parseAuthors,
-} from '@/lib/data-utils'
-import { formatDate } from '@/lib/utils'
-import { Icon } from 'astro-icon/components'
-import { Image } from 'astro:assets'
-import { render } from 'astro:content'
+import MetaPost from "@/components/MetaPost.astro"
+import PostActions from "@/components/PostActions.astro"
+import ScrollToTop from "@/components/ScrollToTop.astro"
+import SeriesReader from "@/components/SeriesReader.astro"
+import TableOfContents from "@/components/TableOfContents.astro"
+import Layout from "@/layouts/Layout.astro"
+import { getPosts, getSubposts, pageTitle } from "@/lib/content"
+import { formatDate, isSubpost, subpostSlug } from "@/lib/utils"
+import { Image } from "astro:assets"
+import { getEntries, render, type CollectionEntry } from "astro:content"
 
 export async function getStaticPaths() {
-  const posts = await getAllPostsAndSubposts()
-  return posts.map((post) => ({
-    params: { id: post.id },
-    props: post,
-  }))
+  const posts = await getPosts()
+  const series = await getSubposts()
+  return posts.flatMap((parent, i) => {
+    const chain = [parent, ...(series.get(parent.id) ?? [])]
+    return chain.map((post) => ({
+      params: { id: post.id },
+      props: { post, chain, prev: posts[i + 1], next: posts[i - 1] },
+    }))
+  })
 }
 
-const post = Astro.props
-const currentPostId = Astro.params.id
-const { Content, headings } = await render(post)
-const authors = await parseAuthors(post.data.authors ?? [])
+type Props = {
+  post: CollectionEntry<"blog">
+  chain: CollectionEntry<"blog">[]
+  prev?: CollectionEntry<"blog">
+  next?: CollectionEntry<"blog">
+}
 
-const isCurrentSubpost = isSubpost(currentPostId)
-const navigation = await getAdjacentPosts(currentPostId)
-const parentPost = isCurrentSubpost ? await getParentPost(currentPostId) : null
+const { post, chain, prev, next } = Astro.props
+const [parent] = chain
+const rendered = await Promise.all(
+  chain.map(async (entry) => ({
+    entry,
+    ...(await render(entry)),
+    authors: await getEntries(entry.data.authors),
+  })),
+)
 
-const hasChildPosts = await hasSubposts(currentPostId)
-const subpostCount = !isCurrentSubpost
-  ? await getSubpostCount(currentPostId)
-  : 0
-const postReadingTime = await getPostReadingTime(currentPostId)
-const combinedReadingTime =
-  hasChildPosts && !isCurrentSubpost
-    ? await getCombinedReadingTime(currentPostId)
-    : null
+const sections = rendered.map(({ entry, headings }, i) => ({
+  id: i === 0 ? undefined : subpostSlug(entry.id),
+  label: entry.data.title,
+  open: entry.id === post.id,
+  headings: headings.filter(
+    ({ depth, text }) => depth >= 2 && depth <= 4 && text.trim(),
+  ),
+}))
+const hasToc =
+  sections.length > 1 || sections.some(({ headings }) => headings.length > 0)
 
-const tocSections = await getTOCSections(currentPostId)
+const crumbs = [{ label: parent.data.title, href: `/blog/${parent.id}` }]
+if (isSubpost(post.id)) {
+  crumbs.push({ label: post.data.title, href: `/blog/${post.id}` })
+}
 ---
 
-<Layout>
-  <PostHead slot="head" post={post} />
-  {
-    (hasChildPosts || isCurrentSubpost) && (
-      <SubpostsHeader
-        slot="subposts-navigation"
-        parentId={isCurrentSubpost ? getParentId(currentPostId) : currentPostId}
+<Layout crumbs={crumbs}>
+  <MetaPost
+    slot="head"
+    post={post}
+    canonical={isSubpost(post.id) ? `/blog/${parent.id}` : undefined}
+  />
+  {hasToc && (
+      <TableOfContents
+        slot="toc"
+        title={parent.data.title}
+        sections={sections}
       />
-    )
-  }
-  {
-    headings?.length > 0 &&
-      !(
-        isCurrentSubpost &&
-        headings.length === 1 &&
-        headings[0].text === post.data.title
-      ) && <TOCHeader slot="table-of-contents" headings={headings} />
-  }
-
-  <section
-    class="grid grid-cols-[minmax(0px,1fr)_min(calc(var(--breakpoint-md)-2rem),100%)_minmax(0px,1fr)] gap-y-6"
-  >
-    <div class="col-start-2">
-      <Breadcrumbs
-        items={[
-          { href: '/blog', label: 'Blog', icon: 'lucide:library-big' },
-          ...(isCurrentSubpost && parentPost
-            ? [
-                {
-                  href: `/blog/${parentPost.id}`,
-                  label: parentPost.data.title,
-                  icon: 'lucide:book-open',
-                },
-                {
-                  href: `/blog/${currentPostId}`,
-                  label: post.data.title,
-                  icon: 'lucide:file-text',
-                },
-              ]
-            : [
-                {
-                  href: `/blog/${currentPostId}`,
-                  label: post.data.title,
-                  icon: 'lucide:book-open-text',
-                },
-              ]),
-        ]}
-      />
-    </div>
-
-    {
-      post.data.image && (
-        <Image
-          src={post.data.image}
-          alt={post.data.title}
-          width={1200}
-          height={630}
-          class="col-span-full mx-auto w-full max-w-5xl object-cover"
-        />
-      )
-    }
-
-    <section class="col-start-2 flex flex-col gap-y-6 text-center">
-      <div class="flex flex-col">
-        <h1
-          class="mb-2 scroll-mt-31 text-3xl leading-tight font-medium sm:text-4xl"
-          id="post-title"
-        >
-          {post.data.title}
-        </h1>
-
-        <div
-          class="text-muted-foreground divide-border mb-4 flex flex-col items-center justify-center divide-y text-xs sm:flex-row sm:flex-wrap sm:divide-x sm:divide-y-0 sm:text-sm"
-        >
-          {
-            authors.length > 0 && (
-              <div class="flex w-full items-center justify-center gap-x-2 py-2 sm:w-fit sm:px-2 sm:py-0 first:sm:pl-0 last:sm:pr-0">
-                {authors.map((author) => (
-                  <div class="flex items-center gap-x-1.5">
-                    <Image
-                      src={author.avatar}
-                      alt={author.name}
-                      width={20}
-                      height={20}
-                      class="rounded-full"
+    )}
+  <PostActions slot="actions" prev={prev} next={next} />
+  <ScrollToTop floating />
+  {rendered.map(({ entry, Content, authors }, i) => (
+      <article
+        id={i === 0 ? undefined : subpostSlug(entry.id)}
+        data-url={`/blog/${entry.id}`}
+        data-title={pageTitle(entry.data.title)}
+        data-embedded={i > 0 || undefined}
+      >
+        <header>
+          <h1>{entry.data.title}</h1>
+          <post-meta>
+            {authors.length > 0 && (
+              <post-authors>
+                <author-avatars>
+                  {authors.map((author) => (
+                    <img
+                      src={author.data.avatar}
+                      alt={author.data.name}
+                      width="18"
+                      height="18"
                     />
-                    {author.isRegistered ? (
-                      <Link
-                        href={`/authors/${author.id}`}
-                        underline
-                        class="text-foreground"
-                      >
-                        <span>{author.name}</span>
-                      </Link>
-                    ) : (
-                      <span>{author.name}</span>
-                    )}
-                  </div>
+                  ))}
+                </author-avatars>
+                <author-names>
+                  {authors.map((author, j) => (
+                    <>{j > 0 && ", "}<a href={`/authors/${author.id}`}>{author.data.name}</a></>
+                  ))}
+                </author-names>
+              </post-authors>
+            )}
+            <time datetime={entry.data.date.toISOString()}
+              >{formatDate(entry.data.date)}</time
+            >
+            {entry.data.tags && (
+              <post-tags>
+                {entry.data.tags.map((tag) => (
+                  <a href={`/tags/${tag}`}>#{tag}</a>
                 ))}
-              </div>
-            )
-          }
-
-          <div
-            class="flex w-full items-center justify-center gap-2 py-2 sm:w-fit sm:px-2 sm:py-0 first:sm:pl-0 last:sm:pr-0"
-          >
-            <span>{formatDate(post.data.date)}</span>
-          </div>
-
-          <div
-            class="flex w-full items-center justify-center gap-2 py-2 sm:w-fit sm:px-2 sm:py-0 first:sm:pl-0 last:sm:pr-0"
-          >
-            <span>
-              {postReadingTime}
-              {
-                combinedReadingTime &&
-                  combinedReadingTime !== postReadingTime && (
-                    <span class="text-muted-foreground">
-                      {' '}
-                      ({combinedReadingTime} total)
-                    </span>
-                  )
-              }
-            </span>
-          </div>
-
-          {
-            subpostCount > 0 && (
-              <div class="flex w-full items-center justify-center gap-1 py-2 sm:w-fit sm:px-2 sm:py-0 first:sm:pl-0 last:sm:pr-0">
-                <Icon name="lucide:file-text" class="size-3" />
-                {subpostCount} subpost{subpostCount === 1 ? '' : 's'}
-              </div>
-            )
-          }
-        </div>
-        <div class="flex flex-wrap justify-center gap-2">
-          {
-            post.data.tags &&
-              post.data.tags.length > 0 &&
-              post.data.tags.map((tag) => (
-                <a
-                  href={`/tags/${tag}`}
-                  class={badgeVariants({ variant: 'muted' })}
-                >
-                  <Icon name="lucide:hash" class="size-3" />
-                  {tag}
-                </a>
-              ))
-          }
-        </div>
-      </div>
-
-      <PostNavigation
-        newerPost={navigation.newer}
-        olderPost={navigation.older}
-        parentPost={isCurrentSubpost ? navigation.parent : undefined}
-      />
-    </section>
-
-    {
-      tocSections.length > 0 && (
-        <TOCSidebar sections={tocSections} currentPostId={currentPostId} />
-      )
-    }
-
-    <article class="prose col-start-2 max-w-none">
-      <Content />
-    </article>
-
-    {
-      (hasChildPosts || isCurrentSubpost) && (
-        <SubpostsSidebar
-          parentId={
-            isCurrentSubpost ? getParentId(currentPostId) : currentPostId
-          }
-          className="w-64"
-        />
-      )
-    }
-
-    <PostNavigation
-      newerPost={navigation.newer}
-      olderPost={navigation.older}
-      parentPost={isCurrentSubpost ? navigation.parent : undefined}
-    />
-  </section>
-
-  <Button
-    variant="outline"
-    size="icon"
-    className="group fixed right-8 bottom-8 z-50 hidden"
-    id="scroll-to-top"
-    title="Scroll to top"
-    aria-label="Scroll to top"
-  >
-    <Icon
-      name="lucide:arrow-up"
-      class="mx-auto size-4 transition-all group-hover:-translate-y-0.5"
-    />
-  </Button>
-
-  <script>
-    document.addEventListener('astro:page-load', () => {
-      const scrollToTopButton = document.getElementById('scroll-to-top')
-      const footer = document.querySelector('footer')
-
-      if (scrollToTopButton && footer) {
-        scrollToTopButton.addEventListener('click', () => {
-          window.scrollTo({ top: 0, behavior: 'smooth' })
-        })
-
-        window.addEventListener('scroll', () => {
-          const footerRect = footer.getBoundingClientRect()
-          const isFooterVisible = footerRect.top <= window.innerHeight
-
-          scrollToTopButton.classList.toggle(
-            'hidden',
-            window.scrollY <= 300 || isFooterVisible,
-          )
-        })
-      }
-    })
-  </script>
+              </post-tags>
+            )}
+          </post-meta>
+          <p>{entry.data.description}</p>
+        </header>
+        {entry.data.image && (
+          <post-banner>
+            <Image
+              src={entry.data.image}
+              alt={entry.data.title}
+              width={1200}
+              height={630}
+              priority={entry.id === post.id || undefined}
+            />
+          </post-banner>
+        )}
+        <prose-content>
+          <Content />
+        </prose-content>
+      </article>
+    ))}
+  {chain.length > 1 && <SeriesReader />}
 </Layout>
 
-<script>
-  const ensureKatexStyles = () => {
-    if (!document.querySelector('.katex')) return
-    if (document.querySelector('link[href*="katex.min.css"]')) return
+<style>
+  article[data-embedded] {
+    margin-block-start: var(--space-xl);
+    padding-block-start: var(--space-xl);
+    border-block-start: 2px solid var(--border);
+    scroll-margin-block-start: calc(-2px - 0.2 * var(--step-2));
 
-    const link = document.createElement('link')
-    link.rel = 'stylesheet'
-    link.href = 'https://cdn.jsdelivr.net/npm/katex@0.16.22/dist/katex.min.css'
-    document.head.appendChild(link)
+    header h1 {
+      font-size: var(--step-2);
+    }
   }
 
-  document.addEventListener('astro:page-load', ensureKatexStyles)
-  document.addEventListener('astro:after-swap', ensureKatexStyles)
-</script>
+  header {
+    margin-block-end: var(--space-m);
+
+    h1 {
+      font-size: var(--step-3);
+      line-height: calc(var(--leading-offset) + 1em);
+      font-weight: var(--font-weight-medium);
+    }
+
+    post-meta {
+      --underline: var(--muted-foreground);
+
+      display: flex;
+      flex-wrap: wrap;
+      align-items: center;
+      gap: var(--space-3xs);
+      margin-block-start: var(--space-3xs);
+      font-size: var(--step--1);
+      color: var(--muted-foreground);
+
+      post-authors {
+        display: flex;
+        align-items: center;
+        gap: var(--space-3xs);
+
+        author-avatars {
+          display: flex;
+          margin-block-end: -0.1em;
+
+          img {
+            border-radius: var(--radius-full);
+            box-shadow: 0 0 0 1.5px var(--background);
+
+            &:not(:first-child) {
+              margin-inline-start: -0.375rem;
+            }
+          }
+        }
+      }
+
+      post-authors ~ time::before {
+        content: "·";
+        margin-inline-end: var(--space-3xs);
+      }
+
+      post-tags {
+        --underline: transparent;
+
+        display: flex;
+        flex-wrap: wrap;
+        gap: var(--space-3xs);
+
+        a {
+          color: color-mix(in oklab, var(--muted-foreground) 50%, transparent);
+
+          &:hover {
+            color: var(--foreground);
+          }
+        }
+      }
+
+      time ~ post-tags::before {
+        content: "·";
+      }
+
+      a {
+        color: var(--foreground);
+      }
+    }
+
+    > p {
+      margin-block-start: var(--space-2xs);
+      font-size: var(--step--1);
+      color: var(--muted-foreground);
+    }
+  }
+
+  post-banner {
+    display: block;
+    margin-block-end: var(--space-m);
+
+    :global(img) {
+      inline-size: 100%;
+      block-size: auto;
+    }
+  }
+</style>

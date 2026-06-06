@@ -1,0 +1,31 @@
+---
+import SocialIcons from "@/components/SocialIcons.astro"
+import { SITE, SOCIALS } from "@/consts"
+---
+
+<footer>
+  <p>
+    &copy; {new Date().getFullYear()}
+    {SITE.title}
+  </p>
+  <SocialIcons links={SOCIALS} />
+</footer>
+
+<style>
+  footer {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    margin-block: var(--space-xs) var(--page-offset-bottom);
+
+    @media (width >= 40rem) {
+      flex-direction: row;
+      justify-content: space-between;
+    }
+
+    p {
+      font-size: var(--step--1);
+      color: var(--muted-foreground);
+    }
+  }
+</style>

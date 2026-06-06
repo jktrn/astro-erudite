@@ -1,85 +1,108 @@
 ---
-import BlogCard from '@/components/blog-card.astro'
-import Link from '@/components/link.astro'
-import PageHead from '@/components/page-head.astro'
-import { buttonVariants } from '@/components/ui/button'
-import { SITE } from '@/consts'
-import Layout from '@/layouts/layout.astro'
-import { getRecentPosts } from '@/lib/data-utils'
-
-const blog = await getRecentPosts(SITE.featuredPostCount)
+import MetaPage from "@/components/MetaPage.astro"
+import Layout from "@/layouts/Layout.astro"
 ---
 
-<Layout class="max-w-3xl">
-  <PageHead slot="head" title="Home" />
-  <section class="rounded-lg border">
-    <div class="flex flex-col space-y-1.5 p-6">
-      <h3 class="text-3xl leading-none font-medium">er·u·dite</h3>
-      <p class="text-muted-foreground text-sm">
-        /ˈer(y)əˌdīt/ &bull; <span class="font-medium">adjective</span>
-      </p>
-    </div>
-    <div class="p-6 pt-0">
-      <p class="text-muted-foreground mb-2 text-sm">
-        astro-erudite is an opinionated, unstyled static blogging template built
-        with <Link
-          href="https://astro.build"
-          class="text-foreground"
-          external
-          underline>Astro</Link
-        >, <Link
-          href="https://tailwindcss.com"
-          class="text-foreground"
-          external
-          underline>Tailwind</Link
-        >, and <Link
-          href="https://ui.shadcn.com"
-          class="text-foreground"
-          external
-          underline>shadcn/ui</Link
-        >. Extraordinarily loosely based on the <Link
-          href="https://astro-micro.vercel.app/"
-          class="text-foreground"
-          external
-          underline>Astro Micro</Link
-        > theme.
-      </p>
-      <p class="text-muted-foreground text-sm">
-        To use this template, check out the <Link
-          href="https://github.com/jktrn/astro-erudite"
-          class="text-foreground"
-          underline
-          external>GitHub</Link
-        > repository. To learn more about why this template exists, read this blog
-        post: <Link
-          href="/blog/the-state-of-static-blogs"
-          class="text-foreground"
-          underline>The State of Static Blogs in 2024</Link
-        >.
-      </p>
-    </div>
-  </section>
-  <section class="flex flex-col gap-y-4">
-    <h2 class="text-2xl font-medium">Latest posts</h2>
-    <ul class="flex flex-col gap-y-4">
-      {
-        blog.map((post) => (
-          <li>
-            <BlogCard entry={post} />
-          </li>
-        ))
-      }
-    </ul>
-    <div class="flex justify-center">
-      <Link
-        href="/blog"
-        class={buttonVariants({ variant: 'ghost' }) + ' group'}
-      >
-        See all posts <span
-          class="ml-1.5 transition-transform group-hover:translate-x-1"
-          >&rarr;</span
+<Layout>
+  <MetaPage slot="head" />
+  <dictionary-entry>
+    <h1>er·u·dite</h1>
+    <etymology-span>
+      <ipa-span>/ˈer(y)əˌdīt/</ipa-span>
+      adj. [L. <i>ēruditus</i>, instructed, pp. of <i>ērudīre</i> to instruct,
+      polish, lit. to free from roughness, f. ē- out + <i>rudis</i> rough,
+      untrained]
+    </etymology-span>
+    <ol>
+      <li>
+        having or showing deep, wide-ranging knowledge acquired through study;
+        learned (<i>an erudite scholar</i>).
+      </li>
+      <li>
+        (of writing, speech, or argument) reflecting such knowledge; scholarly (<i
+          >an erudite footnote</i
+        >).
+      </li>
+    </ol>
+    <hr>
+    <prose-content>
+      <p>
+        astro-erudite is
+        <a href="https://enscribe.dev" target="_blank" rel="noopener noreferrer"
+          >enscribe</a
+        >'s opinionated, unstyled static blogging template built with
+        <a href="https://astro.build" target="_blank" rel="noopener noreferrer"
+          >Astro</a
         >
-      </Link>
-    </div>
-  </section>
+        and native CSS. astro-erudite uses no UI or CSS framework and contains
+        minimal dependencies.
+      </p>
+      <p>
+        To use this template, check out the
+        <a
+          href="https://github.com/jktrn/astro-erudite"
+          target="_blank"
+          rel="noopener noreferrer"
+          >GitHub</a
+        >
+        repository. To learn more about why this template exists, read this blog
+        post: <a href="/blog/introducing-v2">Introducing astro-erudite v2</a>.
+      </p>
+    </prose-content>
+  </dictionary-entry>
 </Layout>
+
+<style>
+  dictionary-entry {
+    display: block;
+    font-size: var(--step-0);
+    color: var(--muted-foreground);
+
+    @media (width >= 64rem) {
+      margin-block-start: -0.2em;
+    }
+
+    ipa-span {
+      opacity: 0.6;
+    }
+
+    h1 {
+      font-size: var(--step-2);
+      line-height: calc(var(--leading-offset) + 1em);
+      font-weight: var(--font-weight-medium);
+      color: var(--foreground);
+      margin-block-end: var(--space-2xs);
+    }
+
+    ol {
+      margin-block-start: var(--space-xs);
+      list-style: none;
+
+      li {
+        padding-inline-start: 1em;
+        text-indent: -1em;
+
+        &::before {
+          content: counter(list-item);
+          display: inline-block;
+          inline-size: 1em;
+          text-indent: 0;
+          font-weight: var(--font-weight-medium);
+        }
+
+        + li {
+          margin-block-start: var(--space-3xs);
+        }
+      }
+    }
+
+    hr {
+      margin-block: var(--space-m);
+      border-block-start: 2px solid var(--border);
+    }
+
+    prose-content {
+      margin-block-start: var(--space-xs);
+    }
+  }
+</style>

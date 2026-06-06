@@ -1,0 +1,47 @@
+---
+import { getEntries, type CollectionEntry } from "astro:content"
+import { SITE } from "@/consts"
+import { pageTitle } from "@/lib/content"
+
+interface Props {
+  post: CollectionEntry<"blog">
+  canonical?: string
+}
+
+const { post } = Astro.props
+const { title, description, date, image } = post.data
+
+const base = Astro.site ?? new URL(Astro.url.origin)
+const authors = await getEntries(post.data.authors)
+const authorNames = authors.map((author) => author.data.name)
+const url = new URL(Astro.url.pathname, base)
+const canonical = new URL(Astro.props.canonical ?? Astro.url.pathname, base)
+const ogImage = image
+  ? new URL(image.src, base)
+  : new URL(SITE.defaultPostImage, base)
+---
+
+<title>{pageTitle(title)}</title>
+<meta name="description" content={description}>
+<link rel="canonical" href={canonical}>
+
+<meta property="og:title" content={title}>
+<meta property="og:description" content={description}>
+<meta property="og:type" content="article">
+<meta property="og:url" content={url}>
+<meta property="og:site_name" content={SITE.title}>
+<meta property="og:locale" content={SITE.locale.replace("-", "_")}>
+<meta property="og:image" content={ogImage}>
+<meta property="og:image:alt" content={title}>
+
+<meta name="twitter:card" content="summary_large_image">
+<meta name="twitter:title" content={title}>
+<meta name="twitter:description" content={description}>
+<meta name="twitter:image" content={ogImage}>
+<meta name="twitter:image:alt" content={title}>
+{authorNames.length > 0 && (
+    <meta name="twitter:creator" content={authorNames.join(", ")} />
+  )}
+
+<meta property="article:published_time" content={date.toISOString()}>
+{authorNames.map((name) => <meta property="article:author" content={name} />)}

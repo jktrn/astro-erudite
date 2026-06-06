@@ -1,0 +1,41 @@
+:root {
+  /* https://utopia.fyi/grid/calculator?c=320,16,1.125,1024,18,1.2,6,1,&s=0.75%7C0.5%7C0.25,1.5%7C2%7C3%7C4%7C6,s-l%7Cs-m&g=s,m,2xl,12 */
+  --space-3xs: clamp(0.25rem, 0.2269rem + 0.1127vw, 0.3125rem);
+  --space-2xs: clamp(0.5rem, 0.4769rem + 0.1127vw, 0.5625rem);
+  --space-xs: clamp(0.75rem, 0.7038rem + 0.2255vw, 0.875rem);
+  --space-s: clamp(1rem, 0.9538rem + 0.2255vw, 1.125rem);
+  --space-m: clamp(1.5rem, 1.4307rem + 0.3382vw, 1.6875rem);
+  --space-l: clamp(2rem, 1.9076rem + 0.451vw, 2.25rem);
+  --space-xl: clamp(3rem, 2.8613rem + 0.6764vw, 3.375rem);
+  --space-2xl: clamp(4rem, 3.8151rem + 0.9019vw, 4.5rem);
+  --space-3xl: clamp(6rem, 5.7227rem + 1.3529vw, 6.75rem);
+
+  --space-3xs-2xs: clamp(0.25rem, 0.1344rem + 0.5637vw, 0.5625rem);
+  --space-2xs-xs: clamp(0.5rem, 0.3613rem + 0.6764vw, 0.875rem);
+  --space-xs-s: clamp(0.75rem, 0.6113rem + 0.6764vw, 1.125rem);
+  --space-s-m: clamp(1rem, 0.7458rem + 1.2401vw, 1.6875rem);
+  --space-m-l: clamp(1.5rem, 1.2227rem + 1.3529vw, 2.25rem);
+  --space-l-xl: clamp(2rem, 1.4915rem + 2.4803vw, 3.375rem);
+  --space-xl-2xl: clamp(3rem, 2.4453rem + 2.7057vw, 4.5rem);
+  --space-2xl-3xl: clamp(4rem, 2.9831rem + 4.9605vw, 6.75rem);
+
+  --grid-max-width: 75.94rem;
+  --grid-gutter: var(--space-s-m);
+  --grid-columns: 12;
+  --bar-gutter: max(var(--grid-gutter), (100% - var(--measure)) / 2);
+  --bar-border-image: linear-gradient(
+      to right,
+      transparent 0 var(--bar-gutter),
+      var(--border) 0 calc(100% - var(--bar-gutter)),
+      transparent 0
+    )
+    1;
+
+  --page-offset-top: var(--space-xl);
+  --page-offset-bottom: var(--space-m);
+}
+
+html {
+  overscroll-behavior: none;
+  scrollbar-gutter: stable;
+}

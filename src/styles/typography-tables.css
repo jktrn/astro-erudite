@@ -1,0 +1,58 @@
+prose-content {
+  table {
+    --table-border: color-mix(
+      in oklab,
+      var(--muted-foreground) 30%,
+      transparent
+    );
+
+    display: block;
+    max-inline-size: fit-content;
+    margin-inline: auto;
+    overflow-x: auto;
+    font-size: var(--step--1);
+
+    thead {
+      border-block-end: 1.5px solid var(--table-border);
+    }
+
+    tr {
+      border-block: 1.5px solid var(--table-border);
+
+      &:first-child {
+        border-block-start: 0;
+      }
+
+      &:last-child {
+        border-block-end: 0;
+      }
+    }
+
+    :is(th, td) {
+      min-width: 10rem;
+      max-width: 22rem;
+    }
+
+    th {
+      padding: 0.5em 1em;
+      font-weight: var(--font-weight-medium);
+      color: var(--foreground);
+      text-align: start;
+    }
+
+    td {
+      padding: 0.5em 1em;
+      color: var(--prose-foreground);
+      text-align: start;
+      vertical-align: top;
+
+      > :first-child {
+        margin-block-start: 0;
+      }
+
+      > :last-child {
+        margin-block-end: 0;
+      }
+    }
+  }
+}

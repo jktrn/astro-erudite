@@ -1,29 +1,12 @@
 ---
-import Breadcrumbs from '@/components/breadcrumbs.astro'
-import Link from '@/components/link.astro'
-import PageHead from '@/components/page-head.astro'
-import { buttonVariants } from '@/components/ui/button'
-import Layout from '@/layouts/layout.astro'
-import { cn } from '@/lib/utils'
+import MetaPage from "@/components/MetaPage.astro"
+import Layout from "@/layouts/Layout.astro"
 ---
 
-<Layout class="max-w-3xl">
-  <PageHead slot="head" title="404" />
-  <Breadcrumbs items={[{ label: '???', icon: 'lucide:circle-help' }]} />
-
-  <section
-    class="flex flex-col items-center justify-center gap-y-4 text-center"
-  >
-    <div class="max-w-md">
-      <h1 class="mb-4 text-3xl font-medium">404: Page not found</h1>
-      <p class="prose">Oops! The page you're looking for doesn't exist.</p>
-    </div>
-    <Link
-      href="/"
-      class={cn(buttonVariants({ variant: 'outline' }), 'flex gap-x-1.5 group')}
-    >
-      <span class="transition-transform group-hover:-translate-x-1">&larr;</span
-      > Go to home page
-    </Link>
-  </section>
+<Layout crumbs={[{ label: "404", href: "/404" }]}>
+  <MetaPage slot="head" title="404" />
+  <prose-content>
+    <h1>404</h1>
+    <p>This page does not exist.</p>
+  </prose-content>
 </Layout>
