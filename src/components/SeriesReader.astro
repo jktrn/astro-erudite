@@ -17,8 +17,20 @@
 <script>
   import { hashId, trimSlash } from "@/lib/utils"
 
-  let series = false
-  let pendingHash = ""
+  const articles = [
+    ...document.querySelectorAll<HTMLElement>("article[data-url]"),
+  ]
+
+  const list = document.querySelector("page-nav nav ul ul")
+  const parentLink = list?.querySelector("a")
+  let crumb = list?.querySelector<HTMLElement>('li[data-depth="1"]')
+  if (list && !crumb) {
+    crumb = document.createElement("li")
+    crumb.dataset.depth = "1"
+    crumb.hidden = true
+    crumb.append(document.createElement("a"))
+    list.append(crumb)
+  }
 
   const hashTarget = (hash: string) => {
     try {
@@ -28,119 +40,81 @@
     }
   }
 
-  document.addEventListener(
-    "click",
-    (event) => {
-      if (
-        !series ||
-        event.defaultPrevented ||
-        event.metaKey ||
-        event.ctrlKey ||
-        event.shiftKey ||
-        event.altKey
-      )
-        return
-      const link = (event.target as Element).closest?.("a[href]")
-      if (
-        !(link instanceof HTMLAnchorElement) ||
-        link.target ||
-        link.hasAttribute("download")
-      )
-        return
-      let target: Element | null = null
-      if (link.getAttribute("href")?.startsWith("#")) {
-        target = hashTarget(link.hash)
-      } else if (link.origin === location.origin && !link.search) {
-        const article = document.querySelector(
-          `article[data-url="${trimSlash(link.pathname)}"]`,
-        )
-        if (article) {
-          target = link.hash ? (hashTarget(link.hash) ?? article) : article
-        }
+  const localTarget = (link: HTMLAnchorElement) => {
+    if (link.getAttribute("href")?.startsWith("#")) return hashTarget(link.hash)
+    if (link.origin !== location.origin || link.search) return null
+    const article = articles.find(
+      (article) => article.dataset.url === trimSlash(link.pathname),
+    )
+    if (!article) return null
+    return link.hash ? (hashTarget(link.hash) ?? article) : article
+  }
+
+  const syncCrumb = (article: HTMLElement) => {
+    const link = crumb?.querySelector("a")
+    if (!crumb || !link || !parentLink) return
+    if (article === articles[0]) {
+      crumb.hidden = true
+      link.removeAttribute("aria-current")
+      parentLink.setAttribute("aria-current", "page")
+    } else {
+      crumb.hidden = false
+      link.href = article.dataset.url ?? ""
+      link.textContent = article.querySelector("header h1")?.textContent ?? ""
+      link.setAttribute("aria-current", "page")
+      parentLink.removeAttribute("aria-current")
+    }
+  }
+
+  const sync = (article: HTMLElement, hash = "") => {
+    const { url, title } = article.dataset
+    if (!url) return
+    history.replaceState(history.state, "", url + hash)
+    if (title) document.title = title
+    syncCrumb(article)
+  }
+
+  document.addEventListener("click", (event) => {
+    if (
+      event.defaultPrevented ||
+      event.metaKey ||
+      event.ctrlKey ||
+      event.shiftKey ||
+      event.altKey
+    )
+      return
+    const link = (event.target as Element).closest?.("a[href]")
+    if (
+      !(link instanceof HTMLAnchorElement) ||
+      link.target ||
+      link.hasAttribute("download")
+    )
+      return
+    const target = localTarget(link)
+    const article = target?.closest<HTMLElement>("article[data-url]")
+    if (!target || !article) return
+    event.preventDefault()
+    if (target === articles[0]) {
+      scrollTo({ top: 0 })
+    } else {
+      target.scrollIntoView()
+    }
+    sync(article, target === article ? "" : link.hash)
+  })
+
+  const inBand = new Set<Element>()
+  const observer = new IntersectionObserver(
+    (entries) => {
+      for (const entry of entries) {
+        if (entry.isIntersecting) inBand.add(entry.target)
+        else inBand.delete(entry.target)
       }
-      if (!target) return
-      event.preventDefault()
-      if (target === document.querySelector("article[data-url]")) {
-        scrollTo({ top: 0 })
-      } else {
-        target.scrollIntoView()
-      }
-      const article = target.closest<HTMLElement>("article[data-url]")
-      if (article && target !== article && link.hash) {
-        if (article.dataset.url === trimSlash(location.pathname)) {
-          history.replaceState(
-            history.state,
-            "",
-            article.dataset.url + link.hash,
-          )
-        } else {
-          pendingHash = link.hash
-        }
+      const current = articles.find((article) => inBand.has(article))
+      if (current && current.dataset.url !== trimSlash(location.pathname)) {
+        sync(current)
       }
     },
-    true,
+    { rootMargin: "-20% 0px -79% 0px" },
   )
-
-  ;(() => {
-    const articles = [
-      ...document.querySelectorAll<HTMLElement>("article[data-url]"),
-    ]
-    series = articles.length > 1
-    if (!series) return
-
-    const list = document.querySelector("page-nav nav ul ul")
-    const parentLink = list?.querySelector("a")
-    let crumb = list?.querySelector<HTMLElement>('li[data-depth="1"]')
-
-    const syncCrumb = (article: HTMLElement) => {
-      if (!list || !parentLink) return
-      if (!crumb) {
-        crumb = document.createElement("li")
-        crumb.dataset.depth = "1"
-        crumb.append(document.createElement("a"))
-        list.append(crumb)
-      }
-      const link = crumb.querySelector("a")
-      if (!link) return
-      if (article === articles[0]) {
-        crumb.hidden = true
-        link.removeAttribute("aria-current")
-        parentLink.setAttribute("aria-current", "page")
-      } else {
-        crumb.hidden = false
-        link.href = article.dataset.url ?? ""
-        link.textContent = article.querySelector("header h1")?.textContent ?? ""
-        link.setAttribute("aria-current", "page")
-        parentLink.removeAttribute("aria-current")
-      }
-    }
-
-    const inBand = new Set<Element>()
-    const observer = new IntersectionObserver(
-      (entries) => {
-        for (const entry of entries) {
-          if (entry.isIntersecting) inBand.add(entry.target)
-          else inBand.delete(entry.target)
-        }
-        const current = articles.find((article) => inBand.has(article))
-        if (!current) return
-        const { url, title } = current.dataset
-        if (url && trimSlash(location.pathname) !== url) {
-          let hash = ""
-          if (
-            pendingHash &&
-            hashTarget(pendingHash)?.closest("article[data-url]") === current
-          ) {
-            hash = pendingHash
-            pendingHash = ""
-          }
-          history.replaceState(history.state, "", url + hash)
-          if (title) document.title = title
-          syncCrumb(current)
-        }
-      },
-      { rootMargin: "-20% 0px -79% 0px" },
-    )
-    for (const article of articles) observer.observe(article)
-  })()
+  for (const article of articles) observer.observe(article)
 </script>
