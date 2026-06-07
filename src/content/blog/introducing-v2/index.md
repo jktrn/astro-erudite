@@ -14,6 +14,10 @@ tags:
     opacity: 0.6;
   }
 
+  delta-down {
+    color: light-dark(oklch(48% 0.12 150), oklch(83% 0.1 150));
+  }
+
   click-counter button {
     padding: var(--space-3xs) var(--space-2xs);
     border: 2px solid var(--border);
@@ -32,16 +36,38 @@ When I recently used this project as the base for some client work, I soon reali
 
 What you are now looking at is the culmination of all the lessons I've learned throughout my years as a design engineer. I apologize for not getting to this quicker and I regret having shipped out such a subpar project. This blog post will explain the fundamental issues I had with the original version, and how the new version addresses them. Later on I'll also talk about breaking changes, and how to convert existing v1 projects into v2.
 
+### Benchmarks
+
+The description of this post claims that v2 is better in every way I know how to measure, so here are the measurements. Both versions were benchmarked with the same blog posts on the same machine:
+
+| | v1 | v2 | Δ |
+| - | -: | -: | -: |
+| JavaScript shipped | 253kb | 6.5kb | <delta-down>↓97%</delta-down> |
+| Largest JavaScript file | 169.8kb <dim-span>(React)</dim-span> | 2.6kb <dim-span>(ToC)</dim-span> | <delta-down>↓98%</delta-down> |
+| CSS shipped | 76kb | 25.5kb | <delta-down>↓66%</delta-down> |
+| Homepage transfer size | 293kb | 216kb | <delta-down>↓26%</delta-down> |
+| Homepage requests | 14 | 7 | <delta-down>↓50%</delta-down> |
+| Homepage main-thread work | 0.43s | 0.12s | <delta-down>↓72%</delta-down> |
+| Series read: page loads | 6 | 1 | <delta-down>↓83%</delta-down> |
+| Series read: transfer | 669kb | 546kb | <delta-down>↓18%</delta-down> |
+| Build time <dim-span>(warm)</dim-span> | 6.1s | 1.2s | <delta-down>↓80%</delta-down> |
+| Build time <dim-span>(per page)</dim-span> | 303ms | 67ms | <delta-down>↓78%</delta-down> |
+| Direct dependencies | 33 | 13 | <delta-down>↓61%</delta-down> |
+| Installed packages | 636 | 294 | <delta-down>↓54%</delta-down> |
+| `node_modules` size | 334mb | 174mb | <delta-down>↓48%</delta-down> |
+
+The series rows measure reading every post of [the v1 release series](#regarding-subposts) end to end. v1 needs a full navigation per subpost, while v2 renders the whole chain as one continuous page.
+
 ## Gripes, remediations
 
 The format of this blog post will be simple: I will first talk about something I dislike, and then I will talk about how I got rid of it. If I used to like it, I will talk about what changed my mind.
 
 ### Regarding dependency hell
 
-In general, a good statistic that quantifies the "weight" of a project is its dependencies. This is only natural. astro-erudite v1 (which I will now just call v1 for brevity) had 29 dependencies. v2 reduces this by 59%, down to 12 dependencies. 
+In general, a good statistic that quantifies the "weight" of a project is its dependencies. This is only natural. astro-erudite v1 (which I will now just call v1 for brevity) had 33 direct dependencies <dim-span>(devDependencies included)</dim-span>. v2 reduces this by 61%, down to 13.
 
 :::note
-In terms of the full tree, `bun pm ls --all{:sh}` reports **742** installed packages for v1 versus **383** for v2. A bare `astro` install is 327 packages on its own, so of the part of the tree I actually control, v1 stacked ~415 packages on top of Astro, and v2 adds 56.
+In terms of the full tree, a fresh `bun install{:sh}` reports **636** installed packages for v1 versus **294** for v2. A bare `astro` install is 254 packages on its own, so of the part of the tree I actually control, v1 stacked ~382 packages on top of Astro, and v2 adds 40.
 :::
 
 The following is our `package.json` diff showing the changes:
@@ -565,7 +591,7 @@ The `customElements.get(){:js}` check is not optional! Since astro-erudite has [
 :::
 
 A plethora of other benefits also comes with unchaining ourselves from the React ecosystem like this:
-- Removing `@astrojs/mdx` also drops our dependency tree by 48 packages <dim-span>(almost as many packages as everything v2 stacks on top of Astro!)</dim-span>.
+- Removing `@astrojs/mdx` also drops our dependency tree by 51 packages <dim-span>(more packages than everything v2 stacks on top of Astro!)</dim-span>.
 - JSX syntax is a lot less forgiving for both humans and compilers. Non-technical writers find it harder to write valid JSX, and embedded JSX can also fail entire builds. In general, rendering it is heavier.
 - Your blogs are now dramatically more portable and universal to different platforms!
 
