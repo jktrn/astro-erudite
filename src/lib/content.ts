@@ -23,14 +23,7 @@ export async function getSubposts(): Promise<
       (a.data.order ?? Infinity) - (b.data.order ?? Infinity) ||
       a.data.date.getTime() - b.data.date.getTime(),
   )
-  const series = new Map<string, CollectionEntry<"blog">[]>()
-  for (const post of posts) {
-    const parent = post.id.split("/")[0]
-    const siblings = series.get(parent)
-    if (siblings) siblings.push(post)
-    else series.set(parent, [post])
-  }
-  return series
+  return Map.groupBy(posts, (post) => post.id.split("/")[0])
 }
 
 export async function getTags(): Promise<

@@ -7,12 +7,10 @@ import Twitter from "@/assets/icons/twitter.svg"
 export const SITE = {
   title: "astro-erudite",
   description: "An opinionated, unstyled blogging template built with Astro.",
-  author: "jktrn",
   locale: "en-US",
   dir: "ltr",
   defaultPageImage: "/static/opengraph-image.png",
   defaultPostImage: "/static/1200x630.png",
-  featuredPostCount: 2,
 } as const
 
 export const NAVIGATION = [

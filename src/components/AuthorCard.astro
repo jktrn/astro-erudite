@@ -5,7 +5,7 @@ import Globe from "@/assets/icons/globe.svg"
 import Link from "@/assets/icons/link.svg"
 import Twitter from "@/assets/icons/twitter.svg"
 import SocialIcons from "@/components/SocialIcons.astro"
-import { trimSlash } from "@/lib/utils"
+import { normalizePath } from "@/lib/utils"
 import type { SvgComponent } from "astro/types"
 import type { CollectionEntry } from "astro:content"
 
@@ -29,7 +29,7 @@ const links = [
 ]
 
 const href = `/authors/${author.id}`
-const isCurrent = trimSlash(Astro.url.pathname) === href
+const isCurrent = normalizePath(Astro.url.pathname) === href
 ---
 
 <li>

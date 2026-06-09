@@ -1,7 +1,7 @@
 import GithubSlugger from "github-slugger"
 import { defineHastPlugin } from "satteri"
 
-const SUBPOST = /\/blog\/[^/]+\/(?!index\.mdx?$)([^/]+)\.mdx?$/
+const SUBPOST = /\/blog\/[^/]+\/(?!index\.md$)([^/]+)\.md$/
 
 export function headingNamespace() {
   const slugger = new GithubSlugger()

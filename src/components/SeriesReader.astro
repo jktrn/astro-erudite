@@ -3,19 +3,18 @@
     const type = performance.getEntriesByType("navigation")[0]?.type
     if (type && type !== "navigate") return
     if (location.hash) return
-    const pathname = location.pathname.replace(/\/+$/, "")
-    const articles = document.querySelectorAll("article[data-url]")
-    for (let i = 1; i < articles.length; i++) {
-      if (articles[i].dataset.url === pathname) {
-        articles[i].scrollIntoView({ behavior: "instant" })
-        return
-      }
-    }
+    let pathname = location.pathname.replace(/\/+$/, "")
+    try {
+      pathname = decodeURIComponent(pathname)
+    } catch {}
+    document
+      .querySelector(`article[data-embedded][data-url="${pathname}"]`)
+      ?.scrollIntoView({ behavior: "instant" })
   })()
 </script>
 
 <script>
-  import { hashId, trimSlash } from "@/lib/utils"
+  import { hashId, normalizePath } from "@/lib/utils"
 
   const articles = [
     ...document.querySelectorAll<HTMLElement>("article[data-url]"),
@@ -31,6 +30,7 @@
     crumb.append(document.createElement("a"))
     list.append(crumb)
   }
+  const crumbLink = crumb?.querySelector("a")
 
   const hashTarget = (hash: string) => {
     try {
@@ -44,24 +44,24 @@
     if (link.getAttribute("href")?.startsWith("#")) return hashTarget(link.hash)
     if (link.origin !== location.origin || link.search) return null
     const article = articles.find(
-      (article) => article.dataset.url === trimSlash(link.pathname),
+      (article) => article.dataset.url === normalizePath(link.pathname),
     )
     if (!article) return null
     return link.hash ? (hashTarget(link.hash) ?? article) : article
   }
 
   const syncCrumb = (article: HTMLElement) => {
-    const link = crumb?.querySelector("a")
-    if (!crumb || !link || !parentLink) return
+    if (!crumb || !crumbLink || !parentLink) return
     if (article === articles[0]) {
       crumb.hidden = true
-      link.removeAttribute("aria-current")
+      crumbLink.removeAttribute("aria-current")
       parentLink.setAttribute("aria-current", "page")
     } else {
       crumb.hidden = false
-      link.href = article.dataset.url ?? ""
-      link.textContent = article.querySelector("header h1")?.textContent ?? ""
-      link.setAttribute("aria-current", "page")
+      crumbLink.href = article.dataset.url ?? ""
+      crumbLink.textContent =
+        article.querySelector("header h1")?.textContent ?? ""
+      crumbLink.setAttribute("aria-current", "page")
       parentLink.removeAttribute("aria-current")
     }
   }
@@ -110,7 +110,7 @@
         else inBand.delete(entry.target)
       }
       const current = articles.find((article) => inBand.has(article))
-      if (current && current.dataset.url !== trimSlash(location.pathname)) {
+      if (current && current.dataset.url !== normalizePath(location.pathname)) {
         sync(current)
       }
     },

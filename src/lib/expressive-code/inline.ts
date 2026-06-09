@@ -59,32 +59,30 @@ function resolveScopeColor(theme: ExpressiveCodeTheme, scope: string): string {
   return best?.fg ?? theme.fg
 }
 
-export function inlineExpressiveCode() {
-  return defineMdastPlugin({
-    name: "inline-expressive-code",
-    async inlineCode(node, ctx) {
-      const annotation = parseAnnotation(node.value)
-      if (!annotation) return
+export const inlineExpressiveCode = defineMdastPlugin({
+  name: "inline-expressive-code",
+  async inlineCode(node, ctx) {
+    const annotation = parseAnnotation(node.value)
+    if (!annotation) return
 
-      try {
-        const { ec } = await ecRenderer
-        const tokens =
-          annotation.kind === "lang"
-            ? await highlightLanguage(ec, annotation.code, annotation.lang)
-            : highlightScope(ec, annotation.code, annotation.scope)
-        const dataLanguage =
-          annotation.kind === "lang" ? annotation.lang : undefined
+    try {
+      const { ec } = await ecRenderer
+      const tokens =
+        annotation.kind === "lang"
+          ? await highlightLanguage(ec, annotation.code, annotation.lang)
+          : highlightScope(ec, annotation.code, annotation.scope)
+      const dataLanguage =
+        annotation.kind === "lang" ? annotation.lang : undefined
 
-        const value = toHtml(h("code", { dataEc: "", dataLanguage }, tokens))
-        return { type: "html", value } satisfies Html
-      } catch (error) {
-        const reason = error instanceof Error ? error.message : String(error)
-        ctx.report({
-          message: `inline-expressive-code: failed on \`${node.value}\`: ${reason}`,
-          node,
-          severity: "warning",
-        })
-      }
-    },
-  })
-}
+      const value = toHtml(h("code", { dataEc: "", dataLanguage }, tokens))
+      return { type: "html", value } satisfies Html
+    } catch (error) {
+      const reason = error instanceof Error ? error.message : String(error)
+      ctx.report({
+        message: `inline-expressive-code: failed on \`${node.value}\`: ${reason}`,
+        node,
+        severity: "warning",
+      })
+    }
+  },
+})

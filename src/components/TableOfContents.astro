@@ -135,9 +135,14 @@ const { title, sections } = Astro.props
           stroke-width: 2;
 
           &:last-child {
+            --circumference: calc(2 * pi * 6.5px);
+
             stroke: var(--muted-foreground);
-            stroke-dasharray: 40.84px;
-            stroke-dashoffset: calc(40.84px * (1 - var(--progress, 0)));
+            stroke-dasharray: var(--circumference);
+            stroke-dashoffset: calc(
+              var(--circumference) *
+              (1 - var(--progress, 0))
+            );
           }
         }
       }
@@ -300,44 +305,45 @@ const { title, sections } = Astro.props
 <script>
   import { hashId } from "@/lib/utils"
 
-  const nav = document.querySelector<HTMLElement>("page-toc nav")
-
-  const progress = () => {
-    const max = document.documentElement.scrollHeight - innerHeight
-    nav?.style.setProperty(
-      "--progress",
-      String(max > 0 ? Math.min(scrollY / max, 1) : 0),
-    )
-  }
-  addEventListener("scroll", progress, { passive: true })
-  progress()
-
   ;(() => {
+    const nav = document.querySelector<HTMLElement>("page-toc nav")
+    if (!nav) return
+
+    const ring = nav.querySelector<SVGElement>("label svg")
+    const mobile = matchMedia("(width < 64rem)")
+    const progress = () => {
+      if (!ring || !mobile.matches) return
+      const max = document.documentElement.scrollHeight - innerHeight
+      ring.style.setProperty(
+        "--progress",
+        String(max > 0 ? Math.min(scrollY / max, 1) : 0),
+      )
+    }
+    addEventListener("scroll", progress, { passive: true })
+    mobile.addEventListener("change", progress)
+    progress()
+
     const links = new Map(
-      [
-        ...document.querySelectorAll<HTMLAnchorElement>(
-          "page-toc nav a[href^='#']",
-        ),
-      ].map((a) => [hashId(a.hash), a]),
+      [...nav.querySelectorAll<HTMLAnchorElement>("a[href^='#']")].map((a) => [
+        hashId(a.hash),
+        a,
+      ]),
     )
     const articles = document.querySelectorAll("main article")
-    const list = document.querySelector("page-toc nav > ul")
-    const title = document.querySelector("page-toc nav toc-title")
-    const currentLabel = document.querySelector("page-toc nav toc-current")
-    const toggle =
-      document.querySelector<HTMLInputElement>("page-toc nav input")
+    const list = nav.querySelector(":scope > ul")
+    const title = nav.querySelector("toc-title")
+    const currentLabel = nav.querySelector("toc-current")
+    const toggle = nav.querySelector<HTMLInputElement>("input")
     const heading = document.querySelector("article > header h1")
     if (articles.length === 0 || !list || links.size === 0) return
 
     const fallback = currentLabel?.textContent ?? ""
 
     const groups = [
-      ...document.querySelectorAll<HTMLButtonElement>(
-        "page-toc nav li[data-group] button",
-      ),
+      ...nav.querySelectorAll<HTMLButtonElement>("li[data-group] button"),
     ].map((button) => ({
       button,
-      open: button.getAttribute("aria-expanded") === "true",
+      active: button.getAttribute("aria-expanded") === "true",
       ids: [
         ...(button
           .closest("li[data-group]")
@@ -345,16 +351,21 @@ const { title, sections } = Astro.props
       ].map((a) => hashId(a.hash)),
     }))
 
+    const blockOf = new Map<Element, string>()
+    for (const id of links.keys()) {
+      const block = document
+        .getElementById(id)
+        ?.closest("prose-content > *, article[data-url]")
+      if (block && !blockOf.has(block)) blockOf.set(block, id)
+    }
+
     const sectionOf = new Map<Element, string>()
     for (const article of articles) {
-      let current = links.has(article.id) ? article.id : undefined
+      let current = blockOf.get(article)
       for (const child of article.children) {
         if (child.tagName === "PROSE-CONTENT") {
           for (const block of child.children) {
-            const anchor = [block, ...block.querySelectorAll("[id]")].find(
-              (el) => links.has(el.id),
-            )
-            if (anchor) current = anchor.id
+            current = blockOf.get(block) ?? current
             if (current) sectionOf.set(block, current)
           }
         } else if (current) sectionOf.set(child, current)
@@ -408,15 +419,15 @@ const { title, sections } = Astro.props
         else visible.delete(entry.target)
       }
 
-      const active = new Set<string>()
+      const activeIds = new Set<string>()
       for (const block of visible) {
         const id = sectionOf.get(block)
-        if (id) active.add(id)
+        if (id) activeIds.add(id)
       }
 
       let firstActive: HTMLAnchorElement | undefined
       for (const [id, link] of links) {
-        const on = active.has(id)
+        const on = activeIds.has(id)
         link.toggleAttribute("data-active", on)
         link.removeAttribute("aria-current")
         if (on) firstActive ??= link
@@ -424,25 +435,26 @@ const { title, sections } = Astro.props
       firstActive?.setAttribute("aria-current", "location")
 
       if (currentLabel) {
-        currentLabel.textContent = firstActive?.textContent?.trim() || fallback
+        const label = firstActive?.textContent?.trim() || fallback
+        if (currentLabel.textContent !== label) currentLabel.textContent = label
       }
 
       for (const group of groups) {
-        const open = group.ids.some((id) => active.has(id))
-        if (open !== group.open) {
-          group.open = open
-          if (open) group.button.setAttribute("aria-expanded", "true")
+        const active = group.ids.some((id) => activeIds.has(id))
+        if (active !== group.active) {
+          group.active = active
+          if (active) group.button.setAttribute("aria-expanded", "true")
         }
       }
 
       let grew = false
-      for (const id of active) {
+      for (const id of activeIds) {
         if (!prevActive.has(id)) {
           grew = true
           break
         }
       }
-      prevActive = active
+      prevActive = activeIds
       if (grew) center()
     })
 

@@ -107,7 +107,6 @@ Edit the `src/consts.ts` file to update your site's metadata, navigation links, 
 export const SITE = {
   title: "astro-erudite",
   description: "An opinionated, unstyled blogging template built with Astro.",
-  author: "jktrn",
   locale: "en-US",
   dir: "ltr",
   defaultPageImage: "/static/opengraph-image.png",
@@ -207,7 +206,7 @@ src/content/blog/
     └── going-further.md
 ```
 
-The entire series renders as one continuous document, with the address bar syncing as you scroll between parts. Every subpost still gets its own URL (`/blog/my-series/getting-started`). Use the `order` frontmatter field to control the sequence.
+The entire series renders as one continuous document, with the address bar syncing as you scroll between parts. Every subpost still gets its own URL (`/blog/my-series/getting-started`). Use the `order` frontmatter field to control the sequence. Only one level of nesting is supported, so files nested any deeper are ignored.
 
 ### Markdown extensions
 

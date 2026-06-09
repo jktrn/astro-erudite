@@ -3,19 +3,19 @@ import { getEntries, type CollectionEntry } from "astro:content"
 import { SITE } from "@/consts"
 import { pageTitle } from "@/lib/content"
 
-interface Props {
+type Props = {
   post: CollectionEntry<"blog">
   canonical?: string
 }
 
-const { post } = Astro.props
+const { post, canonical: canonicalPath } = Astro.props
 const { title, description, date, image } = post.data
 
 const base = Astro.site ?? new URL(Astro.url.origin)
 const authors = await getEntries(post.data.authors)
 const authorNames = authors.map((author) => author.data.name)
 const url = new URL(Astro.url.pathname, base)
-const canonical = new URL(Astro.props.canonical ?? Astro.url.pathname, base)
+const canonical = new URL(canonicalPath ?? Astro.url.pathname, base)
 const ogImage = image
   ? new URL(image.src, base)
   : new URL(SITE.defaultPostImage, base)
