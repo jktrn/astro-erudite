@@ -1,0 +1,18 @@
+[data-icon-button] {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  width: 2rem;
+  height: 2rem;
+  border-radius: var(--radius-md);
+  cursor: pointer;
+
+  &:hover {
+    background-color: color-mix(in oklab, var(--muted) 50%, transparent);
+  }
+
+  svg {
+    width: 1rem;
+    height: 1rem;
+  }
+}

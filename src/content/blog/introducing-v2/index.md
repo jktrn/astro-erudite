@@ -43,8 +43,8 @@ The description of this post claims that v2 is better in every way I know how to
 | | v1 | v2 | Δ |
 | - | -: | -: | -: |
 | JavaScript shipped | 253kb | 6.5kb | <delta-down>↓97%</delta-down> |
-| Largest JavaScript file | 169.8kb <dim-span>(React)</dim-span> | 2.6kb <dim-span>(ToC)</dim-span> | <delta-down>↓98%</delta-down> |
-| CSS shipped | 76kb | 25.5kb | <delta-down>↓66%</delta-down> |
+| Largest JavaScript file | 169.8kb <dim-span>(React)</dim-span> | 2.4kb <dim-span>(ToC)</dim-span> | <delta-down>↓99%</delta-down> |
+| CSS shipped | 76kb | 24.2kb | <delta-down>↓68%</delta-down> |
 | Homepage transfer size | 293kb | 216kb | <delta-down>↓26%</delta-down> |
 | Homepage requests | 14 | 7 | <delta-down>↓50%</delta-down> |
 | Homepage main-thread work | 0.43s | 0.12s | <delta-down>↓72%</delta-down> |
@@ -428,34 +428,35 @@ And that is a complete rundown of astro-erudite's new design system!
 
 #### "If not Tailwind's color system, then what?"
 
-Well, we do still use Tailwind's color system, but it's just imported as pure [`oklch()`](https://evilmartians.com/chronicles/oklch-in-css-why-quit-rgb-hsl) colors:
+[Radix Colors](https://www.radix-ui.com/colors), with each scale carrying a light and dark value per step:
 
 ```css title="src/styles/color.css"
 :root {
-  --color-red-400: oklch(70.4% 0.191 22.216);
-  --color-red-600: oklch(57.7% 0.245 27.325);
+  --gray-1:  light-dark(#fcfcfc, #111111);
+  --gray-2:  light-dark(#f9f9f9, #191919);
+  --gray-3:  light-dark(#f0f0f0, #222222);
+  --gray-4:  light-dark(#e8e8e8, #2a2a2a);
+  --gray-5:  light-dark(#e0e0e0, #313131);
+  --gray-6:  light-dark(#d9d9d9, #3a3a3a);
+  --gray-7:  light-dark(#cecece, #484848);
+  --gray-8:  light-dark(#bbbbbb, #606060);
+  --gray-9:  light-dark(#8d8d8d, #6e6e6e);
+  --gray-10: light-dark(#838383, #7b7b7b);
+  --gray-11: light-dark(#646464, #b4b4b4);
+  --gray-12: light-dark(#202020, #eeeeee);
 
-  --color-neutral-50:  oklch(98.5% 0 0);
-  --color-neutral-100: oklch(97% 0 0);
-  --color-neutral-200: oklch(92.2% 0 0);
-  --color-neutral-300: oklch(87% 0 0);
-  --color-neutral-400: oklch(70.8% 0 0);
-  --color-neutral-500: oklch(55.6% 0 0);
-  --color-neutral-600: oklch(43.9% 0 0);
-  --color-neutral-700: oklch(37.1% 0 0);
-  --color-neutral-800: oklch(26.9% 0 0);
-  --color-neutral-900: oklch(20.5% 0 0);
-  --color-neutral-950: oklch(14.5% 0 0);
+  --red-9:  light-dark(#e5484d, #e5484d);
+  --red-11: light-dark(#ce2c31, #ff9592);
 
-  --background:         light-dark(var(--color-neutral-50),  var(--color-neutral-950));
-  --foreground:         light-dark(var(--color-neutral-950), var(--color-neutral-50));
-  --primary:            light-dark(var(--color-neutral-900), var(--color-neutral-200));
-  --primary-foreground: light-dark(var(--color-neutral-50),  var(--color-neutral-900));
-  --muted:              light-dark(var(--color-neutral-200), var(--color-neutral-800));
-  --muted-foreground:   light-dark(var(--color-neutral-500), var(--color-neutral-400));
-  --destructive:        light-dark(var(--color-red-600),     var(--color-red-400));
-  --border:             light-dark(var(--color-neutral-200), var(--color-neutral-800));
-  --ring:               light-dark(var(--color-neutral-400), var(--color-neutral-500));
+  --background:         var(--gray-1);
+  --foreground:         var(--gray-12);
+  --primary:            var(--gray-12);
+  --primary-foreground: var(--gray-1);
+  --muted:              var(--gray-3);
+  --muted-foreground:   var(--gray-11);
+  --destructive:        var(--red-11);
+  --border:             var(--gray-6);
+  --ring:               var(--gray-8);
 
   color-scheme: light dark;
 }
@@ -988,11 +989,11 @@ prose-content {
     }
   }
 
-  [data-callout="note"]      { --accent: oklch(62.3% 0.214 259.815); }
-  [data-callout="tip"]       { --accent: oklch(72.3% 0.219 149.579); }
-  [data-callout="warning"]   { --accent: oklch(76.9% 0.188 70.08);   }
-  [data-callout="caution"]   { --accent: oklch(63.7% 0.237 25.331);  }
-  [data-callout="important"] { --accent: oklch(62.7% 0.265 303.9);   }
+  [data-callout="note"]      { --accent: #0090ff; }
+  [data-callout="tip"]       { --accent: #30a46c; }
+  [data-callout="warning"]   { --accent: #ffc53d; }
+  [data-callout="caution"]   { --accent: #e5484d; }
+  [data-callout="important"] { --accent: #8e4ec6; }
 }
 ```
 
