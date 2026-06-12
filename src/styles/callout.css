@@ -24,6 +24,10 @@ prose-content {
         display: none;
       }
 
+      :is(strong, b) {
+        color: inherit;
+      }
+
       svg {
         flex-shrink: 0;
         inline-size: 1.25rem;
@@ -61,9 +65,9 @@ prose-content {
     }
   }
 
-  [data-callout="note"]      { --accent: oklch(62.3% 0.214 259.815); }
-  [data-callout="tip"]       { --accent: oklch(72.3% 0.219 149.579); }
-  [data-callout="warning"]   { --accent: oklch(76.9% 0.188 70.08);   }
-  [data-callout="caution"]   { --accent: oklch(63.7% 0.237 25.331);  }
-  [data-callout="important"] { --accent: oklch(62.7% 0.265 303.9);   }
+  [data-callout="note"]      { --accent: #0090ff; }
+  [data-callout="tip"]       { --accent: #30a46c; }
+  [data-callout="warning"]   { --accent: #ffc53d; }
+  [data-callout="caution"]   { --accent: #e5484d; }
+  [data-callout="important"] { --accent: #8e4ec6; }
 }

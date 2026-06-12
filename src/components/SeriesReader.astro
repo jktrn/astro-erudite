@@ -103,18 +103,31 @@
   })
 
   const inBand = new Set<Element>()
+
+  const atBottom = () => {
+    const max = document.documentElement.scrollHeight - innerHeight
+    return max > 0 && scrollY >= max - 2
+  }
+
+  const update = () => {
+    const current = atBottom()
+      ? articles[articles.length - 1]
+      : articles.find((article) => inBand.has(article))
+    if (current && current.dataset.url !== normalizePath(location.pathname)) {
+      sync(current)
+    }
+  }
+
   const observer = new IntersectionObserver(
     (entries) => {
       for (const entry of entries) {
         if (entry.isIntersecting) inBand.add(entry.target)
         else inBand.delete(entry.target)
       }
-      const current = articles.find((article) => inBand.has(article))
-      if (current && current.dataset.url !== normalizePath(location.pathname)) {
-        sync(current)
-      }
+      update()
     },
     { rootMargin: "-20% 0px -79% 0px" },
   )
   for (const article of articles) observer.observe(article)
+  addEventListener("scroll", update, { passive: true })
 </script>

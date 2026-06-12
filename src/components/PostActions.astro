@@ -13,6 +13,7 @@ const { prev, next } = Astro.props
 <post-actions>
   <a
     href={prev && `/blog/${prev.id}`}
+    data-icon-button
     data-dir="prev"
     aria-label={prev && `Previous post: ${prev.data.title}`}
     aria-hidden={!prev || undefined}
@@ -22,6 +23,7 @@ const { prev, next } = Astro.props
   </a>
   <a
     href={next && `/blog/${next.id}`}
+    data-icon-button
     data-dir="next"
     aria-label={next && `Next post: ${next.data.title}`}
     aria-hidden={!next || undefined}
@@ -42,22 +44,7 @@ const { prev, next } = Astro.props
   }
 
   a {
-    display: inline-flex;
-    align-items: center;
-    justify-content: center;
-    width: 2rem;
-    height: 2rem;
-    border-radius: var(--radius-md);
     color: var(--foreground);
-
-    &:hover {
-      background-color: color-mix(in oklab, var(--muted) 50%, transparent);
-    }
-
-    svg {
-      width: 1rem;
-      height: 1rem;
-    }
 
     &:not([href]) {
       color: var(--muted-foreground);

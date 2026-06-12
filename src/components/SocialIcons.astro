@@ -11,6 +11,7 @@ const { links } = Astro.props
       <li>
         <a
           href={href}
+          data-icon-button
           target="_blank"
           rel="noopener noreferrer"
           aria-label={label}
@@ -28,18 +29,11 @@ const { links } = Astro.props
     margin-inline: -0.5rem;
 
     li a {
-      display: inline-flex;
-      align-items: center;
-      justify-content: center;
-      width: 2rem;
-      height: 2rem;
       color: var(--muted-foreground);
-      border-radius: var(--radius-md);
       text-decoration: none;
 
       &:hover {
         color: var(--foreground);
-        background-color: color-mix(in oklab, var(--muted) 50%, transparent);
       }
 
       svg {

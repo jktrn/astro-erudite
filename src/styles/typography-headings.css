@@ -11,6 +11,33 @@ prose-content {
     }
   }
 
+  :is(h2, h3, h4, h5, h6) {
+    [data-heading-anchor] {
+      margin-inline-start: 0.5ch;
+      color: var(--muted-foreground);
+      text-decoration-line: none;
+      opacity: 0;
+
+      &::before {
+        content: "#";
+      }
+
+      &:hover {
+        color: var(--foreground);
+      }
+    }
+
+    &:is(:hover, :target) [data-heading-anchor] {
+      opacity: 1;
+    }
+
+    @media (hover: none) {
+      [data-heading-anchor] {
+        opacity: 1;
+      }
+    }
+  }
+
   h1 {
     font-size: var(--step-3);
   }

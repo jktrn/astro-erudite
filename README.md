@@ -60,6 +60,7 @@ Below are some fantastic examples of websites based on this template. If you wis
 - $\LaTeX$ math rendered to browser-native and lightweight [MathML](https://developer.mozilla.org/en-US/docs/Web/MathML) via [Temml](https://temml.org/).
 - Subposts for organizing series, rendered as one continuous scrollable document.
 - A fully responsive table of contents with active scrollspy highlighting.
+- Clickable heading anchors for permalinking to any section.
 - GitHub-style callouts/alerts via `:::` directives.
 - SEO optimization with granular metadata and [Open Graph](https://ogp.me/) tag control for each post.
 - [RSS](https://en.wikipedia.org/wiki/RSS) feed and sitemap generation.
@@ -128,18 +129,18 @@ Your site's production URL is configurable in `astro.config.ts` as the `site` fi
 
 ### Color palette
 
-Colors are defined in `src/styles/color.css` in [OKLCH format](https://developer.mozilla.org/en-US/docs/Web/CSS/color_value/oklch). Semantic tokens are assigned per scheme with [`light-dark()`](https://developer.mozilla.org/en-US/docs/Web/CSS/Reference/Values/color_value/light-dark), so the site respects system preference out of the box and the theme toggle only stores an override:
+Colors are defined in `src/styles/color.css` using the [Radix Colors](https://www.radix-ui.com/colors) scales. Each step carries a light/dark pair via [`light-dark()`](https://developer.mozilla.org/en-US/docs/Web/CSS/Reference/Values/color_value/light-dark) and the semantic tokens point at the scale, so the site respects system preference out of the box and the theme toggle only stores an override:
 
 ```css
 :root {
-  --color-neutral-50:  oklch(98.5% 0 0);
+  --gray-1:  light-dark(#fcfcfc, #111111);
   /* ... */
-  --color-neutral-950: oklch(14.5% 0 0);
+  --gray-12: light-dark(#202020, #eeeeee);
 
-  --background:       light-dark(var(--color-neutral-50),  var(--color-neutral-950));
-  --foreground:       light-dark(var(--color-neutral-950), var(--color-neutral-50));
-  --muted-foreground: light-dark(var(--color-neutral-500), var(--color-neutral-400));
-  --border:           light-dark(var(--color-neutral-200), var(--color-neutral-800));
+  --background:       var(--gray-1);
+  --foreground:       var(--gray-12);
+  --muted-foreground: var(--gray-11);
+  --border:           var(--gray-6);
   /* ... */
 
   color-scheme: light dark;
@@ -302,5 +303,5 @@ Built with &hearts; by [enscribe](https://enscribe.dev)!
 
 [Stargazers]: https://img.shields.io/github/stars/jktrn/astro-erudite?color=fafafa&logo=github&logoColor=fff&style=flat
 [Astro Version]: https://img.shields.io/github/package-json/dependency-version/jktrn/astro-erudite/astro?color=0a0a0a&logo=astro&logoColor=fff&style=flat
-[Dependencies]: https://img.shields.io/badge/dependencies-12-fafafa?style=flat
+[Dependencies]: https://img.shields.io/badge/dependencies-13-fafafa?style=flat
 [License]: https://img.shields.io/github/license/jktrn/astro-erudite?color=0a0a0a&logo=github&logoColor=fff&style=flat
