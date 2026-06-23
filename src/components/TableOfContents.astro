@@ -317,9 +317,9 @@ const { title, sections } = Astro.props
     ].map((details) => ({
       details,
       active: details.open,
-      ids: [
-        ...details.querySelectorAll<HTMLAnchorElement>("a[href^='#']"),
-      ].map((a) => hashId(a.hash)),
+      ids: [...details.querySelectorAll<HTMLAnchorElement>("a[href^='#']")].map(
+        (a) => hashId(a.hash),
+      ),
     }))
 
     const blockOf = new Map<Element, string>()
