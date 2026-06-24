@@ -27,7 +27,12 @@ export default defineConfig({
     processor: satteri({
       features: { directive: true, math: true },
       mdastPlugins: [calloutDirective, inlineExpressiveCode, temmlMath],
-      hastPlugins: [externalLinks, blockExpressiveCode, headingNamespace, headingAnchors],
+      hastPlugins: [
+        externalLinks,
+        blockExpressiveCode,
+        headingNamespace,
+        headingAnchors,
+      ],
     }),
   },
 })
