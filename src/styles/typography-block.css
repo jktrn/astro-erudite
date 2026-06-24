@@ -33,21 +33,6 @@ prose-content {
     border-block-start: 1.5px solid var(--border);
   }
 
-  :is(math, math *) {
-    letter-spacing: normal;
-  }
-
-  math {
-    font-family: var(--font-math);
-  }
-
-  math-display {
-    display: flex;
-    justify-content: safe center;
-    overflow-x: auto;
-    overflow-y: hidden;
-  }
-
   .expressive-code {
     content-visibility: auto;
     contain-intrinsic-block-size: auto 20rem;
