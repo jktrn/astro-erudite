@@ -13,6 +13,7 @@ import { headingAnchors } from "./src/lib/heading-anchors"
 
 export default defineConfig({
   site: "https://astro-erudite.vercel.app",
+  compressHTML: true,
   prefetch: { prefetchAll: true },
   integrations: [
     sitemap({
