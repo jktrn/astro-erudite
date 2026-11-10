@@ -37,6 +37,24 @@ prose-content {
     content-visibility: auto;
     contain-intrinsic-block-size: auto 20rem;
 
+    pre {
+      max-block-size: min(68vh, 1000px);
+      overflow-y: auto;
+
+      &::-webkit-scrollbar-corner {
+        display: none;
+      }
+
+      &:has(> code:focus-visible) {
+        outline: 2px solid var(--ring);
+        outline-offset: -2px;
+      }
+
+      > code:focus-visible {
+        outline: none;
+      }
+    }
+
     .tm-label .code::before {
       font-family: var(--font-sans);
     }
