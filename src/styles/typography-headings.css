@@ -4,7 +4,6 @@ prose-content {
     font-weight: var(--font-weight-medium);
     line-height: calc(var(--leading-offset) + 1em);
     color: var(--foreground);
-    text-wrap: balance;
 
     @media (width >= 64rem) {
       scroll-margin-block-start: calc(var(--page-offset-top) - 0.2em);

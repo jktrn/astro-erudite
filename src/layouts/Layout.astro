@@ -30,6 +30,7 @@ const { crumbs } = Astro.props
     <slot name="head" />
   </MetaHead>
   <body>
+    <a href="#main-content" data-visually-hidden>Skip to content</a>
     <page-grid>
       <page-header>
         <page-nav>
@@ -42,7 +43,7 @@ const { crumbs } = Astro.props
           )}
       </page-header>
       <page-content>
-        <main><slot /></main>
+        <main id="main-content"><slot /></main>
         <page-footer><Footer /></page-footer>
       </page-content>
     </page-grid>
@@ -50,6 +51,15 @@ const { crumbs } = Astro.props
 </html>
 
 <style>
+  body > a {
+    position: fixed;
+    inset-block-start: var(--space-2xs);
+    inset-inline-start: var(--space-2xs);
+    z-index: 20;
+    padding: var(--space-3xs) var(--space-2xs);
+    background-color: var(--background);
+  }
+
   page-grid {
     position: relative;
     isolation: isolate;

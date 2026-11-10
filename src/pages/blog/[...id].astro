@@ -79,7 +79,11 @@ if (isSubpost(post.id)) {
         data-embedded={i > 0 || undefined}
       >
         <header>
-          <h1>{entry.data.title}</h1>
+          {i === 0 ? (
+            <h1>{entry.data.title}</h1>
+          ) : (
+            <h2>{entry.data.title}</h2>
+          )}
           <post-meta>
             {authors.length > 0 && (
               <post-authors>
@@ -87,7 +91,7 @@ if (isSubpost(post.id)) {
                   {authors.map((author) => (
                     <img
                       src={author.data.avatar}
-                      alt={author.data.name}
+                      alt=""
                       width="18"
                       height="18"
                     />
@@ -139,7 +143,7 @@ if (isSubpost(post.id)) {
     border-block-start: 2px solid var(--border);
     scroll-margin-block-start: calc(-2px - 0.2 * var(--step-2));
 
-    header h1 {
+    header h2 {
       font-size: var(--step-2);
     }
   }
@@ -147,7 +151,7 @@ if (isSubpost(post.id)) {
   header {
     margin-block-end: var(--space-m);
 
-    h1 {
+    :is(h1, h2) {
       font-size: var(--step-3);
       line-height: calc(var(--leading-offset) + 1em);
       font-weight: var(--font-weight-medium);
@@ -197,7 +201,7 @@ if (isSubpost(post.id)) {
         gap: var(--space-3xs);
 
         a {
-          color: color-mix(in oklab, var(--muted-foreground) 50%, transparent);
+          color: inherit;
 
           &:hover {
             color: var(--foreground);

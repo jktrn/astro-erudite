@@ -11,10 +11,11 @@ export function headingAnchors() {
       filter: ["h2", "h3", "h4", "h5", "h6"],
       visit(node, ctx) {
         const existing = node.properties.id
+        const text = plainText(node)
         const id =
           typeof existing === "string" && existing
             ? existing
-            : slugger.slug(plainText(node))
+            : slugger.slug(text)
         if (!id) return
         if (existing !== id) ctx.setProperty(node, "id", id)
         ctx.appendChild(
@@ -22,7 +23,7 @@ export function headingAnchors() {
           h("a", {
             dataHeadingAnchor: "",
             href: `#${id}`,
-            ariaLabel: "Link to this section",
+            ariaLabel: `Link to section: ${text}`,
             tabIndex: -1,
           }),
         )

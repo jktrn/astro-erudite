@@ -4,9 +4,9 @@ import { formatDate } from "@/lib/utils"
 import { Image } from "astro:assets"
 import type { CollectionEntry } from "astro:content"
 
-type Props = { project: CollectionEntry<"projects"> }
+type Props = { project: CollectionEntry<"projects">; priority?: boolean }
 
-const { project } = Astro.props
+const { project, priority } = Astro.props
 const { name, description, link, tags, image, startDate, endDate } =
   project.data
 ---
@@ -20,7 +20,13 @@ const { name, description, link, tags, image, startDate, endDate } =
         tabindex="-1"
         aria-hidden="true"
       >
-        <Image src={image} alt="" width={640} height={336} />
+        <Image
+          src={image}
+          alt=""
+          width={640}
+          height={336}
+          priority={priority}
+        />
       </a>
     )}
   <entry-info>
@@ -102,7 +108,6 @@ const { name, description, link, tags, image, startDate, endDate } =
           display: flex;
           align-items: center;
           gap: var(--space-3xs);
-          color: color-mix(in oklab, var(--muted-foreground) 50%, transparent);
 
           svg {
             inline-size: 1em;
@@ -112,7 +117,6 @@ const { name, description, link, tags, image, startDate, endDate } =
 
         project-dates ~ project-link::before {
           content: "·";
-          color: var(--muted-foreground);
         }
       }
 

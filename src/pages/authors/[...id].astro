@@ -26,6 +26,7 @@ const posts = (await getPosts()).filter((post) =>
 
 <Layout crumbs={[{ label: name, href: `/authors/${author.id}` }]}>
   <MetaPage slot="head" title={`${name} (Author)`} description={bio} noindex />
+  <h1 data-visually-hidden>{name}</h1>
   <header>
     <ul>
       <AuthorCard author={author} />
@@ -36,8 +37,8 @@ const posts = (await getPosts()).filter((post) =>
     <h2>Posts</h2>
     {posts.length > 0 ? (
         <ul>
-          {posts.map((post) => (
-            <BlogCard post={post} />
+          {posts.map((post, i) => (
+            <BlogCard post={post} priority={i === 0} />
           ))}
         </ul>
       ) : (

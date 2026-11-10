@@ -18,9 +18,22 @@ const { floating } = Astro.props
 <style>
   button {
     color: var(--foreground);
-    visibility: hidden;
 
-    &[data-visible] {
+    @supports (animation-timeline: scroll()) {
+      visibility: hidden;
+      /* Longhands: the CSS minifier folds animation-timeline into the
+         shorthand, which browsers then drop. */
+      animation-name: scroll-top-reveal;
+      animation-duration: auto;
+      animation-timing-function: linear;
+      animation-fill-mode: both;
+      animation-timeline: scroll(root);
+      animation-range: 50vh calc(50vh + 1px);
+    }
+  }
+
+  @keyframes scroll-top-reveal {
+    to {
       visibility: visible;
     }
   }
@@ -50,18 +63,6 @@ const { floating } = Astro.props
 </style>
 
 <script>
-  const buttons = [
-    ...document.querySelectorAll<HTMLElement>("[data-scroll-top]"),
-  ]
-
-  const update = () => {
-    const past = scrollY > innerHeight * 0.5
-    for (const button of buttons) button.toggleAttribute("data-visible", past)
-  }
-
-  addEventListener("scroll", update, { passive: true })
-  update()
-
   document.addEventListener("click", (event) => {
     if ((event.target as Element).closest("[data-scroll-top]"))
       window.scrollTo({ top: 0 })

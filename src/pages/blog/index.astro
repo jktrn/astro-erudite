@@ -9,8 +9,9 @@ const posts = await getPosts()
 
 <Layout>
   <MetaPage slot="head" title="Blog" />
+  <h1 data-visually-hidden>Blog</h1>
   <ul>
-    {posts.map((post) => <BlogCard post={post} />)}
+    {posts.map((post, i) => <BlogCard post={post} priority={i === 0} />)}
   </ul>
 </Layout>
 

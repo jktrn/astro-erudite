@@ -3,25 +3,27 @@ import MoonIcon from "@/assets/icons/moon.svg"
 import SunIcon from "@/assets/icons/sun.svg"
 ---
 
-<button id="theme-toggle" data-icon-button aria-label="Toggle theme">
-  <light-icon><SunIcon /></light-icon>
-  <dark-icon><MoonIcon /></dark-icon>
+<button id="theme-toggle" data-icon-button>
+  <light-icon>
+    <SunIcon role="img" aria-label="Switch to dark theme" />
+  </light-icon>
+  <dark-icon>
+    <MoonIcon role="img" aria-label="Switch to light theme" />
+  </dark-icon>
 </button>
 
 <style is:global>
-  :root[data-theme="light"] {
+  :root:has(> head > meta[name="color-scheme"][content="light"]) {
     color-scheme: light;
-  }
-
-  :root[data-theme="dark"] {
-    color-scheme: dark;
   }
 
   dark-icon {
     display: none;
   }
 
-  :root[data-theme="dark"] {
+  :root:has(> head > meta[name="color-scheme"][content="dark"]) {
+    color-scheme: dark;
+
     light-icon {
       display: none;
     }
@@ -32,7 +34,7 @@ import SunIcon from "@/assets/icons/sun.svg"
   }
 
   @media (prefers-color-scheme: dark) {
-    :root:not([data-theme]) {
+    :root:has(> head > meta[name="color-scheme"][content="light dark"]) {
       light-icon {
         display: none;
       }
@@ -45,15 +47,24 @@ import SunIcon from "@/assets/icons/sun.svg"
 </style>
 
 <script>
+  const scheme = document.querySelector<HTMLMetaElement>(
+    'meta[name="color-scheme"]',
+  )
+
   const toggleTheme = () => {
-    const root = document.documentElement
-    const dark =
-      root.dataset.theme === "dark" ||
-      (!root.dataset.theme &&
-        matchMedia("(prefers-color-scheme: dark)").matches)
-    const theme = dark ? "light" : "dark"
-    root.dataset.theme = theme
-    localStorage.theme = theme
+    if (!scheme) return
+    const system = matchMedia("(prefers-color-scheme: dark)").matches
+      ? "dark"
+      : "light"
+    const current = scheme.content === "light dark" ? system : scheme.content
+    const theme = current === "dark" ? "light" : "dark"
+    if (theme === system) {
+      scheme.content = "light dark"
+      localStorage.removeItem("theme")
+    } else {
+      scheme.content = theme
+      localStorage.theme = theme
+    }
   }
 
   const button = document.getElementById("theme-toggle")

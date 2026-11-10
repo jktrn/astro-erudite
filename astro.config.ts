@@ -10,11 +10,13 @@ import { calloutDirective } from "./src/lib/callout"
 import { externalLinks } from "./src/lib/external-links"
 import { headingNamespace } from "./src/lib/heading-namespace"
 import { headingAnchors } from "./src/lib/heading-anchors"
+import { tableRegion } from "./src/lib/table-region"
 
 export default defineConfig({
   site: "https://astro-erudite.vercel.app",
   compressHTML: true,
   prefetch: { prefetchAll: true },
+  experimental: { clientPrerender: true },
   integrations: [
     sitemap({
       filter: (page) =>
@@ -33,6 +35,7 @@ export default defineConfig({
         blockExpressiveCode,
         headingNamespace,
         headingAnchors,
+        tableRegion,
       ],
     }),
   },

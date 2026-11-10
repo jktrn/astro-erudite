@@ -17,7 +17,6 @@ const { prev, next } = Astro.props
     data-dir="prev"
     aria-label={prev && `Previous post: ${prev.data.title}`}
     aria-hidden={!prev || undefined}
-    title={prev?.data.title}
   >
     <ArrowLeft />
   </a>
@@ -27,7 +26,6 @@ const { prev, next } = Astro.props
     data-dir="next"
     aria-label={next && `Next post: ${next.data.title}`}
     aria-hidden={!next || undefined}
-    title={next?.data.title}
   >
     <ArrowRight />
   </a>

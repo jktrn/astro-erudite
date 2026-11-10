@@ -8,6 +8,7 @@ const tags = await getTags()
 
 <Layout crumbs={[{ label: "Tags", href: "/tags" }]}>
   <MetaPage slot="head" title="Tags" noindex />
+  <h1 data-visually-hidden>Tags</h1>
   <ul>
     {[...tags].map(([tag, posts]) => (
         <li>
@@ -38,7 +39,6 @@ const tags = await getTags()
 
       tag-count {
         margin-inline-start: var(--space-3xs);
-        opacity: 0.6;
       }
     }
   }

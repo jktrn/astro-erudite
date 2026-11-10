@@ -23,7 +23,7 @@
   --muted-foreground:   var(--gray-11);
   --destructive:        var(--red-11);
   --border:             var(--gray-6);
-  --ring:               var(--gray-8);
+  --ring:               var(--gray-9);
 
   color-scheme: light dark;
 }

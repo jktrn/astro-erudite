@@ -11,6 +11,7 @@ const authors = (await getCollection("authors")).sort((a, b) =>
 
 <Layout>
   <MetaPage slot="head" title="Authors" />
+  <h1 data-visually-hidden>Authors</h1>
   <ul>
     {authors.map((author) => <AuthorCard author={author} />)}
   </ul>
