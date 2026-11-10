@@ -3,8 +3,8 @@ prose-content {
     --accent:         var(--muted-foreground);
     --callout-border: var(--accent);
     --callout-text:   light-dark(
-      oklch(from var(--accent) 0.48 calc(c * 1.05) h),
-      oklch(from var(--accent) 0.83 calc(c * 0.5) h)
+      oklch(from var(--accent) 0.48 calc(c * 0.6) h),
+      oklch(from var(--accent) 0.83 calc(c * 0.45) h)
     );
 
     position: relative;

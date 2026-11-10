@@ -8,7 +8,8 @@ import {
 export const ecOptions: SatteriExpressiveCodeOptions = {
   themes: ["github-light", "github-dark"],
   useDarkModeMediaQuery: true,
-  themeCssSelector: (theme) => `[data-theme="${theme.type}"]`,
+  themeCssSelector: (theme) =>
+    `:has(> head > meta[name="color-scheme"][content="${theme.type}"])`,
   plugins: [pluginCollapsibleSections(), pluginLineNumbers()],
   defaultProps: {
     wrap: true,

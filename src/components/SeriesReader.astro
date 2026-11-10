@@ -60,7 +60,7 @@
       crumb.hidden = false
       crumbLink.href = article.dataset.url ?? ""
       crumbLink.textContent =
-        article.querySelector("header h1")?.textContent ?? ""
+        article.querySelector("header :is(h1, h2)")?.textContent ?? ""
       crumbLink.setAttribute("aria-current", "page")
       parentLink.removeAttribute("aria-current")
     }

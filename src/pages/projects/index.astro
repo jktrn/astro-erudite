@@ -12,8 +12,11 @@ const projects = (await getCollection("projects")).sort(
 
 <Layout>
   <MetaPage slot="head" title="Projects" />
+  <h1 data-visually-hidden>Projects</h1>
   <ul>
-    {projects.map((project) => <ProjectCard project={project} />)}
+    {projects.map((project, i) => (
+        <ProjectCard project={project} priority={i === 0} />
+      ))}
   </ul>
 </Layout>
 

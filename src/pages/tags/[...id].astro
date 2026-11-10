@@ -30,8 +30,9 @@ const { tag, posts } = Astro.props
     description={`A collection of posts tagged with ${tag}.`}
     noindex
   />
+  <h1 data-visually-hidden>#{tag}</h1>
   <ul>
-    {posts.map((post) => <BlogCard post={post} />)}
+    {posts.map((post, i) => <BlogCard post={post} priority={i === 0} />)}
   </ul>
 </Layout>
 

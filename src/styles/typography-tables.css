@@ -1,4 +1,10 @@
 prose-content {
+  [data-table] {
+    max-inline-size: fit-content;
+    margin-inline: auto;
+    overflow-x: auto;
+  }
+
   table {
     --table-border: color-mix(
       in oklab,
@@ -6,10 +12,7 @@ prose-content {
       transparent
     );
 
-    display: block;
-    max-inline-size: fit-content;
-    margin-inline: auto;
-    overflow-x: auto;
+    margin-block: 0;
     font-size: var(--step--1);
 
     thead {

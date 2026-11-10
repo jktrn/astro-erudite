@@ -19,7 +19,7 @@ const section = NAVIGATION.find(
       <Logo />
       <span>{SITE.title}</span>
     </a>
-    <nav>
+    <nav aria-label="Primary">
       <ul>
         {NAVIGATION.map((item) => (
             <li>
@@ -69,15 +69,12 @@ const section = NAVIGATION.find(
 
 <style>
   aside {
-    position: sticky;
-    top: var(--page-offset-top);
     display: flex;
     flex-direction: column;
     justify-content: space-between;
-    height: calc(100svh - var(--page-offset-top) - var(--page-offset-bottom));
+    height: 100%;
 
     @media (width < 64rem) {
-      position: static;
       height: auto;
       flex-direction: row;
       align-items: center;

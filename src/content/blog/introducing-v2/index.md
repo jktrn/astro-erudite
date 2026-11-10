@@ -934,8 +934,8 @@ prose-content {
     --accent:         var(--muted-foreground);
     --callout-border: var(--accent);
     --callout-text:   light-dark(
-      oklch(from var(--accent) 0.48 calc(c * 1.05) h),
-      oklch(from var(--accent) 0.83 calc(c * 0.5) h)
+      oklch(from var(--accent) 0.48 calc(c * 0.6) h),
+      oklch(from var(--accent) 0.83 calc(c * 0.45) h)
     );
 
     position: relative;
@@ -1030,7 +1030,7 @@ export const ecOptions: SatteriExpressiveCodeOptions = {
   themes: ["github-light", "github-dark"],
   useDarkModeMediaQuery: true,
   themeCssSelector: (theme) =>
-    `[data-theme="${theme.name === "github-dark" ? "dark" : "light"}"]`,
+    `:has(> head > meta[name="color-scheme"][content="${theme.type}"])`,
   plugins: [pluginCollapsibleSections(), pluginLineNumbers()],
   defaultProps: {
     wrap: true,

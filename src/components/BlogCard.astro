@@ -3,16 +3,22 @@ import { formatDate } from "@/lib/utils"
 import { Image } from "astro:assets"
 import { getEntries, type CollectionEntry } from "astro:content"
 
-type Props = { post: CollectionEntry<"blog"> }
+type Props = { post: CollectionEntry<"blog">; priority?: boolean }
 
-const { post } = Astro.props
+const { post, priority } = Astro.props
 const authors = await getEntries(post.data.authors)
 ---
 
 <li>
   {post.data.image && (
       <a href={`/blog/${post.id}`} tabindex="-1" aria-hidden="true">
-        <Image src={post.data.image} alt="" width={640} height={336} />
+        <Image
+          src={post.data.image}
+          alt=""
+          width={640}
+          height={336}
+          priority={priority}
+        />
       </a>
     )}
   <entry-info>
@@ -24,7 +30,7 @@ const authors = await getEntries(post.data.authors)
               {authors.map((author) => (
                 <img
                   src={author.data.avatar}
-                  alt={author.data.name}
+                  alt=""
                   width="18"
                   height="18"
                 />
@@ -116,14 +122,6 @@ const authors = await getEntries(post.data.authors)
           display: flex;
           flex-wrap: wrap;
           gap: var(--space-3xs);
-
-          span {
-            color: color-mix(
-              in oklab,
-              var(--muted-foreground) 50%,
-              transparent
-            );
-          }
         }
 
         time ~ entry-tags::before {

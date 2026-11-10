@@ -14,24 +14,23 @@ const { title, sections } = Astro.props
 ---
 
 <nav aria-label="Table of contents">
-  <toc-title aria-hidden="true"><span>{title}</span></toc-title>
-  <label data-bar>
-    <input type="checkbox" aria-label="Toggle table of contents">
+  <toc-title aria-hidden="true">{title}</toc-title>
+  <button type="button" data-bar popovertarget="toc-list">
     <svg viewBox="0 0 16 16" aria-hidden="true">
       <circle cx="8" cy="8" r="6.5" />
       <circle cx="8" cy="8" r="6.5" transform="rotate(-90 8 8)" />
     </svg>
     <toc-current>{title}</toc-current>
     <ChevronIcon aria-hidden="true" />
-  </label>
-  <ul data-bar>
+  </button>
+  <ul data-bar id="toc-list" popover>
     {sections.map(({ id, label, open, headings }) =>
         id ? (
           <li data-group>
-            {headings.length > 0 ? (
+            <a href={`#${id}`}>{label}</a>
+            {headings.length > 0 && (
               <details open={open || undefined}>
-                <summary>
-                  <a href={`#${id}`}>{label}</a>
+                <summary aria-label={`Sections of ${label}`}>
                   <ChevronIcon aria-hidden="true" />
                 </summary>
                 <ul>
@@ -42,8 +41,6 @@ const { title, sections } = Astro.props
                   ))}
                 </ul>
               </details>
-            ) : (
-              <a href={`#${id}`}>{label}</a>
             )}
           </li>
         ) : (
@@ -59,38 +56,24 @@ const { title, sections } = Astro.props
 
 <style>
   nav {
-    position: sticky;
-    top: var(--page-offset-top);
     display: flex;
     flex-direction: column;
-    max-height: calc(
-      100svh -
-      var(--page-offset-top) -
-      var(--page-offset-bottom)
-    );
+    max-height: 100%;
     font-size: var(--step--1);
 
     @media (width < 64rem) {
-      position: relative;
-      top: auto;
       max-height: none;
     }
   }
 
   toc-title {
-    display: grid;
-    grid-template-rows: 0fr;
+    display: block;
     flex-shrink: 0;
+    margin-block-end: var(--space-2xs);
     font-weight: var(--font-weight-medium);
 
-    > span {
-      min-height: 0;
-      overflow: hidden;
-    }
-
-    &[data-visible] {
-      grid-template-rows: 1fr;
-      margin-block-end: var(--space-2xs);
+    &:not([data-visible]) {
+      display: none;
     }
 
     @media (width < 64rem) {
@@ -98,19 +81,20 @@ const { title, sections } = Astro.props
     }
   }
 
-  label {
+  button {
     display: none;
 
     @media (width < 64rem) {
       display: flex;
       align-items: center;
       gap: var(--space-2xs);
+      inline-size: 100%;
+      text-align: start;
       cursor: pointer;
 
-      input {
-        position: absolute;
-        opacity: 0;
-        pointer-events: none;
+      &:focus-visible {
+        outline-offset: -2px;
+        border-radius: 0;
       }
 
       > svg:first-of-type {
@@ -128,10 +112,15 @@ const { title, sections } = Astro.props
 
             stroke: var(--muted-foreground);
             stroke-dasharray: var(--circumference);
-            stroke-dashoffset: calc(
-              var(--circumference) *
-              (1 - var(--progress, 0))
-            );
+            stroke-dashoffset: var(--circumference);
+
+            @supports (animation-timeline: scroll()) {
+              animation-name: toc-progress;
+              animation-duration: auto;
+              animation-timing-function: linear;
+              animation-fill-mode: both;
+              animation-timeline: scroll(root);
+            }
           }
         }
       }
@@ -154,21 +143,15 @@ const { title, sections } = Astro.props
     }
   }
 
-  nav:has(input:focus-visible) label {
-    @media (width < 64rem) {
-      outline: 2px solid var(--ring);
-      outline-offset: -2px;
-    }
-  }
-
-  nav:has(input:checked) label > svg:last-of-type {
-    @media (width < 64rem) {
-      rotate: 180deg;
-    }
+  nav:has(> ul:popover-open) > button > svg:last-of-type {
+    rotate: 180deg;
   }
 
   nav > ul {
     min-height: 0;
+    inline-size: auto;
+    block-size: auto;
+    color: inherit;
     overflow-x: hidden;
     overflow-y: auto;
     overscroll-behavior: contain;
@@ -178,18 +161,18 @@ const { title, sections } = Astro.props
       display: none;
     }
 
-    @media (width < 64rem) {
-      display: none;
-      position: absolute;
-      inset-block-start: 100%;
-      inset-inline: 0;
-      max-block-size: 30svh;
+    @media (width >= 64rem) {
+      position: static;
+      background-color: transparent;
     }
-  }
 
-  nav:has(input:checked) > ul {
     @media (width < 64rem) {
-      display: flex;
+      inset-block: calc(var(--bar-nav-height) + var(--bar-toc-height)) auto;
+      max-block-size: 30svh;
+
+      &:not(:popover-open) {
+        display: none;
+      }
     }
   }
 
@@ -208,16 +191,35 @@ const { title, sections } = Astro.props
     }
 
     li[data-group] {
+      position: relative;
       font-weight: var(--font-weight-medium);
 
       &:not(:first-child) {
         margin-block-start: var(--space-2xs);
       }
 
+      > a {
+        display: block;
+      }
+
+      &:has(> details) > a {
+        padding-inline-end: 1.75rem;
+      }
+
+      &:has(details:not([open]) a[data-active]) > a {
+        color: var(--foreground);
+      }
+
       summary {
+        position: absolute;
+        inset-block-start: 0;
+        inset-inline-end: 0;
         display: flex;
         align-items: center;
-        gap: 0.375rem;
+        justify-content: flex-end;
+        inline-size: 1.5rem;
+        block-size: 1lh;
+        color: var(--muted-foreground);
         cursor: pointer;
         list-style: none;
 
@@ -225,20 +227,13 @@ const { title, sections } = Astro.props
           display: none;
         }
 
-        a {
-          min-inline-size: 0;
+        &:hover {
+          color: var(--foreground);
         }
 
         svg {
-          flex-shrink: 0;
-          margin-inline-start: auto;
           inline-size: 1em;
           block-size: 1em;
-          color: var(--muted-foreground);
-        }
-
-        &:hover svg {
-          color: var(--foreground);
         }
       }
 
@@ -251,10 +246,6 @@ const { title, sections } = Astro.props
 
         margin-block-start: var(--space-3xs);
         font-weight: var(--font-weight-normal);
-      }
-
-      details:not([open]):has(a[data-active]) summary a {
-        color: var(--foreground);
       }
     }
 
@@ -273,6 +264,12 @@ const { title, sections } = Astro.props
       --indent: 2;
     }
   }
+
+  @keyframes toc-progress {
+    to {
+      stroke-dashoffset: 0;
+    }
+  }
 </style>
 
 <script>
@@ -281,20 +278,6 @@ const { title, sections } = Astro.props
   ;(() => {
     const nav = document.querySelector<HTMLElement>("page-toc nav")
     if (!nav) return
-
-    const ring = nav.querySelector<SVGElement>("label svg")
-    const mobile = matchMedia("(width < 64rem)")
-    const progress = () => {
-      if (!ring || !mobile.matches) return
-      const max = document.documentElement.scrollHeight - innerHeight
-      ring.style.setProperty(
-        "--progress",
-        String(max > 0 ? Math.min(scrollY / max, 1) : 0),
-      )
-    }
-    addEventListener("scroll", progress, { passive: true })
-    mobile.addEventListener("change", progress)
-    progress()
 
     const seen = new Map<string, number>()
     const links = new Map<Element, HTMLAnchorElement>()
@@ -306,10 +289,9 @@ const { title, sections } = Astro.props
       if (target) links.set(target, a)
     }
     const articles = document.querySelectorAll("main article")
-    const list = nav.querySelector(":scope > ul")
+    const list = nav.querySelector<HTMLElement>(":scope > ul")
     const title = nav.querySelector("toc-title")
     const currentLabel = nav.querySelector("toc-current")
-    const toggle = nav.querySelector<HTMLInputElement>("input")
     const heading = document.querySelector("article > header h1")
     if (articles.length === 0 || !list || links.size === 0) return
 
@@ -326,7 +308,9 @@ const { title, sections } = Astro.props
       details,
       active: details.open,
       anchors: [
-        ...details.querySelectorAll<HTMLAnchorElement>("a[href^='#']"),
+        ...(details.parentElement?.querySelectorAll<HTMLAnchorElement>(
+          "a[href^='#']",
+        ) ?? []),
       ],
     }))
 
@@ -369,13 +353,11 @@ const { title, sections } = Astro.props
       })
     }
 
-    toggle?.addEventListener("change", () => {
-      if (toggle.checked) center()
+    list.addEventListener("toggle", (event) => {
+      if ((event as ToggleEvent).newState === "open") center()
     })
     list.addEventListener("click", (event) => {
-      if (toggle && (event.target as Element).closest?.("a")) {
-        toggle.checked = false
-      }
+      if ((event.target as Element).closest?.("a")) list.hidePopover()
     })
 
     const observerOptions = {

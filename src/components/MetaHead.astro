@@ -1,6 +1,5 @@
 ---
 import sansWoff2 from "@/assets/fonts/IBMPlexSans-VariableFont_wdth,wght.woff2?url"
-import sansItalicWoff2 from "@/assets/fonts/IBMPlexSans-Italic-VariableFont_wdth,wght.woff2?url"
 import { SITE } from "@/consts"
 ---
 
@@ -12,24 +11,21 @@ import { SITE } from "@/consts"
   >
   <meta name="generator" content={Astro.generator}>
 
-  <meta name="HandheldFriendly" content="True">
-  <meta name="mobile-web-app-capable" content="yes">
-  <meta name="apple-mobile-web-app-capable" content="yes">
-  <meta name="apple-mobile-web-app-status-bar-style" content="default">
   <meta name="apple-mobile-web-app-title" content={SITE.title}>
   <meta
     name="format-detection"
     content="telephone=no,date=no,address=no,email=no,url=no"
   >
 
+  <meta name="color-scheme" content="light dark">
   <meta
     name="theme-color"
-    content="#0a0a0a"
+    content="#111111"
     media="(prefers-color-scheme: dark)"
   >
   <meta
     name="theme-color"
-    content="#fafafa"
+    content="#fcfcfc"
     media="(prefers-color-scheme: light)"
   >
 
@@ -48,18 +44,11 @@ import { SITE } from "@/consts"
   >
 
   <link rel="preload" href={sansWoff2} as="font" type="font/woff2" crossorigin>
-  <link
-    rel="preload"
-    href={sansItalicWoff2}
-    as="font"
-    type="font/woff2"
-    crossorigin
-  >
 
   <script is:inline>
     const theme = localStorage.theme
     if (theme === "light" || theme === "dark")
-      document.documentElement.dataset.theme = theme
+      document.querySelector('meta[name="color-scheme"]').content = theme
   </script>
 
   <slot />
