@@ -237,8 +237,6 @@ if (isSubpost(post.id)) {
 </style>
 
 <script>
-  // Expressive Code strips tabindex from a pre that has no horizontal
-  // overflow, so a height-capped pre gets a focusable code child instead.
   const scrollable = new ResizeObserver((entries) => {
     for (const { target } of entries) {
       const code = target.querySelector("code")

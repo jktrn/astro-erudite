@@ -21,8 +21,6 @@ const { floating } = Astro.props
 
     @supports (animation-timeline: scroll()) {
       visibility: hidden;
-      /* Longhands: the CSS minifier folds animation-timeline into the
-         shorthand, which browsers then drop. */
       animation-name: scroll-top-reveal;
       animation-duration: auto;
       animation-timing-function: linear;

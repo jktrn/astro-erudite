@@ -115,8 +115,6 @@ const { title, sections } = Astro.props
             stroke-dashoffset: var(--circumference);
 
             @supports (animation-timeline: scroll()) {
-              /* Longhands: the CSS minifier folds animation-timeline into the
-                 shorthand, which browsers then drop. */
               animation-name: toc-progress;
               animation-duration: auto;
               animation-timing-function: linear;
